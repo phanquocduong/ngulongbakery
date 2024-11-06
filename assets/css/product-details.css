@@ -376,3 +376,116 @@ main {
     color: var(--white-color);
     cursor: pointer;
 }
+
+/* Tablet - PC low resolution */
+@media (min-width: 740px) and (max-width: 1024px) {
+    .details-box {
+        padding: 50px 0;
+    }
+
+    .extra-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .details-header__right {
+        margin-top: 30px;
+    }
+
+    .image-modal__close {
+        display: none;
+    }
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+    main {
+        padding: 0;
+    }
+
+    .details-box {
+        padding: 40px 0;
+        background: linear-gradient(to bottom, var(--linear-color), var(--white-color));
+    }
+
+    .extra-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .details-header__right {
+        margin-top: 30px;
+    }
+
+    .product-name {
+        font-size: 2.8rem;
+    }
+
+    .add-to-cart-action {
+        flex-wrap: wrap;
+    }
+
+    .quantity-selection {
+        margin-bottom: 25px;
+    }
+
+    .quantity-selection__title {
+        margin-right: 40px;
+    }
+
+    .related-info {
+        flex-wrap: wrap;
+    }
+
+    .main-title {
+        font-size: 2.5rem;
+        line-height: 3.4rem;
+    }
+
+    .image-modal__close {
+        display: none;
+    }
+
+    .pagination-link,
+    .pagination-link__icon-prev,
+    .pagination-link__icon-next {
+        font-size: 1.8rem;
+    }
+
+    .pagination-link {
+        margin-left: 15px;
+    }
+
+    .pagination-link__icon-next {
+        margin-left: 20px;
+    }
+
+    .quantity-selection__action-edit {
+        background-color: var(--linear-color);
+    }
+
+    .product-code,
+    .product-cate {
+        font-size: 1.3rem;
+    }
+
+    .review-item__comment {
+        line-height: 2.2rem;
+    }
+
+    .product-item {
+        background: linear-gradient(to bottom, var(--linear-color), var(--white-color));
+    }
+
+    .sale-off {
+        padding: 5px 10px;
+        font-size: 1.7rem;
+        left: 15px;
+    }
+
+    .review-item__image {
+        width: 90px;
+        height: 90px;
+        margin-right: 8px;
+    }
+}

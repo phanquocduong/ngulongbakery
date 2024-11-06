@@ -695,6 +695,10 @@ header {
         font-size: 2.6rem;
     }
 
+    .add-to-cart-btn {
+        width: 100%;
+    }
+
     /* Start footer */
     .footer-item {
         text-align: center;
