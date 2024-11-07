@@ -1,0 +1,21 @@
+main{
+    max-width: 100%;
+    height: 800px;
+    background-color: var(--linear-color);
+}
+.title-news{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.news-item{
+    background-color: black;
+    height: 100px;
+}
+@media (max-width:739px){
+    .c-offset-1 {
+        margin-left: 8.33333%;
+    }
+}
