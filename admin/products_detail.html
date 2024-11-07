@@ -88,10 +88,10 @@
             <a href="index.html" class="nav-item nav-link"
               ><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a
             >
-            <a href="products.html" class="nav-item nav-link"
+            <a href="products.html" class="nav-item nav-link active"
               ><i class="fa fa-laptop me-2"></i>Sản phẩm</a
             >
-            <a href="categories.html" class="nav-item nav-link active"
+            <a href="categories.html" class="nav-item nav-link"
               ><i class="fa fa-th me-2"></i>Danh mục</a
             >
             <a href="form.html" class="nav-item nav-link"
@@ -134,6 +134,13 @@
           <a href="#" class="sidebar-toggler flex-shrink-0">
             <i class="fa fa-bars"></i>
           </a>
+          <form class="d-none d-md-flex ms-4">
+            <input
+              class="form-control border-0"
+              type="search"
+              placeholder="Search"
+            />
+          </form>
           <div class="navbar-nav align-items-center ms-auto">
             <div class="nav-item dropdown">
               <a
@@ -256,174 +263,151 @@
 
         <!-- header end -->
 
-        <!-- Bảng danh mục sản phẩm có nút thêm, sửa, xoá, xem, tìm kiếm -->
+        <!-- content start -->
+         <h2 class="text text-center text-padding">Chi Tiết Sản Phẩm</h2>
         <div class="container-fluid pt-4 px-4">
-          <div class="row">
-            <div class="col-12">
-              <div class="bg-light rounded p-4">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-4"
-                >
-                  <h6 class="mb-0">Danh Mục Sản Phẩm</h6>
-                  <a href="addCategories.html" class="btn btn-primary"
-                    >Thêm Mới</a
-                  >
-                </div>
-                <!-- form search -->
-                <form class="d-none d-md-flex ms-4">
-                  <div class="input-group">
-                    <input
-                      class="form-control border-0"
-                      type="search"
-                      placeholder="Tìm kiếm danh mục"
-                    />
-                    <button class="btn">
-                      <span class="input-group-text bg-transparent border-0">
-                        <i class="fa fa-search"></i>
-                      </span>
-                    </button>
-                  </div>
-                </form>
-                <br />
-                <!-- form search end -->
-                <div class="table-responsive">
-                  <table class="table table-hover table-borderless">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Tên Danh Mục</th>
-                        <th>Ảnh</th>
-                        <th>Thao Tác</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Bánh Bông Lan</td>
-                        <td>
-                          <img
-                            src="img/products/banhkem-bong-lan.webp"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit_categories.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view_categories.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Bánh Bò</td>
-                        <td>
-                          <img
-                            src="img/products/banh-bo.webp"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Bánh Mì</td>
-                        <td>
-                          <img
-                            src="img/products/banh-mi.jpg"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Bánh Trung Thu</td>
-                        <td>
-                          <img
-                            src="img/products/banh_trung_thu_nhan_dau_xanh-300x300.webp"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>Bánh Da Lợn</td>
-                        <td>
-                          <img
-                            src="img/products/banh-da-lon.jpg"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+          <div class="bg-light rounded p-4">
+            <div class="table-responsive">
+                <a href="products.html"><button class="btn btn-primary">Quay lại</button></a>
+                <a href="edit_products.html"><button class="btn btn-primary">Sửa chi tiết sản phẩm</button></a>
+                <a href=""><button class="btn btn-primary btn-danger">Xoá sản phẩm</button></a>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Giá</th>
+                    <th>Tên</th>
+                    <th>Giá giảm</th>
+                    <th>Hình ảnh</th>
+                    <th>Hình con</th>
+                    <th>Mô tả ngắn</th>
+                    <th>Mô tả chi tiết</th>
+                    <th>Số lượng hàng tồn kho</th>
+                    <th>Số lượt xem</th>
+                    <th>Thẻ</th>
+                    <th>Danh mục</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Bánh mì thịt</td>
+                    <td>100,000 VND</td>
+                    <td>90,000 VND</td>
+                    <td>
+                      <img
+                        src="img/products/banh-mi.jpg"
+                        alt="Hình Sản Phẩm"
+                        style="width: 50px; height: 50px"
+                      />
+                    </td>
+                    <td>
+                      <img
+                        src="img/products/banhmi1.jpg"
+                        alt="Hình Con"
+                        style="width: 50px; height: 50px"
+                      />
+                      <img
+                        src="img/products/banhmi2.jpg"
+                        alt="Hình Con"
+                        style="width: 50px; height: 50px"
+                      />
+                      <img
+                        src="img/products/banhmi3.jpg"
+                        alt="Hình Con"
+                        style="width: 50px; height: 50px"
+                      />
+                      <img
+                        src="img/products/banhmi4.webp"
+                        alt="Hình Con"
+                        style="width: 50px; height: 50px"
+                      />
+                    </td>
+                    <td>Bánh mì ngon</td>
+                    <td>Bánh mì ngon với hương vị đặc biệt</td>
+                    <td>50</td>
+                    <td>100</td>
+                    <td>Bánh mì</td>
+                    <td>Thực phẩm</td>
+                  </tr>
+                  <!-- Add more rows as needed -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
+
+        <!-- Product review -->
+        <h2 class="text text-center text-padding">Đánh Giá Sản Phẩm</h2>
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-light rounded p-4">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Người Dùng</th>
+                                <th>Đánh Giá Sao</th>
+                                <th>Nội Dung Đánh Giá</th>
+                                <th>Ngày</th>
+                                <th>Đánh Dấu</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Con Mèo Ngu Ngốc</td>
+                                <td>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </td>
+                                <td>Sản phẩm rất tốt</td>
+                                <td>08-11-2024</td>
+                                <td><button class="btn toggle-star"><i class="fa fa-star"></i></button></td>
+                                <td><button class="btn btn-danger">Xoá</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Tran Thi Đẹp</td>
+                                <td>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </td>
+                                <td>Giá cả hợp lý</td>
+                                <td>08-11-2024</td>
+                                <td><button class="btn toggle-star"><i class="fa fa-star"></i></button></td>
+                                <td><button class="btn btn-danger">Xoá</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Con Sói Cô Độc</td>
+                                <td>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </td>
+                                <td>Chất lượng tuyệt vời</td>
+                                <td>07-11-2024</td>
+                                <td><button class="btn toggle-star"><i class="fa fa-star"></i></button></td>
+                                <td><button class="btn btn-danger">Xoá</button></td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- content end -->
 
         <!-- Footer Start -->
         <div class="container-fluid pt-4 px-4">

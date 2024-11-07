@@ -31,13 +31,20 @@
 .btn {
   transition: 0.5s;
 }
+.btn-color-text {
+  color: white;
+}
 .btn-custom {
   background-color: #009cff;
   color: white;
   border: none;
   margin-left: 40px;
-margin-top: 20px;
+  margin-top: 20px;
 }
+.btn-sub{
+  width: 100%;
+}
+
 .btn.btn-primary {
   color: #ffffff;
 }
@@ -47,7 +54,7 @@ margin-top: 20px;
   height: 38px;
 }
 .btn-sm {
-  background-color: rgb(232, 138, 25);
+  background-color: rgb(31, 137, 170);
   border: #ffffff;
 }
 
@@ -72,6 +79,14 @@ margin-top: 20px;
   border-radius: 50px;
 }
 
+.star-active {
+  color: rgb(253, 211, 0);
+}
+
+/*** Text ***/
+.text-padding{
+  padding-top: 20px;
+}
 /*** Layout ***/
 .sidebar {
   position: fixed;

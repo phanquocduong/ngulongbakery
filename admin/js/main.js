@@ -58,6 +58,18 @@
         nav : false
     });
 
+    // start
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleStarButtons = document.getElementsByClassName('toggle-star');
+        Array.prototype.forEach.call(toggleStarButtons, function(button) {
+            button.addEventListener('click', function() {
+                const starIcon = this.getElementsByClassName('fa-star')[0];
+                if (starIcon) {
+                    starIcon.classList.toggle('star-active');
+                }
+            });
+        });
+    });
 
     // Biểu đồ thống kê
     // var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
