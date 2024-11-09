@@ -91,14 +91,14 @@
             <a href="products.html" class="nav-item nav-link"
               ><i class="fa fa-laptop me-2"></i>Sản phẩm</a
             >
-            <a href="categories.html" class="nav-item nav-link active"
+            <a href="categories.html" class="nav-item nav-link"
               ><i class="fa fa-th me-2"></i>Danh mục</a
             >
             <a href="order.html" class="nav-item nav-link"
               ><i class="fa fa-shopping-cart me-2"></i>Đơn hàng</a
             >
-            <a href="table.html" class="nav-item nav-link"
-              ><i class="fa fa-table me-2"></i>Tables</a
+            <a href="accounts_manage.html" class="nav-item nav-link active"
+              ><i class="fa fa-users me-2"></i>Tài khoản</a
             >
             <a href="chart.html" class="nav-item nav-link"
               ><i class="fa fa-chart-bar me-2"></i>Charts</a
@@ -256,186 +256,156 @@
 
         <!-- header end -->
 
-        <!-- Bảng danh mục sản phẩm có nút thêm, sửa, xoá, xem, tìm kiếm -->
-        <div class="container-fluid pt-4 px-4">
-          <div class="row">
-            <div class="col-12">
-              <div class="bg-light rounded p-4">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-4"
-                >
-                  <h6 class="mb-0">Danh Mục Sản Phẩm</h6>
-                  <a href="addCategories.html" class="btn btn-primary"
-                    >Thêm Mới</a
-                  >
-                </div>
-                <!-- form search -->
-                <form class="d-none d-md-flex ms-4">
-                  <div class="input-group">
-                    <input
-                      class="form-control border-0"
-                      type="search"
-                      placeholder="Tìm kiếm danh mục"
-                    />
-                    <button class="btn">
-                      <span class="input-group-text bg-transparent border-0">
-                        <i class="fa fa-search"></i>
-                      </span>
-                    </button>
+        <!-- body start -->
+        <form action="" class="form-label">
+          <div class="container-fluid py-4 px-4">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header bg-light">
+                    <h4 class="mb-0">Thêm Tài Khoản</h4>
                   </div>
-                </form>
-                <br />
-                <!-- form search end -->
-                <div class="table-responsive">
-                  <table class="table table-hover table-borderless">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Tên Danh Mục</th>
-                        <th>Ảnh</th>
-                        <th>Thao Tác</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Bánh Bông Lan</td>
-                        <td>
-                          <img
-                            src="img/products/banhkem-bong-lan.webp"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit_categories.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view_categories.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Bánh Bò</td>
-                        <td>
-                          <img
-                            src="img/products/banh-bo.webp"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Bánh Mì</td>
-                        <td>
-                          <img
-                            src="img/products/banh-mi.jpg"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Bánh Trung Thu</td>
-                        <td>
-                          <img
-                            src="img/products/banh_trung_thu_nhan_dau_xanh-300x300.webp"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>Bánh Da Lợn</td>
-                        <td>
-                          <img
-                            src="img/products/banh-da-lon.jpg"
-                            alt=""
-                            style="width: 40px; height: 40px"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="edit-category.html"
-                            class="btn btn-sm btn-primary"
-                            >Sửa</a
-                          >
-                          <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                          <a
-                            href="view-category.html"
-                            class="btn btn-sm btn-success"
-                            >Xem</a
-                          >
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 col -lg-4">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <img
+                              id="profile-image"
+                              src="img/user1.jpg"
+                              alt="Tải lên Hình Ảnh"
+                              class="rounded-circle"
+                              style="
+                                width: 100px;
+                                height: 100px;
+                                cursor: pointer;
+                              "
+                            />
+                            <input
+                              type="file"
+                              id="image-upload"
+                              style="display: none"
+                              accept="image/*"
+                            />
+                            <h5 class="mt-3">Tải Lên Hình Ảnh</h5>
+                            <p class="text-muted"></p>
+                            <div class="d-flex justify-content-center">
+                              <a
+                                href="accounts_manage.html"
+                                class="btn btn-primary"
+                                >Quay lại</a
+                              >
+                              <button class="btn btn-danger ms-2"
+                                >Thêm Tài Khoản</button
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col -lg-8">
+                        <div class="card">
+                          <div class="card-header bg-light">
+                            <h5 class="mb-0">Thông Tin</h5>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                  <label for="name" class="form-label"
+                                    >Họ và Tên</label
+                                  >
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    value=""
+                                  />
+                                </div>
+                              </div>
+                              <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                  <label for="email" class="form-label"
+                                    >Email</label
+                                  >
+                                  <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    value=""
+                                  />
+                                </div>
+                              </div>
+                              <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                  <label for="phone" class="form-label"
+                                    >Số Điện Thoại</label
+                                  >
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="phone"
+                                    value=""
+                                  />
+                                </div>
+                              </div>
+                              <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                  <label for="address" class="form-label"
+                                    >Địa Chỉ</label
+                                  >
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="address"
+                                    value=""
+                                  />
+                                </div>
+                              </div>
+                              <div class="col-12 col -lg-6">
+                                <div class="mb-3">
+                                  <label for="role" class="form-label"
+                                    >Vai Trò</label
+                                  >
+                                  <select class="form-select" id="role">
+                                    <option selected>Chọn vai trò</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-12 col -lg-6">
+                                <div class="mb-3">
+                                  <label for="role" class="form-label"
+                                    >Trạng thái</label
+                                  >
+                                  <select class="form-select" id="role" disabled>
+                                    <option selected>Thiết lập trạng thái</option>
+                                    <option value="0" selected>Đang Hoạt động</option>
+                                    <option value="1">Đã tắt</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
+        <!-- body end -->
 
         <!-- Footer Start -->
         <div class="container-fluid pt-4 px-4">
           <div class="bg-light rounded-top p-4">
             <div class="row">
               <div class="col-12 col-sm-6 text-center text-sm-start">
-                &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                &copy; <a href="#">Ngũ Long Bakery</a>.
               </div>
-              <div class="col-12 col-sm-6 text-center text-sm-end">
-                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-              </div>
+              <div class="col-12 col-sm-6 text-center text-sm-end"></div>
             </div>
           </div>
         </div>

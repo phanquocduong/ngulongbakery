@@ -293,3 +293,18 @@
   background: var(--dark);
   border-color: var(--primary);
 }
+
+/* Trạng thái tài khoản */
+.status-icon {
+  width: 10px; /* Kích thước chấm */
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-online {
+  background-color: #28a745; /* Màu xanh lá */
+}
+
+.status-offline {
+  background-color: #dc3545; /* Màu đỏ */
+}
