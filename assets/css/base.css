@@ -257,8 +257,11 @@ header {
 .product-item {
     position: relative;
     margin-bottom: 36px;
-    transition: transform 0.2s;
     overflow: hidden;
+}
+
+.product-item__img-link:hover .product-item__img {
+    filter: brightness(0.9);
 }
 
 .product-item__img-link {
@@ -267,10 +270,10 @@ header {
 
 .product-item__img {
     padding-top: 100%;
-    overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
+    transition: all 0.3s ease;
 }
 
 .product-item__title-link {

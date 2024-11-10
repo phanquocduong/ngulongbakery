@@ -166,29 +166,46 @@
 
         <!-- Start main -->
         <main>
-            <div class="register-form">
+            <form action="action.html" method="POST" class="register-form">
                 <h4 class="register-title">Đăng ký</h4>
                 <div class="full-name__form">
-                    <div class="form-group__half">
+                    <div class="form-group form-group__half">
                         <label for="lastName" class="form-label">HỌ:</label>
-                        <input id="lastName" type="text" class="form-control" />
+                        <input id="lastName" name="lastname" rules="required" type="text" class="form-control" />
+                        <div class="form-message"></div>
                     </div>
-                    <div class="form-group__half">
+                    <div class="form-group form-group__half">
                         <label for="firstName" class="form-label">TÊN:</label>
-                        <input id="firstName" type="text" class="form-control" />
+                        <input id="firstName" name="firstname" rules="required" type="text" class="form-control" />
+                        <div class="form-message"></div>
                     </div>
                 </div>
-                <div class="form-group__full">
+                <div class="form-group form-group__full">
                     <label for="email" class="form-label">EMAIL:</label>
-                    <input type="email" id="email" class="form-control" />
+                    <input type="email" id="email" name="email" rules="required|email" class="form-control" />
+                    <div class="form-message"></div>
                 </div>
-                <div class="form-group__full">
+                <div class="form-group form-group__full">
                     <label for="password" class="form-label">MẬT KHẨU:</label>
-                    <input type="password" id="password" class="form-control" />
+                    <input
+                        type="password"
+                        name="password"
+                        rules="required|min:8|passwordComplexity"
+                        id="password"
+                        class="form-control"
+                    />
+                    <div class="form-message"></div>
                 </div>
-                <div class="form-group__full">
+                <div class="form-group form-group__full">
                     <label for="repassword" class="form-label">NHẬP LẠI MẬT KHẨU:</label>
-                    <input type="password" id="repassword" class="form-control" />
+                    <input
+                        type="password"
+                        name="repassword"
+                        rules="required|min:8|passwordComplexity"
+                        id="repassword"
+                        class="form-control"
+                    />
+                    <div class="form-message"></div>
                 </div>
                 <div class="register-action">
                     <button class="register-btn">Đăng ký</button>
@@ -197,7 +214,7 @@
                         <span class="login-title__link">Đăng nhập</span>
                     </a>
                 </div>
-            </div>
+            </form>
         </main>
         <!-- End main -->
 
@@ -262,5 +279,9 @@
         <!-- End footer -->
 
         <script src="./assets/js/base.js"></script>
+        <script src="./assets/js/validator.js"></script>
+        <script>
+            const form = new Validator('.register-form');
+        </script>
     </body>
 </html>

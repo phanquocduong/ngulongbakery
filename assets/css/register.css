@@ -94,6 +94,12 @@ main {
     font-weight: bold;
 }
 
+.form-message {
+    color: #f4516c;
+    font-size: 1.4rem;
+    padding-top: 6px;
+}
+
 /* Tablet - PC low resolution */
 @media (min-width: 740px) and (max-width: 1024px) {
     .register-form {

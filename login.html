@@ -166,15 +166,36 @@
 
         <!-- Start main -->
         <main>
-            <div id="loginForm" class="login-form login-form--active">
+            <form action="action.html" method="POST" id="loginForm" class="login-form login-form--active">
                 <h4 class="login-title">Đăng nhập</h4>
-                <div class="email-form">
-                    <label for="customerEmail" class="form-label">EMAIL</label>
-                    <input type="email" id="customerEmail" class="form-control" placeholder="Nhập Email của bạn" />
+                <div class="errors">
+                    <ul>
+                        <li>Thông tin đăng nhập không hợp lệ.</li>
+                    </ul>
                 </div>
-                <div class="password-form">
+                <div class="form-group email-form">
+                    <label for="customerEmail" class="form-label">EMAIL</label>
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        name="customerEmail"
+                        rules="required|email"
+                        class="form-control"
+                        placeholder="Nhập Email của bạn"
+                    />
+                    <div class="form-message"></div>
+                </div>
+                <div class="form-group password-form">
                     <label for="customerPassword" class="form-label">MẬT KHẨU</label>
-                    <input type="password" id="customerPassword" class="form-control" placeholder="Nhập Mật khẩu" />
+                    <input
+                        type="password"
+                        id="customerPassword"
+                        name="customerPassword"
+                        rules="required"
+                        class="form-control"
+                        placeholder="Nhập Mật khẩu"
+                    />
+                    <div class="form-message"></div>
                 </div>
                 <div class="remember-me-box">
                     <input id="rememberMe" type="checkbox" class="remember-me__check-box" />
@@ -188,13 +209,21 @@
                     </div>
                     <span class="forgot-pass__link" onclick="openForgotPassForm()">Quên mật khẩu?</span>
                 </div>
-            </div>
+            </form>
 
-            <div id="forgotPassForm" class="forgot-pass-form">
+            <form action="forgotpass.html" method="POST" id="forgotPassForm" class="forgot-pass-form">
                 <h4 class="forgot-pass-title">Quên mật khẩu</h4>
-                <div class="email-form">
+                <div class="form-group email-form">
                     <label for="email" class="form-label">EMAIL</label>
-                    <input type="email" id="email" class="form-control" placeholder="Nhập Email của bạn" />
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        rules="required|email"
+                        class="form-control"
+                        placeholder="Nhập Email của bạn"
+                    />
+                    <div class="form-message"></div>
                 </div>
                 <div class="submit-action">
                     <button class="submit-btn">Gửi</button>
@@ -203,7 +232,7 @@
                         <span class="back-login-title__link" onclick="openLoginForm()">Đăng nhập</span>
                     </div>
                 </div>
-            </div>
+            </form>
         </main>
         <!-- End main -->
 
@@ -268,6 +297,7 @@
         <!-- End footer -->
 
         <script src="./assets/js/base.js"></script>
+        <script src="./assets/js/validator.js"></script>
         <script src="./assets/js/login.js"></script>
     </body>
 </html>

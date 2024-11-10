@@ -11,3 +11,6 @@ function openForgotPassForm() {
     loginForm.classList.remove('login-form--active');
     forgotPassForm.classList.add('forgot-pass-form--active');
 }
+
+const loginForm = new Validator('#loginForm');
+const forgotPassForm = new Validator('#forgotPassForm');
