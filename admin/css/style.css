@@ -41,7 +41,7 @@
   margin-left: 40px;
   margin-top: 20px;
 }
-.btn-sub{
+.btn-sub {
   width: 100%;
 }
 
@@ -84,7 +84,7 @@
 }
 
 /*** Text ***/
-.text-padding{
+.text-padding {
   padding-top: 20px;
 }
 /*** Layout ***/
@@ -307,4 +307,35 @@
 
 .status-offline {
   background-color: #dc3545; /* Màu đỏ */
+}
+
+/* thêm bài viết */
+.container {
+  max-width: 100%;
+}
+
+.editor {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  min-height: 200px;
+  background-color: #fafafa;
+}
+
+#image-input {
+  display: none; /* Ẩn input chọn file */
+}
+
+.editor img {
+  width: 800px;
+  height: 600px;
+  margin-top: 10px;
+}
+
+/* bài viết */
+.date-create{
+  margin-left: 10px;
+}
+.badge{
+  font-size: 15px;
 }

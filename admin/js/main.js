@@ -90,6 +90,73 @@
     });
   });
 
+  // Thêm bài viết
+  document.addEventListener("DOMContentLoaded", function () {
+    function addElement() {
+      const editor = document.getElementById("editor");
+      const elementType = document.getElementById("element-type").value;
+
+      if (elementType === "img") {
+        document.getElementById("image-input").style.display = "inline-block"; // Hiển thị input chọn file
+      } else if (elementType === "p") {
+        document.getElementById("image-input").style.display = "none"; // Ẩn input khi chọn các thẻ khác
+        let newElement = document.createElement(elementType);
+        newElement.contentEditable = "true";
+        newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
+        editor.appendChild(newElement);
+        editor.appendChild(document.createElement("br"));
+      } else {
+        document.getElementById("image-input").style.display = "none";
+        let newElement = document.createElement(elementType);
+        newElement.contentEditable = "true";
+        newElement.className = "test-Class";
+        newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
+        editor.appendChild(newElement);
+        editor.appendChild(document.createElement("br"));
+      }
+    }
+
+    function handleImageSelect(event) {
+      const editor = document.getElementById("editor");
+      const file = event.target.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imgElement = document.createElement("img");
+          imgElement.src = e.target.result;
+          imgElement.alt = "Hình ảnh từ máy";
+          imgElement.style.width = "960";
+          imgElement.style.height = "540";
+          editor.appendChild(imgElement);
+          editor.appendChild(document.createElement("br"));
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Gắn sự kiện click cho nút "Thêm thẻ"
+    document
+      .getElementById("add-element-btn")
+      .addEventListener("click", addElement);
+
+    // Gắn sự kiện thay đổi cho input chọn file
+    document
+      .getElementById("image-input")
+      .addEventListener("change", handleImageSelect);
+  });
+
+
+  // format thời gian đăng bài viết
+  document.addEventListener("DOMContentLoaded", function () {
+  var options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false }; // Khởi tạo options trước
+  var d = new Date(); // Khởi tạo ngày giờ hiện tại
+  var formattedDate = d.toLocaleString("vi-VN", options); // Định dạng ngày giờ với options
+  
+  document.querySelector(".date-create").innerHTML = "Thời gian tạo bài viết: " + formattedDate; // Hiển thị ngày giờ đã định dạng
+  });
+  
+
   // up new image in edit account
   document.addEventListener("DOMContentLoaded", function () {
     const profileImage = document.getElementById("profile-image");
@@ -113,8 +180,6 @@
     }
   });
 
-
-
   // trạng thái tài khoản
   document.addEventListener("DOMContentLoaded", function () {
     const statusCells = document.querySelectorAll(".status-text");
@@ -129,152 +194,5 @@
         statusIcon.className = "status-icon status-online";
       }
     });
-  });
-
-  // Biểu đồ thống kê
-  // var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
-  // var myChart1 = new Chart(ctx1, {
-  //     type: "bar",
-  //     data: {
-  //         labels: ["01", "02", "03", "04", "05", "06"],
-  //         datasets: [{
-  //                 label: "Bánh bông lan",
-  //                 data: [15, 30, 55, 65, 60, 80, 95],
-  //                 backgroundColor: "rgba(0, 156, 255, .7)"
-
-  //             },
-  //             {
-  //                 label: "UK",
-  //                 data: [8, 35, 40, 60, 70, 55, 75],
-  //                 backgroundColor: "rgba(0, 156, 255, .5)"
-  //             },
-  //             {
-  //                 label: "AU",
-  //                 data: [12, 25, 45, 55, 65, 70, 60],
-  //                 backgroundColor: "rgba(0, 156, 255, .3)"
-  //             }
-  //         ]
-  //         },
-  //     options: {
-  //         responsive: true
-  //     }
-  // });
-
-  // Salse & Revenue Chart
-  var ctx2 = $("#salse-revenue").get(0).getContext("2d");
-  var myChart2 = new Chart(ctx2, {
-    type: "line",
-    data: {
-      labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
-      datasets: [
-        {
-          label: "Salse",
-          data: [15, 30, 55, 45, 70, 65, 85],
-          backgroundColor: "rgba(0, 156, 255, .5)",
-          fill: true,
-        },
-        {
-          label: "Revenue",
-          data: [99, 135, 170, 130, 190, 180, 270],
-          backgroundColor: "rgba(0, 156, 255, .3)",
-          fill: true,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-    },
-  });
-
-  // Single Line Chart
-  var ctx3 = $("#line-chart").get(0).getContext("2d");
-  var myChart3 = new Chart(ctx3, {
-    type: "line",
-    data: {
-      labels: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
-      datasets: [
-        {
-          label: "Salse",
-          fill: false,
-          backgroundColor: "rgba(0, 156, 255, .3)",
-          data: [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15],
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-    },
-  });
-
-  // Single Bar Chart
-  var ctx4 = $("#bar-chart").get(0).getContext("2d");
-  var myChart4 = new Chart(ctx4, {
-    type: "bar",
-    data: {
-      labels: ["Italy", "France", "Spain", "USA", "Argentina"],
-      datasets: [
-        {
-          backgroundColor: [
-            "rgba(0, 156, 255, .7)",
-            "rgba(0, 156, 255, .6)",
-            "rgba(0, 156, 255, .5)",
-            "rgba(0, 156, 255, .4)",
-            "rgba(0, 156, 255, .3)",
-          ],
-          data: [55, 49, 44, 24, 15],
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-    },
-  });
-
-  // Pie Chart
-  var ctx5 = $("#pie-chart").get(0).getContext("2d");
-  var myChart5 = new Chart(ctx5, {
-    type: "pie",
-    data: {
-      labels: ["Italy", "France", "Spain", "USA", "Argentina"],
-      datasets: [
-        {
-          backgroundColor: [
-            "rgba(0, 156, 255, .7)",
-            "rgba(0, 156, 255, .6)",
-            "rgba(0, 156, 255, .5)",
-            "rgba(0, 156, 255, .4)",
-            "rgba(0, 156, 255, .3)",
-          ],
-          data: [55, 49, 44, 24, 15],
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-    },
-  });
-
-  // Doughnut Chart
-  var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
-  var myChart6 = new Chart(ctx6, {
-    type: "doughnut",
-    data: {
-      labels: ["Italy", "France", "Spain", "USA", "Argentina"],
-      datasets: [
-        {
-          backgroundColor: [
-            "rgba(0, 156, 255, .7)",
-            "rgba(0, 156, 255, .6)",
-            "rgba(0, 156, 255, .5)",
-            "rgba(0, 156, 255, .4)",
-            "rgba(0, 156, 255, .3)",
-          ],
-          data: [55, 49, 44, 24, 15],
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-    },
   });
 })(jQuery);
