@@ -85,28 +85,59 @@ main{
     color: gray;
     margin-left: 5px;
 }
-.pageorder{
+.pageorder {
     text-align: center;
     padding-bottom: 50px;
 }
-.pageorder .pageorder-link{
-    text-decoration: none;
-    color: var(--white-color);
+
+.pageorder .loading-btn {
+    border: none;
     background-color: var(--primary-color-bold);
     font-size: 1.4rem;
     font-weight: 600;
     padding: 12px 30px;
-    border: none;
     border-radius: 5px;
     cursor: pointer;
-    opacity: 1;
+    color: var(--white-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: opacity 0.3s ease;
-    width: 200px;
+    opacity: 1;
 }
-.pageorder .pageorder-link:hover{
-    opacity: 0.9;
 
+.pageorder .loading-btn:hover {
+    opacity: 0.7;
 }
+
+.pageorder .loading-btn .spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    animation: spin 0.7s linear infinite;
+}
+
+.loading-btn.loading .spinner {
+    display: inline-block;
+}
+
+.loading-btn.loading .button-text {
+    visibility: hidden;
+}
+  
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 @media (max-width:739px){
     .c-offset-1 {
         margin-left: 8.33333%;
