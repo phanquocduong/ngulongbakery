@@ -79,10 +79,14 @@
   border-radius: 50px;
 }
 
+/* star */
+
 .star-active {
   color: rgb(253, 211, 0);
 }
-
+.rating>i {
+  color: gold;
+}
 /*** Text ***/
 .text-padding {
   padding-top: 20px;
