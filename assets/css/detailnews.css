@@ -160,19 +160,26 @@ main{
     font-weight: bold;
 }
 .writecomment .writecomment-content{
+    padding-top: 30px;
+    margin-bottom: 30px;
     padding-left: 100px;
     padding-right: 100px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    line-height: 2.3rem;
-    font-size: 16px;
-    font-weight: 350;
-    color: lightgrey;   
+    
 }
-.writecomment .writecomment-content textarea{
-    padding: 20px;
+.writecomment .writecomment-content .comment-input {
+    width: 100%;
+    height: 100px;
+    font-size: 16px;
+    padding: 15px;
     border: 1px solid lightgrey;
     border-radius: 5px;
+    outline: none;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.writecomment .writecomment-content .comment-input:focus {
+    border-color: var(--primary-color);
 }
 .writecomment .writecomment-btn{
     padding-left: 100px;
@@ -313,4 +320,83 @@ main{
         justify-content: flex-start;
         gap: 20px;
     }
+}
+@media (min-width: 740px) and (max-width: 1024px) {
+    .contentnews,
+    .commentnews,
+    .writecomment {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-top: 30px;
+    }
+
+    .contentnews .contentnews-title {
+        padding-top: 60px;
+        padding-left: 30px;
+        font-size: 26px;
+        line-height: 2rem;
+        line-height: 3rem;
+
+    }
+
+    .contentnews .contentnews-author,
+    .contentnews .contentnews-titledescription,
+    .contentnews .contentnews-content,
+    .contentnews-titlecontent,
+    .contentnews .contentnews-infor,
+    .backtonews,
+    .commentnews .quantitycomment,
+    .commentnews .commentnews-content,
+    .writecomment .writecomment-title,
+    .writecomment .writecomment-title__link,
+    .writecomment .writecomment-content,
+    .writecomment .writecomment-btn {
+        padding-left: 30px;
+        padding-right: 30px;
+        font-size: 16px;
+        line-height: 2rem;
+    }
+
+    .contentnews .contentnews-img .contentnews-img__products {
+        width: 90%;
+        height: auto;
+        margin-left: 30px;
+        padding-bottom: 15px;
+    }
+
+    .contentnews .contentnews-listindex {
+        margin-left: 30px;
+        font-size: 16px;
+        padding: 12px;
+        max-width: 90%;
+    }
+
+    .commentnews,
+    .commentnews .commentnews-user,
+    .commentnews .commentnews-content,
+    .commentnews .commentnews-manage {
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-top: 15px;
+    }
+
+    .commentnews .commentnews-user .commentnews-user__avt-img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .commentnews .quantitycomment,
+    .commentnews .commentnews-user__name-date,
+    .commentnews .commentnews-content,
+    .commentnews .commentnews-manage a {
+        font-size: 14px;
+        line-height: 1.8rem;
+    }
+
+    .writecomment .writecomment-btn button {
+        width: 100%;
+        height: 45px;
+    }
+    
 }
