@@ -18,7 +18,7 @@ main{
     padding-left: 100px;
     line-height: 30px;
     font-size: 30px;
-    /* font-weight: bold; */
+    font-weight: bold;
     color: var(--primary-color);
 }
 .contentnews .contentnews-author{
@@ -30,12 +30,7 @@ main{
     text-decoration: none;
     color: var(--primary-color-bold);
 }
-.contentnews .contentnews-titledescription{
-    padding-left: 100px;
-    line-height: 80px;
-    font-size: 18px;
-    font-weight: bold;
-}
+
 .contentnews .contentnews-content{
     padding-left: 100px;
     padding-right: 100px;
@@ -77,10 +72,14 @@ main{
     font-size: 18px;
     padding-top: 50px;
     padding-bottom: 50px;
+    display: flex;
     font-weight: 400;
+    justify-content: space-between;
+
 }
 .backtonews a{
     text-decoration: none;
+    
     color: var(--primary-color-bold);
 }
 .backtonews i{
@@ -110,9 +109,10 @@ main{
     border-radius: 50%;
 }
 .commentnews-user .commentnews-user__name-date{
-    padding-left: 25px;
+    padding-left: 15px;
     padding-top: 10px;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 2rem;
     color: var(--primary-color-bold);
 }
 .commentnews .commentnews-content{
@@ -217,8 +217,19 @@ main{
     padding: 15px;
     border-radius: 8px;
     max-width: 400px;
-    min-height: 300px;
+    min-height: 20px;
     position: relative;
+}
+.contentnews .contentnews-listindex button{
+    position: absolute;
+    min-width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    top: 33px;
+    right: 30px;
+    background-color: var(--white-color);
+    padding: 3px;
+    border-radius: 5px;
 }
 .contentnews .contentnews-listindex a{
     text-decoration: none;
@@ -258,7 +269,7 @@ main{
         padding-left: 0;
         padding-right: 0;
         font-size: 14px;
-        line-height: 1.9rem;
+        line-height: 2rem;
     }
     .contentnews .contentnews-img .contentnews-img__products {
         width: 100%;
@@ -321,13 +332,13 @@ main{
         gap: 20px;
     }
 }
-@media (min-width: 740px) and (max-width: 1024px) {
+@media (min-width: 740px) and (max-width: 1236px) {
     .contentnews,
     .commentnews,
     .writecomment {
         width: 100%;
-        padding-left: 30px;
-        padding-right: 30px;
+        /* padding-left: 30px; */
+        /* padding-right: 30px; */
         margin-top: 30px;
     }
 
@@ -355,7 +366,7 @@ main{
         padding-left: 30px;
         padding-right: 30px;
         font-size: 16px;
-        line-height: 2rem;
+        line-height: 2.3rem;
     }
 
     .contentnews .contentnews-img .contentnews-img__products {
