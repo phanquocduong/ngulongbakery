@@ -230,6 +230,7 @@ main{
     background-color: var(--white-color);
     padding: 3px;
     border-radius: 5px;
+    cursor: pointer;
 }
 .contentnews .contentnews-listindex a{
     text-decoration: none;
