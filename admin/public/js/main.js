@@ -2,14 +2,16 @@
   "use strict";
 
   // Spinner
-  var spinner = function () {
-    setTimeout(function () {
-      if ($("#spinner").length > 0) {
-        $("#spinner").removeClass("show");
-      }
-    }, 1);
-  };
-  spinner();
+  document.addEventListener("DOMContentLoaded", function () {
+    var spinner = function () {
+      setTimeout(function () {
+        if ($("#spinner").length > 0) {
+          $("#spinner").removeClass("show");
+        }
+      }, 1);
+    };
+    spinner();
+  });
 
   // Back to top button
   $(window).scroll(function () {
@@ -146,16 +148,15 @@
       .addEventListener("change", handleImageSelect);
   });
 
-
   // format thời gian đăng bài viết
   document.addEventListener("DOMContentLoaded", function () {
-  var options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false }; // Khởi tạo options trước
-  var d = new Date(); // Khởi tạo ngày giờ hiện tại
-  var formattedDate = d.toLocaleString("vi-VN", options); // Định dạng ngày giờ với options
-  
-  document.querySelector(".date-create").innerHTML = "Thời gian tạo bài viết: " + formattedDate; // Hiển thị ngày giờ đã định dạng
+    var options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false }; // Khởi tạo options trước
+    var d = new Date(); // Khởi tạo ngày giờ hiện tại
+    var formattedDate = d.toLocaleString("vi-VN", options); // Định dạng ngày giờ với options
+
+    document.querySelector(".date-create").innerHTML =
+      "Thời gian tạo bài viết: " + formattedDate; // Hiển thị ngày giờ đã định dạng
   });
-  
 
   // up new image in edit account
   document.addEventListener("DOMContentLoaded", function () {
