@@ -21,6 +21,6 @@ if (isset($_GET['page'])) {
     $main = new MainController();
     $main->viewMain();
 }
-require_once 'admin/app/view/Footer.php';
+require_once './app/view/Footer.php';
 
 ?>
