@@ -250,7 +250,7 @@
 
 /* Start review section */
 .review-section {
-    background: url(../image/background-icon/banhbonglan.png),
+    background: url(../upload/background-icon/banhbonglan.png),
         linear-gradient(to bottom, var(--white-color), var(--linear-color));
     padding: 100px 0;
     background-repeat: no-repeat;

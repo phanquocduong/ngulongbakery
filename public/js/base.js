@@ -33,10 +33,10 @@ menuItemDropOnTablet.onclick = e => {
 };
 // End modal menu on mobile device
 
-// Checked onclick button
-function showCheckedIcon(button) {
-    button.classList.add('active');
-}
+// // Checked onclick button
+// function showCheckedIcon(button) {
+//     button.classList.add('active');
+// }
 
 // Search button on mobile device
 const searchBtn = document.querySelector('.header-search__btn.header-search__btn--mobile');
