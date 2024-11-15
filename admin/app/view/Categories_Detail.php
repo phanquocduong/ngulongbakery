@@ -23,8 +23,8 @@
                         <td>20,000 VND</td>
                         <td>50</td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="products_detail.html">Xem chi tiết</a>
-                            <a class="btn btn-sm btn-primary" href="edit_products.html">Sửa</a>
+                            <a class="btn btn-sm btn-primary" href="index.php?page=products_detail">Xem chi tiết</a>
+                            <a class="btn btn-sm btn-primary" href="index.php?page=edit_products">Sửa</a>
                             <a class="btn btn-sm btn-danger" href="#">Xóa</a>
                         </td>
                     </tr>

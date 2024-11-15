@@ -44,7 +44,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Thêm
                                     </button>
-                                    <a href="voucher.html" class="btn btn-danger">Quay lại</a>
+                                    <a href="index.php?page=voucher" class="btn btn-danger">Quay lại</a>
                                 </div>
                             </div>
                         </div>

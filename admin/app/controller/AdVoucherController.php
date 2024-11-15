@@ -16,5 +16,13 @@
         {
             $this->renderview('voucher', $this->data);
         }
+        public function viewAddVoucher()
+        {
+            $this->renderview('add_voucher', $this->data);
+        }
+        public function viewEditVoucher()
+        {
+            $this->renderview('edit_voucher', $this->data);
+        }
     }
 ?>

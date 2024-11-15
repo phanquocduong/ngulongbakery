@@ -61,7 +61,7 @@
                     <td>400.000đ</td>
                     <td>Đã Giao</td>
                     <td>
-                      <a class="btn btn-sm btn-primary" href="order_detail.html">Chi Tiết</a>
+                      <a class="btn btn-sm btn-primary" href="index.php?page=order_detail">Chi Tiết</a>
                     </td>
                   </tr>
                   <tr>

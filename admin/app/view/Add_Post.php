@@ -85,5 +85,5 @@
         </button>
     </div>
 </form>
-<a href="post_manage.html" class="btn btn-primary" style="margin-left: 20px">Quay lại</a>
+<a href="index.php?page=post_manage" class="btn btn-primary" style="margin-left: 20px">Quay lại</a>
 <!-- Main End -->

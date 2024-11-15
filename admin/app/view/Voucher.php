@@ -9,7 +9,7 @@
                     Danh Sách Mã Giảm Giá
                   </h4>
                   <a
-                    href="add_voucher.html"
+                    href="index.php?page=add_voucher"
                     class="btn btn-primary"
                     style="float: right"
                     >Thêm mã giảm giá</a
@@ -47,7 +47,7 @@
                           </td>
                           <td>
                             <a
-                              href="edit_voucher.html"
+                              href="index.php?page=edit_voucher"
                               class="text-primary me-2"
                               ><i class="fa fa-pencil-alt"></i
                             ></a>

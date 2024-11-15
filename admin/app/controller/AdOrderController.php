@@ -16,5 +16,8 @@
         {
             $this->renderview('order', $this->data);
         }
+        public function viewOrder_Detail(){
+            $this->renderview('order_detail', $this->data);
+        }
     }
 ?>

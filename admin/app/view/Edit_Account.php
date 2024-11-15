@@ -22,7 +22,7 @@
                                         <h5 class="mt-3">PhanGB</h5>
                                         <p class="text-muted">Admin</p>
                                         <div class="d-flex justify-content-center">
-                                            <a href="account_detail.html" class="btn btn-primary">Quay lại</a>
+                                            <a href="index.php?page=account_detail" class="btn btn-primary">Quay lại</a>
                                             <button class="btn btn-danger ms-2">Lưu thông tin</button>
                                         </div>
                                     </div>

@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </form>
-                    <a href="categories.html" class="btn btn-custom">
+                    <a href="index.php?page=categories" class="btn btn-custom">
                         Quay lại
                     </a>
                 </div>

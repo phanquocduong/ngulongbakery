@@ -6,7 +6,7 @@
         </h1>
         <hr />
         <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-        <a href="post_manage.html" class="btn btn-primary">Quay lại</a>
+        <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
         <a href="" class="btn btn-primary">Lưu thay đổi</a>
         <hr />
         <div class="add-element">

@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </form>
-                    <a href="products.html" class="btn btn-custom">
+                    <a href="index.php?page=products" class="btn btn-custom">
                         Quay lại
                     </a>
                 </div>

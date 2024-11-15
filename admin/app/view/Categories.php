@@ -5,7 +5,7 @@
             <div class="bg-light rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Danh Mục Sản Phẩm</h6>
-                    <a href="addCategories.html" class="btn btn-primary">Thêm Mới</a>
+                    <a href="index.php?page=addCategories" class="btn btn-primary">Thêm Mới</a>
                 </div>
                 <!-- form search -->
                 <form class="d-none d-md-flex ms-4">
@@ -39,9 +39,9 @@
                                         style="width: 40px; height: 40px" />
                                 </td>
                                 <td>
-                                    <a href="edit_categories.html" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="index.php?page=edit_categories" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                                    <a href="view_categories.html" class="btn btn-sm btn-success">Xem</a>
+                                    <a href="index.php?page=view_categories" class="btn btn-sm btn-success">Xem</a>
                                 </td>
                             </tr>
                             <tr>

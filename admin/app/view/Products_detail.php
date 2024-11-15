@@ -3,10 +3,10 @@
         <div class="container-fluid pt-4 px-4">
           <div class="bg-light rounded p-4">
             <div class="table-responsive">
-              <a href="products.html"
+              <a href="index.php?page=products"
                 ><button class="btn btn-primary">Quay lại</button></a
               >
-              <a href="edit_products.html"
+              <a href="index.php?page=edit_products"
                 ><button class="btn btn-primary">
                   Sửa chi tiết sản phẩm
                 </button></a

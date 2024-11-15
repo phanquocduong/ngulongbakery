@@ -16,8 +16,8 @@
                                     <h5 class="mt-3">PhanGB</h5>
                                     <p class="text-muted">Admin</p>
                                     <div class="d-flex justify-content-center">
-                                        <a href="accounts_manage.html" class="btn btn-primary me-2">Quay lại</a>
-                                        <a href="edit_account.html" class="btn btn-primary">Sửa chi tiết</a>
+                                        <a href="index.php?page=accounts" class="btn btn-primary me-2">Quay lại</a>
+                                        <a href="index.php?page=edit_account" class="btn btn-primary">Sửa chi tiết</a>
                                         <a href="#" class="btn btn-danger ms-2">Xóa tài khoản</a>
                                     </div>
                                 </div>

@@ -5,7 +5,7 @@
               <div class="card border-0 shadow">
                 <div class="card-header bg-light border-0 py-3">
                   <h4 class="mb-3">Quản Lý Bài Viết</h4>
-                  <a href="add_post.html" class="btn btn-primary"
+                  <a href="index.php?page=add_post" class="btn btn-primary"
                     >Thêm Bài Viết</a
                   >
                 </div>
@@ -37,7 +37,7 @@
                           <td>PhanGB</td>
                           <td>
                             <a href="index.php?page=post_detail" class="btn btn-sm btn-primary" >Xem</a>
-                            <a href="" class="btn btn-sm btn-primary">Sửa</a>
+                            <a href="index.php?page=edit_post" class="btn btn-sm btn-primary">Sửa</a>
                             <a href="#" class="btn btn-sm btn-danger">Xóa</a>
                           </td>
                         </tr>

@@ -97,7 +97,7 @@
                       </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Lưu</button>
-                    <a href="voucher.html" class="btn btn-danger">Quay lại</a>
+                    <a href="index.php?page=voucher" class="btn btn-danger">Quay lại</a>
                   </form>
                 </div>
               </div>

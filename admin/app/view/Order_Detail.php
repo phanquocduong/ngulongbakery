@@ -3,7 +3,7 @@
           <div class="row">
             <div class="col-12">
               <div class="card card-body">
-                <a href="order.html" class="nav nav-link">Quay lại</a>
+                <a href="index.php?page=order" class="nav nav-link">Quay lại</a>
                 <h4
                   class="card-title text-center text-primary fw-bold mb-4 mt-2"
                 >

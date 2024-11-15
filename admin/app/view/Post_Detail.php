@@ -6,8 +6,8 @@
             </h1>
             <hr />
             <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-            <a href="post_manage.html" class="btn btn-primary">Quay lại</a>
-            <a href="edit_post.html" class="btn btn-primary">Sửa bài viết</a>
+            <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
+            <a href="index.php?page=edit_post" class="btn btn-primary">Sửa bài viết</a>
             <hr />
             <div class="form-control">
               Ngày tạo bài viết: <span> 10-11-2024</span>

@@ -22,7 +22,7 @@
                                         <h5 class="mt-3">Tải Lên Hình Ảnh</h5>
                                         <p class="text-muted"></p>
                                         <div class="d-flex justify-content-center">
-                                            <a href="accounts_manage.html" class="btn btn-primary">Quay lại</a>
+                                            <a href="index.php?page=accounts" class="btn btn-primary">Quay lại</a>
                                             <button class="btn btn-danger ms-2">Thêm Tài Khoản</button>
                                         </div>
                                     </div>

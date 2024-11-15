@@ -155,7 +155,7 @@ Bánh mì ngon với hương vị đặc biệt</textarea
                       </div>
                     </div>
                   </form>
-                  <a href="products.html" class="btn btn-custom">
+                  <a href="index.php?page=products" class="btn btn-custom">
                     Quay lại
                   </a>
                 </div>
