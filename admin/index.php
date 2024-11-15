@@ -31,6 +31,14 @@ if (isset($_GET['page'])) {
             $main = new MainController();
             $main->viewMain();
             break;
+        case 'categories':
+            $cate = new CategoriesController();
+            $cate->viewCate();
+            break;
+        case 'accounts':
+            $acc = new AcccountsController();
+            $acc->viewAcc();
+            break;
     }
 } else {
     $main = new MainController();
