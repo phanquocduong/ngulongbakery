@@ -36,12 +36,8 @@
                           </td>
                           <td>PhanGB</td>
                           <td>
-                            <a
-                              href="view_post.html"
-                              class="btn btn-sm btn-primary"
-                              >Xem</a
-                            >
-                            <a href="#" class="btn btn-sm btn-primary">Sửa</a>
+                            <a href="index.php?page=post_detail" class="btn btn-sm btn-primary" >Xem</a>
+                            <a href="" class="btn btn-sm btn-primary">Sửa</a>
                             <a href="#" class="btn btn-sm btn-danger">Xóa</a>
                           </td>
                         </tr>

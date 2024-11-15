@@ -43,7 +43,7 @@
                     <td>08-11-2024</td>
                     <td>Đã Giao</td>
                     <td>
-                      <a href="order_detail.html"
+                      <a href="index.php?page=order_detail"
                         ><button class="btn btn-sm btn-primary">
                           Xem Chi Tiết
                         </button></a
