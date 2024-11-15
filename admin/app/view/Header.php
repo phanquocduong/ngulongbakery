@@ -63,12 +63,12 @@
         </div>
         <div class="navbar-nav w-100">
           <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
-          <a href="products.html" class="nav-item nav-link"><i class="fa fa-box me-2"></i>Sản phẩm</a>
+          <a href="index.php?page=products" class="nav-item nav-link"><i class="fa fa-box me-2"></i>Sản phẩm</a>
           <a href="categories.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Danh mục</a>
-          <a href="order.html" class="nav-item nav-link"><i class="fa fa-shopping-cart me-2"></i>Đơn hàng</a>
+          <a href="index.php?page=order" class="nav-item nav-link"><i class="fa fa-shopping-cart me-2"></i>Đơn hàng</a>
           <a href="accounts_manage.html" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Tài khoản</a>
-          <a href="post_manage.html" class="nav-item nav-link"><i class="fa fa-newspaper me-2"></i>Bài viết</a>
-          <a href="voucher.html" class="nav-item nav-link"><i class="fa fa-ticket-alt me-2"></i>Mã giảm giá</a>
+          <a href="index.php?page=post_manage" class="nav-item nav-link"><i class="fa fa-newspaper me-2"></i>Bài viết</a>
+          <a href="index.php?page=voucher" class="nav-item nav-link"><i class="fa fa-ticket-alt me-2"></i>Mã giảm giá</a>
         </div>
       </nav>
     </div>
