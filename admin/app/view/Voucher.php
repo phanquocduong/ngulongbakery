@@ -1,5 +1,4 @@
 <!-- Main Start -->
-
 <div class="container-fluid py-4 px-4">
           <div class="row">
             <div class="col-12">
@@ -35,69 +34,36 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>#12345</td>
-                          <td>10%</td>
-                          <td>10/11/2024</td>
-                          <td>10/11/2025</td>
-                          <td>100</td>
-                          <td>10.000</td>
-                          <td>
-                            <span class="badge bg-success">Hoạt Động</span>
-                          </td>
-                          <td>
-                            <a
-                              href="index.php?page=edit_voucher"
-                              class="text-primary me-2"
-                              ><i class="fa fa-pencil-alt"></i
-                            ></a>
-                            <a href="#" class="text-danger"
-                              ><i class="fa fa-trash-alt"></i
-                            ></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#12345</td>
-                          <td>10%</td>
-                          <td>10/11/2024</td>
-                          <td>10/11/2025</td>
-                          <td>100</td>
-                          <td>10.000</td>
-                          <td>
-                            <span class="badge bg-danger">Đã hết hạn</span>
-                          </td>
-                          <td>
-                            <a
-                              href="edit_voucher.html"
-                              class="text-primary me-2"
-                              ><i class="fa fa-pencil-alt"></i
-                            ></a>
-                            <a href="#" class="text-danger"
-                              ><i class="fa fa-trash-alt"></i
-                            ></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#12345</td>
-                          <td>10%</td>
-                          <td>10/11/2024</td>
-                          <td>10/11/2025</td>
-                          <td>100</td>
-                          <td>10.000</td>
-                          <td>
-                            <span class="badge bg-success">Hoạt Động</span>
-                          </td>
-                          <td>
-                            <a
-                              href="edit_voucher.html"
-                              class="text-primary me-2"
-                              ><i class="fa fa-pencil-alt"></i
-                            ></a>
-                            <a href="#" class="text-danger"
-                              ><i class="fa fa-trash-alt"></i
-                            ></a>
-                          </td>
-                        </tr>
+                        <?php
+                          foreach ($data['voucher'] as $item) {
+                            extract($item);
+                            echo '<tr>
+                              <td>'.$code.'</td>
+                              <td>'.$discount_value.'%</td>
+                              <td>'.$start_date.'</td>
+                              <td>'.$end_date.'</td>
+                              <td>'.$usage_limit.'</td>
+                              <td>'.$min_order_value.'</td>
+                              <td>';
+                                if ($active==1) {
+                                  echo '<span class="badge bg-success">Hoạt Động</span>';
+                                } else {
+                                  echo '<span class="badge bg-danger">Đã hết hạn</span>';
+                                }
+                              echo '</td>
+                              <td>
+                                <a
+                                  href="index.php?page=edit_voucher&id='.$id.'"
+                                  class="text-primary me-2"
+                                  ><i class="fa fa-pencil-alt"></i
+                                ></a>
+                                <a href="#" class="text-danger"
+                                  ><i class="fa fa-trash-alt"></i
+                                ></a>
+                              </td>
+                            </tr>';
+                            }
+                          ?>
                       </tbody>
                     </table>
                   </div>

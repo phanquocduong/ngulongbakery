@@ -1,24 +1,23 @@
 <?php
-class UserModel{
+class VoucherModel{
     private $db;
     function __construct(){
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
-    function getUser(){
-        $sql = "SELECT * FROM users";
+    function getVoucher(){
+        $sql = "SELECT * FROM discounts";
         return $this->db->getAll($sql);
     }
-    public function getIdUser($iduser)
+    public function getIdVocher($idvoucher)
     {
-        if ($iduser > 0) {
+        if ($idvoucher > 0) {
             // Sử dụng prepared statements để tránh SQL injection
-            $sql ="SELECT * FROM users WHERE id = :iduser";
-            $params = [':iduser' => $iduser];
+            $sql ="SELECT * FROM discounts WHERE id = :idvoucher";
+            $params = [':idvoucher' => $idvoucher];
             return $this->db->get($sql, $params);
         } else {
             return null;
         }
     }
-    
 }
