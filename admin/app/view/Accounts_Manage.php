@@ -18,16 +18,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Phận GB</td>
-                    <td>conmeo123@gmail.com</td>
-                    <td>Admin</td>
-                    <td>
-                      <span class="status-icon status-online"></span>
+                  <?php
+                  $stt =1;
+                  foreach ($data['user'] as $item) {
+                    extract($item);
+                    echo '<tr>
+                    <td>'.$stt++.'</td>
+                    <td>'.$full_name.'</td>
+                    <td>'.$email.'</td>';
+                    if ($role_id==1) {
+                      echo'<td>Admin</td>';
+                    } else {
+                      echo'<td>Người dùng</td>';
+                    }
+                    if ($status==1) {
+                      echo'<td>
+                      <span class="status-icon status-offline"></span>
                       <span class="status-text">Đang hoạt động</span>
-                  </td>
-                    <td>
+                          </td>';
+                    }else{
+                      echo'<td>
+                      <span class="status-icon status-online"></span>
+                      <span class="status-text">Đã tắt</span>
+                          </td>';
+                    }
+                      
+                    echo'<td>
                       <a href="index.php?page=account_detail"
                         ><button class="btn btn-info btn-sm btn-color-text">
                           Xem
@@ -39,30 +55,9 @@
                       <button class="btn btn-danger btn-sm">Xoá</button>
                       <button class="btn btn-dark btn-sm">Khoá/Mở</button>
                     </td>
-                  </tr>
-                  <!--  -->
-                  <tr>
-                    <td>1</td>
-                    <td>Nguyễn Văn Mèo Con</td>
-                    <td>nguyenvanmeo@example.com</td>
-                    <td>Admin</td>
-                    <td>
-                      <span class="status-icon status-online"></span>
-                      <span class="status-text">Đã tắt</span>
-                  </td>
-                    <td>
-                      <a href="account_detail.html"
-                        ><button class="btn btn-info btn-sm btn-color-text">
-                          Xem
-                        </button></a
-                      >
-                      <button class="btn btn-warning btn-sm btn-color-text">
-                        Sửa
-                      </button>
-                      <button class="btn btn-danger btn-sm">Xoá</button>
-                      <button class="btn btn-dark btn-sm">Khoá/Mở</button>
-                    </td>
-                  </tr>
+                  </tr>';
+                  }
+                  ?>
                 </tbody>
               </table>
             </div>
