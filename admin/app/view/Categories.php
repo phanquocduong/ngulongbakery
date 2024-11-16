@@ -32,20 +32,19 @@
                         </thead>
                         <tbody>
                             <?php
-                            $stt=1;
                             foreach ($data['cate'] as $item) {
                                 extract($item);
                                 echo '<tr>
-                                <td>'.$stt++.'</td>
-                                <td>'.$name.'</td>
+                                <td>' . $id . '</td>
+                                <td>' . $name . '</td>
                                 <td>
-                                    <img src="public/upload/product/'.$image.'" alt=""
+                                    <img src="../public/upload/category/' . $image . '" alt=""
                                         style="width: 40px; height: 40px" />
                                 </td>
                                 <td>
-                                    <a href="index.php?page=edit_categories" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                                    <a href="index.php?page=view_categories" class="btn btn-sm btn-success">Xem</a>
+                                    <a href="index.php?page=edit_categories&id=' . $id . '" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="index.php?page=del_category&id=' . $id . '" class="btn btn-sm btn-danger">Xoá</a>
+                                    <a href="index.php?page=view_categories&id=' . $id . '" class="btn btn-sm btn-success">Xem</a>
                                 </td>
                             </tr>';
                             }

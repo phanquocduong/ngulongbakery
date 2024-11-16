@@ -92,31 +92,36 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Bánh Mì</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Bánh Ngọt</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bánh Trái Cây</td>
-            <td>30</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Bánh Kem</td>
-            <td>40</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Bánh Bao</td>
-            <td>50</td>
-          </tr>
+          <?php
+          require_once './app/model/CategoryModel.php';
+          require_once './app/model/AdProductsModel.php';
+          require_once './app/controller/AdProductsController.php';
+          require_once './app/controller/AdCategoriesController.php';
+          $products = new AdProductsModel();
+          $cate = new CategoryModel();
+          $listCate = $cate->getCate();
+          $listPro = $products->getProducts();
+          ?>
+          <?php
+          $categoryMap = [];
+          foreach ($listCate as $category) {
+            $categoryMap[$category['id']] = $category['name'];
+          }
+          foreach ($listCate as $key => $value) {
+            extract($value);
+            echo "<tr>";
+            echo "<td>$id</td>";
+            echo "<td>$name</td>";
+            $count = 0;
+            foreach ($listPro as $key => $value) {
+              if ($value['category_id'] == $id) {
+                $count++;
+              }
+            }
+            echo "<td>$count</td>";
+            echo "</tr>";
+          }
+          ?>
         </tbody>
       </table>
     </div>
@@ -141,31 +146,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Bánh Mì</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Bánh Ngọt</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bánh Trái Cây</td>
-            <td>30</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Bánh Kem</td>
-            <td>40</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Bánh Bao</td>
-            <td>50</td>
-          </tr>
+          <?php
+          require_once './app/model/AdProductsModel.php';
+          $orderDetail = new AdProductsModel();
+          $viewOrderDetail = $orderDetail->getBestSell();
+          ?>
+          <?php
+          foreach ($viewOrderDetail as $key => $value) {
+            extract($value);
+            echo "<tr>";
+            echo "<td>$id</td>";
+            echo "<td>$name</td>";
+            echo "<td>$sold</td>";
+            echo "</tr>";
+          }
+          ?>
         </tbody>
       </table>
     </div>
@@ -190,31 +185,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Bánh Mì</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Bánh Ngọt</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bánh Trái Cây</td>
-            <td>30</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Bánh Kem</td>
-            <td>40</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Bánh Bao</td>
-            <td>50</td>
-          </tr>
+          <?php
+          require_once './app/model/AdProductsModel.php';
+          $stock_quantity = new AdProductsModel();
+          $viewStock_quantity = $stock_quantity->stock_quantity();
+          ?>
+          <?php
+          foreach ($viewStock_quantity as $key => $value) {
+            extract($value);
+            echo '<tr>';
+            echo '<td>' . $id . '</td>';
+            echo '<td>' . $name . '</td>';
+            echo '<td>' . $stock_quantity . '</td>';
+            echo '</tr>';
+          }
+          ?>
         </tbody>
       </table>
     </div>
