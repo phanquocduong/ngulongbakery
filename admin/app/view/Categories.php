@@ -32,14 +32,13 @@
                         </thead>
                         <tbody>
                             <?php
-                            $stt=1;
                             foreach ($data['cate'] as $item) {
                                 extract($item);
                                 echo '<tr>
-                                <td>'.$stt++.'</td>
-                                <td>'.$name.'</td>
+                                <td>' . $id . '</td>
+                                <td>' . $name . '</td>
                                 <td>
-                                    <img src="public/upload/product/'.$image.'" alt=""
+                                    <img src="../public/upload/category/' . $image . '" alt=""
                                         style="width: 40px; height: 40px" />
                                 </td>
                                 <td>

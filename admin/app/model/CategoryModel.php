@@ -1,34 +1,38 @@
 <?php
-class CategoryModel{
+class CategoryModel
+{
     private $db;
-    function __construct(){
+    function __construct()
+    {
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
-    function getCate(){
+    function getCate()
+    {
         $sql = "SELECT * FROM categories";
         return $this->db->getAll($sql);
     }
-    public function getIdPros($idpros)
+    public function getIdPro($id)
     {
-        if ($idpros > 0) {
-            // Sử dụng prepared statements để tránh SQL injection
-            $sql ="SELECT * FROM products WHERE category_id = :idpros";
-            $params = [':idpros' => $idpros];
-            return $this->db->getAll($sql, $params);
-        } else {
-            return null;
-        }
+        $sql = "SELECT * FROM products WHERE category_id = ? LIMIT 1";
+        return $this->db->getOne($sql, [$id]);
     }
-    public function getIdCate($idcate)
+    public function getIdCate($id)
     {
-        if ($idcate > 0) {
-            // Sử dụng prepared statements để tránh SQL injection
-            $sql ="SELECT * FROM categories WHERE id = :idcate";
-            $params = [':idcate' => $idcate];
-            return $this->db->get($sql, $params);
-        } else {
-            return null;
-        }
+        $sql = "SELECT * FROM categories WHERE id = ?";
+        return $this->db->getOne($sql, [$id]);
+    }
+    public function countProductsByCategoryId($categoryId)
+    {
+        $sql = "SELECT COUNT(*) as count FROM products WHERE category_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$categoryId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['count'];
+    }
+    public function getProductsByCategoryId($categoryId)
+    {
+        $sql = "SELECT * FROM products WHERE category_id = ?";
+        return $this->db->getAll($sql, [$categoryId]);
     }
 }

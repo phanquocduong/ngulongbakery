@@ -1,133 +1,139 @@
 <!-- Main Start -->
 <form action="" class="form form-group">
-          <div class="container">
-            <?php
-            extract($data['postdetail']);
-            ?>
-            <h1 style="margin: 10px 0 0 0">
-              <?php echo $title; ?>
-            </h1>
-            <hr />
-            <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-            <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
-            <a href="index.php?page=edit_post" class="btn btn-primary">Sửa bài viết</a>
-            <hr />
-            <div class="form-control">
-              Ngày tạo bài viết: <span> <?php echo $created_at ?></span>
-            </div>
-            <!-- Ngày tạo bài viết -->
-          </div>
-          <!-- -------------- -->
-          <div id="editor" class="editor" contenteditable="false">
-          <div class="contentnews">
-            <?php echo $content; ?>
-          </div>
+  <div class="container">
+    <?php
+    extract($data['postdetail']);
+    ?>
+    <h1 style="margin: 10px 0 0 0">
+      <?php echo $title; ?>
+    </h1>
+    <hr />
+    <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
+    <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
+    <a href="index.php?page=edit_post" class="btn btn-primary">Sửa bài viết</a>
+    <hr />
+    <div class="form-control">
+      Ngày tạo bài viết: <span> <?php echo $created_at ?></span>
+    </div>
+    <!-- Ngày tạo bài viết -->
+  </div>
+  <!-- -------------- -->
+  <div id="editor" class="editor" contenteditable="false">
+    <div class="contentnews">
+      <?php echo $content; ?>
+    </div>
 
-          <br />
-          <!-- trạng thái ẩn/hiện bài viết -->
-          <div class="container">
-            <div class="form-group" style="margin-left: 10px">
-              <label class="form-check-label" for="flexCheckDefault">
-                Trạng thái
-              </label>
-              <select name="" id="" class="form-select" disabled>
-                <option value="0">Ẩn</option>
-                <option value="1">Hiện</option>
-              </select>
-            </div>
-          </div>
-          <hr />
-          <!-- -------------- -->
+    <br />
+    <!-- trạng thái ẩn/hiện bài viết -->
+    <div class="container">
+      <div class="form-group" style="margin-left: 10px">
+        <label class="form-check-label" for="flexCheckDefault">
+          Trạng thái
+        </label>
+        <select name="" id="" class="form-select" disabled>
+          <option value="0" <?php echo ($status == 0 ? 'selected' : '') ?>>Ẩn</option>
+          <option value="1" <?php echo ($status == 1 ? 'selected' : '') ?>>Hiện</option>
+        </select>
+      </div>
+    </div>
+    <hr />
+    <!-- -------------- -->
 
-          <!-- Thể loại bài viết -->
-          <div class="container">
-            <div class="form-group" style="margin-left: 10px">
-              <label class="form-check-label" for="flexCheckDefault">
-                Thể loại
-              </label>
-              <select name="" id="" class="form-select" disabled>
-                <option value="0"><?php echo $category_name?></option>
-                <option value="1"></option>
-                <option value="2">Khuyến mãi</option>
-              </select>
-            </div>
-          </div>
-          <hr />
-          <!-- -------------- -->
+    <!-- Thể loại bài viết -->
+    <div class="container">
+      <div class="form-group" style="margin-left: 10px">
+        <label class="form-check-label" for="flexCheckDefault">
+          Thể loại
+        </label>
+        <select name="" id="" class="form-select" disabled>
 
-          <!-- Tác giả -->
-          <div class="container">
-            <div class="form-group" style="margin-left: 10px">
-              <label class="form-check-label" for="flexCheckDefault">
-                Tác giả
-              </label>
-              <select name="" id="" class="form-select" disabled>
-                <option value="0"><?php echo $author_name?></option>
-                <option value="1">Admin</option>
-                <option value="2">Người dùng</option>
-              </select>
-            </div>
-          </div>
-          <hr />
-          <!-- -------------- -->
-        </form>
-
-        <!-- phần comment -->
-        <div class="container">
-          <h2>Bình luận</h2>
-          <hr />
-          <!-- -------------------------------------------------------- -->
           <?php
-            foreach($data['comments'] as $item){
-              extract($item);
-            } 
+          require_once './app/model/CategoryModel.php';
+          $categoryModel = new CategoryModel();
+
+          // Lấy danh sách thể loại bài viết
+          $categories = $categoryModel->getCate();
+          $data['categories'] = $categories;
+
+          foreach ($data['categories'] as $item) {
+            extract($item);
+            echo "<option value='$id' " . ($id == $category_id ? 'selected' : '') . ">$category_name</option>";
+          }
           ?>
-          <div class="comment">
-            <div class="comment-item">
-              <div class="comment-item-header">
-                <img
-                  src="img/meo.jpg"
-                  class="rounded-circle"
-                  alt=""
-                  style="width: 40px; height: 40px"
-                />
-                <div class="comment-item-header-info">
-                  <h6>PhanGB</h6>
-                  <span>10-11-2024</span>
-                </div>
-              </div>
-              <div class="comment-item-content">
-                <p>Bài viết rất hay, mình sẽ ghé thăm Ngũ Long Bakery ngay</p>
-              </div>
-              <button class="btn btn-sm btn-danger">Xoá</button>
-              <button class="btn btn-sm btn-primary">Ẩn</button>
-            </div>
-          </div>
-          <br />
-          <!-- -------------------------------------------------------- -->
+        </select>
+      </div>
+    </div>
+    <hr />
+    <!-- -------------- -->
 
-          <div class="comment">
-            <div class="comment-item">
-              <div class="comment-item-header">
-                <img
-                  src="img/meo3.jpg"
-                  alt=""
-                  style="width: 40px; height: 40px"
-                  class="rounded-circle"
-                />
-                <div class="comment-item-header-info">
-                  <h6>Con Meobeo</h6>
-                  <span>10-11-2024</span>
-                </div>
-              </div>
-              <div class="comment-item-content">
-                <p>Bài viết rất hay, mình sẽ ghé thăm Ngũ Long Bakery ngay</p>
-              </div>
-              <button class="btn btn-sm btn-danger">Xoá</button>
-              <button class="btn btn-sm btn-primary">Ẩn</button>
-            </div>
-          </div>
-        </div>
-        <br />
+    <!-- Tác giả -->
+    <div class="container">
+      <div class="form-group" style="margin-left: 10px">
+        <label class="form-check-label" for="flexCheckDefault">
+          Tác giả
+        </label>
+        <select name="" id="" class="form-select" disabled>
+          <?php
+          require_once './app/model/UserModel.php';
+          $userModel = new UserModel();
 
-        <!-- Main End -->
+          // Lấy thông tin tác giả, những user có role là 1
+          $user = $userModel->getUserByRole(1);
+          ?>
+          <?php
+          foreach ($user as $user) {
+            echo '<option value="' . $user['id'] . '" ' . ($user['id'] == $author_id ? 'selected' : '') . '>' . $user['full_name'] . '</option>';
+          }
+          ?>
+        </select>
+      </div>
+    </div>
+    <hr />
+    <!-- -------------- -->
+</form>
+
+<!-- phần comment -->
+<div class="container">
+  <h2>Bình luận</h2>
+  <hr />
+  <!-- -------------------------------------------------------- -->
+  <?php
+  require_once './app/model/PostModel.php';
+  $getComments = new PostModel();
+
+  // Lấy id bài viết từ url
+  $postId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+  // Lấy danh sách comment theo id bài viết
+  $comments = $getComments->getCommentsByPostId($postId);
+  ?>
+  <?php
+  if ($comments) {
+    foreach ($comments as $comment) {
+      extract($comment);
+      echo '<div class="comment">';
+      echo '<div class="comment-item">';
+      echo '<div class="comment-item-header">';
+      echo '<img src="img/meo.jpg" class="rounded-circle" alt="" style="width: 40px; height: 40px" />';
+      echo '<div class="comment-item-header-info">';
+      echo '<h6>' . htmlspecialchars($full_name) . '</h6>';
+      echo '<span>' . htmlspecialchars($created_at) . '</span>';
+      echo '</div>';
+      echo '</div>';
+      echo '<div class="comment-item-content">';
+      echo '<p>' . htmlspecialchars($comment) . '</p>';
+      echo '</div>';
+      echo '<button class="btn btn-sm btn-danger">Xoá</button>';
+      echo '<button class="btn btn-sm btn-primary">Ẩn</button>';
+      echo '</div>';
+      echo '</div>';
+    }
+  } else {
+    echo '<p>Không có bình luận nào.</p>';
+  }
+  ?>
+  <br />
+  <!-- -------------------------------------------------------- -->
+</div>
+<br />
+
+<!-- Main End -->

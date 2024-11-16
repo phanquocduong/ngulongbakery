@@ -27,15 +27,24 @@ class PostModel{
             return null;
         }
     }
-    public function getComments($idpost)
-    {
-        $sql = "SELECT comments.*, users.full_name AS user_name
-                FROM comments
-                JOIN users ON comments.user_id = users.id
-                WHERE comments.post_id = 1";
-        $params = [':idpost' => $idpost];
-        return $this->db->getAll($sql, $params);
+    // public function getComments($idpost)
+    // {
+    //     $sql = "SELECT comments.*, users.full_name AS user_name
+    //             FROM comments
+    //             JOIN users ON comments.user_id = users.id
+    //             WHERE comments.post_id = 1";
+    //     $params = [':idpost' => $idpost];
+    //     return $this->db->getAll($sql, $params);
 
+    // }
+
+    // Lấy comments theo id post trên url
+    public function getCommentsByPostId($postId)
+    {
+        $sql = "SELECT comments.*, users.full_name FROM comments 
+                JOIN users ON comments.user_id = users.id 
+                WHERE comments.post_id = ?";
+        return $this->db->getAll($sql, [$postId]);
     }
     
 }

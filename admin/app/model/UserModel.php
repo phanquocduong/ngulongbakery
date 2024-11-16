@@ -20,5 +20,10 @@ class UserModel{
             return null;
         }
     }
+    public function getUserByRole($role)
+    {
+        $sql = "SELECT * FROM users WHERE role_id = ?";
+        return $this->db->getAll($sql, [$role]);
+    }
     
 }

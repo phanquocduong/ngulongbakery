@@ -18,6 +18,21 @@
     </form>
     <br />
     <!-- form search end -->
+    <?php
+    require_once './app/model/CategoryModel.php';
+    require_once './app/model/AdProductsModel.php';
+    require_once './app/controller/AdProductsController.php';
+    require_once './app/controller/AdCategoriesController.php';
+    $products = new AdProductsModel();
+    $cate = new CategoryModel();
+    $listCate = $cate->getCate();
+    $listPro = $products->getProducts();
+
+    $categoryMap = [];
+    foreach ($listCate as $category) {
+      $categoryMap[$category['id']] = $category['name'];
+    }
+    ?>
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
@@ -32,113 +47,36 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Bánh mì thịt</td>
-            <td>10,000 VND</td>
-            <td>
-              <img src="img/products/banh-mi.jpg" alt="" style="width: 50px; height: 50px" />
-            </td>
-            <td>30</td>
-            <td>Bánh mì</td>
-            <td>
-              <a href="index.php?page=products_detail"><button class="btn btn-info btn-sm btn-color-text">
+
+
+
+          <?php
+          foreach ($listPro as $key => $value) {
+            extract($value);
+            echo "<tr>";
+            echo "<td>$id</td>";
+            echo "<td>$name</td>";
+            echo "<td>$price</td>";
+            echo "<td><img src='../public/upload/product/$image' alt='' style='width: 50px; height: 50px' /></td>";
+            echo "<td>$views</td>";
+            $categoryName = isset($categoryMap[$category_id]) ? $categoryMap[$category_id] : 'Không xác định';
+            echo "<td>$categoryName</td>";
+            echo "<td>
+              <a href='index.php?page=products_detail&id=$id'><button class='btn btn-info btn-sm btn-color-text'>
                   Xem
                 </button></a>
-              <a href="index.php?page=edit_products"><button class="btn btn-warning btn-sm btn-color-text">
+              <a href='index.php?page=edit_products&id=$id'><button class='btn btn-warning btn-sm btn-color-text'>
                   Sửa
                 </button></a>
-              <a href="index.php?page=del_products">
-                <button class="btn btn-danger btn-sm btn-color-text">
+              <a href='index.php?page=del_products&id=$id'>
+                <button class='btn btn-danger btn-sm btn-color-text'>
                   Xóa
                 </button>
               </a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Bánh mì heo quay</td>
-            <td>10,000 VND</td>
-            <td>
-              <img src="img/products/banh-mi.jpg" alt="" style="width: 50px; height: 50px" />
-            </td>
-            <td>30</td>
-            <td>Bánh mì</td>
-            <td>
-              <button class="btn btn-info btn-sm btn-color-text">
-                Xem
-              </button>
-              <button class="btn btn-warning btn-sm btn-color-text">
-                Sửa
-              </button>
-              <button class="btn btn-danger btn-sm btn-color-text">
-                Xóa
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bánh mì chả sao</td>
-            <td>10,000 VND</td>
-            <td>
-              <img src="img/products/banh-mi.jpg" alt="" style="width: 50px; height: 50px" />
-            </td>
-            <td>30</td>
-            <td>Bánh mì</td>
-            <td>
-              <button class="btn btn-info btn-sm btn-color-text">
-                Xem
-              </button>
-              <button class="btn btn-warning btn-sm btn-color-text">
-                Sửa
-              </button>
-              <button class="btn btn-danger btn-sm btn-color-text">
-                Xóa
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Bánh mì phải có pate</td>
-            <td>10,000 VND</td>
-            <td>
-              <img src="img/products/banh-mi.jpg" alt="" style="width: 50px; height: 50px" />
-            </td>
-            <td>30</td>
-            <td>Bánh mì</td>
-            <td>
-              <button class="btn btn-info btn-sm btn-color-text">
-                Xem
-              </button>
-              <button class="btn btn-warning btn-sm btn-color-text">
-                Sửa
-              </button>
-              <button class="btn btn-danger btn-sm btn-color-text">
-                Xóa
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Bánh mì nem nướng</td>
-            <td>10,000 VND</td>
-            <td>
-              <img src="img/products/banh-mi.jpg" alt="" style="width: 50px; height: 50px" />
-            </td>
-            <td>30</td>
-            <td>Bánh mì</td>
-            <td>
-              <button class="btn btn-info btn-sm btn-color-text">
-                Xem
-              </button>
-              <button class="btn btn-warning btn-sm btn-color-text">
-                Sửa
-              </button>
-              <button class="btn btn-danger btn-sm btn-color-text">
-                Xóa
-              </button>
-            </td>
-          </tr>
+            </td>";
+            echo "</tr>";
+          }
+          ?>
         </tbody>
       </table>
     </div>
