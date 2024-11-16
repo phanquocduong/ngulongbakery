@@ -9,9 +9,10 @@ class AdProductsModel
     }
     public function getProducts()
     {
-        $sql = 'SELECT * FROM products';
-        $query = $this->db->getAll($sql);
-        return $query;
+        $sql = "SELECT products.*, categories.name AS category_name
+                FROM products
+                JOIN categories ON products.category_id = categories.id";
+        return $this->db->getAll($sql);
     }
 }
 
