@@ -53,7 +53,7 @@
                               echo '</td>
                               <td>
                                 <a
-                                  href="index.php?page=edit_voucher"
+                                  href="index.php?page=edit_voucher&id='.$id.'"
                                   class="text-primary me-2"
                                   ><i class="fa fa-pencil-alt"></i
                                 ></a>

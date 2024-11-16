@@ -24,10 +24,27 @@ class AdAccountsController{
         $this->renderview('add_account', $this->data);
     }
     public function viewAccount_Detail(){
-        $this->renderview('account_detail', $this->data);
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $accountDetail = $this->user->getIdUser($id);
+
+            if (is_array($accountDetail)) {
+                $this->data['accountDetail'] = $accountDetail;
+                $this->renderview('account_detail', $this->data);
+            } else {
+                echo "Not found....";
+            }
     }
     public function viewEditAccount(){
-        $this->renderview('edit_account', $this->data);
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $editaccountDetail = $this->user->getIdUser($id);
+
+            if (is_array($editaccountDetail)) {
+                $this->data['editaccountDetail'] = $editaccountDetail;
+                $this->renderview('edit_account', $this->data);
+            } else {
+                echo "Not found....";
+            }
+        
     }
 }
 

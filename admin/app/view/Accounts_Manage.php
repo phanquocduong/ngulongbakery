@@ -44,12 +44,12 @@
                     }
                       
                     echo'<td>
-                      <a href="index.php?page=account_detail"
+                      <a href="index.php?page=account_detail&id='.$id.'"
                         ><button class="btn btn-info btn-sm btn-color-text">
                           Xem
                         </button></a
                       >
-                      <a href="index.php?page=edit_account" class="btn btn-warning btn-sm btn-color-text">
+                      <a href="index.php?page=edit_account&id='.$id.'" class="btn btn-warning btn-sm btn-color-text">
                         Sửa
                       </a>
                       <button class="btn btn-danger btn-sm">Xoá</button>

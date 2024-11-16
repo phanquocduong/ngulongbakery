@@ -43,9 +43,9 @@
                                         style="width: 40px; height: 40px" />
                                 </td>
                                 <td>
-                                    <a href="index.php?page=edit_categories" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="index.php?page=edit_categories&id='.$id.'" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                                    <a href="index.php?page=view_categories" class="btn btn-sm btn-success">Xem</a>
+                                    <a href="index.php?page=view_categories&id='.$id.'" class="btn btn-sm btn-success">Xem</a>
                                 </td>
                             </tr>';
                             }

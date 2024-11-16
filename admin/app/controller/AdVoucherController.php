@@ -26,7 +26,15 @@
         }
         public function viewEditVoucher()
         {
-            $this->renderview('edit_voucher', $this->data);
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $voucherdetail = $this->voucher->getIdVocher($id);
+
+            if (is_array($voucherdetail)) {
+                $this->data['voucherdetail'] = $voucherdetail;
+                $this->renderview('edit_voucher', $this->data);
+            } else {
+                echo "Not found....";
+            }
         }
     }
 ?>
