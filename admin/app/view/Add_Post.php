@@ -69,11 +69,21 @@
             <label class="form-check-label" for="flexCheckDefault">
                 Tác giả
             </label>
-            <select name="" id="" class="form-select">
-                <option value="0">PhanGB</option>
-                <option value="1">Admin</option>
-                <option value="2">Người dùng</option>
+            <?php
+            require_once './app/model/UserModel.php';
+            $userModel = new UserModel();
+
+            // Lấy thông tin tác giả, những user có role là 1
+            $user = $userModel->getUserByRole(1);
+            ?>
+            <select name="user" id="user" class="form-select">
+                <?php
+                foreach ($user as $user){
+                    echo '<option value="'.$user['id'].'">'.$user['full_name'].'</option>';
+                }
+                ?>
             </select>
+
         </div>
     </div>
     <hr />

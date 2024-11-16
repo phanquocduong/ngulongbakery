@@ -29,7 +29,6 @@ class AdCategoriesController
     {
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
             $editcate = $this->cate->getIdCate($id);
-
             if (is_array($editcate)) {
                 $this->data['editcate'] = $editcate;
                 $this->renderview('edit_categories', $this->data);
@@ -40,7 +39,7 @@ class AdCategoriesController
     public function viewCategories_Detail()
     {
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
-            $procate = $this->cate->getIdPros($id);
+            $procate = $this->cate->getIdPro($id);
 
             if (is_array($procate)) {
                 $this->data['procate'] = $procate;
