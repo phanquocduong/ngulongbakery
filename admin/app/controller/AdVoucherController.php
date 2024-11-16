@@ -1,5 +1,5 @@
 <?php
-    class AdOrderController{
+    class AdVoucherController{
         private $data; // biến lưu trữ dữ liệu từ controller sang view
 
         public function __construct()
@@ -12,12 +12,17 @@
             require_once $view;
         }
     
-        public function viewOrder()
+        public function viewVoucher()
         {
-            $this->renderview('order', $this->data);
+            $this->renderview('voucher', $this->data);
         }
-        public function viewOrder_Detail(){
-            $this->renderview('order_detail', $this->data);
+        public function viewAddVoucher()
+        {
+            $this->renderview('add_voucher', $this->data);
+        }
+        public function viewEditVoucher()
+        {
+            $this->renderview('edit_voucher', $this->data);
         }
     }
 ?>
