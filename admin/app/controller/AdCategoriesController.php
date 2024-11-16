@@ -2,9 +2,11 @@
 class AdCategoriesController
 {
     private $data;
-
+    private $cate;
     public function __construct()
     {
+        require_once './app/model/CategoryModel.php';
+        $this->cate = new CategoryModel();
         $this->data = [];
     }
     public function renderview($view, $data = null)
@@ -15,6 +17,8 @@ class AdCategoriesController
 
     public function viewCategories()
     {
+        $cate = new CategoryModel();
+        $this->data['cate'] = $this->cate->getCate();
         $this->renderview('Categories', $this->data);
     }
     public function viewAddCategories()
