@@ -45,7 +45,7 @@
                                   echo'</td>
                                   <td>'.$author_name.'</td>
                                   <td>
-                                    <a href="index.php?page=post_detail" class="btn btn-sm btn-primary" >Xem</a>
+                                    <a href="index.php?page=post_detail&id='.$id.'" class="btn btn-sm btn-primary" >Xem</a>
                                     <a href="index.php?page=edit_post" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" class="btn btn-sm btn-danger">Xóa</a>
                                   </td>
