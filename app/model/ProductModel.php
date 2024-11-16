@@ -20,5 +20,19 @@
             }
             return $this->db->getAll($sql, $params);
         }
+
+        function getProductCount($condition = '', $params = []) {
+            $sql = "SELECT count(*) AS quantity FROM products $condition";
+            return $this->db->get($sql, $params)['quantity'];
+        }
+
+        public function getProduct($id) {
+            $sql = "SELECT p.*, c.name AS category_name FROM products p INNER JOIN categories c ON p.category_id = c.id WHERE p.id = ?";
+            return $this->db->get($sql, [$id]);
+        }        
+
+        public function getRelatedProducts($categoryId, $productId) {
+            return $this->getProducts('WHERE category_id = ? AND id != ?', [$categoryId, $productId], 'rand()', 0, 4);
+        }
     }
 ?>

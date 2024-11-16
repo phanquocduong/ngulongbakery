@@ -20,26 +20,16 @@
         <header>
             <div class="header-left">
                 <div class="header-logo">
-                    <a href="/" class="header-logo__link">
+                    <a href="index.php" class="header-logo__link">
                         <img src="public/upload/logo/logo.png" alt="Ngũ Long Bakery" class="header-logo__img" />
                     </a>
                 </div>
                 <ul class="header-menu">
                     <li class="header-menu__item">
-                        <a href="" class="header-menu__item-link">TRANG CHỦ</a>
+                        <a href="index.php" class="header-menu__item-link">TRANG CHỦ</a>
                     </li>
                     <li class="header-menu__item">
-                        <a href="" class="header-menu__item-link">
-                            SẢN PHẨM
-                            <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
-                        </a>
-                        <ul class="header-sub-menu">
-                            <?php foreach($categories as $category): ?>
-                                <li class="header-sub-menu__item">
-                                    <a href="" class="header-sub-menu__item-link"><?=$category['name']?></a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <a href="index.php?page=collection" class="header-menu__item-link">SẢN PHẨM</a>
                     </li>
                     <li class="header-menu__item">
                         <a href="" class="header-menu__item-link">TIN TỨC</a>
@@ -71,19 +61,17 @@
                         <i class="user-icon fa-solid fa-user"></i>
                         <div class="user-action">
                             <a href="" class="user-action__link">Đăng nhập</a>
-                            <a href="" class="user-action__link">Đăng ký</a>
+                            <a href="index.php?page=register" class="user-action__link">Đăng ký</a>
                         </div>
                     </li>
                     <li class="header-right__item">
-                        <a href="" class="header-right__item-link">
+                        <a href="index.php?page=cart" class="header-right__item-link">
                             <i class="cart-icon fa-solid fa-basket-shopping"></i>
                             <span id="cart-quantity" class="cart-quantity">
                                 <?php
                                     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                                        end($_SESSION['cart']);
-                                        $lastIndex = key($_SESSION['cart']);
-                                        reset($_SESSION['cart']);
-                                        echo $lastIndex + 1;
+                                        $cartQuantity = array_sum(array_column($_SESSION['cart'], 'quantity'));
+                                        echo $cartQuantity;
                                     } else {
                                         echo 0;
                                     }
@@ -102,17 +90,7 @@
                     <a href="" class="header-menu__item-link">TRANG CHỦ</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="" id="menu-item-drop--tablet" class="header-menu__item-link"
-                        >SẢN PHẨM
-                        <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
-                    </a>
-                    <ul class="header-sub-menu">
-                        <?php foreach($categories as $category): ?>
-                            <li class="header-sub-menu__item">
-                                <a href="" class="header-sub-menu__item-link"><?=$category['name']?></a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <a href="" class="header-menu__item-link">SẢN PHẨM</a>
                 </li>
                 <li class="header-menu__item">
                     <a href="" class="header-menu__item-link">TIN TỨC</a>
@@ -134,18 +112,7 @@
                 <button class="close-btn" id="closeBtn">✖</button>
                 <ul class="modal-menu__list">
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Trang Chủ</a></li>
-                    <li class="modal-menu__item">
-                        <a id="menu-item-drop" class="modal-menu__item-link" href="#"
-                            >Sản Phẩm <i class="chevron-down-icon fa-solid fa-chevron-down"></i
-                        ></a>
-                        <ul class="modal-sub-menu__list modal-sub-menu__list--active">
-                            <?php foreach($categories as $category): ?>
-                                <li class="header-sub-menu__item">
-                                    <a href="" class="header-sub-menu__item-link"><?=$category['name']?></a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Sản Phẩm</a></li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Tin Tức</a></li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Giới Thiệu</a></li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Liên Hệ</a></li>

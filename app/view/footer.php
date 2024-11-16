@@ -8,25 +8,11 @@
                         </div>
                         <div class="footer-box-none col l-3 m-3 c-12"></div>
                         <div class="footer-item col l-3 m-4 c-12">
-                            <h3 class="footer-menu__heading">Danh mục bánh</h3>
+                            <h3 class="footer-menu__heading">Điều hướng nhanh</h3>
                             <ul class="footer-menu__list">
                                 <li class="footer-menu__item">
-                                    <a href="" class="footer-menu__item-link">Bánh bông lan</a>
+                                    <a href="" class="footer-menu__item-link">Sản phẩm</a>
                                 </li>
-                                <li class="footer-menu__item">
-                                    <a href="" class="footer-menu__item-link">Bánh bò</a>
-                                </li>
-                                <li class="footer-menu__item">
-                                    <a href="" class="footer-menu__item-link">Bánh da lợn</a>
-                                </li>
-                                <li class="footer-menu__item">
-                                    <a href="" class="footer-menu__item-link">Bánh trung thu</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer-item col l-3 m-4 c-12">
-                            <h3 class="footer-menu__heading">Khác</h3>
-                            <ul class="footer-menu__list">
                                 <li class="footer-menu__item">
                                     <a href="" class="footer-menu__item-link">Tin tức</a>
                                 </li>
@@ -35,6 +21,17 @@
                                 </li>
                                 <li class="footer-menu__item">
                                     <a href="" class="footer-menu__item-link">Liên hệ</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-item col l-3 m-4 c-12">
+                            <h3 class="footer-menu__heading">Khác</h3>
+                            <ul class="footer-menu__list">
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Đăng ký</a>
+                                </li>
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Đăng nhập</a>
                                 </li>
                                 <li class="footer-menu__item">
                                     <a href="" class="footer-menu__item-link">Giỏ hàng</a>
@@ -60,6 +57,7 @@
 
         <script src="public/js/base.js"></script>
         <script src="public/js/validator.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="public/js/<?=$js?>"></script>
     </body>
 </html>

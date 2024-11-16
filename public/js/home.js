@@ -64,33 +64,3 @@ document.querySelector('.slider-next--tablet').addEventListener('click', () => {
     });
 });
 //End product slider tablet
-
-function addToCart(button, productId, productName, productPrice, productImage) {
-    // Tạo object sản phẩm để gửi tới PHP
-    const product = {
-        id: productId,
-        name: productName,
-        price: productPrice,
-        image: productImage
-    };
-
-    // Gửi yêu cầu AJAX tới file PHP để thêm vào session
-    fetch('index.php?page=handle-add-to-cart', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(product)
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const cartQuantityElement = document.querySelector('#cart-quantity');
-                cartQuantityElement.textContent = data.cartQuantity; // Cập nhật theo số lượng giỏ hàng mới
-                button.classList.add('active');
-            } else {
-                alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-}

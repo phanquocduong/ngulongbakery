@@ -25,7 +25,7 @@
                         MUA NGAY
                     </a>
                 </button>
-                <img src="public/upload/banner-mobile-img.jpg" alt="" class="banner-mobile__img" />
+                <img src="public/upload/banner/banner-mobile-img.jpg" alt="" class="banner-mobile__img" />
             </div>
             <!-- End slideshow/banner mobile -->
 
@@ -82,10 +82,10 @@
                         <?php foreach ($data['featuredProducts'] as $product): ?>
                             <div class="col l-3 m-6 c-10 c-offset-1">
                                 <div class="product-item">
-                                    <a href="#" class="product-item__img-link">
-                                        <div class="product-item__img" style="background-image: url(<?= $product['image'] ?>);"></div>
+                                    <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__img-link">
+                                        <div class="product-item__img" style="background-image: url(public/upload/product/<?= $product['image'] ?>);"></div>
                                     </a>
-                                    <a href="#" class="product-item__title-link">
+                                    <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__title-link">
                                         <h4 class="product-item__name"><?= $product['name'] ?></h4>
                                     </a>
                                     <div class="product-item__rating">
@@ -133,7 +133,7 @@
                                 <h3 class="category-item__name">Bánh bông lan</h3>
                                 <p class="category-item__desc">Bánh bông lan mềm mịn, xốp nhẹ, ngọt ngào, thơm ngon.</p>
                                 <button class="buy-now-btn">
-                                    <a class="buy-now-btn__link" href="#"
+                                    <a class="buy-now-btn__link" href="index.php?page=collection"
                                         >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                                     ></a>
                                 </button>
@@ -147,7 +147,7 @@
                                 <h3 class="category-item__name">Bánh bò</h3>
                                 <p class="category-item__desc">Bánh bò mềm mịn, xốp nhẹ, hương lá dứa thơm lừng.</p>
                                 <button class="buy-now-btn">
-                                    <a class="buy-now-btn__link" href="#"
+                                    <a class="buy-now-btn__link" href="index.php?page=collection"
                                         >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                                     ></a>
                                 </button>
@@ -161,7 +161,7 @@
                                 <h3 class="category-item__name">Bánh da lợn</h3>
                                 <p class="category-item__desc">Bánh da lợn mềm mịn, thơm béo hương truyền thống.</p>
                                 <button class="buy-now-btn">
-                                    <a class="buy-now-btn__link" href="#"
+                                    <a class="buy-now-btn__link" href="index.php?page=collection"
                                         >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                                     ></a>
                                 </button>
@@ -177,7 +177,7 @@
                 <div class="promotion-section-box grid wide">
                     <h1 class="promotion-section__title">Được giảm giá 10% cho lần mua hàng đầu tiên</h1>
                     <button class="buy-now-btn--bigger">
-                        <a class="buy-now-btn__link" href="#">
+                        <a class="buy-now-btn__link" href="index.php?page=collection">
                             <i class="shopping-cart-icon fa-solid fa-cart-shopping"></i>
                             MUA NGAY
                         </a>
@@ -200,10 +200,10 @@
                             <?php foreach($data['discountProductsPC'] as $product): ?>
                                 <div class="product-slide">
                                     <div class="product-item">
-                                        <a href="#" class="product-item__img-link">
-                                            <div class="product-item__img" style="background-image: url(<?= $product['image'] ?>);"></div>
+                                        <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__img-link">
+                                            <div class="product-item__img" style="background-image: url(public/upload/product/<?= $product['image'] ?>);"></div>
                                         </a>
-                                        <a href="#" class="product-item__title-link">
+                                        <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__title-link">
                                             <h4 class="product-item__name"><?= $product['name'] ?></h4>
                                         </a>
                                         <div class="product-item__rating">
@@ -247,10 +247,10 @@
                         <?php foreach($data['discountProductsMobile'] as $product): ?>
                             <div class="col l-3 m-6 c-10 c-offset-1">
                                 <div class="product-item">
-                                    <a href="#" class="product-item__img-link">
-                                        <div class="product-item__img" style="background-image: url(<?= $product['image'] ?>);"></div>
+                                    <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__img-link">
+                                        <div class="product-item__img" style="background-image: url(public/upload/product/<?= $product['image'] ?>);"></div>
                                     </a>
-                                    <a href="#" class="product-item__title-link">
+                                    <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__title-link">
                                         <h4 class="product-item__name"><?= $product['name'] ?></h4>
                                     </a>
                                     <div class="product-item__rating">
@@ -287,6 +287,10 @@
             <!-- End promtional products section -->
 
             <!-- Start review section -->
+            <?php 
+                $review1 = $data['featuredReviews'][0];
+                $review2 = $data['featuredReviews'][1];
+            ?>
             <section class="review-section">
                 <h2 class="section-title">ĐÁNH GIÁ CỦA KHÁCH HÀNG</h2>
                 <div class="grid wide">
@@ -294,28 +298,23 @@
                         <div class="review-item-box col l-4 m-12 c-10 c-offset-1">
                             <div class="review-item">
                                 <div class="review-item__rating">
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-regular fa-star"></i>
+                                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                                        <i class="star-icon-large fa-<?= $i <= $review1['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
+                                    <?php endfor; ?>
                                 </div>
-                                <p class="review-item__content">
-                                    Bánh rất ngon, mềm mịn và ngọt vừa phải. Dịch vụ giao hàng nhanh chóng, đóng gói cẩn
-                                    thận. Mình rất hài lòng và sẽ ủng hộ tiệm lâu dài!
-                                </p>
+                                <p class="review-item__content">Bánh rất ngon, mềm mịn và ngọt vừa phải. Dịch vụ giao hàng nhanh chóng, đóng gói cẩn thận. Mình rất hài lòng và sẽ ủng hộ tiệm lâu dài!</p>
                                 <div class="review-item__user">
                                     <img
-                                        src="public/upload/avatar/maitruongduy.webp"
+                                        src="public/upload/avatar/<?=$review1['avatar']?>"
                                         alt=""
                                         class="review-item__user-avatar"
                                     />
-                                    <span class="review-item__user-name">Trường Duy</span>
+                                    <span class="review-item__user-name"><?=$review1['full_name']?></span>
                                 </div>
                             </div>
                         </div>
                         <div class="review-item-box col l-4 m-12 c-10 c-offset-1">
-                            <div class="promotion-item" style="background-image: url(public/upload/small-banner.webp)">
+                            <div class="promotion-item" style="background-image: url(public/upload/banner/small-banner.webp)">
                                 <h2 class="promotion-item__title">
                                     Ưu Đãi Trong Ngày Giảm Giá 15% Cho Tất Cả Các Loại Bánh
                                 </h2>
@@ -327,23 +326,18 @@
                         <div class="review-item-box col l-4 m-12 c-10 c-offset-1">
                             <div class="review-item">
                                 <div class="review-item__rating">
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-solid fa-star"></i>
-                                    <i class="star-icon-large fa-regular fa-star"></i>
+                                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                                        <i class="star-icon-large fa-<?= $i <= $review2['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
+                                    <?php endfor; ?>
                                 </div>
-                                <p class="review-item__content">
-                                    Bánh rất ngon, mềm mịn và ngọt vừa phải. Dịch vụ giao hàng nhanh chóng, đóng gói cẩn
-                                    thận. Mình rất hài lòng và sẽ ủng hộ tiệm lâu dài!
-                                </p>
+                                <p class="review-item__content"><?=$review2['comment']?></p>
                                 <div class="review-item__user">
                                     <img
-                                        src="public/upload/avatar/maitruongduy.webp"
+                                        src="public/upload/avatar/<?=$review2['avatar']?>"
                                         alt=""
                                         class="review-item__user-avatar"
                                     />
-                                    <span class="review-item__user-name">Trường Duy</span>
+                                    <span class="review-item__user-name"><?=$review2['full_name']?></span>
                                 </div>
                             </div>
                         </div>

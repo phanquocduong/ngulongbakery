@@ -100,6 +100,25 @@ main {
     padding-top: 6px;
 }
 
+.errors {
+    border-radius: 3px;
+    padding: 6px 12px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    text-align: left;
+    color: #d02e2e;
+    background-color: #fff6f6;
+    border-color: #d02e2e;
+}
+
+.errors ul {
+    margin: 0;
+    padding: 0;
+    margin-left: 20px;
+}
+
 /* Tablet - PC low resolution */
 @media (min-width: 740px) and (max-width: 1024px) {
     .register-form {

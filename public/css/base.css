@@ -49,9 +49,7 @@ header {
     position: relative;
 }
 
-.header-menu__item:hover .header-menu__item-link,
-.header-menu__item:hover .chevron-down-icon,
-.header-sub-menu__item-link:hover {
+.header-menu__item:hover .header-menu__item-link {
     color: var(--primary-color-bold);
 }
 
@@ -64,53 +62,6 @@ header {
     text-decoration: none;
     color: var(--secondary-color);
     transition: color 0.4s ease;
-}
-
-.chevron-down-icon {
-    cursor: pointer;
-    position: relative;
-    top: -2px;
-    font-size: 1rem;
-    margin-left: 4px;
-    color: var(--secondary-color);
-    transition: color 0.4s ease;
-}
-
-.header-menu__item:hover .header-sub-menu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.header-sub-menu {
-    background-color: var(--white-color);
-    position: absolute;
-    display: block;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    border: 1px solid #eee;
-    min-width: 200px;
-    top: 100%;
-    border-radius: 1px;
-    box-shadow: 0 0 1px #eee;
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.header-sub-menu__item-link {
-    text-decoration: none;
-    font-size: 1.6rem;
-    color: var(--secondary-color);
-    font-weight: 400;
-    display: block;
-    padding: 15px 20px;
-    line-height: 2rem;
-    transition: color 0.2s ease;
 }
 
 .header-search {
@@ -655,25 +606,13 @@ header {
         margin: 0;
     }
 
-    .modal-sub-menu__list {
-        padding-right: 20px;
-        margin: 0;
-        display: none;
-        transition: transform ease 0.5s;
-    }
-
-    .modal-menu__item-link,
-    .modal-sub-menu__item-link {
+    .modal-menu__item-link {
         text-decoration: none;
         font-size: 1.8rem;
         color: var(--secondary-color);
         display: block;
         padding: 20px;
         border-bottom: 1px solid #ccc;
-    }
-
-    .modal-sub-menu__item-link {
-        font-size: 1.6rem;
     }
 
     .overlay {
@@ -693,10 +632,6 @@ header {
     .overlay.active {
         opacity: 1;
         visibility: visible;
-    }
-
-    .modal-sub-menu__list.active {
-        display: block;
     }
     /* End header */
 

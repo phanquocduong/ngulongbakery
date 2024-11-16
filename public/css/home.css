@@ -262,7 +262,11 @@
 }
 
 .review-item {
-    padding: 75px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 380px;
+    padding: 0 50px;
     background-color: var(--white-color);
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);

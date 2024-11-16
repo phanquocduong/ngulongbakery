@@ -20,5 +20,10 @@
             }
             return $this->db->getAll($sql, $params);
         }
+
+        public function getCategory($id) {
+            $sql = "SELECT * FROM categories WHERE id = ?";
+            return $this->db->get($sql, [$id]);
+        }
     }
 ?>

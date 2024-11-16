@@ -112,7 +112,7 @@ main {
 
 .collection-desc {
     font-size: 1.6rem;
-    line-height: 2.2rem;
+    line-height: 2.4rem;
     color: var(--text-color);
     margin: 0;
     margin-bottom: 20px;
@@ -146,6 +146,11 @@ main {
 
 .pagination-link__icon-next {
     margin-left: 30px;
+}
+
+.pagination-link__icon-prev.none,
+.pagination-link__icon-next.none {
+    display: none;
 }
 
 /* Tablet - PC low resolution */
