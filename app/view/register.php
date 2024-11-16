@@ -58,7 +58,7 @@
                 ?>
                 <div class="register-action">
                     <button class="register-btn">Đăng ký</button>
-                    <a href="login.html" class="login-title">
+                    <a href="index.php?page=login" class="login-title">
                         Bạn đã có tài khoản?
                         <span class="login-title__link">Đăng nhập</span>
                     </a>
