@@ -3,7 +3,6 @@ class AdPost_ManageController
 {
     private $data; // biến lưu trữ dữ liệu từ controller sang view
     private $post;
-    private $category;
     public function __construct()
     {
         require_once './app/model/PostModel.php';
@@ -17,8 +16,8 @@ class AdPost_ManageController
     }
     public function viewPost_Manage()
     {
-        $post = new PostModel();
         $this->data['post'] = $this->post->getPost();
+        $post = new PostModel();
         $this->renderview('post_manage', $this->data);
     }
     public function viewAddPost(){

@@ -19,7 +19,7 @@
                           <th class="border-0">ID</th>
                           <th class="border-0">Tiêu Đề</th>
                           <th class="border-0">Danh Mục</th>
-                          <th class="border-0">Ngày Đăng</th>
+                          <th class="border-0">Ngày Và Thời Gian Đăng</th>
                           <th class="border-0">Trạng Thái</th>
                           <th class="border-0">Tác Giả</th>
                           <th class="border-0">Tác Vụ</th>
@@ -33,12 +33,17 @@
                           echo '<tr>
                                   <td>'.$stt++.'</td>
                                   <td>'.$title.'</td>
-                                  <td>Ẩm thực</td>
-                                  <td>09-11-2024</td>
-                                  <td>
-                                    <span class="badge bg-success">Đã đăng</span>
-                                  </td>
-                                  <td>PhanGB</td>
+                                  <td>'.$category_name.'</td>
+                                  <td>'.$created_at.'</td>
+                                  <td>';
+                                  if($status==1){
+                                    echo'<span class="badge bg-success">Đã đăng</span>';
+                                  }else{
+                                    echo '<span class="badge bg-danger">Chưa đăng</span>';
+                                  }
+                                    
+                                  echo'</td>
+                                  <td>'.$author_name.'</td>
                                   <td>
                                     <a href="index.php?page=post_detail" class="btn btn-sm btn-primary" >Xem</a>
                                     <a href="index.php?page=edit_post" class="btn btn-sm btn-primary">Sửa</a>
