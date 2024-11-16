@@ -2,9 +2,12 @@
 class AdProductsController
 {
     private $data; // biến lưu trữ dữ liệu từ controller sang view
+    private $products;
 
     public function __construct()
     {
+        require_once './app/model/AdProductsModel.php';
+        $this->products = new AdProductsModel();
         $this->data = [];
     }
     public function renderview($view, $data = null)
@@ -15,6 +18,7 @@ class AdProductsController
 
     public function viewProducts()
     {
+        $this->data = $this->products->getProducts();
         $this->renderview('products', $this->data);
     }
     public function viewProducts_Detail()

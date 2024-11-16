@@ -1,7 +1,7 @@
 <?php
 session_start();
 ob_start();
-require_once '../app/model/database.php';
+require_once '.././app/model/database.php';
 require_once './app/view/Header.php';
 require_once './app/controller/MainController.php';
 require_once './app/controller/AdProductsController.php';
