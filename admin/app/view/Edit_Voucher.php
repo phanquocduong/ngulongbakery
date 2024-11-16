@@ -1,4 +1,7 @@
 <!-- Main Start -->
+ <?php
+extract($data['voucherdetail']);
+ ?>
 <div class="container-fluid py-4 px-4">
           <div class="row">
             <div class="col-12">
@@ -16,7 +19,7 @@
                         class="form-control"
                         id="code"
                         name="code"
-                        value="ABC123"
+                        value="<?php echo $code ?>"
                         required
                       />
                     </div>
@@ -29,7 +32,7 @@
                         class="form-control"
                         id="discount"
                         name="discount"
-                        value="10"
+                        value="<?php echo $discount_value ?>"
                         required
                       />
                     </div>
@@ -41,7 +44,7 @@
                           class="form-control"
                           id="start"
                           name="start"
-                          value="09-11-2024"
+                          value="<?php echo $start_date ?>"
                           required
                         />
                         <span class="input-group-text"
@@ -57,7 +60,7 @@
                           class="form-control"
                           id="end"
                           name="end"
-                          value="30-12-2024"
+                          value="<?php echo $end_date ?>"
                           required
                         />
                         <span class="input-group-text"
@@ -72,7 +75,7 @@
                         class="form-control"
                         id="quantity"
                         name="quantity"
-                        value="100"
+                        value="<?php echo $usage_limit ?>"
                         required
                       />
                     </div>
@@ -85,15 +88,22 @@
                         class="form-control"
                         id="quantity"
                         name="quantity"
-                        value="10.000"
+                        value="<?php echo $min_order_value ?>"
                         required
                       />
                     </div>
                     <div class="mb-3">
                       <label for="status" class="form-label">Trạng Thái</label>
                       <select class="form-select" id="status" name="status">
-                        <option value="1">Kích Hoạt</option>
-                        <option value="0">Không Kích Hoạt</option>
+                        <?php
+                        if ($active==0) {
+                          echo '<option value="1">Kích Hoạt</option>
+                          <option value="0" selected>Không Kích Hoạt</option>';
+                        } else {
+                          echo '<option value="1" selected>Kích Hoạt</option>
+                          <option value="0">Không Kích Hoạt</option>';
+                        }
+                        ?>
                       </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Lưu</button>

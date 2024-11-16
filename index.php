@@ -1,6 +1,7 @@
 <?php
     session_start();
     ob_start();
+    require_once 'vendor/autoload.php';
     require_once 'app/model/database.php';
     require_once 'app/model/CategoryModel.php';
     require_once 'app/model/ProductModel.php';
@@ -70,6 +71,50 @@
                 $js = 'register.js';
                 $user = new UserController();
                 $user->handleRegister($css, $js);
+                break;
+            case 'verify':
+                $user = new UserController();
+                $user->verify();
+                break;
+            case 'login':
+                $css = 'login.css';
+                $js = 'login.js';
+                $user = new UserController();
+                $user->viewLogin($css, $js);
+                break;
+            case 'handle-login':
+                $css = 'login.css';
+                $js = 'login.js';
+                $user = new UserController();
+                $user->handleLogin($css, $js);
+                break;
+            case 'handle-forgot-pass':
+                $css = 'login.css';
+                $js = 'login.js';
+                $user = new UserController();
+                $user->handleForgotPassword($css, $js);
+                break;
+            case 'reset-password':
+                $css = 'reset-password.css';
+                $js = 'reset-password.js';
+                $user = new UserController();
+                $user->viewResetPassword($css, $js);
+                break;
+            case 'handle-reset-password':
+                $css = 'reset-password.css';
+                $js = 'reset-password.js';
+                $user = new UserController();
+                $user->handleResetPassword($css, $js);
+                break;
+            case 'logout':
+                $user = new UserController();
+                $user->logout();
+                break;
+            case 'account':
+                $css = 'account.css';
+                $js = 'account.js';
+                $user = new UserController();
+                $user->viewAccount($css, $js);
                 break;
             default:
                 $css = 'home.css';

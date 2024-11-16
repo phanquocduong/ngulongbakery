@@ -32,7 +32,7 @@ class PostModel{
         $sql = "SELECT comments.*, users.full_name AS user_name
                 FROM comments
                 JOIN users ON comments.user_id = users.id
-                WHERE comments.post_id = :idpost";
+                WHERE comments.post_id = 1";
         $params = [':idpost' => $idpost];
         return $this->db->getAll($sql, $params);
 

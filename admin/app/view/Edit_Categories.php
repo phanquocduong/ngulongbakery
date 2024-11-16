@@ -1,4 +1,7 @@
 <!-- form edit category -->
+<?php 
+    extract($data['editcate']);
+?>
 <div class="container-fluid py-4 px-4">
     <div class="row">
         <div class="col-12">
@@ -24,7 +27,7 @@
                                     echo '<div class="card card-body">
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Tên Danh Mục</label>
-                                            <input type="text" class="form-control" id="name" value="' . $name . '" />
+                                            <input type="text" class="form-control" id="name" value="Bánh Mì" />
                                         </div>
                                         <div class="mb-3">
                                             <label for="image" class="form-label">Hình Ảnh</label>
@@ -33,14 +36,14 @@
                                         <div class="mb-3">
                                             <label for="description" class="form-label">Mô Tả</label>
                                             <textarea class="form-control" id="description" rows="3"
-                                                placeholder="Nhập mô tả">' . $description . '</textarea>
+                                                placeholder="Nhập mô tả">Danh mục cho sản phẩm và bài viết liên quan tới bánh mì.</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="parent" class="form-label">Loại danh mục</label>
                                             <select class="form-select" id="parent">
                                                 <option selected>Chọn danh mục</option>
-                                                <option value="1"' . ($type == 'Tin tức' ? ' selected' : '') . '>Danh Mục Tin Tức</option>
-                                                <option value="2"' . ($type == 'Sản phẩm' ? ' selected' : '') . '>Danh Mục Sản Phẩm</option>
+                                                <option value="1">Danh Mục Bài Viết</option>
+                                                <option value="2" selected>Danh Mục Sản Phẩm</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">

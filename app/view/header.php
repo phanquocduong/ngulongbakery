@@ -58,11 +58,19 @@
                 </button>
                 <ul class="header-right__list">
                     <li class="header-right__item">
-                        <i class="user-icon fa-solid fa-user"></i>
-                        <div class="user-action">
-                            <a href="" class="user-action__link">Đăng nhập</a>
-                            <a href="index.php?page=register" class="user-action__link">Đăng ký</a>
-                        </div>
+                        <?php if(isset($_SESSION['user']) && ($_SESSION['user']) != ""): ?>
+                            <img class="user-avatar" src="public/upload/avatar/<?=$_SESSION['user']['avatar']?>" alt="<?=$_SESSION['user']['full_name']?>">
+                            <div class="user-action">
+                                <a href="index.php?page=account" class="user-action__link">Tài khoản</a>
+                                <a href="index.php?page=logout" class="user-action__link">Đăng xuất</a>
+                            </div>
+                        <?php else: ?>
+                            <i class="user-icon fa-solid fa-user"></i>
+                            <div class="user-action">
+                                <a href="index.php?page=login" class="user-action__link">Đăng nhập</a>
+                                <a href="index.php?page=register" class="user-action__link">Đăng ký</a>
+                            </div>
+                        <?php endif; ?>
                     </li>
                     <li class="header-right__item">
                         <a href="index.php?page=cart" class="header-right__item-link">

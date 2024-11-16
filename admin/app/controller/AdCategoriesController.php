@@ -27,11 +27,27 @@ class AdCategoriesController
     }
     public function viewEditCategories()
     {
-        $this->renderview('edit_categories', $this->data);
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $editcate = $this->cate->getIdCate($id);
+
+            if (is_array($editcate)) {
+                $this->data['editcate'] = $editcate;
+                $this->renderview('edit_categories', $this->data);
+            } else {
+                echo "Not found....";
+            }
     }
     public function viewCategories_Detail()
     {
-        $this->renderview('Categories_detail', $this->data);
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $procate = $this->cate->getIdPros($id);
+
+            if (is_array($procate)) {
+                $this->data['procate'] = $procate;
+                $this->renderview('Categories_detail', $this->data);
+            } else {
+                echo "Not found....";
+            }
     }
 }
 

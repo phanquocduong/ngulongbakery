@@ -1,4 +1,7 @@
 <!-- body start -->
+<?php
+extract($data['editaccountDetail']);
+?>
 <form action="" class="form-label">
     <div class="container-fluid py-4 px-4">
         <div class="row">
@@ -19,8 +22,14 @@
                                 cursor: pointer;
                               " />
                                         <input type="file" id="image-upload" style="display: none" accept="image/*" />
-                                        <h5 class="mt-3">PhanGB</h5>
-                                        <p class="text-muted">Admin</p>
+                                        <h5 class="mt-3"><?php echo $full_name?></h5>
+                                        <?php
+                                        if($role_id==1){
+                                        echo '<p class="text-muted">Admin</p>';
+                                        }else{
+                                            echo '<p class="text-muted">Người dùng</p>';
+                                        }
+                                        ?>
                                         <div class="d-flex justify-content-center">
                                             <a href="index.php?page=account_detail" class="btn btn-primary">Quay lại</a>
                                             <button class="btn btn-danger ms-2">Lưu thông tin</button>
@@ -39,28 +48,28 @@
                                                 <div class="mb-3">
                                                     <label for="name" class="form-label">Họ và Tên</label>
                                                     <input type="text" class="form-control" id="name"
-                                                        value="Phận Goodboy" />
+                                                        value="<?php echo $full_name?>" />
                                                 </div>
                                             </div>
                                             <div class="col-12 col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email</label>
                                                     <input type="email" class="form-control" id="email"
-                                                        value="conmeo123@gmail.com" />
+                                                        value="<?php echo $email?>" />
                                                 </div>
                                             </div>
                                             <div class="col-12 col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label">Số Điện Thoại</label>
                                                     <input type="text" class="form-control" id="phone"
-                                                        value="0123456789" />
+                                                        value="<?php echo $phone?>" />
                                                 </div>
                                             </div>
                                             <div class="col-12 col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label">Địa Chỉ</label>
                                                     <input type="text" class="form-control" id="address"
-                                                        value="47/10C Tô Kí, Phường Trung Mỹ Tây, Q.12, TP.HCM" />
+                                                        value="<?php echo $address?>" />
                                                 </div>
                                             </div>
                                             <div class="col-12 col -lg-6">
@@ -68,8 +77,8 @@
                                                     <label for="role" class="form-label">Vai Trò</label>
                                                     <select class="form-select" id="role">
                                                         <option selected>Chọn vai trò</option>
-                                                        <option value="admin" selected>Admin</option>
-                                                        <option value="user">User</option>
+                                                        <option value="1" selected>Admin</option>
+                                                        <option value="0">User</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -78,8 +87,8 @@
                                                     <label for="role" class="form-label">Trạng thái</label>
                                                     <select class="form-select" id="role">
                                                         <option selected>Thiết lập trạng thái</option>
-                                                        <option value="admin" selected>Đang Hoạt động</option>
-                                                        <option value="user">Đã tắt</option>
+                                                        <option value="1" selected>Đang Hoạt động</option>
+                                                        <option value="0">Đã tắt</option>
                                                     </select>
                                                 </div>
                                             </div>
