@@ -26,100 +26,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>#1</td>
-                          <td>Top 10 Sản Phẩm Được Yêu Thích Nhất</td>
-                          <td>Ẩm thực</td>
-                          <td>09-11-2024</td>
-                          <td>
-                            <span class="badge bg-success">Đã đăng</span>
-                          </td>
-                          <td>PhanGB</td>
-                          <td>
-                            <a href="index.php?page=post_detail" class="btn btn-sm btn-primary" >Xem</a>
-                            <a href="index.php?page=edit_post" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#1</td>
-                          <td>Top 10 Sản Phẩm Được Yêu Thích Nhất</td>
-                          <td>Ẩm thực</td>
-                          <td>09-11-2024</td>
-                          <td>
-                            <span class="badge bg-success">Đã đăng</span>
-                          </td>
-                          <td>PhanGB</td>
-                          <td>
-                            <a
-                              href="view_post.html"
-                              class="btn btn-sm btn-primary"
-                              >Xem</a
-                            >
-                            <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#1</td>
-                          <td>Top 10 Sản Phẩm Được Yêu Thích Nhất</td>
-                          <td>Ẩm thực</td>
-                          <td>09-11-2024</td>
-                          <td>
-                            <span class="badge bg-success">Đã đăng</span>
-                          </td>
-                          <td>PhanGB</td>
-                          <td>
-                            <a href="" class="btn btn-sm btn-primary">Xem</a>
-                            <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#1</td>
-                          <td>Top 10 Sản Phẩm Được Yêu Thích Nhất</td>
-                          <td>Ẩm thực</td>
-                          <td>09-11-2024</td>
-                          <td>
-                            <span class="badge bg-success">Đã đăng</span>
-                          </td>
-                          <td>PhanGB</td>
-                          <td>
-                            <a href="" class="btn btn-sm btn-primary">Xem</a>
-                            <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#1</td>
-                          <td>Top 10 Sản Phẩm Được Yêu Thích Nhất</td>
-                          <td>Ẩm thực</td>
-                          <td>09-11-2024</td>
-                          <td>
-                            <span class="badge bg-success">Đã đăng</span>
-                          </td>
-                          <td>PhanGB</td>
-                          <td>
-                            <a href="" class="btn btn-sm btn-primary">Xem</a>
-                            <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#1</td>
-                          <td>Top 10 Sản Phẩm Được Yêu Thích Nhất</td>
-                          <td>Ẩm thực</td>
-                          <td>09-11-2024</td>
-                          <td>
-                            <span class="badge bg-success">Đã đăng</span>
-                          </td>
-                          <td>PhanGB</td>
-                          <td>
-                            <a href="" class="btn btn-sm btn-primary">Xem</a>
-                            <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                          </td>
-                        </tr>
+                        <?php
+                        $stt=1; 
+                          foreach ($data['post'] as $item) {
+                          extract($item);
+                          echo '<tr>
+                                  <td>'.$stt++.'</td>
+                                  <td>'.$title.'</td>
+                                  <td>Ẩm thực</td>
+                                  <td>09-11-2024</td>
+                                  <td>
+                                    <span class="badge bg-success">Đã đăng</span>
+                                  </td>
+                                  <td>PhanGB</td>
+                                  <td>
+                                    <a href="index.php?page=post_detail" class="btn btn-sm btn-primary" >Xem</a>
+                                    <a href="index.php?page=edit_post" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="#" class="btn btn-sm btn-danger">Xóa</a>
+                                  </td>
+                                </tr>';
+                          }
+                        ?>
                       </tbody>
                     </table>
                   </div>

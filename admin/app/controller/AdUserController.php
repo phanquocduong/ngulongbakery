@@ -1,9 +1,11 @@
 <?php
 class AdAccountsController{
     private $data;
-
+    private $user;
     public function __construct()
     {
+        require_once './app/model/UserModel.php';
+        $this->user = new UserModel();
         $this->data = [];
     }
     public function renderview($view, $data = null)
@@ -14,6 +16,8 @@ class AdAccountsController{
 
     public function viewAcc()
     {
+        $user = new UserModel();
+        $this->data['user'] = $this->user->getUser();
         $this->renderview('Accounts_Manage', $this->data);
     }
     public function viewAddAccount(){

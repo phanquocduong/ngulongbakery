@@ -31,11 +31,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Bánh Bông Lan</td>
+                            <?php
+                            $stt=1;
+                            foreach ($data['cate'] as $item) {
+                                extract($item);
+                                echo '<tr>
+                                <td>'.$stt++.'</td>
+                                <td>'.$name.'</td>
                                 <td>
-                                    <img src="img/products/banhkem-bong-lan.webp" alt=""
+                                    <img src="public/upload/product/'.$image.'" alt=""
                                         style="width: 40px; height: 40px" />
                                 </td>
                                 <td>
@@ -43,56 +47,9 @@
                                     <a href="#" class="btn btn-sm btn-danger">Xoá</a>
                                     <a href="index.php?page=view_categories" class="btn btn-sm btn-success">Xem</a>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bánh Bò</td>
-                                <td>
-                                    <img src="img/products/banh-bo.webp" alt="" style="width: 40px; height: 40px" />
-                                </td>
-                                <td>
-                                    <a href="edit-category.html" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                                    <a href="view-category.html" class="btn btn-sm btn-success">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Bánh Mì</td>
-                                <td>
-                                    <img src="img/products/banh-mi.jpg" alt="" style="width: 40px; height: 40px" />
-                                </td>
-                                <td>
-                                    <a href="edit-category.html" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                                    <a href="view-category.html" class="btn btn-sm btn-success">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Bánh Trung Thu</td>
-                                <td>
-                                    <img src="img/products/banh_trung_thu_nhan_dau_xanh-300x300.webp" alt=""
-                                        style="width: 40px; height: 40px" />
-                                </td>
-                                <td>
-                                    <a href="edit-category.html" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                                    <a href="view-category.html" class="btn btn-sm btn-success">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Bánh Da Lợn</td>
-                                <td>
-                                    <img src="img/products/banh-da-lon.jpg" alt="" style="width: 40px; height: 40px" />
-                                </td>
-                                <td>
-                                    <a href="edit-category.html" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xoá</a>
-                                    <a href="view-category.html" class="btn btn-sm btn-success">Xem</a>
-                                </td>
-                            </tr>
+                            </tr>';
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
