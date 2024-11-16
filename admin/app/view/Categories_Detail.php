@@ -4,12 +4,31 @@
         <div class="d-flex align-items-center mb-4">
             <a href="index.php?page=categories" class="btn nav-link" style="margin-right: 50px">Quay lại</a>
             <!-- <h4 class="mb-0">Danh Mục Bánh Bông Lan</h4> -->
-             <?php
-             extract($category);
-            if ($countProduct > 0) {
-                echo '<h4 class="mb-0">Danh Sách Sản Phẩm Danh Mục '. $name.'</h4>';
+            <?php
+            require_once './app/model/CategoryModel.php';
+            $categoryModel = new CategoryModel();
+
+            // Lấy ID danh mục từ URL
+            $categoryId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+            // Lấy thông tin danh mục theo ID
+            $category = $categoryModel->getIdCate($categoryId);
+
+            // Đếm số lượng sản phẩm theo ID danh mục
+            $countProduct = $categoryModel->countProductsByCategoryId($categoryId);
+
+            // Lấy danh sách sản phẩm theo ID danh mục
+            $products = $categoryModel->getProductsByCategoryId($categoryId);
+
+            if ($category) {
+                extract($category);
+                if ($countProduct > 0) {
+                    echo '<h4 class="mb-0">Danh Sách Sản Phẩm Danh Mục ' . $name . '</h4>';
+                } else {
+                    echo '<h4 class="mb-0">Không có sản phẩm nào</h4>';
+                }
             } else {
-                echo '<h4 class="mb-0">Không có sản phẩm nào</h4>';
+                echo '<h4 class="mb-0">Không tìm thấy danh mục</h4>';
             }
             ?>
         </div>
@@ -25,7 +44,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                <?php
+                if ($countProduct > 0) {
+                    foreach ($products as $index => $item) {
+                        echo '<tr>';
+                        echo '<td>' . ($index + 1) . '</td>';
+                        echo '<td>' . $item['name'] . '</td>';
+                        echo '<td>' . number_format($item['price'], 0, ',', '.') . ' VND</td>';
+                        echo '<td>' . $item['stock_quantity'] . '</td>';
+                        echo '<td>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=products_detail&id=' . $item['id'] . '">Xem chi tiết</a>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=edit_products&id=' . $item['id'] . '">Sửa</a>
+                                <a class="btn btn-sm btn-danger" href="index.php?page=delete_products&id=' . $item['id'] . '">Xóa</a>
+                            </td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="5" class="text-center">Không có sản phẩm nào</td></tr>';
+                }
+                ?>
+                    <!-- <tr>
                         <td>1</td>
                         <td>Bánh Bông Lan Trứng Muối</td>
                         <td>20,000 VND</td>
@@ -57,7 +95,7 @@
                             <a class="btn btn-sm btn-primary" href="#">Sửa</a>
                             <a class="btn btn-sm btn-danger" href="#">Xóa</a>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
