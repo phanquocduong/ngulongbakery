@@ -3,7 +3,7 @@
   <div class="bg-light rounded p-4">
     <div class="d-flex justify-content-between mb-4">
       <h4 class="mb-0">Danh sách sản phẩm</h4>
-      <a href="index.php?page=addPro"><button class="btn btn-primary">Thêm sản phẩm</button></a>
+      <a href="index.php?page=viewAddPro"><button class="btn btn-primary">Thêm sản phẩm</button></a>
     </div>
     <!-- form search -->
     <form class="d-none d-md-flex ms-4">
@@ -65,15 +65,25 @@
               <a href='index.php?page=products_detail&id=$id'><button class='btn btn-info btn-sm btn-color-text'>
                   Xem
                 </button></a>
-              <a href='index.php?page=edit_products&id=$id'><button class='btn btn-warning btn-sm btn-color-text'>
+              <a href='index.php?page=viewEdit_products&id=$id'><button class='btn btn-warning btn-sm btn-color-text'>
                   Sửa
-                </button></a>
-              <a href='index.php?page=del_products&id=$id'>
-                <button class='btn btn-danger btn-sm btn-color-text'>
-                  Xóa
+                </button></a>";
+                echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $id . ')">
+                <button class="btn btn-danger btn-sm btn-color-text">
+                  xoá
                 </button>
-              </a>
-            </td>";
+                </a>';
+            ?>
+            <script>
+              function confirmDelete(id) {
+                const url = "index.php?page=delProducts&id=" + id;
+                if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+                  window.location.href = url;
+                }
+              }
+            </script>
+            <?php
+            echo "</td>";
             echo "</tr>";
           }
           ?>

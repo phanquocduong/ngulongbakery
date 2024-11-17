@@ -6,7 +6,7 @@
       <a href="index.php?page=products"><button class="btn btn-primary">Quay lại</button></a>
       <?php
       $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-      echo "<a href='index.php?page=edit_products&id=$product_id'><button class='btn btn-primary'>
+      echo "<a href='index.php?page=viewEdit_products&id=$product_id'><button class='btn btn-primary'>
           Sửa chi tiết sản phẩm
         </button></a>"
         ?>

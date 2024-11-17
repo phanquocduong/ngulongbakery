@@ -8,7 +8,7 @@
             Sửa
             <span class="text-primary">Sản Phẩm</span>
           </h2>
-          <form action="">
+          <form action="index.php?page=editPro" method="POST" enctype="multipart/form-data">
             <div class="container-fluid px-4">
               <div class="row">
                 <div class="col-12 col -lg-6">
@@ -41,20 +41,20 @@
                     echo "<div class='card card-body'>";
                     echo "<div class='mb-3'>";
                     echo "<label for='name' class='form-label'>Tên Sản Phẩm</label>";
-                    echo "<input type='text' class='form-control' id='name' value='$name' />";
+                    echo "<input type='text' class='form-control' id='name' name='name' value='$name' />";
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='price' class='form-label'>Giá Gốc (VNĐ)</label>";
-                    echo "<input type='number' class='form-control' id='price' value='$price' />";
+                    echo "<input type='number' class='form-control' id='price' name='price' value='$price' />";
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='price' class='form-label'>Giá Khuyến Mãi (VNĐ)</label>";
-                    echo "<input type='number' class='form-control' id='price' value='$sale' />";
+                    echo "<input type='number' class='form-control' id='price_sale' name='price_sale' value='$sale' />";
                     echo "<br />";
                     echo "<div class='mb-3'>";
                     echo "<label for='image' class='form-label'>Hình Ảnh</label><br />";
                     echo "<img src='../public/upload/product/$image' alt='Product Image' class='img-thumbnail' style='width: 100px;' />";
-                    echo "<input class='form-control' type='file' id='image' />";
+                    echo "<input class='form-control' type='file' id='image' name='image' />";
                     echo "<br />";
                     echo "<label for='image' class='form-label'>Hình Ảnh Con</label>";
                     echo "<hr />";
@@ -63,33 +63,33 @@
                     foreach ($imageArray as $image) {
                       echo "<div class='mb-3'>";
                       echo "<img src='../public/upload/product/$image' alt='Product Image' class='img-thumbnail' style='width: 100px;' />";
-                      echo "<input class='form-control' type='file' id='image' />";
+                      echo "<input class='form-control' type='file' id='ex_image' name='ex_image'/>";
                       echo "<hr />";
                       echo "</div>";
                     }
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='short-description' class='form-label'>Mô Tả Ngắn</label>";
-                    echo "<input type='text' id='short-description' value='$short_description' class='form-control' />";
+                    echo "<input type='text' id='short-description' name='short-description' value='$short_description' class='form-control' />";
                     echo "<br />";
                     echo "<label for='description'>Mô Tả Chi Tiết</label>";
-                    echo "<textarea class='form-control' id='description' rows='10'>$detailed_description</textarea>";
+                    echo "<textarea class='form-control' id='description' name='description' rows='10'>$detailed_description</textarea>";
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='stock_quantity' class='form-label'>Số Lượng Hàng Tồn Kho</label>";
-                    echo "<input type='number' class='form-control' id='stock_quantity' value='$stock_quantity' />";
+                    echo "<input type='number' class='form-control' id='stock_quantity' name='stock_quantity' value='$stock_quantity' />";
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='views' class='form-label'>Số Lượt Xem</label>";
-                    echo "<input type='number' class='form-control' id='views' value='$views' disabled />";
+                    echo "<input type='number' class='form-control' id='views' name='views' value='$views' disabled />";
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='tag' class='form-label'>Thẻ</label>";
-                    echo "<input type='text' class='form-control' id='tag' value='$tags' />";
+                    echo "<input type='text' class='form-control' id='tag' name='tag' value='$tags' />";
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='parent' class='form-label'>Loại danh mục</label>";
-                    echo "<select class='form-select' id='parent'>";
+                    echo "<select class='form-select' id='category' name='category'>";
                     echo "<option selected>Chọn danh mục</option>";
                     foreach ($listCate as $category) {
                       $selected = $category['id'] == $category_id ? 'selected' : '';
@@ -97,151 +97,12 @@
                     }
                     echo "</select>";
                     echo "</div>";
-                    echo "<button type='submit' class='btn btn-primary btn-sub'>Sửa</button>";
+                    echo "<input type='submit' class='btn btn-primary btn-sub'/>";
                     echo "<br />";
                     echo "</div>";
                     echo "</div>";
                   }
                   ?>
-
-                  <!-- <div class="card card-body">
-                            <div class="mb-3">
-                              <label for="name" class="form-label"
-                                >Tên Sản Phẩm</label
-                              >
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="name"
-                                value="Bánh mì thịt"
-                              />
-                            </div>
-                            <div class="mb-3">
-                              <label for="price" class="form-label"
-                                >Giá Gốc (VNĐ)</label
-                              >
-                              <input
-                                type="number"
-                                class="form-control"
-                                id="price"
-                                value="10.000"
-                              />
-                            </div>
-                            <div class="mb-3">
-                              <label for="price" class="form-label"
-                                >Giá Khuyến Mãi (VNĐ)</label
-                              >
-                              <input
-                                type="number"
-                                class="form-control"
-                                id="price"
-                                value="8.000"
-                              />
-                              <br />
-                              <div class="mb-3">
-                                <label for="image" class="form-label"
-                                  >Hình Ảnh</label
-                                >
-                                <input
-                                  class="form-control"
-                                  type="file"
-                                  id="image"
-                                />
-                                <br />
-                                <label for="image" class="form-label"
-                                  >Hình Ảnh Con</label
-                                >
-                                <hr />
-                                <input
-                                  class="form-control"
-                                  type="file"
-                                  id="image"
-                                />
-                                <hr />
-                                <input
-                                  class="form-control"
-                                  type="file"
-                                  id="image"
-                                />
-                                <hr />
-                                <input
-                                  class="form-control"
-                                  type="file"
-                                  id="image"
-                                />
-                              </div>
-                              <div class="mb-3">
-                                <label
-                                  for="short-description"
-                                  class="form-label"
-                                  >Mô Tả Ngắn</label
-                                >
-                                <input
-                                  type="text"
-                                  id="short-description"
-                                  value="Bánh mì ngon"
-                                  class="form-control"
-                                />
-                                <br />
-                                <label for="description">Mô Tả Chi Tiết</label>
-                                <textarea
-                                  class="form-control"
-                                  id="description"
-                                  rows="10"
-                                >
-Bánh mì ngon với hương vị đặc biệt</textarea
-                                >
-                              </div>
-                              <div class="mb-3">
-                                <label for="stock_quantity" class="form-label"
-                                  >Số Lượng Hàng Tồn Kho</label
-                                >
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  id="stock_quantity"
-                                  value="100"
-                                />
-                              </div>
-                              <div class="mb-3">
-                                <label for="views" class="form-label"
-                                  >Số Lượt Xem</label
-                                >
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  id="views"
-                                  value="100"
-                                  disabled
-                                />
-                              </div>
-                              <div class="mb-3">
-                                <label for="tag" class="form-label">Thẻ</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="tag"
-                                  value="Bánh mì, Bánh mì thịt, Bánh mì ngon"
-                                />
-                              </div>
-                              <div class="mb-3">
-                                <label for="parent" class="form-label"
-                                  >Loại danh mục</label
-                                >
-                                <select class="form-select" id="parent">
-                                  <option selected>Chọn danh mục</option>
-                                  <option value="1" selected>Bánh Mì</option>
-                                  <option value="2">Bánh Trung Thu</option>
-                                  <option value="3">Bánh Ngọt</option>
-                                  <option value="4">Bánh Bò</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sub">
-                              Thêm
-                            </button>
-                              <br />
-                            </div>
-                          </div> -->
                 </div>
               </div>
             </div>

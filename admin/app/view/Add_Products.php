@@ -8,72 +8,90 @@
                         Thêm
                         <span class="text-primary">Sản Phẩm</span>
                     </h2>
-                    <form action="">
+                    <form action="index.php?page=addPro" method="POST" enctype="multipart/form-data">
                         <div class="container-fluid px-4">
                             <div class="row">
                                 <div class="col-12 col -lg-6">
                                     <div class="card card-body">
-                                        <!-- <h5 class="mb-4">Thêm Danh Mục</h5> -->
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
-                                            <input type="text" class="form-control" id="name" value="" />
+                                            <input type="text" class="form-control" id="name" name="name" value="" />
                                         </div>
                                         <div class="mb-3">
                                             <label for="price" class="form-label">Giá Gốc (VNĐ)</label>
-                                            <input type="number" class="form-control" id="price" value="" />
+                                            <input type="number" class="form-control" id="price" name="price" value="" />
                                         </div>
                                         <div class="mb-3">
                                             <label for="price_sale" class="form-label">Giá Khuyến Mãi (VNĐ)</label>
-                                            <input type="number" class="form-control" id="price_sale" value="" />
+                                            <input type="number" class="form-control" id="price_sale" name="price_sale" value="" />
                                             <br />
                                             <div class="mb-3">
                                                 <label for="image" class="form-label">Hình Ảnh</label>
-                                                <input class="form-control" type="file" id="image" />
+                                                <input class="form-control" type="file" id="image1" name="image1" />
                                                 <br />
                                                 <label for="image" class="form-label">Hình Ảnh Con</label>
-                                                <input class="form-control" type="file" id="image" />
+                                                <input class="form-control" type="file" id="image2" name="image2" />
                                                 <hr />
-                                                <input class="form-control" type="file" id="image" />
+                                                <input class="form-control" type="file" id="image3" name="image3" />
                                                 <hr />
-                                                <input class="form-control" type="file" id="image" />
+                                                <input class="form-control" type="file" id="image4" name="image4" />
                                                 <hr />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="short-description" class="form-label">Mô Tả Ngắn</label>
-                                                <input type="text" id="short-description" value=""
+                                                <input type="text" id="short_description" name="short_description" value=""
                                                     class="form-control" />
                                                 <br />
                                                 <label for="description">Mô Tả Chi Tiết</label>
-                                                <textarea class="form-control" id="description" rows="10"></textarea>
+                                                <textarea class="form-control" id="description" name="description" rows="10"></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="stock_quantity" class="form-label">Số đánh giá</label>
+                                                <input type="number" class="form-control" id="rating" name="rating" value="0" readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="stock_quantity" class="form-label">Số Lượng Hàng Tồn
                                                     Kho</label>
-                                                <input type="number" class="form-control" id="stock_quantity"
+                                                <input type="number" class="form-control" id="stock_quantity" name="stock_quantity"
                                                     value="" />
+                                            </div>
+                                             <div class="mb-3">
+                                                <label for="stock_quantity" class="form-label">Số lượng sản phẩm đã bán</label>
+                                                <input type="number" class="form-control" id="sold" name="sold"
+                                                    value="0" />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="views" class="form-label">Số Lượt Xem</label>
-                                                <input type="number" class="form-control" id="views" value="0"
-                                                    disabled />
+                                                <input type="number" class="form-control" id="views" name="views" value="0"
+                                                    readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tag" class="form-label">Thẻ sản phẩm</label>
-                                                <input type="text" class="form-control" id="tag" value="" />
+                                                <input type="text" class="form-control" id="tag" name="tag" value="" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="parent" class="form-label">Trạng thái</label>
+                                                <select class="form-select" id="status" name="status">
+                                                    <option selected>Chọn trạng thái</option>
+                                                    <option value="0">Ẩn</option>
+                                                    <option value="1">Hiện</option>
+                                                </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="parent" class="form-label">Loại danh mục</label>
-                                                <select class="form-select" id="parent">
+                                                <select class="form-select" id="category" name="category">
                                                     <option selected>Chọn danh mục</option>
-                                                    <option value="1">Bánh Mì</option>
-                                                    <option value="2">Bánh Trung Thu</option>
-                                                    <option value="3">Bánh Ngọt</option>
-                                                    <option value="4">Bánh Bò</option>
+                                                    <?php
+                                                    require_once './app/model/CategoryModel.php';
+                                                    $category = new CategoryModel();
+                                                    $listCate = $category->getCate();
+                                                    foreach ($listCate as $category) {
+                                                        echo '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-sub">
-                                                Thêm
-                                            </button>
+                                            <input type="submit" value="Thêm sản phẩm" name="submit" class="btn btn-primary btn-sub">
                                             <br />
                                         </div>
                                     </div>

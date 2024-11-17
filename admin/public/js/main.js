@@ -47,6 +47,16 @@
     });
   });
 
+  // kiểm tra hình ảnh nhập vào
+  document.getElementById("image1").addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (file && !allowedTypes.includes(file.type)) {
+      alert("Chỉ được tải lên tệp hình ảnh (JPEG, PNG, GIF).");
+      e.target.value = ""; // Xóa file đã chọn
+    }
+  });
+
   // Sidebar Toggler
   $(".sidebar-toggler").click(function () {
     $(".sidebar, .content").toggleClass("open");

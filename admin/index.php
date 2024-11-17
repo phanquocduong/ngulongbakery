@@ -21,17 +21,25 @@ if (isset($_GET['page'])) {
             $products_detail = new AdProductsController();
             $products_detail->viewProducts_Detail();
             break;
-        case 'addPro':
+        case 'viewAddPro':
             $products = new AdProductsController();
             $products->viewAddProducts();
             break;
-        case 'edit_products':
+        case 'addPro':
+            $products = new AdProductsController();
+            $products->addPro();
+            break;
+        case 'viewEdit_products':
             $products = new AdProductsController();
             $products->viewEditProducts();
             break;
-        case 'del_products':
+        case 'editPro':
             $products = new AdProductsController();
-            $products->delProducts($id);
+            $products->editPro();
+            break;
+        case 'delProducts':
+            $products = new AdProductsController();
+            $products->delPro();
             break;
         case 'categories':
             $categories = new AdCategoriesController();

@@ -7,6 +7,7 @@ class Database
     private $dbname = "ngulongbakery";
     private $conn;
     private $num_rows;
+    private $pdo;
     function __construct()
     {
         try {
@@ -56,6 +57,21 @@ class Database
     {
         return $this->conn->lastInsertId();
     }
+    public function insert($sql, $params)
+    {
+        $this->query($sql, $params);
+        return $this->conn->lastInsertId();
+    }
+    function update($sql, $param)
+    {
+        $this->query($sql, $param);
+    }
+    function delete($sql, $param)
+    {
+        $this->query($sql, $param);
+    }
+
+
 
     function __destruct()
     {
