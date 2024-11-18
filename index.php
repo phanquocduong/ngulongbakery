@@ -180,6 +180,10 @@
                 $payment = new PaymentController();
                 $payment->handleApplyDiscount();
                 break;
+            case 'handle-payment':
+                $payment = new PaymentController();
+                $payment->handlePayment();
+                break;
             default:
                 $css = 'home.css';
                 $js = 'home.js';

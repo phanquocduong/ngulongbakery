@@ -15,5 +15,10 @@
                     AND active = 1";
             return $this->db->get($sql, [$code, $currentDate, $grandTotal]); 
         }
+
+        public function getDiscount($id) {
+            $sql = "SELECT * FROM discounts WHERE id = ?";
+            return $this->db->get($sql, [$id]);
+        }
     }
 ?>
