@@ -8,12 +8,12 @@
     </div>
     <!-- -------------- -->
 
-    <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
+       <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
     <div id="editor" class="editor" contenteditable="true"></div>
     <br />
     <!-- -------------- -->
-
-    <!-- input để thêm bài viêt -->
+    
+    <!-- input để thêm bài viết -->
     <div class="add-element">
         <select id="element-type" class="form-select m-2">
             <option value="h1">Tiêu đề H1</option>
@@ -74,11 +74,11 @@
             $userModel = new UserModel();
 
             // Lấy thông tin tác giả, những user có role là 1
-            $user = $userModel->getUserByRole(1);
+            $users = $userModel->getUserByRole(1);
             ?>
             <select name="user" id="user" class="form-select">
                 <?php
-                foreach ($user as $user){
+                foreach ($users as $user){
                     echo '<option value="'.$user['id'].'">'.$user['full_name'].'</option>';
                 }
                 ?>

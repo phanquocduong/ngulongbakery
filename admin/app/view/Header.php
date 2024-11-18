@@ -30,7 +30,7 @@
 
   <!-- Template Stylesheet -->
   <link href="./public/css/style.css" rel="stylesheet" />
-  <link href="./public/css/detailnews.css" rel="stylesheet" />
+  <!-- <link href="./public/css/detailnews.css" rel="stylesheet" /> -->
 </head>
 
 <body>

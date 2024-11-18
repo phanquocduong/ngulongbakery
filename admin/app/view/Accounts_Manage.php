@@ -33,12 +33,12 @@
                     }
                     if ($status==1) {
                       echo'<td>
-                      <span class="status-icon status-offline"></span>
+                      <span class="status-icon status-online"></span>
                       <span class="status-text">Đang hoạt động</span>
                           </td>';
                     }else{
                       echo'<td>
-                      <span class="status-icon status-online"></span>
+                      <span class="status-icon status-offline"></span>
                       <span class="status-text">Đã tắt</span>
                           </td>';
                     }

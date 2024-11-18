@@ -1,5 +1,5 @@
 (function ($) {
-  "use strict";
+  ("use strict");
 
   // Spinner
   document.addEventListener("DOMContentLoaded", function () {
@@ -11,6 +11,66 @@
       }, 1);
     };
     spinner();
+  });
+  // Thêm bài viết
+  document.addEventListener("DOMContentLoaded", function () {
+    function addElement() {
+      const editor = document.getElementById("editor");
+      const elementType = document.getElementById("element-type").value;
+
+      if (elementType === "img") {
+        document.getElementById("image-input").click(); // Trigger file input click
+      } else {
+        document.getElementById("image-input").style.display = "none"; // Ẩn input khi chọn các thẻ khác
+        let newElement = document.createElement(elementType);
+        newElement.contentEditable = "true";
+        newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
+        editor.appendChild(newElement);
+        editor.appendChild(document.createElement("br"));
+      }
+    }
+
+    function handleImageSelect(event) {
+      const editor = document.getElementById("editor");
+      const file = event.target.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imgElement = document.createElement("img");
+          imgElement.src = e.target.result;
+          imgElement.alt = "Hình ảnh từ máy";
+          imgElement.style.width = "960px";
+          imgElement.style.height = "540px";
+          editor.appendChild(imgElement);
+          editor.appendChild(document.createElement("br"));
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Hide the file input again after selecting an image
+      document.getElementById("image-input").style.display = "none";
+    }
+
+    // Gắn sự kiện click cho nút "Thêm thẻ"
+    document
+      .getElementById("add-element-btn")
+      .addEventListener("click", addElement);
+
+    // Gắn sự kiện thay đổi cho input chọn file
+    document
+      .getElementById("image-input")
+      .addEventListener("change", handleImageSelect);
+  });
+
+  // format thời gian đăng bài viết
+  document.addEventListener("DOMContentLoaded", function () {
+    var options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false }; // Khởi tạo options trước
+    var d = new Date(); // Khởi tạo ngày giờ hiện tại
+    var formattedDate = d.toLocaleString("vi-VN", options); // Định dạng ngày giờ với options
+
+    document.querySelector(".date-create").innerHTML =
+      "Thời gian tạo bài viết: " + formattedDate; // Hiển thị ngày giờ đã định dạng
   });
 
   // Back to top button
@@ -45,16 +105,6 @@
         inExportButton.style.border = "none";
       }
     });
-  });
-
-  // kiểm tra hình ảnh nhập vào
-  document.getElementById("image1").addEventListener("change", function (e) {
-    const file = e.target.files[0];
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
-    if (file && !allowedTypes.includes(file.type)) {
-      alert("Chỉ được tải lên tệp hình ảnh (JPEG, PNG, GIF).");
-      e.target.value = ""; // Xóa file đã chọn
-    }
   });
 
   // Sidebar Toggler
@@ -100,72 +150,6 @@
         }
       });
     });
-  });
-
-  // Thêm bài viết
-  document.addEventListener("DOMContentLoaded", function () {
-    function addElement() {
-      const editor = document.getElementById("editor");
-      const elementType = document.getElementById("element-type").value;
-
-      if (elementType === "img") {
-        document.getElementById("image-input").style.display = "inline-block"; // Hiển thị input chọn file
-      } else if (elementType === "p") {
-        document.getElementById("image-input").style.display = "none"; // Ẩn input khi chọn các thẻ khác
-        let newElement = document.createElement(elementType);
-        newElement.contentEditable = "true";
-        newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
-        editor.appendChild(newElement);
-        editor.appendChild(document.createElement("br"));
-      } else {
-        document.getElementById("image-input").style.display = "none";
-        let newElement = document.createElement(elementType);
-        newElement.contentEditable = "true";
-        newElement.className = "test-Class";
-        newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
-        editor.appendChild(newElement);
-        editor.appendChild(document.createElement("br"));
-      }
-    }
-
-    function handleImageSelect(event) {
-      const editor = document.getElementById("editor");
-      const file = event.target.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const imgElement = document.createElement("img");
-          imgElement.src = e.target.result;
-          imgElement.alt = "Hình ảnh từ máy";
-          imgElement.style.width = "960";
-          imgElement.style.height = "540";
-          editor.appendChild(imgElement);
-          editor.appendChild(document.createElement("br"));
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    // Gắn sự kiện click cho nút "Thêm thẻ"
-    document
-      .getElementById("add-element-btn")
-      .addEventListener("click", addElement);
-
-    // Gắn sự kiện thay đổi cho input chọn file
-    document
-      .getElementById("image-input")
-      .addEventListener("change", handleImageSelect);
-  });
-
-  // format thời gian đăng bài viết
-  document.addEventListener("DOMContentLoaded", function () {
-    var options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false }; // Khởi tạo options trước
-    var d = new Date(); // Khởi tạo ngày giờ hiện tại
-    var formattedDate = d.toLocaleString("vi-VN", options); // Định dạng ngày giờ với options
-
-    document.querySelector(".date-create").innerHTML =
-      "Thời gian tạo bài viết: " + formattedDate; // Hiển thị ngày giờ đã định dạng
   });
 
   // up new image in edit account

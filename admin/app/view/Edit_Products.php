@@ -70,10 +70,28 @@
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='short-description' class='form-label'>Mô Tả Ngắn</label>";
-                    echo "<input type='text' id='short-description' name='short-description' value='$short_description' class='form-control' />";
+                    echo "<textarea class='form-control' id='short_description' name='short_description' rows='5'>$short_description</textarea>";
                     echo "<br />";
                     echo "<label for='description'>Mô Tả Chi Tiết</label>";
-                    echo "<textarea class='form-control' id='description' name='description' rows='10'>$detailed_description</textarea>";
+                    ?>
+                    <div id="editor" class="editor" contenteditable="true"></div>
+                    <div class="add-element">
+                      <select id="element-type" class="form-select m-2">
+                        <option value="h1">Tiêu đề H1</option>
+                        <option value="h2">Tiêu đề H2</option>
+                        <option value="h3">Tiêu đề H3</option>
+                        <option value="h4">Tiêu đề H4</option>
+                        <option value="h5">Tiêu đề H5</option>
+                        <option value="h6">Tiêu đề H6</option>
+                        <option value="p">Nội dung (Paragraph)</option>
+                        <option value="img">Hình ảnh</option>
+                      </select>
+                      <button type="button" id="add-element-btn" class="btn btn-primary m-2" style="margin-left: 7px">
+                        Thêm thẻ
+                      </button>
+                      <input type="file" id="image-input" accept="image/*" style="display: none" />
+                    </div>
+                    <?php
                     echo "</div>";
                     echo "<div class='mb-3'>";
                     echo "<label for='stock_quantity' class='form-label'>Số Lượng Hàng Tồn Kho</label>";
