@@ -117,9 +117,17 @@ if (isset($_GET['page'])) {
             $voucher = new AdVoucherController();
             $voucher->viewAddVoucher();
             break;
+        case 'addvoucher':
+            $voucher = new AdVoucherController();
+            $voucher->addVoucher();
+            break;
         case 'edit_voucher':
             $voucher = new AdVoucherController();
             $voucher->viewEditVoucher();
+            break;
+        case 'editvoucher':
+            $voucher = new AdVoucherController();
+            $voucher->editVoucher();
             break;
         case 'delete_voucher':
             $voucher = new AdVoucherController();

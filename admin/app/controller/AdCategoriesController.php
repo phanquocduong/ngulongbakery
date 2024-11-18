@@ -41,7 +41,7 @@ class AdCategoriesController
             }
             $result = $this->cate->insertCate($data);
             if ($result) {
-                echo '<script>alert("Thêm sản danh mục")</script>';
+                echo '<script>alert("Thêm danh mục thành công")</script>';
                 echo '<script>location.href="index.php?page=categories"</script>';
             } else {
                 echo '<script>alert("Lỗi khi thêm danh mục vào cơ sở dữ liệu.")</script>';

@@ -49,9 +49,7 @@ class CategoryModel
     }
     function updateCate($data) {
         $sql = "UPDATE categories SET name = ?, image = ?, description = ?, type = ?, status = ? WHERE id = ?";
-        $params = [$data['name'], $data['image'], $data['description'], $data['type'], 
-        $data['status'], // Đảm bảo status là số nguyên
-        $data['id'] // Đảm bảo id là số nguyên
+        $params = [$data['name'], $data['image'], $data['description'], $data['type'], $data['status'], $data['id']
         ];
         return $this->db->update($sql, $params);
     }

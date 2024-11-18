@@ -22,8 +22,26 @@
         }
         public function viewAddVoucher()
         {
-            
             $this->renderview('add_voucher', $this->data);
+        }
+        public function addVoucher(){
+            if (isset($_POST['submit'])) {
+                $data = [];
+                $data['code'] = $_POST['code'];
+                $data['discount_value'] = $_POST['discount_value'];
+                $data['start_date'] = $_POST['start_date'];
+                $data['end_date'] = $_POST['end_date'];
+                $data['usage_limit'] = $_POST['usage_limit'];
+                $data['min_order_value'] = $_POST['min_order_value'];
+                $data['active'] = $_POST['active'];
+                $result = $this->voucher->insertVoucher($data);
+                if ($result) {
+                    echo '<script>alert("Thêm Voucher thành công")</script>';
+                    echo '<script>location.href="index.php?page=voucher"</script>';
+                } else {
+                    echo '<script>alert("Lỗi khi thêm voucher vào cơ sở dữ liệu.")</script>';
+                }
+            }
         }
         public function viewEditVoucher()
         {
@@ -35,6 +53,25 @@
                 $this->renderview('edit_voucher', $this->data);
             } else {
                 echo "Not found....";
+            }
+        }
+        public function editVoucher() {
+            if (isset($_POST['submit'])) {
+                $data = [];
+                $data['id'] = isset($_POST['id']) ? intval($_POST['id']) : 0;
+                $data['code'] = $_POST['code'] ?? '';
+                $data['discount_value'] = $_POST['discount_value'] ?? '';
+                $data['start_date'] = $_POST['start_date'] ?? '';
+                $data['end_date'] = $_POST['end_date'] ?? '';
+                $data['usage_limit'] = $_POST['usage_limit'] ?? '';
+                $data['min_order_value'] = $_POST['min_order_value'] ?? '';
+                $data['active'] = isset($_POST['active']) ? intval($_POST['active']) : 0;
+        
+                // Cập nhật dữ liệu
+                $this->voucher->updateVoucher($data);
+                // print_r($data['id']);
+                echo '<script>alert("Cập nhật voucher thành công")</script>';
+                echo '<script>location.href="index.php?page=voucher"</script>';
             }
         }
         function deleteVoucher(){
