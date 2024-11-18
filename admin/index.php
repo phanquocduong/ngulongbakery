@@ -35,7 +35,8 @@ if (isset($_GET['page'])) {
             break;
         case 'editPro':
             $products = new AdProductsController();
-            $products->editPro();
+            $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+            $products->editPro($id);
             break;
         case 'delProducts':
             $products = new AdProductsController();
