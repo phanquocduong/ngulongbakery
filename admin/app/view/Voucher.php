@@ -57,7 +57,7 @@
                                   class="text-primary me-2"
                                   ><i class="fa fa-pencil-alt"></i
                                 ></a>
-                                <a href="#" class="text-danger"
+                                <a href="index.php?page=delete_voucher&id='.$id.'" class="text-danger"
                                   ><i class="fa fa-trash-alt"></i
                                 ></a>
                               </td>

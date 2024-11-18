@@ -43,7 +43,7 @@
                                 </td>
                                 <td>
                                     <a href="index.php?page=edit_categories&id='.$id.'" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xoá</a>
+                                    <a href="index.php?page=delete_categories&id='.$id.'" class="btn btn-sm btn-danger">Xoá</a>
                                     <a href="index.php?page=view_categories&id='.$id.'" class="btn btn-sm btn-success">Xem</a>
                                 </td>
                             </tr>';

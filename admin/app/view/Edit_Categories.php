@@ -11,9 +11,12 @@ extract($data['editcate']);
                         Sửa
                         <span class="text-primary">Danh Mục</span>
                     </h2>
-                    <form action="">
+                    <form action="index.php?page=editcate" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <input type="hidden" name="existing_image" value="<?= $image ?>">
                         <div class="container-fluid px-4">
                             <div class="row">
+
                                 <div class="col-12 col -lg-6">
                                     <?php
                                     require_once './app/model/CategoryModel.php';
@@ -27,37 +30,37 @@ extract($data['editcate']);
                                     echo '<div class="card card-body">
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Tên Danh Mục</label>
-                                            <input type="text" class="form-control" id="name" value="' . $name . '" />
+                                            <input type="text" class="form-control" name="name" id="name" value="' . $name . '" />
                                         </div>
                                         <div class="mb-3">
-                                            <label for="image" class="form-label">Hình Ảnh</label><br />
+                                            <label for="image" name="image" class="form-label">Hình Ảnh</label><br />
                                             <img src="../public/upload/category/' . $image . '" alt=""
                                                 style="width: 100px; height: 100px" /><br />
-                                            <input class="form-control" type="file" id="image" />
+                                            <input class="form-control" name="image" type="file" id="image" />
                                         </div>
                                         <div class="mb-3">
                                             <label for="description" class="form-label">Mô Tả</label>
-                                            <textarea class="form-control" id="description" rows="3"
+                                            <textarea class="form-control" name="description" id="description" rows="3"
                                                 placeholder="Nhập mô tả">' . $description . '</textarea>
                                         </div>';
                                         ?>
                                         <div class="mb-3">
                                             <label for="parent" class="form-label">Loại danh mục</label>
-                                            <select class="form-select" id="parent">
-                                                <option selected>Chọn danh mục</option>
-                                                <option value="1" <?= ($type == 'Sản phẩm' ? ' selected' : '')  ?> >Danh Mục Bài Viết</option>
-                                                <option value="2" <?= ($type == 'Tin tức' ? ' selected' : '') ?> >Danh Mục Sản Phẩm</option>
+                                            <select class="form-select" name="type" id="parent">
+                                                <!-- <option selected>Chọn danh mục</option> -->
+                                                <option value="Bài viết" <?= ($type == 'Tin tức' ? ' selected' : '')  ?> >Danh Mục Bài Viết</option>
+                                                <option value="Sản phẩm" <?= ($type == 'Sản phẩm' ? ' selected' : '') ?> >Danh Mục Sản Phẩm</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="status" class="form-label">Trạng Thái</label>
-                                            <select class="form-select" id="status">
+                                            <select class="form-select" name="status" id="status">
                                                 <option selected>Chọn trạng thái</option>
                                                 <option value="1" <?= ($status == 1 ? ' selected' : '') ?> >Kích Hoạt</option>
                                                 <option value="0" <?= ($status == 0 ? ' selected' : '') ?> >Không Kích Hoạt</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" name="submit" class="btn btn-primary">
                                             Thêm
                                         </button>
                                         <br />

@@ -53,9 +53,21 @@ if (isset($_GET['page'])) {
             $categories = new AdCategoriesController();
             $categories->viewAddCategories();
             break;
+        case 'addCate':
+            $categories = new AdCategoriesController();
+            $categories->addCate();
+            break;
+        case 'delete_categories':
+            $categories = new AdCategoriesController();
+            $categories->delCate();
+            break;
         case 'edit_categories':
             $categories = new AdCategoriesController();
             $categories->viewEditCategories();
+            break;
+        case 'editcate':
+            $categories = new AdCategoriesController();
+            $categories->editCate();
             break;
         case 'order':
             $order = new AdOrderController();
@@ -69,17 +81,29 @@ if (isset($_GET['page'])) {
             $acc = new AdAccountsController();
             $acc->viewAcc();
             break;
-        case 'add_account':
+        case 'addaccount':
             $acc = new AdAccountsController();
-            $acc->viewAddAccount();
+            $acc->addAccount();
             break;
         case 'edit_account':
             $acc = new AdAccountsController();
             $acc->viewEditAccount();
             break;
+        case 'editaccount':
+            $acc = new AdAccountsController();
+            $acc->editAccount();
+            break;
         case 'account_detail':
             $acc = new AdAccountsController();
             $acc->viewAccount_Detail();
+            break;
+        case 'deluser':
+            $acc = new AdAccountsController();
+            $acc->delUser();
+            break;
+        case 'blockuser':
+            $acc = new AdAccountsController();
+            $acc->blockUser();
             break;
         case 'post_manage':
             $post_manage = new AdPost_ManageController();
@@ -105,9 +129,21 @@ if (isset($_GET['page'])) {
             $voucher = new AdVoucherController();
             $voucher->viewAddVoucher();
             break;
+        case 'addvoucher':
+            $voucher = new AdVoucherController();
+            $voucher->addVoucher();
+            break;
         case 'edit_voucher':
             $voucher = new AdVoucherController();
             $voucher->viewEditVoucher();
+            break;
+        case 'editvoucher':
+            $voucher = new AdVoucherController();
+            $voucher->editVoucher();
+            break;
+        case 'delete_voucher':
+            $voucher = new AdVoucherController();
+            $voucher->deleteVoucher();
             break;
         default:
             $main = new MainController();

@@ -82,7 +82,8 @@
           ?>
           <?php
           foreach ($user as $user) {
-            echo '<option value="' . $user['id'] . '" ' . ($user['id'] == $author_id ? 'selected' : '') . '>' . $user['full_name'] . '</option>';
+            extract($user);
+            echo '<option value="' . $id . '" ' . ($id == $author_id ? 'selected' : '') . '>' . $full_name . '</option>';
           }
           ?>
         </select>

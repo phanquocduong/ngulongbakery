@@ -26,8 +26,11 @@
                                     ?>
                                     <div class="d-flex justify-content-center">
                                         <a href="index.php?page=accounts" class="btn btn-primary me-2">Quay lại</a>
-                                        <a href="index.php?page=edit_account&id='.$id.'" class="btn btn-primary">Sửa chi tiết</a>
-                                        <a href="#" class="btn btn-danger ms-2">Xóa tài khoản</a>
+                                        <?php
+                                        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+                                        ?>
+                                        <a href="index.php?page=edit_account&id=<?= $id ?>" class="btn btn-primary">Sửa chi tiết</a>
+                                        <a href="index.php?page=delete_account&id=<?= $id ?>" class="btn btn-danger ms-2">Xóa tài khoản</a>
                                     </div>
                                 </div>
                             </div>
