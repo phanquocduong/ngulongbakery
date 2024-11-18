@@ -45,7 +45,7 @@
                     <input
                         type="password"
                         name="repassword"
-                        rules="required|min:8|passwordComplexity"
+                        rules="required"
                         id="repassword"
                         class="form-control"
                     />

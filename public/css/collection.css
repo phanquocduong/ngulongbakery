@@ -116,6 +116,7 @@ main {
     color: var(--text-color);
     margin: 0;
     margin-bottom: 20px;
+    text-align: justify;
 }
 
 .pagination {
@@ -161,10 +162,6 @@ main {
 
     .sort-right__selection-list {
         margin-left: 40px;
-    }
-
-    .collection-desc {
-        text-align: justify;
     }
 
     .filter-menu + .filter-menu {
@@ -221,8 +218,7 @@ main {
     }
 
     .collection-desc {
-        padding: 0 35px;
-        text-align: justify;
+        line-height: 2.4rem;
     }
 
     .sort-right {
@@ -230,7 +226,7 @@ main {
     }
 
     .sort-right__selection-list {
-        margin-left: 40px;
+        margin-left: 20px;
     }
 
     .pagination {
@@ -249,9 +245,5 @@ main {
 
     .pagination-link__icon-next {
         margin-left: 20px;
-    }
-
-    .collection-desc {
-        line-height: 2.3rem;
     }
 }

@@ -8,6 +8,7 @@
     require_once 'app/model/UserModel.php';
     require_once 'app/model/OrderModel.php';
     require_once 'app/model/ReviewModel.php';
+    require_once 'app/model/FavoriteProductsModel.php';
     require_once 'app/controller/HomeController.php';
     require_once 'app/controller/ProductController.php';
     require_once 'app/controller/UserController.php';
@@ -16,6 +17,7 @@
     require_once 'app/controller/CartController.php';
     require_once 'app/controller/PaymentController.php';
     require_once 'app/controller/OrderController.php';
+    require_once 'app/controller/ReviewController.php';
 
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
@@ -44,9 +46,9 @@
                 $product = new ProductController();
                 $product->viewCollection($css, $js);
                 break;
-            case 'handle-products-display-by-filter':
+            case 'handle-products-display':
                 $product = new ProductController();
-                $product->handleProductsDisplayByFilter();
+                $product->handleProductsDisplay();
                 break;
             case 'product-details':
                 $css = 'product-details.css';
@@ -115,6 +117,44 @@
                 $js = 'account.js';
                 $user = new UserController();
                 $user->viewAccount($css, $js);
+                break;
+            case 'handle-update-information':
+                $user = new UserController();
+                $user->handleUpdateInformation();
+                break;
+            case 'change-password':
+                $css = 'change-password.css';
+                $js = 'change-password.js';
+                $user = new UserController();
+                $user->viewChangePassword($css, $js);
+                break;
+            case 'handle-change-password':
+                $css = 'change-password.css';
+                $js = 'change-password.js';
+                $user = new UserController();
+                $user->handleChangePassword($css, $js);
+                break;
+            case 'cancel-order':
+                $order = new OrderController();
+                $order->cancelOrder();
+                break;
+            case 'buy-back-order':
+                $order = new OrderController();
+                $order->buyBackOrder();
+                break;
+            case 'review':
+                $review = new ReviewController();
+                $review->review();
+                break;
+            case 'search':
+                $css = 'search-products.css';
+                $js = 'search-products.js';
+                $product = new ProductController();
+                $product->viewSearchProducts($css, $js);
+                break;
+            case 'handle-favorite-product':
+                $product = new ProductController();
+                $product->handleFavoriteProduct();
                 break;
             default:
                 $css = 'home.css';

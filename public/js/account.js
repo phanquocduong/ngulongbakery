@@ -66,21 +66,17 @@ function openFavoriteProducts(elm) {
     favoriteProducts.classList.add('main-information--active');
 }
 
-// Get the elements
-const openPopupBtn = document.getElementById('openPopupBtn');
 const popup = document.getElementById('popup');
-const closePopupBtn = document.getElementById('closePopupBtn');
-
-// Open popup when button is clicked
-openPopupBtn.addEventListener('click', () => {
+function openReviewModal(orderId) {
     popup.style.display = 'flex';
-});
+    document.querySelector('.order-id').value = orderId;
+}
 
+const closePopupBtn = document.getElementById('closePopupBtn');
 // Close popup when close button is clicked
 closePopupBtn.addEventListener('click', () => {
     popup.style.display = 'none';
 });
-
 // Close popup when clicking outside the popup content
 window.addEventListener('click', e => {
     if (e.target === popup) {
@@ -99,3 +95,17 @@ document.getElementById('ratingForm').addEventListener('submit', e => {
         alert('Vui lòng chọn sao và nhập nhận xét.');
     }
 });
+
+function cancelOrder(id) {
+    const result = confirm('Bạn có chắc chắn muốn huỷ đơn hàng không?');
+    if (result) {
+        window.location.href = `index.php?page=cancel-order&id=${id}`;
+    }
+}
+
+function buyBackOrder(id) {
+    const result = confirm('Bạn có chắc chắn muốn tạo lại đơn hàng này không?');
+    if (result) {
+        window.location.href = `index.php?page=buy-back-order&id=${id}`;
+    }
+}
