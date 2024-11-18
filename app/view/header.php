@@ -63,7 +63,7 @@
                         <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
                     </li>
                     <li class="header-menu__item">
-                        <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+                        <a href="index.php?page=contact" class="header-menu__item-link">LIÊN HỆ</a>
                     </li>
                 </ul>
                 <button class="header-search__btn header-search__btn--mobile">
@@ -133,10 +133,17 @@
                     <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+                    <a href="index.php?page=contact" class="header-menu__item-link">LIÊN HỆ</a>
                 </li>
             </ul>
-            <input type="text" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." />
+            <!-- <input type="text" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." /> -->
+
+            <div class="header-search--mobile">
+                <form action="" method="GET">
+                    <input type="hidden" name="page" value="search">
+                    <input type="text" name="keyword" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." />
+                </form>
+            </div>
 
             <!-- Overlay -->
             <div class="overlay" id="overlay"></div>
@@ -163,7 +170,7 @@
                     </li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Tin Tức</a></li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Giới Thiệu</a></li>
-                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Liên Hệ</a></li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="index.php?page=contact">Liên Hệ</a></li>
                 </ul>
             </div>
         </header>

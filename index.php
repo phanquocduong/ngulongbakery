@@ -9,6 +9,8 @@
     require_once 'app/model/OrderModel.php';
     require_once 'app/model/ReviewModel.php';
     require_once 'app/model/FavoriteProductsModel.php';
+    require_once 'app/model/LocationModel.php';
+    require_once 'app/model/DiscountModel.php';
     require_once 'app/controller/HomeController.php';
     require_once 'app/controller/ProductController.php';
     require_once 'app/controller/UserController.php';
@@ -55,12 +57,6 @@
                 $js = 'product-details.js';
                 $product = new ProductController();
                 $product->viewProductDetails($css, $js);
-                break;
-            case 'register':
-                $css = 'register.css';
-                $js = 'register.js';
-                $user = new UserController();
-                $user->viewRegister($css, $js);
                 break;
             case 'register':
                 $css = 'register.css';
@@ -155,6 +151,34 @@
             case 'handle-favorite-product':
                 $product = new ProductController();
                 $product->handleFavoriteProduct();
+                break;
+            case 'contact':
+                $css = 'contact.css';
+                $js = '';
+                $contact = new ContactController();
+                $contact->viewContact($css, $js);
+                break;
+            case 'handle-contact':
+                $contact = new ContactController();
+                $contact->handleContact();
+                break;
+            case 'payment':
+                $css = 'payment.css';
+                $js = 'payment.js';
+                $payment = new PaymentController();
+                $payment->viewPayment($css, $js);
+                break;
+            case 'get-districts':
+                $payment = new PaymentController();
+                $payment->handleGetDistricts();
+                break;
+            case 'get-wards':
+                $payment = new PaymentController();
+                $payment->handleGetWards();
+                break;
+            case 'apply-discount':
+                $payment = new PaymentController();
+                $payment->handleApplyDiscount();
                 break;
             default:
                 $css = 'home.css';

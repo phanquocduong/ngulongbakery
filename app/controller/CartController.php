@@ -8,7 +8,7 @@
 
         // Đảm bảo tham số không bắt buộc được khai báo sau tham số bắt buộc
         private function renderView($view, $css, $js, $data = []) {
-            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm'", [], 'display_order ASC');
+            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm'", []);
             require_once 'app/view/header.php';
             $viewPath = 'app/view/' . $view . '.php';
             require_once $viewPath;

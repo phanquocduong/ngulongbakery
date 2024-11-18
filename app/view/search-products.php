@@ -3,7 +3,7 @@
         <h1 class="search-title">Kết quả tìm kiếm: "<?=$_GET['keyword']?>"</h1>
         <div class="row">
             <?php foreach($data as $item): ?>
-                <div class="col l-3 m-6 c-10 c-offset-1">
+                <div class="col l-3 m-6 c-12">
                     <div class="product-item">
                         <a href="index.php?page=product-details&id=<?=$item['id']?>" class="product-item__img-link">
                             <div class="product-item__img" style="background-image: url(public/upload/product/<?= $item['image'] ?>);"></div>

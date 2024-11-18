@@ -36,9 +36,11 @@ menuItemDropOnTablet.onclick = e => {
 // Search button on mobile device
 const searchBtn = document.querySelector('.header-search__btn.header-search__btn--mobile');
 const searchInput = document.querySelector('.header-search__input--mobile');
+const searchDiv = document.querySelector('.header-search--mobile');
 
 searchBtn.onclick = () => {
     searchInput.classList.toggle('block');
+    searchDiv.classList.toggle('block');
 };
 
 function addToCart(button, productId, productName, productPrice, productImage) {

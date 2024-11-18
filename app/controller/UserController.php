@@ -2,11 +2,13 @@
     use PHPMailer\PHPMailer\PHPMailer;
 
     class UserController {
+        private $category;
         private $user;
         private $order;
         private $favorite_products;
 
         public function __construct() {
+            $this->category = new CategoryModel();
             $this->user = new UserModel();
             $this->order = new OrderModel();
             $this->favorite_products = new FavoriteProductsModel();
@@ -14,6 +16,7 @@
         }
 
         private function renderView($view, $css, $js, $data = null, $numberPages = null) {
+            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm'", []);
             require_once 'app/view/header.php';
             $viewPath = 'app/view/' . $view . '.php';
             require_once $viewPath;
@@ -113,10 +116,15 @@
                     // Thiết lập cookie, hạn 30 ngày
                     setcookie('rememberMe', $cookieValue, time() + (30 * 24 * 60 * 60), "/");
                 }
-                if ($_SESSION['user']['role_id'] == 1) {
-                    echo '<script>window.location.href = "admin/index.php";</script>';
+                if (isset($_SESSION['redirectto'])){
+                    header("Location: $_SESSION[redirectto]");
+                    unset($_SESSION['redirectto']);
                 } else {
-                    echo '<script>window.location.href = "index.php";</script>';
+                    if ($_SESSION['user']['role_id'] == 1) {
+                        echo '<script>window.location.href = "admin/index.php";</script>';
+                    } else {
+                        echo '<script>window.location.href = "index.php";</script>';
+                    }
                 }
             } else {
                 $_SESSION['error'] = "Thông tin đăng nhập không hợp lệ.";
@@ -241,7 +249,6 @@
             $data['favorite'] = $this->favorite_products->getProductOfFavorite($userId);
             
             $this->renderView('account', $css, $js, $data, $numberPages);
-            // $this->viewOrders('account', $css, $js, 'WHERE user_id = ?', [$userId], 'id DESC');
         }
 
         public function handleUpdateInformation() {

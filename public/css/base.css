@@ -124,7 +124,7 @@ header {
 
 .header-search__input {
     width: 400px;
-    padding: 14px;
+    padding: 15px 14px;
     border: none;
     outline: none;
     font-size: 1.4rem;
@@ -142,6 +142,10 @@ header {
 }
 
 .header-search__btn.header-search__btn--mobile {
+    display: none;
+}
+
+.header-search--mobile {
     display: none;
 }
 
@@ -611,7 +615,6 @@ header {
 
     .header-search__input--mobile {
         margin-top: 10px;
-        width: 100%;
         padding: 14px;
         font-size: 1.4rem;
         display: none;
@@ -621,7 +624,9 @@ header {
         transition: opacity 0.3s ease;
     }
 
-    .header-search__input--mobile.block {
+    .header-search__input--mobile.block,
+    .header-search--mobile.block {
+        width: 100%;
         display: block;
         opacity: 1;
     }

@@ -39,7 +39,7 @@
             $sql = "SELECT * FROM products WHERE name = ?";
             return $this->db->get($sql, [$name]);
         }
-
+        
         public function increaseProductViews($id) {
             $sql = "UPDATE products SET views = views + 1 WHERE id = ?";
             return $this->db->execute($sql, [$id]);

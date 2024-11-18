@@ -48,3 +48,10 @@ main {
 .pagination-link__icon-next.none {
     display: none;
 }
+
+/* Mobile */
+@media (max-width: 739px) {
+    main {
+        padding: 64px 32px;
+    }
+}
