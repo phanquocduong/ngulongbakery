@@ -102,6 +102,12 @@ class AdCategoriesController
     }
     public function delCate()
     {
+        if($this->cate->isForeignKey($_GET['id'])){
+            echo '<script>alert("Không thể xoá danh mục này vì nó đang được sử dụng")</script>';
+            echo '<script>location.href="index.php?page=categories"</script>';
+            return;
+        }
+
         if (isset($_GET['id']) && ($_GET['id'] > 0)) {
             $id = $_GET['id'];
             $data = $this->cate->getIdCate($id);
