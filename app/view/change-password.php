@@ -1,7 +1,7 @@
 <!-- Start main -->
         <main>
-            <form action="index.php?page=handle-reset-password" method="POST" class="reset-password-form">
-                <h4 class="reset-password-title">Đặt lại mật khẩu</h4>
+            <form action="index.php?page=handle-change-password" method="POST" class="change-password-form">
+                <h4 class="change-password-title">Đổi mật khẩu</h4>
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="errors">
                         <ul>
@@ -12,7 +12,18 @@
                     unset($_SESSION['error']);
                     endif; 
                 ?>
-                <input type="hidden" name="resetCode" value="<?= $_GET['code'] ?>" />
+                <div class="form-group current-password-form">
+                    <label for="currentPassword" class="form-label">MẬT KHẨU HIỆN TẠI</label>
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        name="currentPassword"
+                        rules="required"
+                        class="form-control"
+                        placeholder="Nhập mật khẩu hiện tại"
+                    />
+                    <div class="form-message"></div>
+                </div>
                 <div class="form-group new-password-form">
                     <label for="newPassword" class="form-label">MẬT KHẨU MỚI</label>
                     <input
@@ -33,7 +44,7 @@
                         name="confirmPassword"
                         rules="required"
                         class="form-control"
-                        placeholder="Nhập lại mật khẩu"
+                        placeholder="Nhập lại mật khẩu mới"
                     />
                     <div class="form-message"></div>
                 </div>

@@ -23,5 +23,10 @@
                     ";
             return $this->db->getAll($sql, [$id]);
         }
+
+        public function addReview($user_id, $rating, $images, $comment, $product_id) {
+            $sql = "INSERT INTO reviews (`user_id`, `rating`, `images`, `comment`, `product_id`) VALUES (?,?,?,?,?)";
+            return $this->db->execute($sql, [$user_id, $rating, $images, $comment, $product_id]);
+        }
     }
 ?>

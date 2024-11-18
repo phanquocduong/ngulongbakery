@@ -207,8 +207,8 @@ main {
 }
 
 .product-info__name {
-    font-size: 1.4rem;
-    line-break: 1.8rem;
+    font-size: 1.6rem;
+    line-break: 2rem;
     margin: 0;
     font-weight: 450;
 }
@@ -220,17 +220,10 @@ main {
     color: var(--text-color);
 }
 
-.product-info__type {
-    display: block;
-    font-size: 1.2rem;
-    line-height: 1.6rem;
-    margin-top: 8px;
-}
-
 .product-info__quantity {
     display: block;
-    font-size: 1.2rem;
-    line-height: 1.6rem;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
     font-weight: 450;
     margin-top: 8px;
 }
@@ -343,6 +336,11 @@ main {
     margin-top: 10px;
 }
 
+.options-btn a {
+    text-decoration: none;
+    color: var(--white-color);
+}
+
 .options-btn:hover {
     opacity: 0.9;
 }
@@ -440,7 +438,7 @@ main {
     margin-top: 10px;
 }
 
-button[type='submit'] {
+.modal-btn {
     background-color: #4caf50;
     color: white;
     padding: 10px 20px;
@@ -451,7 +449,7 @@ button[type='submit'] {
     line-height: 2rem;
 }
 
-button[type='submit']:hover {
+.modal-btn:hover {
     background-color: #45a049;
 }
 
@@ -504,6 +502,11 @@ button[type='submit']:hover {
 
 .pagination-link__icon-next {
     margin-left: 30px;
+}
+
+.pagination-link__icon-prev.none,
+.pagination-link__icon-next.none {
+    display: none;
 }
 
 /* Tablet - PC low resolution */

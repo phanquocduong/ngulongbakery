@@ -34,5 +34,15 @@
         public function getRelatedProducts($categoryId, $productId) {
             return $this->getProducts('WHERE category_id = ? AND id != ?', [$categoryId, $productId], 'rand()', 0, 4);
         }
+
+        public function getProductByName($name) {
+            $sql = "SELECT * FROM products WHERE name = ?";
+            return $this->db->get($sql, [$name]);
+        }
+        
+        public function increaseProductViews($id) {
+            $sql = "UPDATE products SET views = views + 1 WHERE id = ?";
+            return $this->db->execute($sql, [$id]);
+        }
     }
 ?>

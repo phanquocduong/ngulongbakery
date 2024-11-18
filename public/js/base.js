@@ -18,18 +18,37 @@ overlay.addEventListener('click', () => {
     modalMenu.classList.remove('active');
     overlay.classList.remove('active');
 });
+
+const menuItemDrop = document.getElementById('menu-item-drop');
+const menuItemDropOnTablet = document.getElementById('menu-item-drop--tablet');
+const modalSubMenu = document.querySelector('.modal-sub-menu__list');
+
+menuItemDrop.onclick = e => {
+    e.preventDefault();
+    modalSubMenu.classList.toggle('active');
+};
+
+menuItemDropOnTablet.onclick = e => {
+    e.preventDefault();
+};
 // End modal menu on mobile device
 
 // Search button on mobile device
 const searchBtn = document.querySelector('.header-search__btn.header-search__btn--mobile');
 const searchInput = document.querySelector('.header-search__input--mobile');
+const searchDiv = document.querySelector('.header-search--mobile');
 
 searchBtn.onclick = () => {
     searchInput.classList.toggle('block');
+    searchDiv.classList.toggle('block');
 };
 
 function addToCart(button, productId, productName, productPrice, productImage) {
-    const quantity = document.querySelector('.quantity-selection__action-edit').value;
+    const quantityElement = document.querySelector('.quantity-selection__action-edit');
+    let quantity = 1;
+    if (quantityElement) {
+        quantity = quantityElement.value;
+    }
     const product = {
         id: productId,
         name: productName,

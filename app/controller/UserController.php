@@ -2,15 +2,21 @@
     use PHPMailer\PHPMailer\PHPMailer;
 
     class UserController {
+        private $category;
         private $user;
+        private $order;
+        private $favorite_products;
 
         public function __construct() {
+            $this->category = new CategoryModel();
             $this->user = new UserModel();
+            $this->order = new OrderModel();
+            $this->favorite_products = new FavoriteProductsModel();
             $this->autoLogin();
         }
-        
 
-        private function renderView($view, $css, $js, $data = null) {
+        private function renderView($view, $css, $js, $data = null, $numberPages = null) {
+            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm'", []);
             require_once 'app/view/header.php';
             $viewPath = 'app/view/' . $view . '.php';
             require_once $viewPath;
@@ -110,10 +116,15 @@
                     // Thiết lập cookie, hạn 30 ngày
                     setcookie('rememberMe', $cookieValue, time() + (30 * 24 * 60 * 60), "/");
                 }
-                if ($_SESSION['user']['role_id'] == 1) {
-                    echo '<script>window.location.href = "admin/index.php";</script>';
+                if (isset($_SESSION['redirectto'])){
+                    header("Location: $_SESSION[redirectto]");
+                    unset($_SESSION['redirectto']);
                 } else {
-                    echo '<script>window.location.href = "index.php";</script>';
+                    if ($_SESSION['user']['role_id'] == 1) {
+                        echo '<script>window.location.href = "admin/index.php";</script>';
+                    } else {
+                        echo '<script>window.location.href = "index.php";</script>';
+                    }
                 }
             } else {
                 $_SESSION['error'] = "Thông tin đăng nhập không hợp lệ.";
@@ -206,7 +217,7 @@
                 $this->renderView('reset-password', $css, $js);
             } else {
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                if ($this->user->updatePassword($resetCode, $hashedPassword)) {
+                if ($this->user->resetPassword($resetCode, $hashedPassword)) {
                     echo '<script>alert("Mật khẩu đã được cập nhật thành công.")</script>';
                     echo '<script>window.location.href = "index.php?page=login";</script>';
                 } else {
@@ -223,12 +234,94 @@
         }
 
         public function viewAccount($css, $js) {
-            $this->renderView('account', $css, $js);
+            $userId = $_SESSION['user']['id'];
+            $num = $_GET['num'] ?? 1;
+            $start = ($num - 1) * 5;
+            $data['orders'] = $this->order->getOrders('WHERE user_id = ?', [$userId], 'id DESC', $start, 5);
+            
+            foreach ($data['orders'] as &$item) { // Dùng tham chiếu (&) để thay đổi trực tiếp trong mảng
+                $item['details'] = $this->order->getOrderDetails($item['id']);
+            }
+            
+            $quantity = $this->order->getOrderCount('WHERE user_id = ?', [$userId]);
+            $numberPages = ceil($quantity / 5);
+
+            $data['favorite'] = $this->favorite_products->getProductOfFavorite($userId);
+            
+            $this->renderView('account', $css, $js, $data, $numberPages);
         }
 
         public function handleUpdateInformation() {
-            
+            $fullname = $_POST['fullname'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+            if ($_FILES['avatar']['name'] != '') {
+                $avatar = time() . '_' . $_FILES['avatar']['name'];
+                $targetFilePath = './public/upload/avatar/' . $avatar;
+                // Kiểm tra loại file và kích thước
+                $allowedTypes = ['image/jpeg', 'image/png'];
+                if (!in_array($_FILES['avatar']['type'], $allowedTypes)) {
+                    echo '<script>alert("Chỉ hỗ trợ file ảnh PNG và JPEG!")</script>';
+                    return;
+                }
+                if ($_FILES['avatar']['size'] > 5000000) {  // 5MB
+                    echo '<script>alert("Kích thước file quá lớn! Vui lòng chọn ảnh nhỏ hơn 5MB.")</script>';
+                    return;
+                }
+            } else {
+                $avatar = $_SESSION['user']['avatar'];
+            }
+            $result = $this->user->updateInformation($_SESSION['user']['id'], $fullname, $phone, $address, $avatar);
+            if ($result) {
+                $uploadSuccess = true;
+                if ($_FILES['avatar']['name'] != '') {
+                    $uploadSuccess &= move_uploaded_file($_FILES['avatar']['tmp_name'], $targetFilePath);
+                    $oldAvatarFile = './public/upload/avatar/'.$_SESSION['user']['avatar'];
+                    $uploadSuccess &= unlink($oldAvatarFile);
+                }
+                if ($uploadSuccess) {
+                    $_SESSION['user']['full_name'] = $fullname;
+                    $_SESSION['user']['phone'] = $phone;
+                    $_SESSION['user']['address'] = $address;
+                    $_SESSION['user']['avatar'] = $avatar;
+                    echo '<script>alert("Cập nhật thông tin thành công")</script>';
+                    echo '<script>window.location.href = "index.php?page=account";</script>';
+                } else {
+                    echo '<script>alert("Có lỗi khi tải lên hình ảnh. Vui lòng thử lại sau!")</script>';
+                    echo '<script>window.location.href = "index.php?page=account";</script>';
+                }
+            } else {
+                echo '<script>alert("Có lỗi không mong muốn xảy ra. Vui lòng thử lại sau!")</script>';
+                echo '<script>window.location.href = "index.php?page=account";</script>';
+            }
         }
-    
+
+        public function viewChangePassword($css, $js) {
+            $this->renderView('change-password', $css, $js);
+        }
+
+        public function handleChangePassword($css, $js) {
+            $currentPassword = $_POST['currentPassword'];
+            if (password_verify($currentPassword, $_SESSION['user']['password'])) {
+                $newPassword = $_POST['newPassword'];
+                $confirmPassword = $_POST['confirmPassword'];
+                if ($newPassword !== $confirmPassword) {
+                    $_SESSION['error'] = "Mật khẩu không khớp!";
+                    $this->renderView('change-password', $css, $js);
+                } else {
+                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                    if ($this->user->changePassword($_SESSION['user']['id'], $hashedPassword)) {
+                        echo '<script>alert("Mật khẩu đã được cập nhật thành công.")</script>';
+                        echo '<script>window.location.href = "index.php?page=account";</script>';
+                    } else {
+                        $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại";
+                        $this->renderView('change-password', $css, $js);
+                    }
+                }
+            } else {
+                $_SESSION['error'] = "Mật khẩu hiện tại không đúng!";
+                $this->renderView('change-password', $css, $js);
+            }
+        }        
     }
 ?>

@@ -41,7 +41,7 @@ class AdCategoriesController
             }
             $result = $this->cate->insertCate($data);
             if ($result) {
-                echo '<script>alert("Thêm sản danh mục")</script>';
+                echo '<script>alert("Thêm danh mục thành công")</script>';
                 echo '<script>location.href="index.php?page=categories"</script>';
             } else {
                 echo '<script>alert("Lỗi khi thêm danh mục vào cơ sở dữ liệu.")</script>';
@@ -102,6 +102,12 @@ class AdCategoriesController
     }
     public function delCate()
     {
+        if($this->cate->isForeignKey($_GET['id'])){
+            echo '<script>alert("Không thể xoá danh mục này vì nó đang được sử dụng")</script>';
+            echo '<script>location.href="index.php?page=categories"</script>';
+            return;
+        }
+
         if (isset($_GET['id']) && ($_GET['id'] > 0)) {
             $id = $_GET['id'];
             $data = $this->cate->getIdCate($id);

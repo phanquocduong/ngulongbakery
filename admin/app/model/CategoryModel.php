@@ -49,11 +49,18 @@ class CategoryModel
     }
     function updateCate($data) {
         $sql = "UPDATE categories SET name = ?, image = ?, description = ?, type = ?, status = ? WHERE id = ?";
-        $params = [$data['name'], $data['image'], $data['description'], $data['type'], 
-        intval($data['status']), // Đảm bảo status là số nguyên
-        intval($data['id']) // Đảm bảo id là số nguyên
+        $params = [$data['name'], $data['image'], $data['description'], $data['type'], $data['status'], $data['id']
         ];
         return $this->db->update($sql, $params);
+    }
+    public function isForeignKey($id) {
+        $query = "SELECT COUNT(*) as count FROM products WHERE category_id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'] > 0;
     }
     
     

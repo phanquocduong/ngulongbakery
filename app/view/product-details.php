@@ -74,9 +74,14 @@
                                         <span class="product-cate"
                                             >Danh mục: <a class="product-cate__link" href=""><?=$data['product']['category_name']?></a></span
                                         >
-                                        <div class="favorite-action">
-                                            <i onclick="fillHeartIcon(this)" class="heart-icon fa-solid fa-heart"></i>
-                                        </div>
+                                        <?php if (isset($_SESSION['user'])): ?>
+                                            <div class="favorite-action">
+                                                <i onclick="toggleFavorite(<?= $data['product']['id'] ?>, <?= $_SESSION['user']['id'] ?>)" 
+                                                    class="heart-icon fa-solid fa-heart <?= (isset($data['favorite'])) ? 'heart-icon--fill' : '' ?>" 
+                                                    data-product-id="<?= $data['product']['id'] ?>">
+                                                </i>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

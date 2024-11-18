@@ -1,5 +1,10 @@
 <!-- Main Start -->
  <?php
+ require_once './app/model/VoucherModel.php';
+ $voucherModel = new VoucherModel();
+ $voucherId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+ $voucher = $voucherModel->getIdVocher($voucherId);
+//  print_r($voucherId);
 extract($data['voucherdetail']);
  ?>
 <div class="container-fluid py-4 px-4">
@@ -11,7 +16,8 @@ extract($data['voucherdetail']);
                     <h6 class="mb-0">Sửa Mã Giảm Giá</h6>
                   </div>
                   <hr />
-                  <form action="edit_voucher.html" method="POST">
+                  <form action="index.php?page=editvoucher" method="POST" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="<?= $voucherId ?>">
                     <div class="mb-3">
                       <label for="code" class="form-label">Mã Giảm Giá</label>
                       <input
@@ -31,7 +37,7 @@ extract($data['voucherdetail']);
                         type="number"
                         class="form-control"
                         id="discount"
-                        name="discount"
+                        name="discount_value"
                         value="<?php echo $discount_value ?>"
                         required
                       />
@@ -43,7 +49,7 @@ extract($data['voucherdetail']);
                           type="text"
                           class="form-control"
                           id="start"
-                          name="start"
+                          name="start_date"
                           value="<?php echo $start_date ?>"
                           required
                         />
@@ -59,7 +65,7 @@ extract($data['voucherdetail']);
                           type="text"
                           class="form-control"
                           id="end"
-                          name="end"
+                          name="end_date"
                           value="<?php echo $end_date ?>"
                           required
                         />
@@ -74,7 +80,7 @@ extract($data['voucherdetail']);
                         type="number"
                         class="form-control"
                         id="quantity"
-                        name="quantity"
+                        name="usage_limit"
                         value="<?php echo $usage_limit ?>"
                         required
                       />
@@ -87,14 +93,14 @@ extract($data['voucherdetail']);
                         type="number"
                         class="form-control"
                         id="quantity"
-                        name="quantity"
+                        name="min_order_value"
                         value="<?php echo $min_order_value ?>"
                         required
                       />
                     </div>
                     <div class="mb-3">
                       <label for="status" class="form-label">Trạng Thái</label>
-                      <select class="form-select" id="status" name="status">
+                      <select class="form-select" id="status" name="active">
                         <?php
                         if ($active==0) {
                           echo '<option value="1">Kích Hoạt</option>
@@ -106,7 +112,7 @@ extract($data['voucherdetail']);
                         ?>
                       </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Lưu</button>
                     <a href="index.php?page=voucher" class="btn btn-danger">Quay lại</a>
                   </form>
                 </div>

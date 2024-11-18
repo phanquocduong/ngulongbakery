@@ -42,7 +42,7 @@
             return $this->db->execute($sql, [$resetCode, $email]);
         }
         
-        function updatePassword($resetCode, $newPassword) {
+        function resetPassword($resetCode, $newPassword) {
             $sql = "SELECT id FROM users WHERE reset_code = ?";
             $user = $this->db->get($sql, [$resetCode]);
             if ($user) {
@@ -51,5 +51,15 @@
             }
             return false;
         }        
+
+        function updateInformation($id, $fullname, $phone, $address, $avatar) {
+            $sql = "UPDATE users SET `full_name` = ?, `phone` = ?, `address` = ?, `avatar` = ? WHERE `id` = ?";
+            return $this->db->execute($sql, [$fullname, $phone, $address, $avatar, $id]);
+        }
+
+        function changePassword($id, $newPassword) {
+            $sql = "UPDATE users SET `password` = ? WHERE `id` = ?";
+            return $this->db->execute($sql, [$newPassword, $id]);
+        }    
     }
 ?>
