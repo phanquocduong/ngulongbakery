@@ -109,6 +109,10 @@ if (isset($_GET['page'])) {
             $voucher = new AdVoucherController();
             $voucher->viewEditVoucher();
             break;
+        case 'delete_voucher':
+            $voucher = new AdVoucherController();
+            $voucher->deleteVoucher();
+            break;
         default:
             $main = new MainController();
             $main->viewMain();
