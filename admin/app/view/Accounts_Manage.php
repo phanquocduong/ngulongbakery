@@ -54,7 +54,9 @@
                       <a href="index.php?page=deluser&id='.$id.'" class="btn btn-warning btn-sm btn-color-text">
                         Xóa
                       </a>
-                      <button class="btn btn-dark btn-sm">Khoá/Mở</button>
+                      <a href="index.php?page=blockuser&id='.$id.'&status='.$status.'" class="btn btn-warning btn-sm btn-color-text">
+                        Khóa/Mở
+                      </a>
                     </td>
                   </tr>';
                   }

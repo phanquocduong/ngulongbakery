@@ -101,6 +101,10 @@ if (isset($_GET['page'])) {
             $acc = new AdAccountsController();
             $acc->delUser();
             break;
+        case 'blockuser':
+            $acc = new AdAccountsController();
+            $acc->blockUser();
+            break;
         case 'post_manage':
             $post_manage = new AdPost_ManageController();
             $post_manage->viewPost_Manage();

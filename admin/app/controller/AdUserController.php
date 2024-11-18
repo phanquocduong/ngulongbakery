@@ -48,17 +48,13 @@ class AdAccountsController{
             $data = [];
             $data['id'] = isset($_POST['id']) ? intval($_POST['id']) : 0;
             $data['email'] = $_POST['email'] ?? '';
-            $data['password'] = $_POST['password'] ?? '';
             $data['full_name'] = $_POST['full_name'] ?? '';
             $data['phone'] = $_POST['phone'] ?? '';
             $data['address'] = $_POST['address'] ?? '';
             $data['role_id'] = isset($_POST['role_id']) ? intval($_POST['role_id']) : 0;
             $data['avatar'] = $_POST['existing_image'] ?? '';
             $data['status'] = isset($_POST['status']) ? intval($_POST['status']) : 0;
-            $data['verification_code'] = $_POST['verification_code'] ?? '';
-            $data['is_verified'] = isset($_POST['is_verified']) ? intval($_POST['is_verified']) : 0;
-            $data['created_at'] = $_POST['created_at'] ?? '';
-            $data['reset_code'] = $_POST['reset_code'] ?? '';
+            
             // update ảnh mới khi có
             if (!empty($_FILES['image']['name'])) {
                 $data['image'] = $_FILES['image']['name'];
@@ -97,6 +93,19 @@ class AdAccountsController{
             echo '<script>alert("Đã xóa thành công!")</script>';
         }
         echo '<script>location.href="index.php?page=accounts"</script>';
+    }
+    public function blockUser(){
+        if (isset($_GET['id']) && isset($_GET['status'])) {
+            $id = $_GET['id'];
+            $status = $_GET['status'];
+            $newStatus = $this->user->updateStatus($id, $status);
+
+            // Điều hướng lại về trang danh sách người dùng sau khi thay đổi
+            echo '<script>location.href="index.php?page=accounts"</script>';
+            exit();
+        } else {
+            echo "Không tìm thấy thông tin cần thiết!";
+        }
     }
 }
 

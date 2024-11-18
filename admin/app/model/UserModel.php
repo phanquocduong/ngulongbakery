@@ -29,8 +29,8 @@ class UserModel{
         $data['status'] = isset($data['status']) ? intval($data['status']) : 0;
         $data['created_at'] = !empty($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i:s');
     
-        $sql = "UPDATE users SET email = ?, password = ?, full_name = ?, phone = ?, address = ?, role_id = ?, avatar = ?, status = ?, verification_code = ?, is_verified = ?, created_at = ?, reset_code = ? WHERE id = ?";
-        $params = [$data['email'], $data['password'], $data['full_name'], $data['phone'], $data['address'], $data['role_id'], $data['avatar'], $data['status'], $data['verification_code'], $data['is_verified'], $data['created_at'], $data['reset_code'], $data['id']];
+        $sql = "UPDATE users SET email = ?, full_name = ?, phone = ?, address = ?, role_id = ?, avatar = ?, status = ? WHERE id = ?";
+        $params = [$data['email'], $data['full_name'], $data['phone'], $data['address'], $data['role_id'], $data['avatar'], $data['status'], $data['id']];
     
         // Debug dữ liệu
         print_r($params);
@@ -52,6 +52,15 @@ class UserModel{
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
         return $result['count'] > 0;
+    }
+    public function updateStatus($id, $status){
+        $newStatus = ($status == 1) ? 0 : 1;
+        $query = "UPDATE users SET status = :status WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':status', $newStatus, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $newStatus;
     }
     
 }
