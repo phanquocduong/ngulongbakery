@@ -35,4 +35,26 @@ class CategoryModel
         $sql = "SELECT * FROM products WHERE category_id = ?";
         return $this->db->getAll($sql, [$categoryId]);
     }
+    public function insertCate($data)
+    {
+        $sql = "INSERT INTO categories (name, image, description, type, status) VALUES (?,?,?,?,?)";
+        $param = [$data['name'], $data['image'], $data['description'], $data['type'], $data['status']];
+        return $this->db->insert($sql, $param);
+    }
+    function deleteCate($id)
+    {
+        $sql = "DELETE FROM categories WHERE id = ?";
+        $param = [$id];
+        return $this->db->delete($sql, $param);
+    }
+    function updateCate($data) {
+        $sql = "UPDATE categories SET name = ?, image = ?, description = ?, type = ?, status = ? WHERE id = ?";
+        $params = [$data['name'], $data['image'], $data['description'], $data['type'], 
+        intval($data['status']), // Đảm bảo status là số nguyên
+        intval($data['id']) // Đảm bảo id là số nguyên
+        ];
+        return $this->db->update($sql, $params);
+    }
+    
+    
 }

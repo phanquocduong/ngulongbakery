@@ -20,4 +20,9 @@ class VoucherModel{
             return null;
         }
     }
+    public function deleteVoucher($idvoucher){
+        $sql = "DELETE FROM discounts WHERE id = ?";
+        $param = [$idvoucher];
+        return $this->db->delete($sql, $param);
+    }
 }

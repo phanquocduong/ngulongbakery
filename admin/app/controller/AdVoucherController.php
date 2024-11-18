@@ -22,6 +22,7 @@
         }
         public function viewAddVoucher()
         {
+            
             $this->renderview('add_voucher', $this->data);
         }
         public function viewEditVoucher()
@@ -35,6 +36,12 @@
             } else {
                 echo "Not found....";
             }
+        }
+        function deleteVoucher(){
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $deleteVoucher = $this->voucher->deleteVoucher($id);
+            echo '<script>alert("Đã xóa voucher thành công")</script>';
+            echo '<script>location.href="index.php?page=voucher"</script>';
         }
     }
 ?>

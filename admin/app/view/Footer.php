@@ -31,7 +31,7 @@
 
 <!-- Template Javascript -->
 <script src="./public/js/main.js"></script>
-<script src="./public/js/news.js"></script>
+<script src="./public/js/detailnews.js"></script>
 </body>
 
 </html>

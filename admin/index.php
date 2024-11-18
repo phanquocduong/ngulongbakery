@@ -53,9 +53,21 @@ if (isset($_GET['page'])) {
             $categories = new AdCategoriesController();
             $categories->viewAddCategories();
             break;
+        case 'addCate':
+            $categories = new AdCategoriesController();
+            $categories->addCate();
+            break;
+        case 'delete_categories':
+            $categories = new AdCategoriesController();
+            $categories->delCate();
+            break;
         case 'edit_categories':
             $categories = new AdCategoriesController();
             $categories->viewEditCategories();
+            break;
+        case 'editcate':
+            $categories = new AdCategoriesController();
+            $categories->editCate();
             break;
         case 'order':
             $order = new AdOrderController();
@@ -108,6 +120,10 @@ if (isset($_GET['page'])) {
         case 'edit_voucher':
             $voucher = new AdVoucherController();
             $voucher->viewEditVoucher();
+            break;
+        case 'delete_voucher':
+            $voucher = new AdVoucherController();
+            $voucher->deleteVoucher();
             break;
         default:
             $main = new MainController();
