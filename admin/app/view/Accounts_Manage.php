@@ -3,7 +3,6 @@
           <div class="bg-light rounded p-4">
             <div class="d-flex justify-content-between mb-4">
               <h6 class="mb-0">Danh sách tài khoản</h6>
-              <a href="index.php?page=add_account" class="btn btn-primary">Thêm tài khoản</a>
             </div>
             <div class="table-responsive">
               <table class="table table-bordered">
@@ -52,7 +51,9 @@
                       <a href="index.php?page=edit_account&id='.$id.'" class="btn btn-warning btn-sm btn-color-text">
                         Sửa
                       </a>
-                      <button class="btn btn-danger btn-sm">Xoá</button>
+                      <a href="index.php?page=deluser&id='.$id.'" class="btn btn-warning btn-sm btn-color-text">
+                        Xóa
+                      </a>
                       <button class="btn btn-dark btn-sm">Khoá/Mở</button>
                     </td>
                   </tr>';
