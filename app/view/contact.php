@@ -6,8 +6,24 @@
                 <form action="index.php?page=sumbit-getcontact" method="post">
                     <div class="contact_main-box-in-input" style="border-image-source: url(https://t4.ftcdn.net/jpg/08/44/76/91/360_F_844769159_YK4xuiJGP0fmBumMpXVUEk9I2LDEhAEX.jpghttps://as1.ftcdn.net/v2/jpg/06/44/71/32/1000_F_644713254_L42ARbrHjlRKNHnG3ryhwu1G2eZS12g0.jpg);">
                         <h1 style="color: rgb(240, 179, 81);">Liên hệ</h1>
-                        <input type="email" name="email" rules="required|email" required id="usermail" placeholder="Nhập email">
-                        <input type="name" name="name" required id="" placeholder="Nhập tên">
+                        <input type="email" name="email" rules="required|email" required id="usermail"
+                            <?php /* kiem tra dang nhap  */
+
+                            if (isset($_SESSION['user'])) {
+                                echo 'value = ' . $_SESSION['user']['email'] . '';
+                            } else {
+                                echo 'disabled value= "vui lòng đăng nhập" style="color:red"';
+                            } ?> placeholder="Nhập email">
+
+
+                        <input type="number" name="name" required id="" placeholder="Nhập số điện thoại"
+                            <?php /* kiem tra dang nhap  */
+
+                            if (isset($_SESSION['user'])) {
+                                echo 'value = ' . $_SESSION['user']['phone'] . '';
+                            } else {
+                                echo 'disabled value= "vui lòng đăng nhập" style="color:red"';
+                            } ?>>
                         <select name="select-fix" id="" class="contact_main-box-in-input-select">
                             <option value="hotro">Hỗ trợ khách hàng</option>
                             <option value="hotro">Báo lỗi hệ thống</option>
