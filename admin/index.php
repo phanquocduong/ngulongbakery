@@ -48,6 +48,8 @@ if (isset($_GET['page'])) {
         case 'view_categories':
             $products = new AdCategoriesController();
             $products->viewCategories_Detail();
+            $products->viewCategories_Detail();
+            $products->viewCategoriesDetail();
             break;
         case 'addCategories':
             $categories = new AdCategoriesController();
