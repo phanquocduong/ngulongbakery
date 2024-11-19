@@ -184,6 +184,10 @@
                 $payment = new PaymentController();
                 $payment->handlePayment();
                 break;
+            case 'handle-product-reviews-display':
+                $review = new ReviewController();
+                $review->handleProductReviewsDisplay();
+                break;
             default:
                 $css = 'home.css';
                 $js = 'home.js';

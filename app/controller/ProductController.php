@@ -14,10 +14,7 @@
 
         private function renderView($view, $css, $js, $data = null, $numberPages = null) {
             $categories = $this->category->getCategories("WHERE type = 'Sản phẩm'", []);
-            require_once 'app/view/header.php';
-            $viewPath = 'app/view/' . $view . '.php';
-            require_once $viewPath;
-            require_once 'app/view/footer.php';
+            require_once 'app/view/template.php';
         }
 
         private function viewProducts($view, $css, $js, $condition = '', $params = [], $order = '') {
@@ -30,15 +27,11 @@
         }
 
         public function viewCollection($css, $js) {
-            $category_id = $_GET['id'] ?? null;
-            if ($category_id) {
-                $this->viewProducts('collection', $css, $js, 'WHERE category_id = ?', [$category_id]);
-            } else {
-                $this->viewProducts('collection', $css, $js);
-            }
+            $this->renderView('collection', $css, $js);
         }
 
         public function handleProductsDisplay() {
+            // Lấy các tham số từ URL
             $num = isset($_GET['num']) ? (int)$_GET['num'] : 1;
             $limit = 9;
             $start = ($num - 1) * $limit;
@@ -84,6 +77,7 @@
                 $whereConditions = 'WHERE ' . implode(' AND ', $conditions);
             }
 
+            // Xử lý điều kiện sắp xếp
             $order = '';
             if ($sort == 'price_asc') {
                 $order = "price ASC";
@@ -94,9 +88,7 @@
             } elseif ($sort == 'name_desc') {
                 $order = "name DESC";
             } elseif ($sort == 'featured') {
-                $order = "views DESC"; // giả sử có cột 'featured' trong bảng
-            } elseif ($sort == 'promotion') {
-                $order = "sale DESC"; // giả sử có cột 'promotion' trong bảng
+                $order = "views DESC";
             }
         
             // Truy vấn sản phẩm
@@ -104,6 +96,7 @@
             $totalProducts = $this->product->getProductCount($whereConditions, $params);
             $numberPages = ceil($totalProducts / $limit);
 
+            // Lấy thông tin danh mục
             if (empty($categoryId)) {
                 $category = [
                     'name' => '',
@@ -113,12 +106,13 @@
                 $category = $this->category->getCategory($categoryId);
             }
     
-            // Đảm bảo header đúng cho JSON
+            // Trả về kết quả dưới dạng JSON
             header('Content-Type: application/json');
             echo json_encode([
                 'products' => $products,
                 'category' => $category,
-                'pagination' => $this->renderPagination($num, $numberPages)
+                'pagination' => $this->renderPagination($num, $numberPages),
+                'message' => $totalProducts == 0 ? 'Không có sản phẩm nào phù hợp với bộ lọc của bạn!' : ''
             ]);
         }   
 
@@ -144,7 +138,6 @@
                     echo '<script>window.location.href = "index.php";</script>';
                 } else {
                     $this->product->increaseProductViews($_GET['id']);
-                    $data['productReviews'] = $this->review->getProductReviews($_GET['id']);
                     $data['relatedProducts'] = $this->product->getRelatedProducts($data['product']['category_id'], $_GET['id']);
                     if (isset($_SESSION['user'])) {
                         $favorite =  $this->favorite_products->getFavoriteProduct($_SESSION['user']['id'], $_GET['id']);
@@ -162,7 +155,6 @@
         }
 
         public function handleFavoriteProduct() {
-            header('Content-Type: application/json');
             $data = json_decode(file_get_contents('php://input'), true);
             $productId = $data['productId'] ?? null;
             $userId = $data['userId'] ?? null;
@@ -173,10 +165,10 @@
             $favorite = $this->favorite_products->getFavoriteProduct($userId, $productId);
             if ($favorite) {
                 $this->favorite_products->deleteFavoriteProduct($userId, $productId);
-                echo json_encode(['success' => true, 'message' => 'Đã xóa khỏi danh sách yêu thích.', 'isFavorite' => false]);
+                echo json_encode(['success' => true, 'isFavorite' => false]);
             } else {
                 $this->favorite_products->addFavoriteProduct($userId, $productId);
-                echo json_encode(['success' => true, 'message' => 'Đã thêm vào danh sách yêu thích.', 'isFavorite' => true]);
+                echo json_encode(['success' => true, 'isFavorite' => true]);
             }
         }
     }

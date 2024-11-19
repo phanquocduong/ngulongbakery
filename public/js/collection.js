@@ -1,13 +1,17 @@
 function toggleFilterMenu(menuId) {
+    // Toggle hiển thị menu lọc
     document.getElementById(menuId).classList.toggle('filter-menu__body--active');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Lấy các phần tử cần thiết từ DOM
     const categoryFilters = document.querySelectorAll("input[name='category-filter']");
     const priceFilters = document.querySelectorAll("input[name='price-filter']");
     const productContainer = document.querySelector('.products-list');
+    const loadingSpinner = document.querySelector('.loading-spinner');
     const paginationContainer = document.querySelector('.pagination');
 
+    // Định nghĩa các bộ lọc mặc định
     let filters = {
         category: '',
         price: [],
@@ -15,7 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sort: ''
     };
 
+    // Hàm tải sản phẩm từ server và hiển thị lên trang
     function loadProducts() {
+        loadingSpinner.style.display = 'block'; // Hiển thị spinner khi đang tải
+
+        // Xây dựng chuỗi queryParams từ các bộ lọc
         const queryParams = new URLSearchParams({
             category: filters.category,
             price: filters.price.join(','),
@@ -23,19 +31,32 @@ document.addEventListener('DOMContentLoaded', () => {
             sort: filters.sort
         }).toString();
 
-        console.log(queryParams);
+        // Gửi yêu cầu lấy sản phẩm từ server
         fetch(`index.php?page=handle-products-display&${queryParams}`)
             .then(response => response.json())
             .then(data => {
-                productContainer.innerHTML = data.products.map(renderProduct).join('');
+                loadingSpinner.style.display = 'none'; // Ẩn spinner khi dữ liệu đã được tải
+                if (data.message) {
+                    // Nếu không có sản phẩm, hiển thị thông báo
+                    productContainer.style.justifyContent = 'center';
+                    productContainer.innerHTML = `<p class="no-products-message">${data.message}</p>`;
+                } else {
+                    // Hiển thị danh sách sản phẩm
+                    productContainer.innerHTML = data.products.map(renderProduct).join('');
+                }
+                // Cập nhật thông tin danh mục và phân trang
                 document.querySelector('.collection-name').innerText = data.category.name;
                 document.querySelector('.collection-desc').innerText = data.category.description;
                 paginationContainer.innerHTML = data.pagination;
-                filters.num = 1;
+                filters.num = 1; // Đặt lại số trang sau mỗi lần tải sản phẩm mới
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                loadingSpinner.style.display = 'none'; // Ẩn spinner nếu có lỗi xảy ra
+                console.error('Error:', error);
+            });
     }
 
+    // Hàm render từng sản phẩm
     function renderProduct(product) {
         return `
             <div class="col l-4 m-6 c-10 c-offset-1">
@@ -53,27 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${renderStars(product.rating)}
                     </div>
                     <div class="product-item__price">
-                        ${
-                            product.sale
-                                ? `<span class="product-item__price-old">${formatPrice(product.price)}đ</span>`
-                                : ''
-                        }
+                        ${product.sale ? `<span class="product-item__price-old">${formatPrice(product.price)}đ</span>` : ''}
                         <span class="product-item__price-current">${formatPrice(product.sale || product.price)}đ</span>
                     </div>
-                    ${
-                        product.sale
-                            ? `<div class="product-item__sale-off">-${calculateDiscount(
-                                  product.price,
-                                  product.sale
-                              )}%</div>`
-                            : ''
-                    }
+                    ${product.sale ? `<div class="product-item__sale-off">-${calculateDiscount(product.price, product.sale)}%</div>` : ''}
                     <div class="add-to-cart-box">
                         <button 
                             class="add-to-cart-btn" 
-                            onclick="addToCart(this, ${product.id}, '${product.name}', ${
-            product.sale || product.price
-        }, '${product.image}')"
+                            onclick="addToCart(this, ${product.id}, '${product.name}', ${product.sale || product.price}, '${
+            product.image
+        }')"
                         >
                             THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                         </button>
@@ -83,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+    // Hàm render sao đánh giá của sản phẩm
     function renderStars(rating) {
         let starsHtml = '';
         for (let i = 1; i <= 5; i++) {
@@ -91,14 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return starsHtml;
     }
 
+    // Hàm định dạng giá sản phẩm
     function formatPrice(price) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
+    // Hàm tính toán phần trăm giảm giá
     function calculateDiscount(price, sale) {
         return Math.round(((price - sale) / price) * 100);
     }
 
+    // Hàm lắng nghe thay đổi của bộ lọc danh mục khi người dùng nhấn vào danh mục ở ngoài trang
     categoryFilters.forEach(filter => {
         if (filter.checked) {
             filters.category = filter.id;
@@ -106,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Hàm lắng nghe thay đổi của bộ lọc danh mục khi người dùng chọn danh mục trong trang
     categoryFilters.forEach(filter =>
         filter.addEventListener('change', function () {
             filters.category = this.id;
@@ -113,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     );
 
+    // Lắng nghe thay đổi của bộ lọc giá
     priceFilters.forEach(filter =>
         filter.addEventListener('change', function () {
             filters.price = Array.from(priceFilters)
@@ -122,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     );
 
+    // Lắng nghe sự kiện phân trang
     paginationContainer.addEventListener('click', function (e) {
         if (e.target.tagName === 'A') {
             e.preventDefault();
@@ -130,10 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Lắng nghe sự kiện sắp xếp sản phẩm
     document.getElementById('sort-select').addEventListener('change', function () {
         filters.sort = this.value;
         loadProducts();
     });
 
+    // Tải sản phẩm ngay khi trang được tải
     loadProducts();
 });

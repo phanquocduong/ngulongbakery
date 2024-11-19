@@ -8,8 +8,7 @@ class Database
     private $conn;
     private $num_rows;
     private $pdo;
-    function __construct()
-    {
+    function __construct() {
         try {
             $this->conn = new PDO("mysql:host={$this->servername};dbname={$this->dbname};charset=utf8", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,62 +18,54 @@ class Database
         }
     }
 
-    function query($sql, $params = [])
-    {
+    // Dương
+    function query($sql, $params = []) {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
         return $stmt;
     }
-    public function prepare($sql)
-    {
 
-        return $this->conn->prepare($sql);
-
-    }
-
-    function getAll($sql, $params = [], $fetchMode = PDO::FETCH_ASSOC)
-    {
+    function getAll($sql, $params = [], $fetchMode = PDO::FETCH_ASSOC) {
         $statement = $this->query($sql, $params);
         return $statement->fetchAll($fetchMode);
     }
 
-    function get($sql, $params = [], $fetchMode = PDO::FETCH_ASSOC)
-    {
+    function get($sql, $params = [], $fetchMode = PDO::FETCH_ASSOC) {
         $statement = $this->query($sql, $params);
         return $statement->fetch($fetchMode);
     }
-    function getOne($sql, $params = [], $fetchMode = PDO::FETCH_ASSOC)
-    {
-        return $this->get($sql, $params, $fetchMode);
-    }
 
-    function execute($sql, $params = [])
-    {
+    function execute($sql, $params = []) {
         return $this->query($sql, $params);
     }
 
-    function lastInsertId()
-    {
+    function lastInsertId() {
         return $this->conn->lastInsertId();
     }
-    public function insert($sql, $params)
-    {
+
+    // Phận
+    public function prepare($sql) {
+        return $this->conn->prepare($sql);
+    }
+
+    function getOne($sql, $params = [], $fetchMode = PDO::FETCH_ASSOC) {
+        return $this->get($sql, $params, $fetchMode);
+    }
+
+    public function insert($sql, $params) {
         $this->query($sql, $params);
         return $this->conn->lastInsertId();
     }
-    function update($sql, $param)
-    {
-        $this->query($sql, $param);
-    }
-    function delete($sql, $param)
-    {
+
+    function update($sql, $param) {
         $this->query($sql, $param);
     }
 
+    function delete($sql, $param) {
+        $this->query($sql, $param);
+    }
 
-
-    function __destruct()
-    {
+    function __destruct() {
         unset($this->conn);
     }
 }

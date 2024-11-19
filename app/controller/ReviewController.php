@@ -42,6 +42,44 @@
             header('Location: index.php?page=account');
             exit;
         }
+
+        public function handleProductReviewsDisplay() {
+            $productId = isset($_GET['product-id']) ? $_GET['product-id'] : null;
+            $num = isset($_GET['num']) ? (int)$_GET['num'] : 1;
+            $limit = 5;
+            $start = ($num - 1) * $limit;
+    
+            $whereConditions = 'WHERE product_id = ?';
+            $params = [$productId];
+            $order = 'created_at DESC';
+
+            $reviews = $this->review->getReviewsOfProduct($whereConditions, $params, $order, $start, $limit);
+            $totalProducts = $this->review->getReviewCount($whereConditions, $params);
+            $numberPages = ceil($totalProducts / $limit);
+    
+            header('Content-Type: application/json');
+            echo json_encode([
+                'success' => true,
+                'reviews' => $reviews,
+                'pagination' => $this->renderPagination($num, $numberPages)
+            ]);
+        }
+
+        private function renderPagination($currentPage, $numberPages) {
+            $html = '<div class="pagination">';
+            if ($currentPage > 1) {
+                $html .= '<a href="#" data-page="' . ($currentPage - 1) . '" class="pagination-link__icon-prev"><i class="fa-solid fa-chevron-left"></i></a>';
+            }
+            for ($i = 1; $i <= $numberPages; $i++) {
+                $activeClass = $i == $currentPage ? 'pagination-link--active' : '';
+                $html .= '<a href="#" data-page="' . $i . '" class="pagination-link ' . $activeClass . '">' . $i . '</a>';
+            }
+            if ($currentPage < $numberPages) {
+                $html .= '<a href="#" data-page="' . ($currentPage + 1) . '" class="pagination-link__icon-next"><i class="fa-solid fa-chevron-right"></i></a>';
+            }
+            $html .= '</div>';
+            return $html;
+        }
         
     }
 ?>

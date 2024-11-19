@@ -12,18 +12,28 @@
             return $this->db->getAll($sql);
         }
 
-        public function getProductReviews($id) {
+        function getReviewsOfProduct($condition = '', $params = [], $order = '', $start = 0, $limit = 0) {
             $sql = "SELECT r.*, u.full_name, u.avatar 
                     FROM reviews r 
                     INNER JOIN users u ON r.user_id = u.id 
-                    INNER JOIN products p on r.product_id = p.id 
-                    WHERE r.product_id = ? 
-                    ORDER BY id DESC
-                    LIMIT 5
-                    ";
-            return $this->db->getAll($sql, [$id]);
+                    INNER JOIN products p on r.product_id = p.id";
+            if ($condition) {
+                $sql .= " $condition";
+            }
+            if ($order) {
+                $sql .= " ORDER BY $order";
+            }
+            if ($limit > 0) {
+                $sql .= " LIMIT $start, $limit";
+            }
+            return $this->db->getAll($sql, $params);
         }
 
+        function getReviewCount($condition = '', $params = []) {
+            $sql = "SELECT count(*) AS quantity FROM reviews $condition";
+            return $this->db->get($sql, $params)['quantity'];
+        }
+        
         public function addReview($user_id, $rating, $images, $comment, $product_id) {
             $sql = "INSERT INTO reviews (`user_id`, `rating`, `images`, `comment`, `product_id`) VALUES (?,?,?,?,?)";
             return $this->db->execute($sql, [$user_id, $rating, $images, $comment, $product_id]);
