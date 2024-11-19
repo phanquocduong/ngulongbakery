@@ -63,39 +63,7 @@
                     echo '<tr><td colspan="5" class="text-center">Không có sản phẩm nào</td></tr>';
                 }
                 ?>
-                    <!-- <tr>
-                        <td>1</td>
-                        <td>Bánh Bông Lan Trứng Muối</td>
-                        <td>20,000 VND</td>
-                        <td>50</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" href="index.php?page=products_detail">Xem chi tiết</a>
-                            <a class="btn btn-sm btn-primary" href="index.php?page=edit_products">Sửa</a>
-                            <a class="btn btn-sm btn-danger" href="#">Xóa</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Bánh Kem Bông Lan Trứng Muối</td>
-                        <td>15,000 VND</td>
-                        <td>30</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" href="">Xem chi tiết</a>
-                            <a class="btn btn-sm btn-primary" href="#">Sửa</a>
-                            <a class="btn btn-sm btn-danger" href="#">Xóa</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Bánh Bông Lan Khét</td>
-                        <td>25,000 VND</td>
-                        <td>40</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" href="">Xem chi tiết</a>
-                            <a class="btn btn-sm btn-primary" href="#">Sửa</a>
-                            <a class="btn btn-sm btn-danger" href="#">Xóa</a>
-                        </td>
-                    </tr> -->
+                    
                 </tbody>
             </table>
         </div>

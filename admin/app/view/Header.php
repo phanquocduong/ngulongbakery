@@ -36,12 +36,12 @@
 <body>
   <div class="container-fluid position-relative bg-white d-flex p-0">
     <!-- Spinner Start -->
-    <!-- <div id="spinner"
+    <div id="spinner"
       class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
       <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-    </div> -->
+    </div>
     <!-- Spinner End -->
 
     <!-- Sidebar Start -->
@@ -54,7 +54,7 @@
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
           <div class="position-relative">
-            <img class="rounded-circle" src="../img/meo.jpg" alt="" style="width: 40px; height: 40px" />
+            <img class="rounded-circle" src="./upload/avatar/1731762648_Avatar.jpg" alt="" style="width: 40px; height: 40px" />
             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
             </div>
           </div>
