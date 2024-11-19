@@ -13,7 +13,7 @@
         }
 
         private function renderView($view, $css, $js, $data = null, $numberPages = null) {
-            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm'", []);
+            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1", []);
             require_once 'app/view/template.php';
         }
 
@@ -74,7 +74,7 @@
             // Xây dựng điều kiện SQL
             $whereConditions = '';
             if (!empty($conditions)) {
-                $whereConditions = 'WHERE ' . implode(' AND ', $conditions);
+                $whereConditions = 'WHERE ' . implode(' AND ', $conditions) . ' AND status = 1 AND stock_quantity > 0';
             }
 
             // Xử lý điều kiện sắp xếp
@@ -151,7 +151,7 @@
         }
 
         public function viewSearchProducts($css, $js) {
-            $this->viewProducts('search-products', $css, $js, 'WHERE name LIKE "%'.$_GET['keyword'].'%"', []);
+            $this->viewProducts('search-products', $css, $js, 'WHERE name LIKE "%'.$_GET['keyword'].'%" AND status = 1 AND stock_quantity > 0', []);
         }
 
         public function handleFavoriteProduct() {

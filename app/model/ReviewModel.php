@@ -8,7 +8,7 @@
         }
         
         public function getFeaturedReviews() {
-            $sql = "SELECT r.*, u.full_name, u.avatar FROM reviews r INNER JOIN users u ON r.user_id = u.id WHERE rating = 5 ORDER BY rand() LIMIT 2";
+            $sql = "SELECT r.*, u.full_name, u.avatar FROM reviews r INNER JOIN users u ON r.user_id = u.id WHERE r.rating >= 4 AND r.status = 1 ORDER BY r.created_at DESC LIMIT 2";
             return $this->db->getAll($sql);
         }
 

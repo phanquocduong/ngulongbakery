@@ -33,7 +33,7 @@
         }
         
         function getUserByEmail($email) {
-            $sql = "SELECT * FROM users WHERE email = ?";
+            $sql = "SELECT * FROM users WHERE email = ? AND status = 1";
             return $this->db->get($sql, [$email]);
         }        
 
