@@ -9,7 +9,7 @@ class CategoryModel
     }
     function getCate()
     {
-        $sql = "SELECT * FROM categories";
+        $sql = "SELECT * FROM categories  order by id desc";
         return $this->db->getAll($sql);
     }
     public function getIdPro($id)
