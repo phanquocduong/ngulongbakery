@@ -97,7 +97,7 @@ class AdCategoriesController
                 $this->data['procate'] = $procate;
                 $this->renderview('Categories_detail', $this->data);
             } else {
-                echo "Not found....";
+                echo "Danh mục chưa có sản phẩm nào....";
             }
     }
     public function delCate()
