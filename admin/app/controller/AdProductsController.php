@@ -59,7 +59,7 @@ class AdProductsController
             $data['extra_image'] = implode(',', $extra_images);
 
             $data['short_description'] = $_POST['short_description'];
-            $data['detailed_description'] = $_POST['description'];
+            $data['detailed_description'] = $_POST['contain_description'];
             $data['rating'] = $_POST['rating'];
             $data['stock_quantity'] = $_POST['stock_quantity'];
             $data['sold'] = $_POST['sold'];
@@ -109,10 +109,11 @@ class AdProductsController
     }
 
 
-    public function editPro($id)
+    public function editPro()
     {
         if (isset($_POST['submit'])) {
             $data = [];
+            $data['id'] = isset($_POST['id']) ? intval($_POST['id']) : 0;
             $data['name'] = $_POST['name'] ?? '';
             $data['price'] = $_POST['price'] ?? 0;
             $data['sale'] = $_POST['price_sale'] ?? 0;
@@ -153,14 +154,9 @@ class AdProductsController
                 $extra_images = $_POST['existing_extra_image'] ?? [];
             }
             $data['extra_image'] = implode(',', $extra_images);
-            $data['id'] = $id;
-            $this->products->updatePro( $id, $data);
+            $this->products->updatePro($data);
             echo '<script>alert("Cập nhật sản phẩm thành công")</script>';
             echo '<script>location.href="index.php?page=products"</script>';
-        } else {
-            $product = $this->products->getProductById($id);
-            $extra_images = is_string($product['extra_image']) ? explode(',', $product['extra_image']) : [];
-            require_once './app/view/edit_product.php';
         }
     }
 

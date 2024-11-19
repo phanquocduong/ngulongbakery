@@ -64,14 +64,19 @@
   });
 
   // format thời gian đăng bài viết
-  document.addEventListener("DOMContentLoaded", function () {
-    var options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false }; // Khởi tạo options trước
-    var d = new Date(); // Khởi tạo ngày giờ hiện tại
-    var formattedDate = d.toLocaleString("vi-VN", options); // Định dạng ngày giờ với options
+// document.addEventListener("DOMContentLoaded", function () {
+  // Định dạng thời gian đăng bài viết
+  // var options = { timeZone: "Asia/Ho_Chi_Minh"};
+  // var d = new Date();
+  // var formattedDate = d.toLocaleString("vi-VN", options);
 
-    document.querySelector(".date-create").innerHTML =
-      "Thời gian tạo bài viết: " + formattedDate; // Hiển thị ngày giờ đã định dạng
-  });
+  // Hiển thị ngày giờ đã định dạng
+  // document.querySelector(".date-create").innerHTML =
+  //   "Thời gian tạo bài viết: " + formattedDate;
+
+  // Đặt giá trị cho trường create_date
+//   document.getElementById("create_date").value = formattedDate;
+// });
 
   // Back to top button
   $(window).scroll(function () {

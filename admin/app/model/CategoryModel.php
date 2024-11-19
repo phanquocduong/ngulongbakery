@@ -59,7 +59,6 @@ class CategoryModel
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
         return $result['count'] > 0;
     }
     

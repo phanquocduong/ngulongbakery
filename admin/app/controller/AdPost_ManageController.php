@@ -49,7 +49,42 @@ class AdPost_ManageController
     public function viewEditPost(){
         $this->renderview('edit_post', $this->data);
     }
+    public function addPost()
+    {
+        if (isset($_POST['submit'])) {
+            $data = [];
+            $data['title'] = $_POST['title'];
+            $data['content'] = $_POST['content'];
+            $data['created_at'] = $_POST['create_date'];
+            $data['status'] = $_POST['status'];
+            $data['author_id'] = $_POST['user'];
+            $data['category_id'] = $_POST['type'];
+            $this->post->insertPost($data);
+            echo '<script>alert("Thêm bài viết thành công")</script>';
+            echo '<script>location.href="index.php?page=post_manage"</script>';
+        }
+    }
+        public function editPost(){
+            if(isset($_POST['submit'])){
+                $data = [];
+                $data['id'] = $_POST['id'];
+                $data['title'] = $_POST['title'];
+                $data['content'] = $_POST['content'];
+                $data['created_at'] = $_POST['create_date'];
+                $data['status'] = $_POST['status'];
+                $data['author_id'] = $_POST['user'];
+                $data['category_id'] = $_POST['type'];
+                $this->post->updatePost($data);
+                echo '<script>alert("Sửa bài viết thành công")</script>';
+                echo '<script>location.href="index.php?page=post_manage"</script>';
+            }
+        }
 
-
-}
+        public function deletePost(){
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $this->post->deletePost($id);
+            echo '<script>alert("Xóa bài viết thành công")</script>';
+            echo '<script>location.href="index.php?page=post_manage"</script>';
+        }
+    }
 ?>

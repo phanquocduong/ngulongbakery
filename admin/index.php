@@ -114,9 +114,21 @@ if (isset($_GET['page'])) {
             $post_manage = new AdPost_ManageController();
             $post_manage->viewAddPost();
             break;
+        case 'addPost':
+            $post_manage = new AdPost_ManageController();
+            $post_manage->addPost();
+            break;
         case 'edit_post':
             $post_manage = new AdPost_ManageController();
             $post_manage->viewEditPost();
+            break;
+        case 'editPost':
+            $post_manage = new AdPost_ManageController();
+            $post_manage->editPost();
+            break;
+        case 'del_post':
+            $post_manage = new AdPost_ManageController();
+            $post_manage->deletePost();
             break;
         case 'post_detail':
             $post_detail = new AdPost_ManageController();

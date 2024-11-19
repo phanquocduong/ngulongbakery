@@ -41,27 +41,28 @@
                     ?>
                     <div class='card card-body'>
                       <div class='mb-3'>
+                        <input type="hidden" name="id" value="<?= $id ?>">
                         <label for='name' class='form-label'>Tên Sản Phẩm</label>
                         <input type='text' class='form-control' id='name' name='name'
-                          value='<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>' />
+                          value='<?php echo $name; ?>' />
                       </div>
                       <div class='mb-3'>
                         <label for='price' class='form-label'>Giá Gốc (VNĐ)</label>
                         <input type='number' class='form-control' id='price' name='price'
-                          value='<?php echo htmlspecialchars($price, ENT_QUOTES, 'UTF-8'); ?>' />
+                          value='<?php echo  $price; ?>' />
                       </div>
                       <div class='mb-3'>
                         <label for='price' class='form-label'>Giá Khuyến Mãi (VNĐ)</label>
                         <input type='number' class='form-control' id='price_sale' name='price_sale'
-                          value='<?php echo htmlspecialchars($sale, ENT_QUOTES, 'UTF-8'); ?>' />
+                          value='<?php echo $sale; ?>' />
                         <br />
                         <div class='mb-3'>
                           <label for='image' class='form-label'>Hình Ảnh</label><br />
-                          <img src='../public/upload/product/<?php echo htmlspecialchars($image, ENT_QUOTES, 'UTF-8'); ?>'
+                          <img src='../public/upload/product/<?php echo $image; ?>'
                             alt='Product Image' class='img-thumbnail' style='width: 100px;' />
                           <input class='form-control' type='file' id='image' name='image' />
                           <input type="hidden" name="existing_image"
-                            value="<?php echo htmlspecialchars($image, ENT_QUOTES, 'UTF-8'); ?>" />
+                            value="<?php echo $image; ?>" />
                           <br />
                           <label for='image' class='form-label'>Hình Ảnh Con</label>
                           <hr />
@@ -72,11 +73,11 @@
                             ?>
                             <div class='mb-3'>
                               <img
-                                src='../public/upload/product/<?php echo htmlspecialchars($extra_image, ENT_QUOTES, 'UTF-8'); ?>'
+                                src='../public/upload/product/<?php echo $extra_image; ?>'
                                 alt='Product Image' class='img-thumbnail' style='width: 100px;' />
                               <input class='form-control' type='file' id='ex_image' name='ex_image[]' />
                               <input type="hidden" name="existing_extra_image[]"
-                                value="<?php echo htmlspecialchars($extra_image, ENT_QUOTES, 'UTF-8'); ?>" />
+                                value="<?php echo $extra_image; ?>" />
                               <?php
                           }
                           ?>
@@ -87,11 +88,11 @@
                         <div class='mb-3'>
                           <label for='short-description' class='form-label'>Mô Tả Ngắn</label>
                           <textarea class='form-control' id='short_description' name='short_description'
-                            rows='5'><?php echo htmlspecialchars($short_description, ENT_QUOTES, 'UTF-8'); ?></textarea>
+                            rows='5'><?php echo $short_description; ?></textarea>
                           <br />
                           <label for='description'>Mô Tả Chi Tiết</label>
                           <div id="editor" class="editor" contenteditable="true">
-                            <?php echo htmlspecialchars($detailed_description, ENT_QUOTES, 'UTF-8'); ?>
+                            <?php echo $detailed_description; ?>
                           </div>
                           <div class="add-element">
                             <select id="element-type" class="form-select m-2">
@@ -113,17 +114,17 @@
                         <div class='mb-3'>
                           <label for='stock_quantity' class='form-label'>Số Lượng Hàng Tồn Kho</label>
                           <input type='number' class='form-control' id='stock_quantity' name='stock_quantity'
-                            value='<?php echo htmlspecialchars($stock_quantity, ENT_QUOTES, 'UTF-8'); ?>' />
+                            value='<?php echo $stock_quantity; ?>' />
                         </div>
                         <div class='mb-3'>
                           <label for='views' class='form-label'>Số Lượt Xem</label>
                           <input type='number' class='form-control' id='views' name='views'
-                            value='<?php echo htmlspecialchars($views, ENT_QUOTES, 'UTF-8'); ?>' readonly />
+                            value='<?php echo $views; ?>' readonly />
                         </div>
                         <div class='mb-3'>
                           <label for='tag' class='form-label'>Thẻ</label>
                           <input type='text' class='form-control' id='tag' name='tag'
-                            value='<?php echo htmlspecialchars($tags, ENT_QUOTES, 'UTF-8'); ?>' />
+                            value='<?php echo $tags; ?>' />
                         </div>
                         <div class='mb-3'>
                           <label for='parent' class='form-label'>Loại danh mục</label>
@@ -132,7 +133,7 @@
                             <?php
                             foreach ($listCate as $category) {
                               $selected = $category['id'] == $category_id ? 'selected' : '';
-                              echo "<option value='{$category['id']}' $selected>" . htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8') . "</option>";
+                              echo "<option value='{$category['id']}' $selected>" . $category['name'] . "</option>";
                             }
                             ?>
                           </select>

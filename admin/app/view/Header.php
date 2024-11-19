@@ -30,6 +30,7 @@
 
   <!-- Template Stylesheet -->
   <link href="./public/css/style.css" rel="stylesheet" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <!-- <link href="./public/css/detailnews.css" rel="stylesheet" /> -->
 </head>
 
