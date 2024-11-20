@@ -31,18 +31,18 @@
   <!-- Template Stylesheet -->
   <link href="./public/css/style.css" rel="stylesheet" />
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <!-- <link href="./public/css/detailnews.css" rel="stylesheet" /> -->
+  <link href="./public/css/detailnews.css" rel="stylesheet" />
 </head>
 
 <body>
   <div class="container-fluid position-relative bg-white d-flex p-0">
     <!-- Spinner Start -->
-    <div id="spinner"
+    <!-- <div id="spinner"
       class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
       <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-    </div>
+    </div> -->
     <!-- Spinner End -->
 
     <!-- Sidebar Start -->
@@ -55,7 +55,8 @@
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
           <div class="position-relative">
-            <img class="rounded-circle" src="./upload/avatar/1731762648_Avatar.jpg" alt="" style="width: 40px; height: 40px" />
+            <img class="rounded-circle" src="./upload/avatar/1731762648_Avatar.jpg" alt=""
+              style="width: 40px; height: 40px" />
             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
             </div>
           </div>
@@ -70,8 +71,10 @@
           <a href="index.php?page=categories" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Danh mục</a>
           <a href="index.php?page=order" class="nav-item nav-link"><i class="fa fa-shopping-cart me-2"></i>Đơn hàng</a>
           <a href="index.php?page=accounts" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Tài khoản</a>
-          <a href="index.php?page=post_manage" class="nav-item nav-link"><i class="fa fa-newspaper me-2"></i>Bài viết</a>
-          <a href="index.php?page=voucher" class="nav-item nav-link"><i class="fa fa-ticket-alt me-2"></i>Mã giảm giá</a>
+          <a href="index.php?page=post_manage" class="nav-item nav-link"><i class="fa fa-newspaper me-2"></i>Bài
+            viết</a>
+          <a href="index.php?page=voucher" class="nav-item nav-link"><i class="fa fa-ticket-alt me-2"></i>Mã giảm
+            giá</a>
         </div>
       </nav>
     </div>

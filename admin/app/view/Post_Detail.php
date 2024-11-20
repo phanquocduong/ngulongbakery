@@ -4,7 +4,7 @@
     <?php
     extract($data['postdetail']);
     ?>
-    <h1 style="margin: 10px 0 0 0">
+    <h1 style="margin: 10px 0 0 0" >
       <?php echo $title; ?>
     </h1>
     <hr />

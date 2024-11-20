@@ -24,6 +24,7 @@
         document.getElementById("image-input").style.display = "none"; // Ẩn input khi chọn các thẻ khác
         let newElement = document.createElement(elementType);
         newElement.contentEditable = "true";
+        newElement.className = "the";
         newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
         editor.appendChild(newElement);
         editor.appendChild(document.createElement("br"));
@@ -64,19 +65,19 @@
   });
 
   // format thời gian đăng bài viết
-// document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   // Định dạng thời gian đăng bài viết
-  // var options = { timeZone: "Asia/Ho_Chi_Minh"};
-  // var d = new Date();
-  // var formattedDate = d.toLocaleString("vi-VN", options);
+  var options = { timeZone: "Asia/Ho_Chi_Minh"};
+  var d = new Date();
+  var formattedDate = d.toLocaleString("vi-VN", options);
 
   // Hiển thị ngày giờ đã định dạng
   // document.querySelector(".date-create").innerHTML =
   //   "Thời gian tạo bài viết: " + formattedDate;
 
   // Đặt giá trị cho trường create_date
-//   document.getElementById("create_date").value = formattedDate;
-// });
+  document.getElementById("create_date").value = 'Thời gian' + formattedDate;
+});
 
   // Back to top button
   $(window).scroll(function () {

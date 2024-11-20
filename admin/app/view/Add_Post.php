@@ -4,22 +4,20 @@
         <h1>Thêm bài viết</h1>
 
         <!-- Ngày tạo bài viết -->
-        <input type="text" class="date-create form-control" readonly value="" name="create_date">
+        <input type="text" class="date-create form-control" readonly value="" name="create_date" >
     </div>
     <br>
     <!-- -------------- -->
     <input type="text" name="title" class="form-control" style="font-size:20px; font-weight: bold;"
         placeholder="Nhập tiêu đề bài viết" required>
     <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-    <!-- <div id="editor" class="editor" contenteditable="true"></div> -->
     <div id="app">
         <!-- Vùng nhập liệu có thể chỉnh sửa, hỗ trợ các thẻ HTML -->
         <div id="editor" class="editor" contenteditable="true" @input="updateText($event)">
         </div>
 
         <!-- Textarea chứa dữ liệu HTML -->
-        <textarea name="content" id="contain_description" rows="20" cols="100"
-            style="display:none;">{{ inpText }}</textarea>
+        <textarea name="content" id="contain_description" rows="20" cols="100" style="">{{ inpText }}</textarea>
     </div>
 
     <script>
@@ -82,9 +80,16 @@
                 Thể loại
             </label>
             <select name="type" id="" class="form-select">
-                <option value="0">Tin tức</option>
-                <option value="1">Sự kiện</option>
-                <option value="2">Khuyến mãi</option>
+                <?php
+                require_once './app/model/CategoryModel.php';
+                require_once './app/model/PostModel.php';
+                $categoryModel = new CategoryModel();
+                $categories = $categoryModel->getCate();
+                foreach ($categories as $category) {
+                    extract($category);
+                    echo '<option value="' . $id . '">' . $name. '</option>';
+                }
+                ?>
             </select>
         </div>
     </div>

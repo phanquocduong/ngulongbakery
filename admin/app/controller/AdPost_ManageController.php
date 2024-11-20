@@ -55,7 +55,7 @@ class AdPost_ManageController
             $data = [];
             $data['title'] = $_POST['title'];
             $data['content'] = $_POST['content'];
-            $data['created_at'] = $_POST['create_date'];
+            $data['created_at'] = $_POST['create_date'] = date('Y-m-d H:i:s');
             $data['status'] = $_POST['status'];
             $data['author_id'] = $_POST['user'];
             $data['category_id'] = $_POST['type'];

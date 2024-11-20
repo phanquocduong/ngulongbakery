@@ -41,9 +41,11 @@ class PostModel
     }
     public function insertPost($data)
     {
-        $date = $data['created_at']; // Dữ liệu ban đầu
-        $mysqlDate = date('Y-m-d H:i:s', strtotime($date)); // Chuyển đổi định dạng
-        $data['created_at'] = $mysqlDate;
+        if (isset($data['created_at'])) {
+            $date = $data['created_at']; 
+            $mysqlDate = date('Y-m-d H:i:s', strtotime($date));
+            $data['created_at'] = $mysqlDate;
+        }
         $sql = "INSERT INTO posts(title, content, created_at, status, author_id, category_id) VALUES(?,?,?,?,?,?)";
         $params = [
             $data['title'],

@@ -10,7 +10,8 @@
         $post = $postModel->getIdPost($id);
         extract($post);
         ?>
-        <input type="text" name="title" value="<?= $title ?>" class="">
+        <label for="title" style="font-size:25px; font-weight:bold;" >Tiêu đề</label>
+        <input type="text" name="title" value="<?= $title ?>" class="form-control" >
         <!-- </h1> -->
         <hr />
         <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
@@ -48,7 +49,7 @@
 
         <!-- Textarea chứa dữ liệu HTML -->
         <textarea name="content" id="contain_description" rows="20" cols="100"
-            style="display:none;">{{ inpText }}</textarea>
+            style="">{{ inpText }}</textarea>
     </div>
 
     <script>
