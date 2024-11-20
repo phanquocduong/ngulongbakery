@@ -4,18 +4,19 @@
     <?php
     extract($data['postdetail']);
     ?>
-    <h1 style="margin: 10px 0 0 0">
+    <h1 style="margin: 10px 0 0 0" >
       <?php echo $title; ?>
     </h1>
     <hr />
     <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
     <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
-    <a href="index.php?page=edit_post" class="btn btn-primary">Sửa bài viết</a>
+    <a href="index.php?page=edit_post&id=<?= $id; ?>" class="btn btn-primary">Sửa bài viết</a>
     <hr />
-    <div class="form-control">
-      Ngày tạo bài viết: <span> <?php echo $created_at ?></span>
-    </div>
+
+
     <!-- Ngày tạo bài viết -->
+    <input type="text" class="date-create form-control" readonly value="<?= $created_at ?>" name="create_date">
+
   </div>
   <!-- -------------- -->
   <div id="editor" class="editor" contenteditable="false">

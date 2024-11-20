@@ -47,7 +47,7 @@
                                   <td>
                                     <a href="index.php?page=post_detail&id='.$id.'" class="btn btn-sm btn-primary" >Xem</a>
                                     <a href="index.php?page=edit_post&id=' . $id . '" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xóa</a>
+                                    <a href="index.php?page=del_post&id=' . $id . '" class="btn btn-sm btn-danger">Xóa</a>
                                   </td>
                                 </tr>';
                           }

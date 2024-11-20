@@ -42,10 +42,10 @@ class AdProductsModel
         $param = [$data['name'], $data['price'], $data['sale'], $data['image'], $data['extra_image'], $data['short_description'], $data['detailed_description'], $data['rating'], $data['stock_quantity'], $data['sold'], $data['views'], $data['tags'], $data['status'], $data['category_id']];
         return $this->db->insert($sql, $param);
     }
-    public function updatePro($id, $data)
+    public function updatePro($data)
     {
         $sql = "UPDATE products SET name = ?, price = ?, sale = ?, image = ?, extra_image = ?, short_description = ?, detailed_description = ?, rating = ?, stock_quantity = ?, sold = ?, views = ?, tags = ?, status = ?, category_id = ? WHERE id = ?";
-        $param = [$data['name'], $data['price'], $data['sale'], $data['image'], $data['extra_image'], $data['short_description'], $data['detailed_description'], $data['rating'], $data['stock_quantity'], $data['sold'], $data['views'], $data['tags'], $data['status'], $data['category_id'], $id];
+        $param = [$data['name'], $data['price'], $data['sale'], $data['image'], $data['extra_image'], $data['short_description'], $data['detailed_description'], $data['rating'], $data['stock_quantity'], $data['sold'], $data['views'], $data['tags'], $data['status'], $data['category_id'], $data['id']];
         return $this->db->update($sql, $param);
     }
     function deletePro($id)
