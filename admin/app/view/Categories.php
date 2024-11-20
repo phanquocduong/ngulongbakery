@@ -8,17 +8,30 @@
                     <a href="index.php?page=addCategories" class="btn btn-primary">Thêm Mới</a>
                 </div>
                 <!-- form search -->
-                <form class="d-none d-md-flex ms-4">
+                <form class="d-none d-md-flex ms-4" method="POST">
                     <div class="input-group">
-                        <input class="form-control border-0" type="search" placeholder="Tìm kiếm danh mục" />
-                        <button class="btn">
+                        <input class="form-control border-0" type="search" placeholder="Tìm kiếm danh mục" name="search_category"/>
+                        <button class="btn" name="button_category">
                             <span class="input-group-text bg-transparent border-0">
-                                <i class="fa fa-search"></i>
-                            </span>
+                                <a href="index.php?page=search_category"><i class="fa fa-search"></i></a>
+                            </span>                            
                         </button>
                     </div>
                 </form>
                 <br />
+<?php
+    require_once './app/controller/AdCategoriesController.php';
+    require_once './app/model/CategoryModel.php';
+    $categoriesController = new AdCategoriesController();
+    $productsModel = new CategoryModel();
+    if (isset($_POST['button_category']) && !empty($_POST['search_category'])) {
+      $listCate = $categoriesController->searchCategories($_POST['search_category']);
+    } else {
+      // Fetch all products if no search term is provided
+      $listCate = $productsModel->getCate();
+    }
+?>
+
                 <!-- form search end -->
                 <div class="table-responsive">
                     <table class="table table-hover table-borderless">
@@ -27,13 +40,17 @@
                                 <th>ID</th>
                                 <th>Tên Danh Mục</th>
                                 <th>Ảnh</th>
+                                <th>Loại danh mục</th>
                                 <th>Thao Tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($data['cate'] as $item) {
-                                extract($item);
+                            foreach ($listCate as $key => $value) {
+                                $id = $value['id'];
+                                $name = $value['name'];
+                                $type = $value['type'];
+                                $image = $value['image'];
                                 echo '<tr>
                                 <td>' . $id . '</td>
                                 <td>' . $name . '</td>
@@ -41,6 +58,7 @@
                                     <img src="../public/upload/category/' . $image . '" alt=""
                                         style="width: 40px; height: 40px" />
                                 </td>
+                                <td>' . $type . '</td>
                                 <td>
                                     <a href="index.php?page=edit_categories&id='.$id.'" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="index.php?page=delete_categories&id='.$id.'" class="btn btn-sm btn-danger">Xoá</a>

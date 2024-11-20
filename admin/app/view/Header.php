@@ -54,7 +54,7 @@
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
           <div class="position-relative">
-            <img class="rounded-circle" src="../img/meo.jpg" alt="" style="width: 40px; height: 40px" />
+            <img class="rounded-circle" src="./upload/avatar/1731762648_Avatar.jpg" alt="" style="width: 40px; height: 40px" />
             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
             </div>
           </div>
@@ -87,7 +87,7 @@
           <i class="fa fa-bars"></i>
         </a>
         <form class="d-none d-md-flex ms-4">
-          <input class="form-control border-0" type="search" placeholder="Search" />
+          <input class="form-control border-0" type="search" placeholder="Search" id="search_admin"/>
         </form>
         <div class="navbar-nav align-items-center ms-auto">
           <div class="nav-item dropdown">

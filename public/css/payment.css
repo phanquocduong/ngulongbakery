@@ -17,12 +17,6 @@ main {
     margin: 0 0 21px 0;
 }
 
-.section-content-text {
-    margin: 0 0 12px 0;
-    font-size: 1.4rem;
-    color: #737373;
-}
-
 .login-link {
     text-decoration: none;
     color: var(--primary-color-bold);
@@ -71,7 +65,7 @@ main {
     color: var(--text-color);
 }
 
-.form-address-box {
+.address-group {
     padding: 12px;
     background-color: #fafafa;
     margin: 12px 0 30px 0;
@@ -80,7 +74,7 @@ main {
     box-shadow: 0 0 1px #d9d9d9;
 }
 
-.form-address-control {
+.form-address__control {
     padding: 13px 39px 13px 11px;
     border-radius: 5px;
     font-size: 1.6rem;
@@ -89,6 +83,18 @@ main {
     width: 100%;
     outline: none;
     color: var(--text-color);
+    margin-bottom: 12px;
+}
+
+.address-select {
+    padding: 10px 0;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0 1px #d9d9d9;
+    color: var(--text-color);
+    outline: none;
+    width: 30%;
 }
 
 .step-footer {
@@ -179,6 +185,10 @@ main {
     border-bottom: 1px solid #eee;
 }
 
+.product-order + .product-order {
+    padding-top: 10px;
+}
+
 .product-order__thumbnail {
     position: relative;
     display: inline-block;
@@ -206,22 +216,17 @@ main {
 }
 
 .product-order__dsc-name {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     display: inline-block;
-    line-height: 1.8rem;
+    line-height: 2rem;
     color: #4b4b4b;
-}
-
-.product-order__dsc-type {
-    font-size: 1.2rem;
-    color: #969696;
-    line-height: 1.8rem;
 }
 
 .product-order__price {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
     color: #4b4b4b;
-    padding-left: 14px;
+    margin-left: auto;
 }
 
 .discount-code {
@@ -243,10 +248,14 @@ main {
     width: 70%;
 }
 
+.discount-code__input:focus + .discount-code__btn {
+    background-color: var(--primary-color-bold);
+}
+
 .discount-code__btn {
     border-radius: 4px;
     font-weight: 500;
-    background-color: var(--primary-color-bold);
+    background-color: #c8c8c8;
     color: var(--white-color);
     padding: 12px 23px;
     border: none;
@@ -334,6 +343,38 @@ main {
 
 .transfer-information__img {
     width: 100%;
+}
+
+.customer-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 21px;
+}
+
+.customer-info__icon {
+    font-size: 3rem;
+    color: #969696;
+    padding: 0 15px 0 10px;
+}
+
+.customer-info__body-title {
+    margin: 0;
+    color: #737373;
+    font-size: 1.4rem;
+}
+
+.customer-info__body-logout {
+    color: #338dbc;
+    font-size: 1.4rem;
+    margin-top: 5px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.form-message {
+    color: #f4516c;
+    font-size: 1.4rem;
+    padding-top: 6px;
 }
 
 /* Tablet - PC low resolution */

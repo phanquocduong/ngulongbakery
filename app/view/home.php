@@ -133,7 +133,7 @@
                                 <h3 class="category-item__name">Bánh bông lan</h3>
                                 <p class="category-item__desc">Bánh bông lan mềm mịn, xốp nhẹ, ngọt ngào, thơm ngon.</p>
                                 <button class="buy-now-btn">
-                                    <a class="buy-now-btn__link" href="index.php?page=collection"
+                                    <a class="buy-now-btn__link" href="index.php?page=collection&id=1"
                                         >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                                     ></a>
                                 </button>
@@ -147,7 +147,7 @@
                                 <h3 class="category-item__name">Bánh bò</h3>
                                 <p class="category-item__desc">Bánh bò mềm mịn, xốp nhẹ, hương lá dứa thơm lừng.</p>
                                 <button class="buy-now-btn">
-                                    <a class="buy-now-btn__link" href="index.php?page=collection"
+                                    <a class="buy-now-btn__link" href="index.php?page=collection&id=2"
                                         >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                                     ></a>
                                 </button>
@@ -161,7 +161,7 @@
                                 <h3 class="category-item__name">Bánh da lợn</h3>
                                 <p class="category-item__desc">Bánh da lợn mềm mịn, thơm béo hương truyền thống.</p>
                                 <button class="buy-now-btn">
-                                    <a class="buy-now-btn__link" href="index.php?page=collection"
+                                    <a class="buy-now-btn__link" href="index.php?page=collection&id=4"
                                         >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                                     ></a>
                                 </button>

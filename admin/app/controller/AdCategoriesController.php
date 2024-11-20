@@ -97,7 +97,7 @@ class AdCategoriesController
                 $this->data['procate'] = $procate;
                 $this->renderview('Categories_detail', $this->data);
             } else {
-                echo "Not found....";
+                echo "Danh mục chưa có sản phẩm nào....";
             }
     }
     public function delCate()
@@ -123,6 +123,24 @@ class AdCategoriesController
         }
         echo '<script>location.href="index.php?page=categories"</script>';
     }
+    public function searchCategories()
+    {
+        if (isset($_POST['button_category'])) {
+            $keyword = $_POST['search_category'];
+        } else {
+            echo "No keyword provided.";
+            return;
+        }
+    
+        $sql = "SELECT * FROM categories WHERE name LIKE :keyword";
+        $params = [':keyword' => '%' . $keyword . '%'];
+    
+        $db = new Database(); // Ensure this uses your Database class
+        $results = $db->getAll($sql, $params);
+        $db = new Database();
+        return $db->getAll($sql, $params);
+    }
+    
 }
 
 ?>

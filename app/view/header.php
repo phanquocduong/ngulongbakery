@@ -29,19 +29,32 @@
                         <a href="index.php" class="header-menu__item-link">TRANG CHỦ</a>
                     </li>
                     <li class="header-menu__item">
-                        <a href="index.php?page=collection" class="header-menu__item-link">SẢN PHẨM</a>
+                        <a href="index.php?page=collection" class="header-menu__item-link">
+                            SẢN PHẨM
+                            <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
+                        </a>
+                        <ul class="header-sub-menu">
+                            <?php foreach($categories as $category): ?>
+                                <li class="header-sub-menu__item">
+                                    <a href="index.php?page=collection&id=<?=$category['id']?>" class="header-sub-menu__item-link"><?=$category['name']?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </li>
                     <li class="header-menu__item">
-                        <a href="" class="header-menu__item-link">TIN TỨC</a>
+                        <a href="index.php?page=news" class="header-menu__item-link">TIN TỨC</a>
                     </li>
                 </ul>
             </div>
 
             <div class="header-search">
-                <input type="text" class="header-search__input" placeholder="Bạn đang tìm kiếm ..." />
-                <button class="header-search__btn">
-                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
-                </button>
+                <form action="" method="GET">
+                    <input type="hidden" name="page" value="search">
+                    <input type="text" name="keyword" class="header-search__input" placeholder="Bạn đang tìm kiếm ..." />
+                    <button type="submit" class="header-search__btn">
+                        <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
             </div>
 
             <div class="header-right">
@@ -50,7 +63,7 @@
                         <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
                     </li>
                     <li class="header-menu__item">
-                        <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+                        <a href="index.php?page=contact" class="header-menu__item-link">LIÊN HỆ</a>
                     </li>
                 </ul>
                 <button class="header-search__btn header-search__btn--mobile">
@@ -98,7 +111,20 @@
                     <a href="" class="header-menu__item-link">TRANG CHỦ</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="" class="header-menu__item-link">SẢN PHẨM</a>
+                    <a href="" id="menu-item-drop--tablet" class="header-menu__item-link"
+                        >SẢN PHẨM
+                        <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="header-sub-menu">
+                        <li class="header-sub-menu__item">
+                            <a href="index.php?page=collection" class="header-sub-menu__item-link">Tất cả</a>
+                        </li>
+                        <?php foreach($categories as $category): ?>
+                            <li class="header-sub-menu__item">
+                                <a href="index.php?page=collection&id=<?=$category['id']?>" class="header-sub-menu__item-link"><?=$category['name']?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </li>
                 <li class="header-menu__item">
                     <a href="" class="header-menu__item-link">TIN TỨC</a>
@@ -107,10 +133,17 @@
                     <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+                    <a href="index.php?page=contact" class="header-menu__item-link">LIÊN HỆ</a>
                 </li>
             </ul>
-            <input type="text" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." />
+            <!-- <input type="text" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." /> -->
+
+            <div class="header-search--mobile">
+                <form action="" method="GET">
+                    <input type="hidden" name="page" value="search">
+                    <input type="text" name="keyword" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." />
+                </form>
+            </div>
 
             <!-- Overlay -->
             <div class="overlay" id="overlay"></div>
@@ -120,10 +153,24 @@
                 <button class="close-btn" id="closeBtn">✖</button>
                 <ul class="modal-menu__list">
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Trang Chủ</a></li>
-                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Sản Phẩm</a></li>
+                    <li class="modal-menu__item">
+                        <a id="menu-item-drop" class="modal-menu__item-link" href="#"
+                            >Sản Phẩm <i class="chevron-down-icon fa-solid fa-chevron-down"></i
+                        ></a>
+                        <ul class="modal-sub-menu__list modal-sub-menu__list--active">
+                            <li class="header-sub-menu__item">
+                                <a href="index.php?page=collection" class="header-sub-menu__item-link">Tất cả</a>  
+                            </li> 
+                            <?php foreach($categories as $category): ?>
+                                <li class="header-sub-menu__item">
+                                    <a href="index.php?page=collection&id=<?=$category['id']?>" class="header-sub-menu__item-link"><?=$category['name']?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Tin Tức</a></li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Giới Thiệu</a></li>
-                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Liên Hệ</a></li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="index.php?page=contact">Liên Hệ</a></li>
                 </ul>
             </div>
         </header>

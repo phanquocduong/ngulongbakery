@@ -1,5 +1,20 @@
-function fillHeartIcon(icon) {
-    icon.classList.toggle('heart-icon--fill');
+function toggleFavorite(productId, userId) {
+    fetch('index.php?page=handle-favorite-product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, userId })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message); // Hiển thị thông báo
+                const heartIcon = document.querySelector(`.heart-icon[data-product-id="${productId}"]`);
+                heartIcon.classList.toggle('heart-icon--fill', data.isFavorite);
+            } else {
+                alert(data.error); // Lỗi nếu có
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 function changeDisplayImage(image) {

@@ -138,7 +138,7 @@
                                         <label for="" class="total-label">Thành tiền</label>
                                         <span class="total-price"><?=number_format($total)?>đ</span>
                                     </div>
-                                    <a class="cart-btn-link" href="payment.html">
+                                    <a class="cart-btn-link" href="index.php?page=payment">
                                         <button class="cart-btn">Thanh toán</button>
                                     </a>
                                 </div>
