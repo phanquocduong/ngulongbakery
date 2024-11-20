@@ -188,6 +188,11 @@
                 $review = new ReviewController();
                 $review->handleProductReviewsDisplay();
                 break;
+            case 'about':
+                $css = 'about.css';
+                $js = 'about.js';
+                $about = new AboutController();
+                $about->viewAbout($css, $js);
             default:
                 $css = 'home.css';
                 $js = 'home.js';
