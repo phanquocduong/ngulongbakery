@@ -49,7 +49,7 @@
 
         <!-- Textarea chứa dữ liệu HTML -->
         <textarea name="content" id="contain_description" rows="20" cols="100"
-            style="">{{ inpText }}</textarea>
+            style="display:none;">{{ inpText }}</textarea>
     </div>
 
     <script>
