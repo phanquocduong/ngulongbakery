@@ -20,7 +20,14 @@
   </div>
   <!-- -------------- -->
   <div id="editor" class="editor" contenteditable="false">
+    
     <div class="contentnews">
+      <!-- Mục lục -->
+      <div class="contentnews-listindex">
+          <button id="toggle-button"><i class="fa-solid fa-bars"></i></button>
+          <p>Mục lục</p>
+      </div>
+      <!-- End Mục lục -->
       <?php echo $content; ?>
     </div>
 
