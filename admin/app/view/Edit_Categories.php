@@ -61,7 +61,7 @@ extract($data['editcate']);
                                             </select>
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-primary">
-                                            Thêm
+                                            Sửa
                                         </button>
                                         <br />
                                     </div>

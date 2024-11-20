@@ -40,6 +40,7 @@ extract($data['voucherdetail']);
                         name="discount_value"
                         value="<?php echo $discount_value ?>"
                         required
+                        min=0
                       />
                     </div>
                     <div class="mb-3">
@@ -83,6 +84,7 @@ extract($data['voucherdetail']);
                         name="usage_limit"
                         value="<?php echo $usage_limit ?>"
                         required
+                        min=0
                       />
                     </div>
                     <div class="mb-3">
@@ -96,6 +98,7 @@ extract($data['voucherdetail']);
                         name="min_order_value"
                         value="<?php echo $min_order_value ?>"
                         required
+                        min=0
                       />
                     </div>
                     <div class="mb-3">

@@ -15,36 +15,36 @@
                                     <div class="card card-body">
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
-                                            <input type="text" class="form-control" id="name" name="name" value="" />
+                                            <input type="text" class="form-control" id="name" name="name" value="" required/>
                                         </div>
                                         <div class="mb-3">
                                             <label for="price" class="form-label">Giá Gốc (VNĐ)</label>
                                             <input type="number" class="form-control" id="price" name="price"
-                                                value="" />
+                                                value="" required />
                                         </div>
                                         <div class="mb-3">
                                             <label for="price_sale" class="form-label">Giá Khuyến Mãi (VNĐ)</label>
                                             <input type="number" class="form-control" id="price_sale" name="price_sale"
-                                                value="" />
+                                                value="" required />
                                             <br />
                                             <div class="mb-3">
                                                 <label for="image" class="form-label">Hình Ảnh</label>
-                                                <input class="form-control" type="file" id="image1" name="image1" />
+                                                <input class="form-control" type="file" id="image1" name="image1" required />
                                                 <br />
                                                 <label for="image" class="form-label">Hình Ảnh Con</label>
-                                                <input class="form-control" type="file" id="image2" name="image2" />
+                                                <input class="form-control" type="file" id="image2" name="image2"  />
                                                 <hr />
-                                                <input class="form-control" type="file" id="image3" name="image3" />
+                                                <input class="form-control" type="file" id="image3" name="image3"  />
                                                 <hr />
-                                                <input class="form-control" type="file" id="image4" name="image4" />
+                                                <input class="form-control" type="file" id="image4" name="image4"  />
                                                 <hr />
                                             </div>
                                             <div class="mb-3">
-                                                <label for="short-description" class="form-label">Mô Tả Ngắn</label>
+                                                <label for="short-description" class="form-label" required>Mô Tả Ngắn</label>
                                                 <input type="text" id="short_description" name="short_description"
-                                                    value="" class="form-control" />
+                                                    value="" class="form-control" required />
                                                 <br />
-                                                <label for="description">Mô Tả Chi Tiết</label>
+                                                <label for="description" required>Mô Tả Chi Tiết</label>
                                                 <br>
                                                 <!-- <textarea class="form-control" id="description" name="description" rows="10"></textarea> -->
                                                 <!-- -------------- -->
@@ -109,7 +109,7 @@
                                                 <label for="stock_quantity" class="form-label">Số Lượng Hàng Tồn
                                                     Kho</label>
                                                 <input type="number" class="form-control" id="stock_quantity"
-                                                    name="stock_quantity" value="" />
+                                                    name="stock_quantity" value="0" />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="stock_quantity" class="form-label">Số lượng sản phẩm đã
@@ -124,11 +124,11 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tag" class="form-label">Thẻ sản phẩm</label>
-                                                <input type="text" class="form-control" id="tag" name="tag" value="" />
+                                                <input type="text" class="form-control" id="tag" name="tag" value="" required />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="parent" class="form-label">Trạng thái</label>
-                                                <select class="form-select" id="status" name="status">
+                                                <select class="form-select" id="status" name="status" required>
                                                     <option selected>Chọn trạng thái</option>
                                                     <option value="0">Ẩn</option>
                                                     <option value="1">Hiện</option>
@@ -136,7 +136,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="parent" class="form-label">Loại danh mục</label>
-                                                <select class="form-select" id="category" name="category">
+                                                <select class="form-select" id="category" name="category" required>
                                                     <option selected>Chọn danh mục</option>
                                                     <?php
                                                     require_once './app/model/CategoryModel.php';

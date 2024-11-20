@@ -35,15 +35,22 @@
                       </thead>
                       <tbody>
                         <?php
+                          
                           foreach ($data['voucher'] as $item) {
                             extract($item);
+                            $date_start = $start_date;
+                            $date_end = $end_date;
+                            $start_date_obj = new DateTime($date_start, new DateTimeZone('Asia/Ho_Chi_Minh'));
+                            $end_date_obj = new DateTime($date_end, new DateTimeZone('Asia/Ho_Chi_Minh'));
+                            $start_date_formatted = $start_date_obj->format('d-m-Y');
+                            $end_date_formatted = $end_date_obj->format('d-m-Y');
                             echo '<tr>
                               <td>'.$code.'</td>
                               <td>'.$discount_value.'%</td>
-                              <td>'.$start_date.'</td>
-                              <td>'.$end_date.'</td>
+                              <td>'.$start_date_formatted.'</td>
+                              <td>'.$end_date_formatted.'</td>
                               <td>'.$usage_limit.'</td>
-                              <td>'.$min_order_value.'</td>
+                              <td>'.number_format($min_order_value, 0, ',', '.') . ' VND</td>
                               <td>';
                                 if ($active==1) {
                                   echo '<span class="badge bg-success">Hoạt Động</span>';
