@@ -29,21 +29,7 @@
             <table class="table text-start align-middle table-bordered table-hover mb-0">
                 
                 <?php
-                if ($countProducts < 0 && $countPosts < 0) {
-                    echo '<thead>
-                            <tr class="text-dark">
-                                <th scope="col">STT</th>
-                                <th scope="col">Tên Sản Phẩm</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Số Lượng</th>
-                                <th scope="col">Hành Động</th>
-                            </tr>
-                          </thead>
-                          <tbody>';
-                    echo '<tr><td colspan="5" class="text-center">Không có sản phẩm nào</td></tr>';
-                } 
-                
-                elseif ($countProducts > 0) {
+                if ($countProducts > 0) {
                     echo '<thead>
                             <tr class="text-dark">
                                 <th scope="col">STT</th>
@@ -94,8 +80,20 @@
                             </td>';
                         echo '</tr>';
                     }
-                }else {
+                }elseif($countProducts<0 && $countProducts<0) {
+                        echo '<thead>
+                                <tr class="text-dark">
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Tên Sản Phẩm</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Số Lượng</th>
+                                    <th scope="col">Hành Động</th>
+                                </tr>
+                              </thead>
+                              <tbody>';
+                        echo '<tr><td colspan="5" class="text-center">Không có sản phẩm nào</td></tr>';
                     
+                }else{
                 }
                 ?>
                     

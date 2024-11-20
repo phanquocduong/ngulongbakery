@@ -33,7 +33,7 @@ class CategoryModel
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$categoryId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row;
+        return (int)$row['count'];
     }
     public function getProductsByCategoryId($categoryId)
     {
@@ -46,7 +46,7 @@ class CategoryModel
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$categoryId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row;
+        return (int)$row['count'];
     }
     public function getPostsByCategoryId($categoryId)
     {
