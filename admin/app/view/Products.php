@@ -56,7 +56,7 @@
             echo "<tr>";
             echo "<td>$id</td>";
             echo "<td>$name</td>";
-            echo "<td>$price</td>";
+            echo "<td>".number_format($price, 0, ',', '.')." VNĐ</td>";
             echo "<td><img src='../public/upload/product/$image' alt='' style='width: 50px; height: 50px' /></td>";
             echo "<td>$views</td>";
             $categoryName = isset($categoryMap[$category_id]) ? $categoryMap[$category_id] : 'Không xác định';
