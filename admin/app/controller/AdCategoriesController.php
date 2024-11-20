@@ -97,11 +97,28 @@ class AdCategoriesController
                 $this->data['procate'] = $procate;
                 $this->renderview('Categories_detail', $this->data);
             } else {
-                echo "Danh mục chưa có sản phẩm nào....";
+                // echo "Danh mục chưa có sản phẩm nào....";
+            }
+    }
+    public function viewCategoriesDetail()
+    {
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $postcate = $this->cate->getIdPost($id);
+
+            if (is_array($postcate)) {
+                $this->data['postcate'] = $postcate;
+                $this->renderview('Categories_detail', $this->data);
+            } else {
+                // echo "Danh mục chưa có sản phẩm nào....";
             }
     }
     public function delCate()
     {
+        if($this->cate->checkForeignKey($_GET['id'])){
+            echo '<script>alert("Không thể xoá danh mục này vì nó đang được sử dụng")</script>';
+            echo '<script>location.href="index.php?page=categories"</script>';
+            return;
+        }
         if($this->cate->isForeignKey($_GET['id'])){
             echo '<script>alert("Không thể xoá danh mục này vì nó đang được sử dụng")</script>';
             echo '<script>location.href="index.php?page=categories"</script>';
