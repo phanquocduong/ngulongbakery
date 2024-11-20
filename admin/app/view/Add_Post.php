@@ -17,7 +17,7 @@
         </div>
 
         <!-- Textarea chứa dữ liệu HTML -->
-        <textarea name="content" id="contain_description" rows="20" cols="100" style="">{{ inpText }}</textarea>
+        <textarea name="content" id="contain_description" rows="20" cols="100" style="display:none;">{{ inpText }}</textarea>
     </div>
 
     <script>
