@@ -4,7 +4,7 @@
     <?php
     extract($data['postdetail']);
     ?>
-    <h1 style="margin: 10px 0 0 0" >
+    <h1 style="margin: 10px 0 0 0">
       <?php echo $title; ?>
     </h1>
     <hr />
@@ -15,17 +15,30 @@
 
 
     <!-- Ngày tạo bài viết -->
-    <input type="text" class="date-create form-control" readonly value="<?= $created_at ?>" name="create_date">
+    <?php
+    $timestamp = strtotime($created_at);
+    // Tạo đối tượng DateTime từ chuỗi thời gian
+    $date = new DateTime($created_at, new DateTimeZone("UTC"));
+
+    // Chuyển đổi sang múi giờ UTC+7
+    $date->setTimezone(new DateTimeZone("Asia/Ho_Chi_Minh"));
+
+    // Định dạng lại thời gian
+    $vn_format = $date->format("d/m/Y H:i:s");
+    ?>
+    <input type="text" class="date-create form-control" readonly value="<?php
+    echo $vn_format;
+    ?>" name="create_date">
 
   </div>
   <!-- -------------- -->
   <div id="editor" class="editor" contenteditable="false">
-    
+
     <div class="contentnews">
       <!-- Mục lục -->
       <div class="contentnews-listindex">
-          <button id="toggle-button"><i class="fa-solid fa-bars"></i></button>
-          <p>Mục lục</p>
+        <button id="toggle-button"><i class="fa-solid fa-bars"></i></button>
+        <p>Mục lục</p>
       </div>
       <!-- End Mục lục -->
       <?php echo $content; ?>

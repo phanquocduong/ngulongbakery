@@ -2,66 +2,25 @@
   ("use strict");
 
   // Spinner
-  document.addEventListener("DOMContentLoaded", function () {
-    var spinner = function () {
-      setTimeout(function () {
-        if ($("#spinner").length > 0) {
-          $("#spinner").removeClass("show");
-        }
-      }, 1);
-    };
-    spinner();
-  });
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   var spinner = function () {
+  //     setTimeout(function () {
+  //       if ($("#spinner").length > 0) {
+  //         $("#spinner").removeClass("show");
+  //       }
+  //     }, 1);
+  //   };
+  //   spinner();
+  // });
   // Thêm bài viết
   document.addEventListener("DOMContentLoaded", function () {
-    function addElement() {
-      const editor = document.getElementById("editor");
-      const elementType = document.getElementById("element-type").value;
-
-      if (elementType === "img") {
-        document.getElementById("image-input").click(); // Trigger file input click
-      } else {
-        document.getElementById("image-input").style.display = "none"; // Ẩn input khi chọn các thẻ khác
-        let newElement = document.createElement(elementType);
-        newElement.contentEditable = "true";
-        newElement.className = "the";
-        newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
-        editor.appendChild(newElement);
-        editor.appendChild(document.createElement("br"));
-      }
-    }
-
-    function handleImageSelect(event) {
-      const editor = document.getElementById("editor");
-      const file = event.target.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const imgElement = document.createElement("img");
-          imgElement.src = e.target.result;
-          imgElement.alt = "Hình ảnh từ máy";
-          imgElement.style.width = "960px";
-          imgElement.style.height = "540px";
-          editor.appendChild(imgElement);
-          editor.appendChild(document.createElement("br"));
-        };
-        reader.readAsDataURL(file);
-      }
-
-      // Hide the file input again after selecting an image
-      document.getElementById("image-input").style.display = "none";
-    }
-
-    // Gắn sự kiện click cho nút "Thêm thẻ"
-    document
-      .getElementById("add-element-btn")
-      .addEventListener("click", addElement);
-
-    // Gắn sự kiện thay đổi cho input chọn file
-    document
-      .getElementById("image-input")
-      .addEventListener("change", handleImageSelect);
+   ClassicEditor.create(document.querySelector("#content"))
+     .then((editor) => {
+       console.log(editor);
+     })
+     .catch((error) => {
+       console.error(error);
+     });   
   });
 
   // format thời gian đăng bài viết
