@@ -35,14 +35,13 @@
 
 .box_intro-dl ul {
     list-style: none;
-
     padding: 20px 0%;
     padding-top: 0;
     margin: 0;
 }
 
 .box_intro-dl ul li {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: var(--text-color);
 }
 

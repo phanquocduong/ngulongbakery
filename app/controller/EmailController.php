@@ -7,8 +7,7 @@ class GetlayoutEmail
         var_dump($data);
         ob_start();
         extract($data);
-        require 'app/view/email_Send.php/' . $view . '.php';
-        ob_get_clean();
-        require 'app/view/email_Send.php/layoutmail.php';
+        require 'app/view/emailSend.php/' . $view . '.php';
+        return ob_get_clean();
     }
 }
