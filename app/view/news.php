@@ -1,578 +1,129 @@
+
 <!-- Start Main -->
-<main>
-            <div class="title-news">Tin tức</div>
-            <section class="news-list">
-                <div class="grid wide">
-                    <div class="row">
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                    <div class="overlay"></div>
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
+<!-- <main>
+    <div class="title-news">Tin tức</div>
+    <section class="news-list">
+        <div class="grid wide">
+            <div class="row">
+                <?php if (!empty($news)): ?>
+                    <?php foreach ($news as $newsItem): ?>
+                    <div class="col l-4 m-6 c-10 c-offset-1">
+                        <div class="news-item">
+                            <a href="<?= htmlspecialchars($newsItem['link']) ?>" class="news-item__img-link">
+                                <img
+                                    src="<?= htmlspecialchars($newsItem['img']) ?>"
+                                    alt="<?= htmlspecialchars($newsItem['title']) ?>"
+                                    class="news-item__img"
+                                />
+                                <div class="overlay"></div>
+                            </a>
+                            <a href="<?= htmlspecialchars($newsItem['link']) ?>" class="news-item__title-link">
+                                <div class="news-item__name">
+                                    <?= htmlspecialchars($newsItem['title']) ?>
                                 </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
+                            </a>
+                            <div class="news-item__description">
+                                <?= htmlspecialchars($newsItem['description']) ?>
                             </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
+                            <a href="<?= htmlspecialchars($newsItem['link']) ?>" class="news-item__readmore-link">
+                                <div class="news-item__readmore">
+                                    ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
                                 </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu thích
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                    <div class="overlay"></div>
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu thích
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                    <div class="overlay"></div>
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu thích
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-4 m-6 c-10 c-offset-1">
-                            <div class="news-item">
-                                <a href="" class="news-item__img-link">
-                                    <img
-                                        src="./assets/image/product/product-1-1.jpg"
-                                        alt="Ảnh sản phẩm"
-                                        class="news-item__img"
-                                    />
-                                </a>
-                                <a href="" class="news-item__title-link">
-                                    <div class="news-item__name">
-                                        Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery
-                                    </div>
-                                </a>
-                                <div class="news-item__description">
-                                    Khám Phá Các Loại Bánh Bông Lan Đặc Biệt Tại Ngũ Long Bakery Ngũ Long Bakery là địa
-                                    chỉ quen thuộc của những người yêu
-                                </div>
-                                <a href="" class="news-item__readmore-link">
-                                    <div class="news-item__readmore">
-                                        ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
-                                    </div>
-                                </a>
-                                <div class="news-item__line"></div>
-                                <div class="news-item__comment">
-                                    <div class="news-item__comment-date">15/10/2024</div>
-                                    <i class="fa-solid fa-circle"></i>
-                                    <div class="news-item__comment-content">Không có bình luận</div>
-                                </div>
+                            </a>
+                            <div class="news-item__line"></div>
+                            <div class="news-item__comment">
+                                <div class="news-item__comment-date"><?= htmlspecialchars($newsItem['date']) ?></div>
+                                <i class="fa-solid fa-circle"></i>
+                                <div class="news-item__comment-content"><?= htmlspecialchars($newsItem['comments']) ?></div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <div class="pageorder">
-                <button class="loading-btn" onclick="showLoading(this)">
-                    <span class="button-text">Xem thêm</span>
-                    <span class="spinner"></span>
-                </button>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="col l-12">
+                        <div class="no-news-message">Không có tin tức nào để hiển thị.</div>
+                    </div>
+                <?php endif; ?>
             </div>
-        </main>
-        <!-- End Main -->
+        </div>
+    </section>
+    <div class="pageorder">
+        <button class="loading-btn" onclick="showLoading(this)">
+            <span class="button-text">Xem thêm</span>
+            <span class="spinner"></span>
+        </button>
+    </div>
+</main> -->
+<!-- End Main -->
+
+
+<?php
+$dsn = 'mysql:host=localhost;dbname=ngulongbakery;charset=utf8';
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo 'Kết nối thất bại: ' . $e->getMessage();
+}
+?>
+
+<?php
+// Truy vấn dữ liệu từ bảng news
+$stmt = $pdo->query("SELECT img, title, description, date, comments FROM news");
+$news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Start Main -->
+<main>
+    <div class="title-news">Tin tức</div>
+    <section class="news-list">
+        <div class="grid wide">
+            <div class="row">
+                <?php foreach ($news as $newsItem): ?>
+                <div class="col l-4 m-6 c-10 c-offset-1">
+                    <div class="news-item">
+                        <a href="" class="news-item__img-link">
+                            <img
+                                src="<?= htmlspecialchars($newsItem['img']) ?>"
+                                alt="Ảnh sản phẩm"
+                                class="news-item__img"
+                            />
+                            <div class="overlay"></div>
+                        </a>
+                        <a href="" class="news-item__title-link">
+                            <div class="news-item__name">
+                                <?= htmlspecialchars($newsItem['title']) ?>
+                            </div>
+                        </a>
+                        <div class="news-item__description">
+                            <?= htmlspecialchars($newsItem['description']) ?>
+                        </div>
+                        <a href="" class="news-item__readmore-link">
+                            <div class="news-item__readmore">
+                                ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
+                            </div>
+                        </a>
+                        <div class="news-item__line"></div>
+                        <div class="news-item__comment">
+                            <div class="news-item__comment-date"><?= htmlspecialchars($newsItem['date']) ?></div>
+                            <i class="fa-solid fa-circle"></i>
+                            <div class="news-item__comment-content"><?= htmlspecialchars($newsItem['comments']) ?></div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <div class="pageorder">
+        <button class="loading-btn" onclick="showLoading(this)">
+            <span class="button-text">Xem thêm</span>
+            <span class="spinner"></span>
+        </button>
+    </div>
+</main>
+<!-- End Main -->
+
