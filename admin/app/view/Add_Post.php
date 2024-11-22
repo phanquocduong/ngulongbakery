@@ -1,4 +1,11 @@
 <!-- Main Start -->
+ <style>
+.ck-editor__editable_inline {
+    min-height: 450px;
+    max-height: 650px;
+}
+</style>
+
 <form action="index.php?page=addPost" method="POST" class="form form-group" enctype="multipart/form-data">
     <div class="container">
         <h1>Thêm bài viết</h1>
@@ -8,14 +15,13 @@
         <input type="text" class="date-create form-control" readonly value="" name="create_date" >
     </div>
     <br>
-    <!-- -------------- -->
-    <div class="mb-3">    
+    <!-- -------Phần nhập bài viết------- -->
+    <div class="mb-3">
+        <label for="title" class="form-label">Tiêu đề</label>
+        <textarea type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề"></textarea>
+        <br>    
     <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
   </div>
-   <!-- <div class="text-center">
-       <button name="btnLuu" type="submit" class="btn btn-primary py-1 px-5">Lưu dữ liệu</button>
-       <button type="reset" class="btn btn-danger py-1 px-5">Xóa làm lại</button>
-  </div> -->
     <br />
     <!-- ----------------------- -->
 

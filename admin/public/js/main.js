@@ -14,29 +14,92 @@
   // });
   // Thêm bài viết
   document.addEventListener("DOMContentLoaded", function () {
-   ClassicEditor.create(document.querySelector("#content"))
-     .then((editor) => {
-       console.log(editor);
-     })
-     .catch((error) => {
-       console.error(error);
-     });   
+    ClassicEditor.create(document.querySelector("#content"), {
+      language: "vi",
+      ckfinder: {
+        uploadUrl:
+          "ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json",
+      },
+      toolbar: {
+        items: [
+          "fontfamily",
+          "fontsize",
+          "|",
+          "heading",
+          "|",
+          "alignment",
+          "|",
+          "fontColor",
+          "fontBackgroundColor",
+          "|",
+          "bold",
+          "italic",
+          "underline",
+          "subscript",
+          "superscript",
+          "|",
+          "link",
+          "|",
+          "outdent",
+          "indent",
+          "|",
+          "bulletedList",
+          "numberedList",
+          "todoList",
+          "|",
+          "code",
+          "codeBlock",
+          "|",
+          "insertTable",
+          "|",
+          "uploadImage",
+          "|",
+          "ckfinder",
+          "undo",
+          "redo",
+        ],
+        shouldNotGroupWhenFull: true,
+      },
+    })
+      .then((editor) => {
+        console.log(editor);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+  // định nghĩa popup ckfinder
+  document.addEventListener("DOMContentLoaded", function () {
+    function openPopup(idobj) {
+      CKFinder.popup({
+        chooseFiles: true,
+        onInit: function (finder) {
+          finder.on("files:choose", function (evt) {
+            var file = evt.data.files.first();
+            document.getElementById(idobj).value = file.getUrl();
+          });
+          finder.on("file:choose:resizedImage", function (evt) {
+            document.getElementById(idobj).value = evt.data.resizedUrl;
+          });
+        },
+      });
+    }
   });
 
   // format thời gian đăng bài viết
-document.addEventListener("DOMContentLoaded", function () {
-  // Định dạng thời gian đăng bài viết
-  var options = { timeZone: "Asia/Ho_Chi_Minh"};
-  var d = new Date();
-  var formattedDate = d.toLocaleString("vi-VN", options);
+  document.addEventListener("DOMContentLoaded", function () {
+    // Định dạng thời gian đăng bài viết
+    var options = { timeZone: "Asia/Ho_Chi_Minh" };
+    var d = new Date();
+    var formattedDate = d.toLocaleString("vi-VN", options);
 
-  // Hiển thị ngày giờ đã định dạng
-  // document.querySelector(".date-create").innerHTML =
-  //   "Thời gian tạo bài viết: " + formattedDate;
+    // Hiển thị ngày giờ đã định dạng
+    // document.querySelector(".date-create").innerHTML =
+    //   "Thời gian tạo bài viết: " + formattedDate;
 
-  // Đặt giá trị cho trường create_date
-  document.getElementById("create_date").value = 'Thời gian' + formattedDate;
-});
+    // Đặt giá trị cho trường create_date
+    document.getElementById("create_date").value = "Thời gian" + formattedDate;
+  });
 
   // Back to top button
   $(window).scroll(function () {
