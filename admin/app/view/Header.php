@@ -172,5 +172,10 @@
         </div>
       </nav>
       <!-- Navbar End -->
-
+      <style>
+        .ck-editor__editable_inline {
+          min-height: 450px;
+          max-height: 650px;
+        }
+      </style>
       <!-- header end -->

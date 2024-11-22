@@ -1,11 +1,4 @@
 <!-- Main Start -->
- <style>
-.ck-editor__editable_inline {
-    min-height: 450px;
-    max-height: 650px;
-}
-</style>
-
 <form action="index.php?page=addPost" method="POST" class="form form-group" enctype="multipart/form-data">
     <div class="container">
         <h1>Thêm bài viết</h1>
