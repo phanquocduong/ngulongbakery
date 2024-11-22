@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ngũ Long Bakery - Hương vị truyền thống, lan toả yêu thương</title>
+        <link rel="icon" href="./assets/image/logo/logo.png" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="./assets/css/grid.css" />
+        <link rel="stylesheet" href="./assets/css/base.css" />
+        <link rel="stylesheet" href="./assets/css/cart.css" />
+        <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Aclonica&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- Start Header -->
+        <header>
+            <div class="header-left">
+                <div class="header-logo">
+                    <a href="/" class="header-logo__link">
+                        <img src="./assets/image/logo/logo.png" alt="Ngũ Long Bakery" class="header-logo__img" />
+                    </a>
+                </div>
+                <ul class="header-menu">
+                    <li class="header-menu__item">
+                        <a href="" class="header-menu__item-link">TRANG CHỦ</a>
+                    </li>
+                    <li class="header-menu__item">
+                        <a href="" class="header-menu__item-link">
+                            SẢN PHẨM
+                            <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
+                        </a>
+                        <ul class="header-sub-menu">
+                            <li class="header-sub-menu__item">
+                                <a href="" class="header-sub-menu__item-link">Bánh bông lan</a>
+                            </li>
+                            <li class="header-sub-menu__item">
+                                <a href="" class="header-sub-menu__item-link">Bánh trung thu</a>
+                            </li>
+                            <li class="header-sub-menu__item">
+                                <a href="" class="header-sub-menu__item-link">Bánh bò</a>
+                            </li>
+                            <li class="header-sub-menu__item">
+                                <a href="" class="header-sub-menu__item-link">Bánh da lợn</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="header-menu__item">
+                        <a href="" class="header-menu__item-link">TIN TỨC</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="header-search">
+                <input type="text" class="header-search__input" placeholder="Bạn đang tìm kiếm ..." />
+                <button class="header-search__btn">
+                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div class="header-right">
+                <ul class="header-menu">
+                    <li class="header-menu__item">
+                        <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
+                    </li>
+                    <li class="header-menu__item">
+                        <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+                    </li>
+                </ul>
+                <button class="header-search__btn header-search__btn--mobile">
+                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                </button>
+                <ul class="header-right__list">
+                    <li class="header-right__item">
+                        <i class="user-icon fa-solid fa-user"></i>
+                        <div class="user-action">
+                            <a href="" class="user-action__link">Đăng nhập</a>
+                            <a href="" class="user-action__link">Đăng ký</a>
+                        </div>
+                    </li>
+                    <li class="header-right__item">
+                        <a href="" class="header-right__item-link">
+                            <i class="cart-icon fa-solid fa-basket-shopping"></i>
+                            <span class="cart-quantity">1</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="menu-bars">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+
+            <ul class="header-menu header-menu--tablet">
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">TRANG CHỦ</a>
+                </li>
+                <li class="header-menu__item">
+                    <a href="" id="menu-item-drop--tablet" class="header-menu__item-link"
+                        >SẢN PHẨM
+                        <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="header-sub-menu">
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh bông lan</a>
+                        </li>
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh trung thu</a>
+                        </li>
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh bò</a>
+                        </li>
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh da lợn</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">TIN TỨC</a>
+                </li>
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
+                </li>
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+                </li>
+            </ul>
+            <input type="text" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." />
+
+            <!-- Overlay -->
+            <div class="overlay" id="overlay"></div>
+
+            <!-- Modal Menu -->
+            <div class="modal-menu" id="modalMenu">
+                <button class="close-btn" id="closeBtn">✖</button>
+                <ul class="modal-menu__list">
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Trang Chủ</a></li>
+                    <li class="modal-menu__item">
+                        <a id="menu-item-drop" class="modal-menu__item-link" href="#"
+                            >Sản Phẩm <i class="chevron-down-icon fa-solid fa-chevron-down"></i
+                        ></a>
+                        <ul class="modal-sub-menu__list modal-sub-menu__list--active">
+                            <li class="modal-sub-menu__item">
+                                <a href="" class="modal-sub-menu__item-link">Bánh bông lan</a>
+                            </li>
+                            <li class="modal-sub-menu__item">
+                                <a href="" class="modal-sub-menu__item-link">Bánh trung thu</a>
+                            </li>
+                            <li class="modal-sub-menu__item">
+                                <a href="" class="modal-sub-menu__item-link">Bánh bò</a>
+                            </li>
+                            <li class="modal-sub-menu__item">
+                                <a href="" class="modal-sub-menu__item-link">Bánh da lợn</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Tin Tức</a></li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Giới Thiệu</a></li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Liên Hệ</a></li>
+                </ul>
+            </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- Start main -->
+        <main>
+            <div class="grid wide">
+                <div class="cart-wrap">
+                    <div class="row">
+                        <div class="col l-8 m-12 c-12">
+                            <div class="cart-body-left">
+                                <div class="cart-body-left__heading">
+                                    <div class="row">
+                                        <div class="col l-1 m-1 c-1"></div>
+                                        <div class="col l-11 m-11 c-11">
+                                            <div class="row">
+                                                <div class="col l-5 m-5 c-5">Sản phẩm</div>
+                                                <div class="col l-2 m-2 c-2">Đơn giá</div>
+                                                <div class="col l-3 m-3 c-3">Số lượng</div>
+                                                <div class="col l-2 m-2 c-2">Thành tiền</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cart-body-left__content">
+                                    <div class="row order-item">
+                                        <div class="col l-1 m-1 c-1">
+                                            <a href="" class="delete-item">
+                                                <i class="delete-item__icon fa-solid fa-x"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col l-11 m-11 c-11">
+                                            <div class="row">
+                                                <div class="col l-2 m-2 c-2">
+                                                    <a href="product-details.html" class="product-link">
+                                                        <img
+                                                            src="https://i.pinimg.com/736x/2d/9f/c3/2d9fc349a1da5fa9c0cf517dafd96381.jpg"
+                                                            alt=""
+                                                            class="product-link__img"
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div class="col l-3 m-3 c-3">
+                                                    <a href="product-details.html" class="product-link">
+                                                        <h5 class="product-link__title">Bánh Bông Lan Trứng Muối</h5>
+                                                    </a>
+                                                    <div class="product-classify">
+                                                        <span class="product-classify__title">Mã SP: BL-3463</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col l-2 m-2 c-2">
+                                                    <span class="product-price">25,000đ</span>
+                                                </div>
+                                                <div class="col l-3 m-3 c-3">
+                                                    <div class="quantity-wrapper">
+                                                        <button class="quantity-minus">-</button>
+                                                        <input type="text" class="quantity" value="1" />
+                                                        <button class="quantity-plus">+</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col l-2 m-2 c-2">
+                                                    <span class="line-item-total">100,000đ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row order-item">
+                                        <div class="col l-1 m-1 c-1">
+                                            <a href="" class="delete-item">
+                                                <i class="delete-item__icon fa-solid fa-x"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col l-11 m-11 c-11">
+                                            <div class="row">
+                                                <div class="col l-2 m-2 c-2">
+                                                    <a href="product-details.html" class="product-link">
+                                                        <img
+                                                            src="https://i.pinimg.com/736x/2d/9f/c3/2d9fc349a1da5fa9c0cf517dafd96381.jpg"
+                                                            alt=""
+                                                            class="product-link__img"
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div class="col l-3 m-3 c-3">
+                                                    <a href="product-details.html" class="product-link">
+                                                        <h5 class="product-link__title">Bánh Bông Lan Trứng Muối</h5>
+                                                    </a>
+                                                    <div class="product-classify">
+                                                        <span class="product-classify__title">Mã SP: BL-3463</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col l-2 m-2 c-2">
+                                                    <span class="product-price">25,000đ</span>
+                                                </div>
+                                                <div class="col l-3 m-3 c-3">
+                                                    <div class="quantity-wrapper">
+                                                        <button class="quantity-minus">-</button>
+                                                        <input type="text" class="quantity" value="1" />
+                                                        <button class="quantity-plus">+</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col l-2 m-2 c-2">
+                                                    <span class="line-item-total">100,000đ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-body-left__content cart-body-left__content--mobile">
+                                    <div class="row order-item">
+                                        <div class="col c-5">
+                                            <a href="product-details.html" class="product-link">
+                                                <img
+                                                    src="https://i.pinimg.com/736x/2d/9f/c3/2d9fc349a1da5fa9c0cf517dafd96381.jpg"
+                                                    alt=""
+                                                    class="product-link__img"
+                                                />
+                                            </a>
+                                        </div>
+                                        <div class="col c-5">
+                                            <a href="product-details.html" class="product-link">
+                                                <h5 class="product-link__title">Bánh Bông Lan Trứng Muối</h5>
+                                            </a>
+                                            <div class="product-classify">
+                                                <span class="product-classify__title">Mã SP: BL-3463</span>
+                                            </div>
+                                            <span class="product-price">25,000đ</span>
+                                            <div class="quantity-wrapper">
+                                                <button class="quantity-minus">-</button>
+                                                <input type="text" class="quantity" value="1" />
+                                                <button class="quantity-plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="col c-2">
+                                            <a href="" class="delete-item">
+                                                <i class="delete-item__icon fa-solid fa-x"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row order-item">
+                                        <div class="col c-5">
+                                            <a href="product-details.html" class="product-link">
+                                                <img
+                                                    src="https://i.pinimg.com/736x/2d/9f/c3/2d9fc349a1da5fa9c0cf517dafd96381.jpg"
+                                                    alt=""
+                                                    class="product-link__img"
+                                                />
+                                            </a>
+                                        </div>
+                                        <div class="col c-5">
+                                            <a href="product-details.html" class="product-link">
+                                                <h5 class="product-link__title">Bánh Bông Lan Trứng Muối</h5>
+                                            </a>
+                                            <div class="product-classify">
+                                                <span class="product-classify__title">Mã SP: BL-3463</span>
+                                            </div>
+                                            <span class="product-price">25,000đ</span>
+                                            <div class="quantity-wrapper">
+                                                <button class="quantity-minus">-</button>
+                                                <input type="text" class="quantity" value="1" />
+                                                <button class="quantity-plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="col c-2">
+                                            <a href="" class="delete-item">
+                                                <i class="delete-item__icon fa-solid fa-x"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cart-body-left__footer">
+                                    <div class="row">
+                                        <div class="col l-1 m-1 c-1"></div>
+                                        <div class="col l-11 m-11 c-11">
+                                            <a href="allproduct.html" class="continue-shopping">
+                                                <i class="fa-solid fa-angle-left"></i>
+                                                TIẾP TỤC MUA SẮM
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-4 m-12 c-12">
+                            <div class="cart-body-right">
+                                <div class="cart-total">
+                                    <label for="" class="total-label">Thành tiền</label>
+                                    <span class="total-price">100,000đ</span>
+                                </div>
+                                <a class="cart-btn-link" href="payment.html">
+                                    <button class="cart-btn">Thanh toán</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- End main -->
+
+        <!-- Start footer -->
+        <footer>
+            <div class="main-footer">
+                <div class="grid wide">
+                    <div class="row">
+                        <div class="footer-item l-3 m-4 c-12">
+                            <img src="./assets/image/logo/logo.png" alt="" class="footer-logo" />
+                        </div>
+                        <div class="footer-box-none col l-3 m-3 c-12"></div>
+                        <div class="footer-item col l-3 m-4 c-12">
+                            <h3 class="footer-menu__heading">Danh mục bánh</h3>
+                            <ul class="footer-menu__list">
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Bánh bông lan</a>
+                                </li>
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Bánh bò</a>
+                                </li>
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Bánh da lợn</a>
+                                </li>
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Bánh trung thu</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-item col l-3 m-4 c-12">
+                            <h3 class="footer-menu__heading">Khác</h3>
+                            <ul class="footer-menu__list">
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Tin tức</a>
+                                </li>
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Giới thiệu</a>
+                                </li>
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Liên hệ</a>
+                                </li>
+                                <li class="footer-menu__item">
+                                    <a href="" class="footer-menu__item-link">Giỏ hàng</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-footer">
+                <div class="sub-footer-box grid wide">
+                    <span class="copyright-title">Copyright © 2024 | Ngũ Long Bakery</span>
+                    <div class="social-box">
+                        <a class="social-link" href=""><i class="social-icon fa-brands fa-facebook"></i></a>
+                        <a class="social-link" href=""><i class="social-icon fa-brands fa-instagram"></i></a>
+                        <a class="social-link" href=""><i class="social-icon fa-brands fa-youtube"></i></a>
+                        <a class="social-link" href=""><i class="social-icon fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End footer -->
+
+        <script src="./assets/js/base.js"></script>
+    </body>
+</html>

@@ -20,9 +20,6 @@
     require_once 'app/controller/PaymentController.php';
     require_once 'app/controller/OrderController.php';
     require_once 'app/controller/ReviewController.php';
-    require_once 'app/controller/NewsController.php';
-    require_once 'app/controller/DetailnewsController.php';
-
 
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
@@ -196,19 +193,6 @@
                 $js = 'about.js';
                 $about = new AboutController();
                 $about->viewAbout($css, $js);
-                break;
-            case 'news':
-                $css = 'news.css';
-                $js = 'news.js';
-                $news = new NewsController();
-                $news->viewNews($css, $js);
-                break;
-            case 'detailnews':
-                $css = 'detailnews.css';
-                $js = 'detailnews.js';
-                $news = new DetailnewsController();
-                $news->viewDetailNews($css, $js);
-                break;
             default:
                 $css = 'home.css';
                 $js = 'home.js';

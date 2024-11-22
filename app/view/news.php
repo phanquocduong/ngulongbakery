@@ -58,22 +58,28 @@
 
 
 <?php
-$dsn = 'mysql:host=localhost;dbname=ngulongbakery;charset=utf8';
-$username = 'root';
-$password = '';
+// Kết nối đến cơ sở dữ liệu
+$host = 'localhost'; // Địa chỉ máy chủ
+$db = 'ngulongbakery'; // Tên cơ sở dữ liệu
+$user = 'root'; // Tên người dùng
+$pass = ''; // Mật khẩu
 
 try {
-    $pdo = new PDO($dsn, $username, $password);
+    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo 'Kết nối thất bại: ' . $e->getMessage();
+    echo "Kết nối thất bại: " . $e->getMessage();
+    exit;
 }
-?>
 
-<?php
-// Truy vấn dữ liệu từ bảng news
-$stmt = $pdo->query("SELECT img, title, description, date, comments FROM news");
+// Truy vấn dữ liệu từ bảng posts
+$query = "SELECT id, image, title, content, created_at FROM posts ORDER BY created_at DESC";
+$stmt = $pdo->prepare($query);
+$stmt->execute();
 $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Đóng kết nối
+$pdo = null;
 ?>
 
 <!-- Start Main -->
@@ -86,8 +92,8 @@ $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col l-4 m-6 c-10 c-offset-1">
                     <div class="news-item">
                         <a href="" class="news-item__img-link">
-                            <img
-                                src="<?= htmlspecialchars($newsItem['img']) ?>"
+                        <img
+                                src="public/upload/news/<?= $newsItem['image'] ?>"
                                 alt="Ảnh sản phẩm"
                                 class="news-item__img"
                             />
@@ -99,7 +105,7 @@ $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </a>
                         <div class="news-item__description">
-                            <?= htmlspecialchars($newsItem['description']) ?>
+                            <?= htmlspecialchars($newsItem['content']) ?>
                         </div>
                         <a href="" class="news-item__readmore-link">
                             <div class="news-item__readmore">
@@ -108,9 +114,9 @@ $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </a>
                         <div class="news-item__line"></div>
                         <div class="news-item__comment">
-                            <div class="news-item__comment-date"><?= htmlspecialchars($newsItem['date']) ?></div>
+                            <div class="news-item__comment-date"><?= htmlspecialchars($newsItem['created_at']) ?></div>
                             <i class="fa-solid fa-circle"></i>
-                            <div class="news-item__comment-content"><?= htmlspecialchars($newsItem['comments']) ?></div>
+                            <div class="news-item__comment-content">0 bình luận</div>
                         </div>
                     </div>
                 </div>
@@ -126,4 +132,3 @@ $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </main>
 <!-- End Main -->
-
