@@ -2,82 +2,104 @@
   ("use strict");
 
   // Spinner
-  document.addEventListener("DOMContentLoaded", function () {
-    var spinner = function () {
-      setTimeout(function () {
-        if ($("#spinner").length > 0) {
-          $("#spinner").removeClass("show");
-        }
-      }, 1);
-    };
-    spinner();
-  });
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   var spinner = function () {
+  //     setTimeout(function () {
+  //       if ($("#spinner").length > 0) {
+  //         $("#spinner").removeClass("show");
+  //       }
+  //     }, 1);
+  //   };
+  //   spinner();
+  // });
   // Thêm bài viết
   document.addEventListener("DOMContentLoaded", function () {
-    function addElement() {
-      const editor = document.getElementById("editor");
-      const elementType = document.getElementById("element-type").value;
-
-      if (elementType === "img") {
-        document.getElementById("image-input").click(); // Trigger file input click
-      } else {
-        document.getElementById("image-input").style.display = "none"; // Ẩn input khi chọn các thẻ khác
-        let newElement = document.createElement(elementType);
-        newElement.contentEditable = "true";
-        newElement.className = "the";
-        newElement.innerText = `Nhập ${elementType.toUpperCase()}...`;
-        editor.appendChild(newElement);
-        editor.appendChild(document.createElement("br"));
-      }
+    ClassicEditor.create(document.querySelector("#content"), {
+      language: "vi",
+      ckfinder: {
+        uploadUrl:
+          "ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json",
+      },
+      toolbar: {
+        items: [
+          "fontfamily",
+          "fontsize",
+          "|",
+          "heading",
+          "|",
+          "alignment",
+          "|",
+          "fontColor",
+          "fontBackgroundColor",
+          "|",
+          "bold",
+          "italic",
+          "underline",
+          "subscript",
+          "superscript",
+          "|",
+          "link",
+          "|",
+          "outdent",
+          "indent",
+          "|",
+          "bulletedList",
+          "numberedList",
+          "todoList",
+          "|",
+          "code",
+          "codeBlock",
+          "|",
+          "insertTable",
+          "|",
+          "uploadImage",
+          "|",
+          "ckfinder",
+          "undo",
+          "redo",
+        ],
+        shouldNotGroupWhenFull: true,
+      },
+    })
+      .then((editor) => {
+        console.log(editor);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+  // định nghĩa popup ckfinder
+  document.addEventListener("DOMContentLoaded", function () {
+    function openPopup(idobj) {
+      CKFinder.popup({
+        chooseFiles: true,
+        onInit: function (finder) {
+          finder.on("files:choose", function (evt) {
+            var file = evt.data.files.first();
+            document.getElementById(idobj).value = file.getUrl();
+          });
+          finder.on("file:choose:resizedImage", function (evt) {
+            document.getElementById(idobj).value = evt.data.resizedUrl;
+          });
+        },
+      });
     }
-
-    function handleImageSelect(event) {
-      const editor = document.getElementById("editor");
-      const file = event.target.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const imgElement = document.createElement("img");
-          imgElement.src = e.target.result;
-          imgElement.alt = "Hình ảnh từ máy";
-          imgElement.style.width = "960px";
-          imgElement.style.height = "540px";
-          editor.appendChild(imgElement);
-          editor.appendChild(document.createElement("br"));
-        };
-        reader.readAsDataURL(file);
-      }
-
-      // Hide the file input again after selecting an image
-      document.getElementById("image-input").style.display = "none";
-    }
-
-    // Gắn sự kiện click cho nút "Thêm thẻ"
-    document
-      .getElementById("add-element-btn")
-      .addEventListener("click", addElement);
-
-    // Gắn sự kiện thay đổi cho input chọn file
-    document
-      .getElementById("image-input")
-      .addEventListener("change", handleImageSelect);
   });
 
   // format thời gian đăng bài viết
-document.addEventListener("DOMContentLoaded", function () {
-  // Định dạng thời gian đăng bài viết
-  var options = { timeZone: "Asia/Ho_Chi_Minh"};
-  var d = new Date();
-  var formattedDate = d.toLocaleString("vi-VN", options);
+  document.addEventListener("DOMContentLoaded", function () {
+    // Định dạng thời gian đăng bài viết
+    var options = { timeZone: "Asia/Ho_Chi_Minh" };
+    var d = new Date();
+    var formattedDate = d.toLocaleString("vi-VN", options);
 
-  // Hiển thị ngày giờ đã định dạng
-  // document.querySelector(".date-create").innerHTML =
-  //   "Thời gian tạo bài viết: " + formattedDate;
+    // Hiển thị ngày giờ đã định dạng
+    // document.querySelector(".date-create").innerHTML =
+    //   "Thời gian tạo bài viết: " + formattedDate;
 
-  // Đặt giá trị cho trường create_date
-  document.getElementById("create_date").value = 'Thời gian' + formattedDate;
-});
+    // Đặt giá trị cho trường create_date
+    document.getElementById("create_date").value = "Thời gian" + formattedDate;
+  });
 
   // Back to top button
   $(window).scroll(function () {
