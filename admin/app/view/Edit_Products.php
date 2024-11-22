@@ -38,7 +38,7 @@
                   <?php
                   if ($product) {
                     extract($product);
-                    ?>
+                  ?>
                     <div class='card card-body'>
                       <div class='mb-3'>
                         <input type="hidden" name="id" value="<?= $id ?>">
@@ -70,7 +70,7 @@
                           // Tách chuỗi chứa tên các file ảnh thành mảng
                           $imageArray = explode(',', $extra_image);
                           foreach ($imageArray as $extra_image) {
-                            ?>
+                          ?>
                             <div class='mb-3'>
                               <img
                                 src='../public/upload/product/<?php echo $extra_image; ?>'
@@ -78,11 +78,11 @@
                               <input class='form-control' type='file' id='ex_image' name='ex_image[]' />
                               <input type="hidden" name="existing_extra_image[]"
                                 value="<?php echo $extra_image; ?>" />
-                              <?php
+                            <?php
                           }
-                          ?>
+                            ?>
                             <hr />
-                          </div>
+                            </div>
 
                         </div>
                         <div class='mb-3'>
@@ -137,22 +137,23 @@
                             }
                             ?>
                           </select>
-                          <?php
-                  }
-                  ?>
+                        <?php
+                      }
+                        ?>
+                        </div>
+                        <a style="width:10%; background-color:#dc3545;" href="index.php?page=products" class="btn btn-primary">
+                          Quay lại
+                        </a>
+                        <input style="width:10%" type='submit' name="submit" class='btn btn-primary btn-sub' />
+                        <br />
                       </div>
-                      <input type='submit' name="submit" class='btn btn-primary btn-sub' />
-                      <br />
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
           </form>
           <hr>
-          <a href="index.php?page=products" class="btn btn-primary">
-            Quay lại
-          </a>
+
         </div>
       </div>
     </div>
