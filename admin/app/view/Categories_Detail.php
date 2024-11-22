@@ -80,6 +80,7 @@
                             </td>';
                         echo '</tr>';
                     }
+                    // không hiện được !
                 }elseif($countProducts<0 && $countProducts<0) {
                         echo '<thead>
                                 <tr class="text-dark">

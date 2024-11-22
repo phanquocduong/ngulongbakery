@@ -8,19 +8,19 @@
                     <h5 class="mb-4">Thêm Danh Mục</h5>
                     <div class="mb-3">
                         <label for="name" class="form-label">Tên Danh Mục</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Nhập tên danh mục" />
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Nhập tên danh mục" required />
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Hình Ảnh</label>
-                        <input class="form-control" name="image" type="file" id="image" />
+                        <input class="form-control" name="image" type="file" id="image" required/>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Mô Tả</label>
-                        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Nhập mô tả"></textarea>
+                        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Nhập mô tả" required></textarea>
                     </div>
                     <di class="mb-3">
                         <label for="parent" class="form-label">Loại danh mục</label>
-                        <select class="form-select" name="type" id="type">
+                        <select class="form-select" name="type" id="type" required>
                             <option selected>Chọn danh mục</option>
                             <option value="Tin tức">Danh Mục Bài Viết</option>
                             <option value="Sản phẩm">Danh Mục Sản Phẩm</option>
@@ -28,7 +28,7 @@
                     </di>
                     <div class="mb-3">
                         <label for="status" class="form-label">Trạng Thái</label>
-                        <select class="form-select" name="status" id="status">
+                        <select class="form-select" name="status" id="status" required>
                             <option selected>Chọn trạng thái</option>
                             <option value="1">Kích Hoạt</option>
                             <option value="0">Không Kích Hoạt</option>

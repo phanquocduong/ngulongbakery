@@ -77,8 +77,7 @@
                                         <?php if (isset($_SESSION['user'])): ?>
                                             <div class="favorite-action">
                                                 <i onclick="toggleFavorite(<?= $data['product']['id'] ?>, <?= $_SESSION['user']['id'] ?>)" 
-                                                    class="heart-icon fa-solid fa-heart <?= (isset($data['favorite'])) ? 'heart-icon--fill' : '' ?>" 
-                                                    data-product-id="<?= $data['product']['id'] ?>">
+                                                    class="heart-icon fa-solid fa-heart <?= (isset($data['favorite'])) ? 'heart-icon--fill' : '' ?>">
                                                 </i>
                                             </div>
                                         <?php endif; ?>
@@ -91,63 +90,14 @@
                                 <li onclick="activeTab(this, 'detailed-desc')" class="tab-item tab-item--active">
                                     Mô tả
                                 </li>
-                                <li onclick="activeTab(this, 'reviews')" class="tab-item">Đánh giá (<?= count($data['productReviews']) ?>)</li>
+                                <li onclick="activeTab(this, 'reviews')" class="tab-item">Đánh giá ()</li>
                             </ul>
                             <div id="detailed-desc" class="tab-content tab-content--active"><?= $data['product']['detailed_description'] ?></div>
-                            <div id="reviews" class="tab-content">
-                                <?php if (empty($data['productReviews'])): ?>
-                                    <p>Chưa có đánh giá cho sản phẩm này.</p>
-                                <?php else: ?>
-                                    <?php foreach($data['productReviews'] as $item): ?>
-                                        <div class="review-item">
-                                            <img
-                                                class="review-item__avatar"
-                                                src="public/upload/avatar/<?=$item['avatar']?>"
-                                                alt="<?=$item['full_name']?>"
-                                            />
-                                            <div class="review-item__body">
-                                                <span class="review-item__name"><?=$item['full_name']?></span>
-                                                <div class="review-item__rating">
-                                                    <?php for ($i = 1; $i <= 5; $i++): ?>
-                                                        <i class="star-icon fa-<?= $i <= $item['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
-                                                    <?php endfor; ?>
-                                                </div>
-                                                <span class="review-item__date"><?=$item['created_at']?></span>
-                                                <p class="review-item__comment"><?=$item['comment']?></p>
-                                                <div class="review-item__images">
-                                                    <?php 
-                                                        $feedback_images = explode(",", $item['images']); 
-                                                        foreach($feedback_images as $feedback_image):
-                                                    ?>
-                                                        <img
-                                                            onclick="openImageModal(this)"
-                                                            class="review-item__image"
-                                                            src="public/upload/review/<?=$feedback_image?>"
-                                                            alt=""
-                                                        />
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                                <!-- <div class="pagination">
-                                    <a href="" class="pagination-link__icon-prev">
-                                        <i class="fa-solid fa-chevron-left"></i>
-                                    </a>
-                                    <a href="" class="pagination-link pagination-link--active">1</a>
-                                    <a href="" class="pagination-link">2</a>
-                                    <a href="" class="pagination-link">3</a>
-                                    <a href="" class="pagination-link">...</a>
-                                    <a href="" class="pagination-link">11</a>
-                                    <a href="" class="pagination-link__icon-next">
-                                        <i class="fa-solid fa-chevron-right"></i>
-                                    </a>
-                                </div> -->
-                            </div>
+                            <input id="productId" type="hidden" value="<?=$data['product']['id']?>">
+                            <div id="reviews" class="tab-content"></div>
                         </div>
                         <div class="related-products">
-                            <h2 class="section-title">SẢN PHẨM LIÊN QUAN</h2>
+                            <h2 class="section-title test">SẢN PHẨM LIÊN QUAN</h2>
                             <div class="row">
                                 <?php foreach($data['relatedProducts'] as $product): ?>
                                     <div class="col l-3 m-6 c-12">

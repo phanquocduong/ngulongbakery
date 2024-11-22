@@ -154,6 +154,13 @@ main {
     display: none;
 }
 
+.no-products-message {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    color: var(--secondary-color);
+    margin-top: 50px;
+}
+
 /* Tablet - PC low resolution */
 @media (min-width: 740px) and (max-width: 1024px) {
     .sort-right {

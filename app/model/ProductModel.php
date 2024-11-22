@@ -27,12 +27,14 @@
         }
 
         public function getProduct($id) {
-            $sql = "SELECT p.*, c.name AS category_name FROM products p INNER JOIN categories c ON p.category_id = c.id WHERE p.id = ?";
+            $sql = "SELECT p.*, c.name AS category_name 
+                    FROM products p INNER JOIN categories c ON p.category_id = c.id 
+                    WHERE p.id = ? AND p.status = 1 AND p.stock_quantity > 0";
             return $this->db->get($sql, [$id]);
         }        
 
         public function getRelatedProducts($categoryId, $productId) {
-            return $this->getProducts('WHERE category_id = ? AND id != ?', [$categoryId, $productId], 'rand()', 0, 4);
+            return $this->getProducts('WHERE category_id = ? AND id != ? AND status = 1 AND stock_quantity > 1', [$categoryId, $productId], 'rand()', 0, 4);
         }
 
         public function getProductByName($name) {

@@ -548,10 +548,6 @@ header {
 
 @media (min-width: 740px) and (max-width: 1024px) {
     /* Start footer */
-    .footer-box-none {
-        display: none;
-    }
-
     .footer-item {
         text-align: center;
     }

@@ -13,12 +13,13 @@
                                         <a href="index.php?page=logout" class="customer-info__body-logout">Đăng xuất</a>
                                     </div>
                                 </div>
-                                <form action="jkdsfojdf.html" action="POST">
-                                    <input required type="text" class="form-name__control" placeholder="Họ và tên" value="<?=$_SESSION['user']['full_name']?>"/>
+                                <form action="index.php?page=handle-payment" method="POST">
+                                    <input required type="text" name="fullname" class="form-name__control" placeholder="Họ và tên" value="<?=$_SESSION['user']['full_name']?>"/>
                                     <div class="form-group">
-                                        <input required type="email" class="form-email__control" placeholder="Email" value="<?=$_SESSION['user']['email']?>"/>
+                                        <input required type="email" name="email" class="form-email__control" placeholder="Email" value="<?=$_SESSION['user']['email']?>"/>
                                         <input
                                             required
+                                            name="phone"
                                             type="tel"
                                             class="form-tel__control"
                                             placeholder="Số điện thoại"
@@ -26,7 +27,7 @@
                                         />
                                     </div>
                                     <div class="address-group">
-                                        <input required type="text" class="form-address__control" placeholder="Địa chỉ">
+                                        <input required type="text" name="address" class="form-address__control" placeholder="Địa chỉ">
                                         <div class="form-group">
                                             <select id="province" required name="province" class="address-select">
                                                 <option value="">Tỉnh / thành</option>
@@ -42,13 +43,14 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <input type="text" name="note" class="form-note__control" placeholder="Ghi chú"/>
                                     <h2 class="payment-section-title">Phương thức thanh toán</h2>
                                     <label onclick="closeTransferInformation()" for="cod" class="methods">
                                         <input
                                             required
                                             id="cod"
                                             type="radio"
-                                            name="methods-check"
+                                            name="method"
                                             class="methods-check"
                                             value="Tiền mặt"
                                         />
@@ -66,7 +68,7 @@
                                             required
                                             id="transfer"
                                             type="radio"
-                                            name="methods-check"
+                                            name="method"
                                             class="methods-check"
                                             value="Chuyển khoản"
                                         />
@@ -95,7 +97,9 @@
                                         <?php 
                                             $grandTotal = array_reduce($_SESSION['cart'], function($total, $item) {return $total + ($item['quantity'] * $item['price']);}, 0);
                                         ?>
-                                        <input type="hidden" name="total" value="<?=$grandTotal?>">
+                                        <input id="total-payment-hidden" type="hidden" name="total" value="">
+                                        <input id="discount-id" type="hidden" name="discount-id" value="1">
+                                        <input type="hidden" class="transport-fee__price--hidden" name="transport-fee">
                                         <button class="step-footer-continue-btn">Hoàn tất đơn hàng</button>
                                     </div>
                                 </form>

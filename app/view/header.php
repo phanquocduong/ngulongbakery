@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Ngũ Long Bakery - Hương vị truyền thống, lan toả yêu thương</title>
+        <meta name="description" content="Ngũ Long Bakery - Tiệm bánh truyền thống với đa dạng các loại bánh như bánh da lợn, bánh bò, bánh bông lan trứng muối. Thưởng thức hương vị ngọt ngào từ chúng tôi!">
         <link rel="icon" href="public/upload/logo/logo.png" type="image/x-icon" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
         <link rel="stylesheet" href="public/css/grid.css" />
@@ -21,7 +22,7 @@
             <div class="header-left">
                 <div class="header-logo">
                     <a href="index.php" class="header-logo__link">
-                        <img src="public/upload/logo/logo.png" alt="Ngũ Long Bakery" class="header-logo__img" />
+                        <img src="public/upload/logo/logo.png" alt="Logo Ngũ Long Bakery - Tiệm bánh truyền thống" class="header-logo__img" loading="lazy"/>
                     </a>
                 </div>
                 <ul class="header-menu">
@@ -42,13 +43,13 @@
                         </ul>
                     </li>
                     <li class="header-menu__item">
-                        <a href="" class="header-menu__item-link">TIN TỨC</a>
+                        <a href="index.php?page=news" class="header-menu__item-link">TIN TỨC</a>
                     </li>
                 </ul>
             </div>
 
             <div class="header-search">
-                <form action="" method="GET">
+                <form method="GET">
                     <input type="hidden" name="page" value="search">
                     <input type="text" name="keyword" class="header-search__input" placeholder="Bạn đang tìm kiếm ..." />
                     <button type="submit" class="header-search__btn">
@@ -60,7 +61,7 @@
             <div class="header-right">
                 <ul class="header-menu">
                     <li class="header-menu__item">
-                        <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
+                        <a href="index.php?page=about" class="header-menu__item-link">GIỚI THIỆU</a>
                     </li>
                     <li class="header-menu__item">
                         <a href="index.php?page=contact" class="header-menu__item-link">LIÊN HỆ</a>
@@ -108,10 +109,10 @@
 
             <ul class="header-menu header-menu--tablet">
                 <li class="header-menu__item">
-                    <a href="" class="header-menu__item-link">TRANG CHỦ</a>
+                    <a href="index.php" class="header-menu__item-link">TRANG CHỦ</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="" id="menu-item-drop--tablet" class="header-menu__item-link"
+                    <a id="menu-item-drop--tablet" class="header-menu__item-link"
                         >SẢN PHẨM
                         <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
                     </a>
@@ -127,19 +128,18 @@
                     </ul>
                 </li>
                 <li class="header-menu__item">
-                    <a href="" class="header-menu__item-link">TIN TỨC</a>
+                    <a href="index.php?page=news" class="header-menu__item-link">TIN TỨC</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
+                    <a href="index.php?page=about" class="header-menu__item-link">GIỚI THIỆU</a>
                 </li>
                 <li class="header-menu__item">
                     <a href="index.php?page=contact" class="header-menu__item-link">LIÊN HỆ</a>
                 </li>
             </ul>
-            <!-- <input type="text" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." /> -->
 
             <div class="header-search--mobile">
-                <form action="" method="GET">
+                <form method="GET">
                     <input type="hidden" name="page" value="search">
                     <input type="text" name="keyword" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." />
                 </form>
@@ -152,9 +152,9 @@
             <div class="modal-menu" id="modalMenu">
                 <button class="close-btn" id="closeBtn">✖</button>
                 <ul class="modal-menu__list">
-                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Trang Chủ</a></li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="index.php">Trang Chủ</a></li>
                     <li class="modal-menu__item">
-                        <a id="menu-item-drop" class="modal-menu__item-link" href="#"
+                        <a id="menu-item-drop" class="modal-menu__item-link"
                             >Sản Phẩm <i class="chevron-down-icon fa-solid fa-chevron-down"></i
                         ></a>
                         <ul class="modal-sub-menu__list modal-sub-menu__list--active">
@@ -168,8 +168,8 @@
                             <?php endforeach; ?>
                         </ul>
                     </li>
-                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Tin Tức</a></li>
-                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Giới Thiệu</a></li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="index.php?page=news">Tin Tức</a></li>
+                    <li class="modal-menu__item"><a class="modal-menu__item-link" href="index.php?page=contact">Giới Thiệu</a></li>
                     <li class="modal-menu__item"><a class="modal-menu__item-link" href="index.php?page=contact">Liên Hệ</a></li>
                 </ul>
             </div>

@@ -20,5 +20,20 @@
             $sql = "SELECT * FROM wards  WHERE district_id  = ?";
             return $this->db->getAll($sql, [$districtId]); 
         }
+
+        public function getWard($id) {
+            $sql = "SELECT * FROM wards  WHERE id  = ?";
+            return $this->db->get($sql, [$id]); 
+        }
+
+        public function getDistrict($id) {
+            $sql = "SELECT * FROM districts WHERE id = ?";
+            return $this->db->get($sql, [$id]); 
+        }
+
+        public function getProvince($id) {
+            $sql = "SELECT * FROM provinces WHERE id = ?";
+            return $this->db->get($sql, [$id]); 
+        }
     }
 ?>
