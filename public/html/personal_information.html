@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân</title>
+    <link rel="icon" href="./assets/image/logo/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="assets/css/grid.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/personal_information.css" />
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"
+    />
+</head>
+<body>
+     <!-- start header -->
+    <header>
+        <div class="header-left">
+            <div class="header-logo">
+                <a href="/" class="header-logo__link">
+                    <img src="./assets/image/logo/logo.png" alt="Ngũ Long Bakery" class="header-logo__img" />
+                </a>
+            </div>
+            <ul class="header-menu">
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">TRANG CHỦ</a>
+                </li>
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">
+                        SẢN PHẨM
+                        <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="header-sub-menu">
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh bông lan</a>
+                        </li>
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh trung thu</a>
+                        </li>
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh bò</a>
+                        </li>
+                        <li class="header-sub-menu__item">
+                            <a href="" class="header-sub-menu__item-link">Bánh da lợn</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">TIN TỨC</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="header-search">
+            <input type="text" class="header-search__input" placeholder="Bạn đang tìm kiếm ..." />
+            <button class="header-search__btn">
+                <i class="search-icon fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+
+        <div class="header-right">
+            <ul class="header-menu">
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
+                </li>
+                <li class="header-menu__item">
+                    <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+                </li>
+            </ul>
+            <button class="header-search__btn header-search__btn--mobile">
+                <i class="search-icon fa-solid fa-magnifying-glass"></i>
+            </button>
+            <ul class="header-right__list">
+                <li class="header-right__item">
+                    <i class="user-icon fa-solid fa-user"></i>
+                    <div class="user-action">
+                        <a href="" class="user-action__link">Đăng nhập</a>
+                        <a href="" class="user-action__link">Đăng ký</a>
+                    </div>
+                </li>
+                <li class="header-right__item">
+                    <a href="" class="header-right__item-link">
+                        <i class="cart-icon fa-solid fa-basket-shopping"></i>
+                        <span class="font_span_box" class="cart-quantity"></span>
+                    </a>
+                </li>
+            </ul>
+            <div class="menu-bars">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+
+        <ul class="header-menu header-menu--tablet">
+            <li class="header-menu__item">
+                <a href="" class="header-menu__item-link">TRANG CHỦ</a>
+            </li>
+            <li class="header-menu__item">
+                <a href="" id="menu-item-drop--tablet" class="header-menu__item-link"
+                    >SẢN PHẨM
+                    <i class="chevron-down-icon fa-solid fa-chevron-down"></i>
+                </a>
+                <ul class="header-sub-menu">
+                    <li class="header-sub-menu__item">
+                        <a href="" class="header-sub-menu__item-link">Bánh bông lan</a>
+                    </li>
+                    <li class="header-sub-menu__item">
+                        <a href="" class="header-sub-menu__item-link">Bánh trung thu</a>
+                    </li>
+                    <li class="header-sub-menu__item">
+                        <a href="" class="header-sub-menu__item-link">Bánh bò</a>
+                    </li>
+                    <li class="header-sub-menu__item">
+                        <a href="" class="header-sub-menu__item-link">Bánh da lợn</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="header-menu__item">
+                <a href="" class="header-menu__item-link">TIN TỨC</a>
+            </li>
+            <li class="header-menu__item">
+                <a href="" class="header-menu__item-link">GIỚI THIỆU</a>
+            </li>
+            <li class="header-menu__item">
+                <a href="" class="header-menu__item-link">LIÊN HỆ</a>
+            </li>
+        </ul>
+        <input type="text" class="header-search__input--mobile" placeholder="Bạn đang tìm kiếm ..." />
+
+        <!-- Overlay -->
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Modal Menu -->
+        <div class="modal-menu" id="modalMenu">
+            <button class="close-btn" id="closeBtn">✖</button>
+            <ul class="modal-menu__list">
+                <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Trang Chủ</a></li>
+                <li class="modal-menu__item">
+                    <a id="menu-item-drop" class="modal-menu__item-link" href="#"
+                        >Sản Phẩm <i class="chevron-down-icon fa-solid fa-chevron-down"></i
+                    ></a>
+                    <ul class="modal-sub-menu__list modal-sub-menu__list--active">
+                        <li class="modal-sub-menu__item">
+                            <a href="" class="modal-sub-menu__item-link">Bánh bông lan</a>
+                        </li>
+                        <li class="modal-sub-menu__item">
+                            <a href="" class="modal-sub-menu__item-link">Bánh trung thu</a>
+                        </li>
+                        <li class="modal-sub-menu__item">
+                            <a href="" class="modal-sub-menu__item-link">Bánh bò</a>
+                        </li>
+                        <li class="modal-sub-menu__item">
+                            <a href="" class="modal-sub-menu__item-link">Bánh da lợn</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Tin Tức</a></li>
+                <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Giới Thiệu</a></li>
+                <li class="modal-menu__item"><a class="modal-menu__item-link" href="#">Liên Hệ</a></li>
+            </ul>
+        </div> 
+    </header>
+    <!-- Start main -->
+    <main id="main" >
+        <!-- start personal -->
+        <div class="grid wide">
+                     <div  class="main_personal row">
+                         <div class="main_list col l-3 m-4">
+                             <div class="main_list_category">
+                                 <label>
+                                     <div class="main_list_user">
+                                         <img class="main_item_img" src="./assets/image/avatar/caophuoc.jpg" alt="Avatar">
+                                         <p>Phước đẹp trai</p>
+                                         <a href="#" class="edit_info">Sửa thông tin <i class="fa-solid fa-pencil"></i></a>
+                                     </div>
+                                     <div class="main_list_item active">
+                                         <i class="fa-solid fa-user"></i>
+                                         <a href="javascript:void(0);" onclick="personalInformation()">Thông tin cá nhân</a>
+                                     </div>
+                                     <div class="main_list_item">
+                                         <i class="fa-solid fa-cart-shopping"></i>
+                                         <a href="javascript:void(0);" onclick="showOrderHistory()">Lịch sử đơn hàng</a>
+                                     </div>
+                                     <div class="main_list_item">
+                                         <i class="fa-solid fa-star"></i>
+                                         <a href="javascript:void(0);" onclick="favouriteProduct()">Sản phẩm yêu thích</a>
+                                     </div>
+                                 </label>
+                             </div>
+                         </div>
+                         <div class="main_content l-9 m-8 c-12">
+                             <div class="profile_container">
+                                 <div class="profile_header">
+                                     <h1>Hồ Sơ Của Tôi</h1>
+                                     <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                                 </div>
+                             
+                                 <div class="profile_content">
+                                     <!-- Thông tin cá nhân bên trái -->
+                                     <div class="profile_info">
+                                         <div class="profile_row">
+                                             <label>Họ và tên:</label>
+                                             <span>Nguyen Cao Phuoc</span>
+                                             <button class="edit_button">Chỉnh sửa</button>
+                                         </div>
+                                         <div class="profile_row">
+                                             <label>Email:</label>
+                                             <span>phuocncps38249@gmail.com</span>
+                                             <button class="edit_button">Chỉnh sửa</button>
+                                         </div>
+                                         <div class="profile_row">
+                                             <label>Số điện thoại:</label>
+                                             <span>0367337461</span>
+                                             <button class="edit_button">Chỉnh sửa</button>
+                                         </div>
+                                         <div class="profile_row">
+                                             <label>Mật khẩu:</label>
+                                             <span>*********</span>
+                                             <button class="edit_button">Chỉnh sửa</button>
+                                         </div>
+                                         <div class="profile_info_button">
+                                            <button class="upload_button">Thay đổi Avatar</button>
+                                            <button class="upload_button_edit">Lưu</button>
+                                        </div>
+                                     </div>
+                             
+                                     <!-- Avatar bên phải -->
+                                     <div class="profile_avatar">
+                                         <img src="./assets/image/avatar/caophuoc.jpg" alt="Avatar" class="avatar_img">
+                                          <div class="profile_info_button">
+                                             <button class="upload_button">Thay đổi Avatar</button>
+                                             <button class="upload_button_edit">Lưu</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+         </div>
+        <!-- end personal -->
+    </main>
+    <!-- Start footer -->
+    <footer>
+        <div class="main-footer">
+            <div class="grid wide">
+                <div class="row">
+                    <div class="footer-item l-3 m-4 c-12">
+                        <img src="./assets/image/logo/logo.png" alt="" class="footer-logo" />
+                    </div>
+                    <div class="footer-box-none col l-3 m-3 c-12"></div>
+                    <div class="footer-item col l-3 m-4 c-12">
+                        <h3 class="footer-menu__heading">Danh mục bánh</h3>
+                        <ul class="footer-menu__list">
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Bánh bông lan</a>
+                            </li>
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Bánh bò</a>
+                            </li>
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Bánh da lợn</a>
+                            </li>
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Bánh trung thu</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-item col l-3 m-4 c-12">
+                        <h3 class="footer-menu__heading">Khác</h3>
+                        <ul class="footer-menu__list">
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Tin tức</a>
+                            </li>
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Giới thiệu</a>
+                            </li>
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Liên hệ</a>
+                            </li>
+                            <li class="footer-menu__item">
+                                <a href="" class="footer-menu__item-link">Giỏ hàng</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sub-footer">
+            <div class="sub-footer-box grid wide">
+                <span class="font_span_box" class="copyright-title">Copyright © 2024 | Ngũ Long Bakery</span>
+                <div class="social-box">
+                    <a class="social-link" href=""><i class="social-icon fa-brands fa-facebook"></i></a>
+                    <a class="social-link" href=""><i class="social-icon fa-brands fa-instagram"></i></a>
+                    <a class="social-link" href=""><i class="social-icon fa-brands fa-youtube"></i></a>
+                    <a class="social-link" href=""><i class="social-icon fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./assets/js/personal_information.js"></script>
+    <script src="./assets/js/base.js"></script>
+</body>
+</html>

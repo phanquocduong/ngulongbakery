@@ -18,7 +18,6 @@ class AdProductsController
         $view = './app/view/' . $view . '.php';
         require_once $view;
     }
-
     public function viewProducts()
     {
         $this->data = $this->products->getProducts();
@@ -186,5 +185,24 @@ class AdProductsController
         }
         echo '<script>location.href="index.php?page=products"</script>';
     }
+    
+    public function searchProducts()
+    {
+        if (isset($_POST['button_product'])) {
+            $keyword = $_POST['search_product'];
+        } else {
+            echo "No keyword provided.";
+            return;
+        }
+    
+        $sql = "SELECT * FROM products WHERE name LIKE :keyword";
+        $params = [':keyword' => '%' . $keyword . '%'];
+    
+        $db = new Database(); // Ensure this uses your Database class
+        $results = $db->getAll($sql, $params);
+        $db = new Database();
+        return $db->getAll($sql, $params);
+    }
+    
 }
 ?>
