@@ -18,8 +18,8 @@ namespace Symfony\Component\HttpFoundation\Session\Storage\Handler;
  */
 class StrictSessionHandler extends AbstractSessionHandler
 {
-    private \SessionHandlerInterface $handler;
-    private bool $doDestroy;
+    private $handler;
+    private $doDestroy;
 
     public function __construct(\SessionHandlerInterface $handler)
     {
@@ -31,38 +31,46 @@ class StrictSessionHandler extends AbstractSessionHandler
     }
 
     /**
-     * Returns true if this handler wraps an internal PHP session save handler using \SessionHandler.
-     *
-     * @internal
+     * @return bool
      */
-    public function isWrapper(): bool
-    {
-        return $this->handler instanceof \SessionHandler;
-    }
-
-    public function open(string $savePath, string $sessionName): bool
+    #[\ReturnTypeWillChange]
+    public function open($savePath, $sessionName)
     {
         parent::open($savePath, $sessionName);
 
         return $this->handler->open($savePath, $sessionName);
     }
 
-    protected function doRead(#[\SensitiveParameter] string $sessionId): string
+    /**
+     * {@inheritdoc}
+     */
+    protected function doRead(string $sessionId)
     {
         return $this->handler->read($sessionId);
     }
 
-    public function updateTimestamp(#[\SensitiveParameter] string $sessionId, string $data): bool
+    /**
+     * @return bool
+     */
+    #[\ReturnTypeWillChange]
+    public function updateTimestamp($sessionId, $data)
     {
         return $this->write($sessionId, $data);
     }
 
-    protected function doWrite(#[\SensitiveParameter] string $sessionId, string $data): bool
+    /**
+     * {@inheritdoc}
+     */
+    protected function doWrite(string $sessionId, string $data)
     {
         return $this->handler->write($sessionId, $data);
     }
 
-    public function destroy(#[\SensitiveParameter] string $sessionId): bool
+    /**
+     * @return bool
+     */
+    #[\ReturnTypeWillChange]
+    public function destroy($sessionId)
     {
         $this->doDestroy = true;
         $destroyed = parent::destroy($sessionId);
@@ -70,19 +78,30 @@ class StrictSessionHandler extends AbstractSessionHandler
         return $this->doDestroy ? $this->doDestroy($sessionId) : $destroyed;
     }
 
-    protected function doDestroy(#[\SensitiveParameter] string $sessionId): bool
+    /**
+     * {@inheritdoc}
+     */
+    protected function doDestroy(string $sessionId)
     {
         $this->doDestroy = false;
 
         return $this->handler->destroy($sessionId);
     }
 
-    public function close(): bool
+    /**
+     * @return bool
+     */
+    #[\ReturnTypeWillChange]
+    public function close()
     {
         return $this->handler->close();
     }
 
-    public function gc(int $maxlifetime): int|false
+    /**
+     * @return int|false
+     */
+    #[\ReturnTypeWillChange]
+    public function gc($maxlifetime)
     {
         return $this->handler->gc($maxlifetime);
     }

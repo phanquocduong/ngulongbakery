@@ -21,10 +21,10 @@ use Symfony\Component\Mime\Part\TextPart;
  */
 class Message extends RawMessage
 {
-    private Headers $headers;
-    private ?AbstractPart $body;
+    private $headers;
+    private $body;
 
-    public function __construct(?Headers $headers = null, ?AbstractPart $body = null)
+    public function __construct(Headers $headers = null, AbstractPart $body = null)
     {
         $this->headers = $headers ? clone $headers : new Headers();
         $this->body = $body;
@@ -42,7 +42,7 @@ class Message extends RawMessage
     /**
      * @return $this
      */
-    public function setBody(?AbstractPart $body): static
+    public function setBody(AbstractPart $body = null)
     {
         $this->body = $body;
 
@@ -57,7 +57,7 @@ class Message extends RawMessage
     /**
      * @return $this
      */
-    public function setHeaders(Headers $headers): static
+    public function setHeaders(Headers $headers)
     {
         $this->headers = $headers;
 
@@ -122,7 +122,7 @@ class Message extends RawMessage
         yield from $body->toIterable();
     }
 
-    public function ensureValidity(): void
+    public function ensureValidity()
     {
         if (!$this->headers->has('To') && !$this->headers->has('Cc') && !$this->headers->has('Bcc')) {
             throw new LogicException('An email must have a "To", "Cc", or "Bcc" header.');
@@ -140,10 +140,7 @@ class Message extends RawMessage
         if ($this->headers->has('Sender')) {
             $sender = $this->headers->get('Sender')->getAddress();
         } elseif ($this->headers->has('From')) {
-            if (!$froms = $this->headers->get('From')->getAddresses()) {
-                throw new LogicException('A "From" header must have at least one email address.');
-            }
-            $sender = $froms[0];
+            $sender = $this->headers->get('From')->getAddresses()[0];
         } else {
             throw new LogicException('An email must have a "From" or a "Sender" header.');
         }

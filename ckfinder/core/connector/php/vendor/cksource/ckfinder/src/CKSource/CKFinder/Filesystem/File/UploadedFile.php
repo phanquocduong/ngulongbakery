@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -75,19 +75,15 @@ class UploadedFile extends File
             $uploadedFile->move($pathinfo['dirname'], $pathinfo['basename']);
         } catch (\Exception $e) {
             $errorMessage = $uploadedFile->getErrorMessage();
-
             switch ($uploadedFile->getError()) {
                 case UPLOAD_ERR_INI_SIZE:
                 case UPLOAD_ERR_FORM_SIZE:
                     throw new InvalidUploadException($errorMessage, Error::UPLOADED_TOO_BIG, [], $e);
-
                 case UPLOAD_ERR_PARTIAL:
                 case UPLOAD_ERR_NO_FILE:
                     throw new InvalidUploadException($errorMessage, Error::UPLOADED_CORRUPT, [], $e);
-
                 case UPLOAD_ERR_NO_TMP_DIR:
                     throw new InvalidUploadException($errorMessage, Error::UPLOADED_NO_TMP_DIR, [], $e);
-
                 case UPLOAD_ERR_CANT_WRITE:
                 case UPLOAD_ERR_EXTENSION:
                     throw new AccessDeniedException($errorMessage, [], $e);
@@ -234,8 +230,10 @@ class UploadedFile extends File
 
     /**
      * Returns uploaded file MIME type.
+     *
+     * @return string
      */
-    public function getMimeType(): string
+    public function getMimeType()
     {
         return MimeTypes::getDefault()->guessMimeType($this->tempFilePath);
     }

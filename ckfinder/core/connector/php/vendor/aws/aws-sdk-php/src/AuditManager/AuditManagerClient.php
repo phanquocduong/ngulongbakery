@@ -59,8 +59,6 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise getEvidenceAsync(array $args = [])
  * @method \Aws\Result getEvidenceByEvidenceFolder(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getEvidenceByEvidenceFolderAsync(array $args = [])
- * @method \Aws\Result getEvidenceFileUploadUrl(array $args = [])
- * @method \GuzzleHttp\Promise\Promise getEvidenceFileUploadUrlAsync(array $args = [])
  * @method \Aws\Result getEvidenceFolder(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getEvidenceFolderAsync(array $args = [])
  * @method \Aws\Result getEvidenceFoldersByAssessment(array $args = [])

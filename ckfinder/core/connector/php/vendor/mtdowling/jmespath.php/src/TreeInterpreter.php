@@ -107,7 +107,7 @@ class TreeInterpreter
                 $merged = [];
                 foreach ($value as $values) {
                     // Only merge up arrays lists and not hashes
-                    if (is_array($values) && array_key_exists(0, $values)) {
+                    if (is_array($values) && isset($values[0])) {
                         $merged = array_merge($merged, $values);
                     } elseif ($values !== $skipElement) {
                         $merged[] = $values;

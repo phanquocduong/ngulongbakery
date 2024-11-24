@@ -12,7 +12,6 @@
 namespace Symfony\Component\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Symfony\Component\HttpFoundation\Exception\UnexpectedValueException;
 
 /**
  * ParameterBag is a container for key/value pairs.
@@ -23,7 +22,10 @@ use Symfony\Component\HttpFoundation\Exception\UnexpectedValueException;
  */
 class ParameterBag implements \IteratorAggregate, \Countable
 {
-    protected array $parameters;
+    /**
+     * Parameter storage.
+     */
+    protected $parameters;
 
     public function __construct(array $parameters = [])
     {
@@ -34,9 +36,13 @@ class ParameterBag implements \IteratorAggregate, \Countable
      * Returns the parameters.
      *
      * @param string|null $key The name of the parameter to return or null to get them all
+     *
+     * @return array
      */
-    public function all(?string $key = null): array
+    public function all(/*string $key = null*/)
     {
+        $key = \func_num_args() > 0 ? func_get_arg(0) : null;
+
         if (null === $key) {
             return $this->parameters;
         }
@@ -50,8 +56,10 @@ class ParameterBag implements \IteratorAggregate, \Countable
 
     /**
      * Returns the parameter keys.
+     *
+     * @return array
      */
-    public function keys(): array
+    public function keys()
     {
         return array_keys($this->parameters);
     }
@@ -59,7 +67,7 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Replaces the current parameters by a new set.
      */
-    public function replace(array $parameters = []): void
+    public function replace(array $parameters = [])
     {
         $this->parameters = $parameters;
     }
@@ -67,25 +75,39 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Adds parameters.
      */
-    public function add(array $parameters = []): void
+    public function add(array $parameters = [])
     {
         $this->parameters = array_replace($this->parameters, $parameters);
     }
 
-    public function get(string $key, mixed $default = null): mixed
+    /**
+     * Returns a parameter by name.
+     *
+     * @param mixed $default The default value if the parameter key does not exist
+     *
+     * @return mixed
+     */
+    public function get(string $key, $default = null)
     {
         return \array_key_exists($key, $this->parameters) ? $this->parameters[$key] : $default;
     }
 
-    public function set(string $key, mixed $value): void
+    /**
+     * Sets a parameter by name.
+     *
+     * @param mixed $value The value
+     */
+    public function set(string $key, $value)
     {
         $this->parameters[$key] = $value;
     }
 
     /**
      * Returns true if the parameter is defined.
+     *
+     * @return bool
      */
-    public function has(string $key): bool
+    public function has(string $key)
     {
         return \array_key_exists($key, $this->parameters);
     }
@@ -93,98 +115,74 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Removes a parameter.
      */
-    public function remove(string $key): void
+    public function remove(string $key)
     {
         unset($this->parameters[$key]);
     }
 
     /**
      * Returns the alphabetic characters of the parameter value.
+     *
+     * @return string
      */
-    public function getAlpha(string $key, string $default = ''): string
+    public function getAlpha(string $key, string $default = '')
     {
-        return preg_replace('/[^[:alpha:]]/', '', $this->getString($key, $default));
+        return preg_replace('/[^[:alpha:]]/', '', $this->get($key, $default));
     }
 
     /**
      * Returns the alphabetic characters and digits of the parameter value.
+     *
+     * @return string
      */
-    public function getAlnum(string $key, string $default = ''): string
+    public function getAlnum(string $key, string $default = '')
     {
-        return preg_replace('/[^[:alnum:]]/', '', $this->getString($key, $default));
+        return preg_replace('/[^[:alnum:]]/', '', $this->get($key, $default));
     }
 
     /**
      * Returns the digits of the parameter value.
+     *
+     * @return string
      */
-    public function getDigits(string $key, string $default = ''): string
+    public function getDigits(string $key, string $default = '')
     {
-        return preg_replace('/[^[:digit:]]/', '', $this->getString($key, $default));
-    }
-
-    /**
-     * Returns the parameter as string.
-     */
-    public function getString(string $key, string $default = ''): string
-    {
-        $value = $this->get($key, $default);
-        if (!\is_scalar($value) && !$value instanceof \Stringable) {
-            throw new UnexpectedValueException(sprintf('Parameter value "%s" cannot be converted to "string".', $key));
-        }
-
-        return (string) $value;
+        // we need to remove - and + because they're allowed in the filter
+        return str_replace(['-', '+'], '', $this->filter($key, $default, \FILTER_SANITIZE_NUMBER_INT));
     }
 
     /**
      * Returns the parameter value converted to integer.
+     *
+     * @return int
      */
-    public function getInt(string $key, int $default = 0): int
+    public function getInt(string $key, int $default = 0)
     {
-        return $this->filter($key, $default, \FILTER_VALIDATE_INT, ['flags' => \FILTER_REQUIRE_SCALAR]);
+        return (int) $this->get($key, $default);
     }
 
     /**
      * Returns the parameter value converted to boolean.
+     *
+     * @return bool
      */
-    public function getBoolean(string $key, bool $default = false): bool
+    public function getBoolean(string $key, bool $default = false)
     {
-        return $this->filter($key, $default, \FILTER_VALIDATE_BOOL, ['flags' => \FILTER_REQUIRE_SCALAR]);
-    }
-
-    /**
-     * Returns the parameter value converted to an enum.
-     *
-     * @template T of \BackedEnum
-     *
-     * @param class-string<T> $class
-     * @param ?T              $default
-     *
-     * @return ?T
-     */
-    public function getEnum(string $key, string $class, ?\BackedEnum $default = null): ?\BackedEnum
-    {
-        $value = $this->get($key);
-
-        if (null === $value) {
-            return $default;
-        }
-
-        try {
-            return $class::from($value);
-        } catch (\ValueError|\TypeError $e) {
-            throw new UnexpectedValueException(sprintf('Parameter "%s" cannot be converted to enum: %s.', $key, $e->getMessage()), $e->getCode(), $e);
-        }
+        return $this->filter($key, $default, \FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
      * Filter key.
      *
-     * @param int                                     $filter  FILTER_* constant
-     * @param int|array{flags?: int, options?: array} $options Flags from FILTER_* constants
+     * @param mixed $default Default = null
+     * @param int   $filter  FILTER_* constant
+     * @param mixed $options Filter options
      *
      * @see https://php.net/filter-var
+     *
+     * @return mixed
      */
-    public function filter(string $key, mixed $default = null, int $filter = \FILTER_DEFAULT, mixed $options = []): mixed
+    public function filter(string $key, $default = null, int $filter = \FILTER_DEFAULT, $options = [])
     {
         $value = $this->get($key, $default);
 
@@ -198,25 +196,12 @@ class ParameterBag implements \IteratorAggregate, \Countable
             $options['flags'] = \FILTER_REQUIRE_ARRAY;
         }
 
-        if (\is_object($value) && !$value instanceof \Stringable) {
-            throw new UnexpectedValueException(sprintf('Parameter value "%s" cannot be filtered.', $key));
-        }
-
         if ((\FILTER_CALLBACK & $filter) && !(($options['options'] ?? null) instanceof \Closure)) {
-            throw new \InvalidArgumentException(sprintf('A Closure must be passed to "%s()" when FILTER_CALLBACK is used, "%s" given.', __METHOD__, get_debug_type($options['options'] ?? null)));
+            trigger_deprecation('symfony/http-foundation', '5.2', 'Not passing a Closure together with FILTER_CALLBACK to "%s()" is deprecated. Wrap your filter in a closure instead.', __METHOD__);
+            // throw new \InvalidArgumentException(sprintf('A Closure must be passed to "%s()" when FILTER_CALLBACK is used, "%s" given.', __METHOD__, get_debug_type($options['options'] ?? null)));
         }
 
-        $options['flags'] ??= 0;
-        $nullOnFailure = $options['flags'] & \FILTER_NULL_ON_FAILURE;
-        $options['flags'] |= \FILTER_NULL_ON_FAILURE;
-
-        $value = filter_var($value, $filter, $options);
-
-        if (null !== $value || $nullOnFailure) {
-            return $value;
-        }
-
-        throw new \UnexpectedValueException(sprintf('Parameter value "%s" is invalid and flag "FILTER_NULL_ON_FAILURE" was not set.', $key));
+        return filter_var($value, $filter, $options);
     }
 
     /**
@@ -224,15 +209,19 @@ class ParameterBag implements \IteratorAggregate, \Countable
      *
      * @return \ArrayIterator<string, mixed>
      */
-    public function getIterator(): \ArrayIterator
+    #[\ReturnTypeWillChange]
+    public function getIterator()
     {
         return new \ArrayIterator($this->parameters);
     }
 
     /**
      * Returns the number of parameters.
+     *
+     * @return int
      */
-    public function count(): int
+    #[\ReturnTypeWillChange]
+    public function count()
     {
         return \count($this->parameters);
     }

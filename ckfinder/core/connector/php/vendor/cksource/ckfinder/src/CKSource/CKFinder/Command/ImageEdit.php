@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -42,9 +42,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ImageEdit extends CommandAbstract
 {
-    public const OPERATION_CROP = 'crop';
-    public const OPERATION_ROTATE = 'rotate';
-    public const OPERATION_RESIZE = 'resize';
+    const OPERATION_CROP = 'crop';
+    const OPERATION_ROTATE = 'rotate';
+    const OPERATION_RESIZE = 'resize';
 
     protected $requestMethod = Request::METHOD_POST;
 
@@ -97,7 +97,6 @@ class ImageEdit extends CommandAbstract
                     $image->crop($x, $y, $width, $height);
 
                     break;
-
                 case self::OPERATION_ROTATE:
                     if (!isset($actionInfo['angle'])) {
                         throw new InvalidRequestException();
@@ -107,7 +106,6 @@ class ImageEdit extends CommandAbstract
                     $image->rotate($degrees, $bgcolor);
 
                     break;
-
                 case self::OPERATION_RESIZE:
                     if (!Utils::arrayContainsKeys($actionInfo, ['width', 'height'])) {
                         throw new InvalidRequestException();
@@ -139,7 +137,7 @@ class ImageEdit extends CommandAbstract
         if (!$editFileEvent->isPropagationStopped()) {
             $saved = $editedImage->save($editFileEvent->getNewContents());
 
-            // Remove thumbnails and resized images in case if file is overwritten
+            //Remove thumbnails and resized images in case if file is overwritten
             if (null === $newFileName && $saved) {
                 $thumbnailRepository->deleteThumbnails($resourceType, $workingFolder->getClientCurrentFolder(), $fileName);
                 $resizedImageRepository->deleteResizedImages($resourceType, $workingFolder->getClientCurrentFolder(), $fileName);

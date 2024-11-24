@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -31,12 +31,12 @@ class OperationManager
     /**
      * Time interval in seconds for operation status updates.
      */
-    public const UPDATE_STATUS_INTERVAL = 2;
+    const UPDATE_STATUS_INTERVAL = 2;
 
     /**
      * Time interval in seconds for extending the execution time of the script.
      */
-    public const EXTEND_EXECUTION_INTERVAL = 20;
+    const EXTEND_EXECUTION_INTERVAL = 20;
 
     /**
      * @var CKFinder
@@ -169,8 +169,8 @@ class OperationManager
 
         clearstatcache();
 
-        return $this->operationStarted($this->startedOperationId)
-               && file_exists($this->getFilePath($this->startedOperationId, 'abort'));
+        return $this->operationStarted($this->startedOperationId) &&
+               file_exists($this->getFilePath($this->startedOperationId, 'abort'));
     }
 
     /**

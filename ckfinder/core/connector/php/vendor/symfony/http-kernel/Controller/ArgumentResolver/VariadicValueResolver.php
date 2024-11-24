@@ -12,7 +12,7 @@
 namespace Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 /**
@@ -20,20 +20,27 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class VariadicValueResolver implements ValueResolverInterface
+final class VariadicValueResolver implements ArgumentValueResolverInterface
 {
-    public function resolve(Request $request, ArgumentMetadata $argument): array
+    /**
+     * {@inheritdoc}
+     */
+    public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        if (!$argument->isVariadic() || !$request->attributes->has($argument->getName())) {
-            return [];
-        }
+        return $argument->isVariadic() && $request->attributes->has($argument->getName());
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function resolve(Request $request, ArgumentMetadata $argument): iterable
+    {
         $values = $request->attributes->get($argument->getName());
 
         if (!\is_array($values)) {
             throw new \InvalidArgumentException(sprintf('The action argument "...$%1$s" is required to be an array, the request attribute "%1$s" contains a type of "%2$s" instead.', $argument->getName(), get_debug_type($values)));
         }
 
-        return $values;
+        yield from $values;
     }
 }

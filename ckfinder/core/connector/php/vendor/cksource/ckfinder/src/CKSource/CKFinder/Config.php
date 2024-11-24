@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -139,9 +139,9 @@ class Config
      *
      * @param string $resourceType resource type name
      *
-     * @return array configuration node for the resource type
-     *
      * @throws InvalidResourceTypeException if the resource type does not exist
+     *
+     * @return array configuration node for the resource type
      */
     public function getResourceTypeNode($resourceType)
     {
@@ -258,9 +258,9 @@ class Config
      *
      * @param string $backendName
      *
-     * @return array backend configuration node
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return array backend configuration node
      */
     public function getBackendNode($backendName)
     {

@@ -20,40 +20,45 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
  */
 class Profile
 {
-    private string $token;
+    private $token;
 
     /**
      * @var DataCollectorInterface[]
      */
-    private array $collectors = [];
+    private $collectors = [];
 
-    private ?string $ip = null;
-    private ?string $method = null;
-    private ?string $url = null;
-    private ?int $time = null;
-    private ?int $statusCode = null;
-    private ?self $parent = null;
-    private ?string $virtualType = null;
+    private $ip;
+    private $method;
+    private $url;
+    private $time;
+    private $statusCode;
+
+    /**
+     * @var Profile
+     */
+    private $parent;
 
     /**
      * @var Profile[]
      */
-    private array $children = [];
+    private $children = [];
 
     public function __construct(string $token)
     {
         $this->token = $token;
     }
 
-    public function setToken(string $token): void
+    public function setToken(string $token)
     {
         $this->token = $token;
     }
 
     /**
      * Gets the token.
+     *
+     * @return string
      */
-    public function getToken(): string
+    public function getToken()
     {
         return $this->token;
     }
@@ -61,100 +66,100 @@ class Profile
     /**
      * Sets the parent token.
      */
-    public function setParent(self $parent): void
+    public function setParent(self $parent)
     {
         $this->parent = $parent;
     }
 
     /**
      * Returns the parent profile.
+     *
+     * @return self|null
      */
-    public function getParent(): ?self
+    public function getParent()
     {
         return $this->parent;
     }
 
     /**
      * Returns the parent token.
+     *
+     * @return string|null
      */
-    public function getParentToken(): ?string
+    public function getParentToken()
     {
-        return $this->parent?->getToken();
+        return $this->parent ? $this->parent->getToken() : null;
     }
 
     /**
      * Returns the IP.
+     *
+     * @return string|null
      */
-    public function getIp(): ?string
+    public function getIp()
     {
         return $this->ip;
     }
 
-    public function setIp(?string $ip): void
+    public function setIp(?string $ip)
     {
         $this->ip = $ip;
     }
 
     /**
      * Returns the request method.
+     *
+     * @return string|null
      */
-    public function getMethod(): ?string
+    public function getMethod()
     {
         return $this->method;
     }
 
-    public function setMethod(string $method): void
+    public function setMethod(string $method)
     {
         $this->method = $method;
     }
 
     /**
      * Returns the URL.
+     *
+     * @return string|null
      */
-    public function getUrl(): ?string
+    public function getUrl()
     {
         return $this->url;
     }
 
-    public function setUrl(?string $url): void
+    public function setUrl(?string $url)
     {
         $this->url = $url;
     }
 
-    public function getTime(): int
+    /**
+     * @return int
+     */
+    public function getTime()
     {
         return $this->time ?? 0;
     }
 
-    public function setTime(int $time): void
+    public function setTime(int $time)
     {
         $this->time = $time;
     }
 
-    public function setStatusCode(int $statusCode): void
+    public function setStatusCode(int $statusCode)
     {
         $this->statusCode = $statusCode;
     }
 
-    public function getStatusCode(): ?int
+    /**
+     * @return int|null
+     */
+    public function getStatusCode()
     {
         return $this->statusCode;
-    }
-
-    /**
-     * @internal
-     */
-    public function setVirtualType(?string $virtualType): void
-    {
-        $this->virtualType = $virtualType;
-    }
-
-    /**
-     * @internal
-     */
-    public function getVirtualType(): ?string
-    {
-        return $this->virtualType;
     }
 
     /**
@@ -162,7 +167,7 @@ class Profile
      *
      * @return self[]
      */
-    public function getChildren(): array
+    public function getChildren()
     {
         return $this->children;
     }
@@ -172,7 +177,7 @@ class Profile
      *
      * @param Profile[] $children
      */
-    public function setChildren(array $children): void
+    public function setChildren(array $children)
     {
         $this->children = [];
         foreach ($children as $child) {
@@ -183,7 +188,7 @@ class Profile
     /**
      * Adds the child token.
      */
-    public function addChild(self $child): void
+    public function addChild(self $child)
     {
         $this->children[] = $child;
         $child->setParent($this);
@@ -203,9 +208,11 @@ class Profile
     /**
      * Gets a Collector by name.
      *
+     * @return DataCollectorInterface
+     *
      * @throws \InvalidArgumentException if the collector does not exist
      */
-    public function getCollector(string $name): DataCollectorInterface
+    public function getCollector(string $name)
     {
         if (!isset($this->collectors[$name])) {
             throw new \InvalidArgumentException(sprintf('Collector "%s" does not exist.', $name));
@@ -219,7 +226,7 @@ class Profile
      *
      * @return DataCollectorInterface[]
      */
-    public function getCollectors(): array
+    public function getCollectors()
     {
         return $this->collectors;
     }
@@ -229,7 +236,7 @@ class Profile
      *
      * @param DataCollectorInterface[] $collectors
      */
-    public function setCollectors(array $collectors): void
+    public function setCollectors(array $collectors)
     {
         $this->collectors = [];
         foreach ($collectors as $collector) {
@@ -240,18 +247,24 @@ class Profile
     /**
      * Adds a Collector.
      */
-    public function addCollector(DataCollectorInterface $collector): void
+    public function addCollector(DataCollectorInterface $collector)
     {
         $this->collectors[$collector->getName()] = $collector;
     }
 
-    public function hasCollector(string $name): bool
+    /**
+     * @return bool
+     */
+    public function hasCollector(string $name)
     {
         return isset($this->collectors[$name]);
     }
 
-    public function __sleep(): array
+    /**
+     * @return array
+     */
+    public function __sleep()
     {
-        return ['token', 'parent', 'children', 'collectors', 'ip', 'method', 'url', 'time', 'statusCode', 'virtualType'];
+        return ['token', 'parent', 'children', 'collectors', 'ip', 'method', 'url', 'time', 'statusCode'];
     }
 }
