@@ -11,11 +11,8 @@
         }
 
         private function renderView($view, $css, $js, $data = []) {
-            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm'", []);
-            require_once 'app/view/header.php';
-            $viewPath = 'app/view/' . $view . '.php';
-            require_once $viewPath;
-            require_once 'app/view/footer.php';
+            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1", []);
+            require_once 'app/view/template.php';
         }
 
         public function viewHome($css, $js) {

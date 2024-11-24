@@ -11,6 +11,28 @@ function closeTransferInformation() {
 // AJAX để load quận/huyện và phường/xã
 document.getElementById('province').addEventListener('change', function () {
     let provinceId = this.value;
+    let transportFee = 0;
+
+    // Tính phí vận chuyển dựa trên provinceId
+    if (provinceId >= 1 && provinceId <= 30) {
+        transportFee = 40000;
+    } else if (provinceId >= 31 && provinceId <= 43) {
+        transportFee = 30000;
+    } else if (provinceId >= 44 && provinceId <= 63) {
+        transportFee = 20000;
+    }
+
+    // Cập nhật phí vận chuyển trên giao diện
+    const transportFeeElement = document.querySelector('.transport-fee__price');
+    const transportFeeElementHidden = document.querySelector('.transport-fee__price--hidden');
+    transportFeeElement.textContent = new Intl.NumberFormat('en-US').format(transportFee) + 'đ';
+    transportFeeElementHidden.value = new Intl.NumberFormat('en-US').format(transportFee) + 'đ';
+
+    const grandTotal = parseInt(document.getElementById('total-payment').textContent.replace(/[^\d]/g, ''));
+    const newTotal = grandTotal + transportFee;
+    document.getElementById('total-payment').textContent = new Intl.NumberFormat('en-US').format(newTotal) + 'đ';
+    const totalPaymentHidden = document.getElementById('total-payment-hidden');
+    totalPaymentHidden.value = newTotal;
 
     fetch(`index.php?page=get-districts&province_id=${provinceId}`)
         .then(response => response.json())
@@ -45,7 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const applyDiscountButton = document.getElementById('apply-discount');
     const discountCodeInput = document.getElementById('discount-code');
     const totalPayment = document.getElementById('total-payment');
+    const totalPaymentHidden = document.getElementById('total-payment-hidden');
     const discountMessage = document.querySelector('.form-message');
+    const discountId = document.getElementById('discount-id');
 
     applyDiscountButton.addEventListener('click', function (e) {
         e.preventDefault();
@@ -66,7 +90,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data.success) {
                     // Cập nhật giao diện
                     discountMessage.style.color = '#28a745';
-                    totalPayment.textContent = new Intl.NumberFormat().format(data.newTotal) + 'đ';
+                    totalPayment.textContent = new Intl.NumberFormat('en-US').format(data.newTotal) + 'đ';
+                    totalPaymentHidden.value = data.newTotal;
+                    discountId.value = data.discountId;
                 } else {
                     discountMessage.style.color = '#f4516c';
                 }

@@ -33,32 +33,32 @@
         }
         
         function getUserByEmail($email) {
-            $sql = "SELECT * FROM users WHERE email = ?";
+            $sql = "SELECT * FROM users WHERE email = ? AND status = 1";
             return $this->db->get($sql, [$email]);
         }        
 
         function saveResetCode($email, $resetCode) {
-            $sql = "UPDATE users SET reset_code = ? WHERE email = ?";
+            $sql = "UPDATE users SET reset_code = ? WHERE email = ? AND status = 1";
             return $this->db->execute($sql, [$resetCode, $email]);
         }
         
         function resetPassword($resetCode, $newPassword) {
-            $sql = "SELECT id FROM users WHERE reset_code = ?";
+            $sql = "SELECT id FROM users WHERE reset_code = ? AND status = 1";
             $user = $this->db->get($sql, [$resetCode]);
             if ($user) {
-                $sql = "UPDATE users SET password = ?, reset_code = NULL WHERE reset_code = ?";
+                $sql = "UPDATE users SET password = ?, reset_code = NULL WHERE reset_code = ? AND status = 1";
                 return $this->db->execute($sql, [$newPassword, $resetCode]);
             }
             return false;
         }        
 
         function updateInformation($id, $fullname, $phone, $address, $avatar) {
-            $sql = "UPDATE users SET `full_name` = ?, `phone` = ?, `address` = ?, `avatar` = ? WHERE `id` = ?";
+            $sql = "UPDATE users SET `full_name` = ?, `phone` = ?, `address` = ?, `avatar` = ? WHERE `id` = ? AND status = 1";
             return $this->db->execute($sql, [$fullname, $phone, $address, $avatar, $id]);
         }
 
         function changePassword($id, $newPassword) {
-            $sql = "UPDATE users SET `password` = ? WHERE `id` = ?";
+            $sql = "UPDATE users SET `password` = ? WHERE `id` = ? AND status = 1";
             return $this->db->execute($sql, [$newPassword, $id]);
         }    
     }

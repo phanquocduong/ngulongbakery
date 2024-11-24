@@ -41,6 +41,7 @@
                                 <th>Tên Danh Mục</th>
                                 <th>Ảnh</th>
                                 <th>Loại danh mục</th>
+                                <th>Trạng thái</th>
                                 <th>Thao Tác</th>
                             </tr>
                         </thead>
@@ -58,8 +59,13 @@
                                     <img src="../public/upload/category/' . $image . '" alt=""
                                         style="width: 40px; height: 40px" />
                                 </td>
-                                <td>' . $type . '</td>
-                                <td>
+                                <td>' . $type . '</td>';
+                                if($status == 1){
+                                    echo '<td><span class="badge bg-success">Hiển Thị</span></td>';
+                                }else{
+                                    echo '<td><span class="badge bg-danger">Không hiển thị</span></td>';
+                                };
+                                echo'<td>
                                     <a href="index.php?page=edit_categories&id='.$id.'" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="index.php?page=delete_categories&id='.$id.'" class="btn btn-sm btn-danger">Xoá</a>
                                     <a href="index.php?page=view_categories&id='.$id.'" class="btn btn-sm btn-success">Xem</a>

@@ -22,7 +22,7 @@
         }
 
         public function getCategory($id) {
-            $sql = "SELECT * FROM categories WHERE id = ?";
+            $sql = "SELECT * FROM categories WHERE id = ? AND status = 1";
             return $this->db->get($sql, [$id]);
         }
     }

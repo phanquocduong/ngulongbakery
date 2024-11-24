@@ -54,7 +54,7 @@
             echo "<tr>";
             echo "<td>$id</td>";
             echo "<td>$name</td>";
-            echo "<td>$price</td>";
+            echo "<td>".number_format($price, 0, ',', '.')." VNĐ</td>";
             echo "<td>$sale</td>";
             echo "<td><img src='../public/upload/product/$image' alt='' style='width: 50px; height: 50px' /></td>";
             // Tách chuỗi chứa tên các file ảnh thành mảng

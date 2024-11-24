@@ -30,11 +30,20 @@
                         $stt=1; 
                           foreach ($data['post'] as $item) {
                           extract($item);
+                          $timestamp = strtotime($created_at);
+                          // Tạo đối tượng DateTime từ chuỗi thời gian
+                          $date = new DateTime($created_at, new DateTimeZone("UTC"));
+
+                          // Chuyển đổi sang múi giờ UTC+7
+                          $date->setTimezone(new DateTimeZone("Asia/Ho_Chi_Minh"));
+
+                          // Định dạng lại thời gian
+                          $vn_format = $date->format("d/m/Y H:i:s");
                           echo '<tr>
                                   <td>'.$stt++.'</td>
                                   <td>'.$title.'</td>
                                   <td>'.$category_name.'</td>
-                                  <td>'.$created_at.'</td>
+                                  <td>'.$vn_format.'</td>
                                   <td>';
                                   if($status==1){
                                     echo'<span class="badge bg-success">Đã đăng</span>';
@@ -47,7 +56,7 @@
                                   <td>
                                     <a href="index.php?page=post_detail&id='.$id.'" class="btn btn-sm btn-primary" >Xem</a>
                                     <a href="index.php?page=edit_post&id=' . $id . '" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Xóa</a>
+                                    <a href="index.php?page=del_post&id=' . $id . '" class="btn btn-sm btn-danger">Xóa</a>
                                   </td>
                                 </tr>';
                           }

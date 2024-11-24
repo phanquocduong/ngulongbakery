@@ -1,35 +1,21 @@
 <!-- Main Start -->
-<form action="" class="form form-group">
+<form action="index.php?page=addPost" method="POST" class="form form-group" enctype="multipart/form-data">
     <div class="container">
         <h1>Thêm bài viết</h1>
 
-        <div class="date-create form-control"></div>
         <!-- Ngày tạo bài viết -->
+        <label for="create_date">Ngày tạo</label>
+        <input type="text" class="date-create form-control" readonly value="" name="create_date" >
     </div>
-    <!-- -------------- -->
-
-    <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-    <div id="editor" class="editor" contenteditable="true"></div>
+    <br>
+    <!-- -------Phần nhập bài viết------- -->
+    <div class="mb-3">
+        <label for="title" class="form-label">Tiêu đề</label>
+        <textarea type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề"></textarea>
+        <br>    
+    <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
+  </div>
     <br />
-    <!-- -------------- -->
-
-    <!-- input để thêm bài viêt -->
-    <div class="add-element">
-        <select id="element-type" class="form-select m-2">
-            <option value="h1">Tiêu đề H1</option>
-            <option value="h2">Tiêu đề H2</option>
-            <option value="h3">Tiêu đề H3</option>
-            <option value="h4">Tiêu đề H4</option>
-            <option value="h5">Tiêu đề H5</option>
-            <option value="h6">Tiêu đề H6</option>
-            <option value="p">Nội dung (Paragraph)</option>
-            <option value="img">Hình ảnh</option>
-        </select>
-        <button type="button" id="add-element-btn" class="btn btn-primary m-2" style="margin-left: 7px">
-            Thêm thẻ
-        </button>
-        <input type="file" id="image-input" accept="image/*" style="display: none" />
-    </div>
     <!-- ----------------------- -->
 
     <!-- trạng thái ẩn/hiện bài viết -->
@@ -38,7 +24,7 @@
             <label class="form-check-label" for="flexCheckDefault">
                 Trạng thái
             </label>
-            <select name="" id="" class="form-select">
+            <select name="status" id="" class="form-select">
                 <option value="0">Ẩn</option>
                 <option value="1">Hiện</option>
             </select>
@@ -53,10 +39,17 @@
             <label class="form-check-label" for="flexCheckDefault">
                 Thể loại
             </label>
-            <select name="" id="" class="form-select">
-                <option value="0">Tin tức</option>
-                <option value="1">Sự kiện</option>
-                <option value="2">Khuyến mãi</option>
+            <select name="type" id="" class="form-select">
+                <?php
+                require_once './app/model/CategoryModel.php';
+                require_once './app/model/PostModel.php';
+                $categoryModel = new CategoryModel();
+                $categories = $categoryModel->getCate();
+                foreach ($categories as $category) {
+                    extract($category);
+                    echo '<option value="' . $id . '">' . $name. '</option>';
+                }
+                ?>
             </select>
         </div>
     </div>
@@ -74,12 +67,12 @@
             $userModel = new UserModel();
 
             // Lấy thông tin tác giả, những user có role là 1
-            $user = $userModel->getUserByRole(1);
+            $users = $userModel->getUserByRole(1);
             ?>
             <select name="user" id="user" class="form-select">
                 <?php
-                foreach ($user as $user){
-                    echo '<option value="'.$user['id'].'">'.$user['full_name'].'</option>';
+                foreach ($users as $user) {
+                    echo '<option value="' . $user['id'] . '">' . $user['full_name'] . '</option>';
                 }
                 ?>
             </select>
@@ -90,10 +83,8 @@
     <!-- -------------- -->
 
     <div class="container">
-        <button type="submit" class="btn btn-primary m-2">
-            Thêm bài viết
-        </button>
+        <input type="submit" name="submit" class="btn btn-primary m-2" style="width:100%">
     </div>
 </form>
-<a href="index.php?page=post_manage" class="btn btn-primary" style="margin-left: 20px">Quay lại</a>
+<a href="index.php?page=post_manage" class="btn btn-primary btn-danger" style="margin-left:20px;">Quay lại</a>
 <!-- Main End -->

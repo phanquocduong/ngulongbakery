@@ -38,6 +38,15 @@
           <?php
           foreach ($viewOrder as $key => $value) {
             extract($value);
+            $timestamp = strtotime($created_at);
+            // Tạo đối tượng DateTime từ chuỗi thời gian
+            $date = new DateTime($created_at, new DateTimeZone("UTC"));
+
+            // Chuyển đổi sang múi giờ UTC+7
+            $date->setTimezone(new DateTimeZone("Asia/Ho_Chi_Minh"));
+
+            // Định dạng lại thời gian
+            $vn_format = $date->format("d/m/Y");
             echo "<tr>";
             echo "<td>$id</td>";
             echo "
@@ -45,7 +54,7 @@
               <a href='index.php?page=order_detail&id=$id'>$customer</a>
               </td>";
               echo "<td>$total_amount</td>";
-              echo "<td>$created_at</td>";
+              echo "<td>$vn_format</td>";
               echo "<td>$status</td>";
               echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
               echo "</tr>";

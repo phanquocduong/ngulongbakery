@@ -52,7 +52,7 @@
                 $mail->send();
 
                 $mail->clearAddresses(); // Xóa địa chỉ email trước đó
-                $mail->addAddress('truongnvps38421@gmail.com'); // Gửi đến quản trị viên
+                $mail->addAddress('ngulongbakery@gmail.com'); // Gửi đến quản trị viên
                 $mail->Subject = "Thông báo từ form liên hệ [ $optionuser ]";
                 $mail->Body    = "Có một yêu cầu mới từ người dùng: [Email: $emailuser] [Loại: $optionuser] [Nội dung: $comments]";
                 $mail->send();

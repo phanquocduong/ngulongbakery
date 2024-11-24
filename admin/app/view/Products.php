@@ -60,6 +60,7 @@
         <tbody>
 
           <?php
+<<<<<<< HEAD
           // Check if products exist
           if (!empty($listPro)) {
             // Loop through each product and display
@@ -95,6 +96,42 @@
             }
           } else {
             echo "<tr><td colspan='7'>Không có sản phẩm nào.</td></tr>";
+=======
+          foreach ($listPro as $key => $value) {
+            extract($value);
+            echo "<tr>";
+            echo "<td>$id</td>";
+            echo "<td>$name</td>";
+            echo "<td>".number_format($price, 0, ',', '.')." VNĐ</td>";
+            echo "<td><img src='../public/upload/product/$image' alt='' style='width: 50px; height: 50px' /></td>";
+            echo "<td>$views</td>";
+            $categoryName = isset($categoryMap[$category_id]) ? $categoryMap[$category_id] : 'Không xác định';
+            echo "<td>$categoryName</td>";
+            echo "<td>
+              <a href='index.php?page=products_detail&id=$id'><button class='btn btn-info btn-sm btn-color-text'>
+                  Xem
+                </button></a>
+              <a href='index.php?page=viewEdit_products&id=$id'><button class='btn btn-warning btn-sm btn-color-text'>
+                  Sửa
+                </button></a>";
+                echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $id . ')">
+                <button class="btn btn-danger btn-sm btn-color-text">
+                  xoá
+                </button>
+                </a>';
+            ?>
+            <script>
+              function confirmDelete(id) {
+                const url = "index.php?page=delProducts&id=" + id;
+                if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+                  window.location.href = url;
+                }
+              }
+            </script>
+            <?php
+            echo "</td>";
+            echo "</tr>";
+>>>>>>> 13e10407d35846230c48d122a24eb1330de92be9
           }
           ?>
 

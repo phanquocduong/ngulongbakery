@@ -10,16 +10,37 @@
     <hr />
     <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
     <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
-    <a href="index.php?page=edit_post" class="btn btn-primary">Sửa bài viết</a>
+    <a href="index.php?page=edit_post&id=<?= $id; ?>" class="btn btn-primary">Sửa bài viết</a>
     <hr />
-    <div class="form-control">
-      Ngày tạo bài viết: <span> <?php echo $created_at ?></span>
-    </div>
+
+
     <!-- Ngày tạo bài viết -->
+    <?php
+    $timestamp = strtotime($created_at);
+    // Tạo đối tượng DateTime từ chuỗi thời gian
+    $date = new DateTime($created_at, new DateTimeZone("UTC"));
+
+    // Chuyển đổi sang múi giờ UTC+7
+    $date->setTimezone(new DateTimeZone("Asia/Ho_Chi_Minh"));
+
+    // Định dạng lại thời gian
+    $vn_format = $date->format("d/m/Y H:i:s");
+    ?>
+    <input type="text" class="date-create form-control" readonly value="<?php
+    echo $vn_format;
+    ?>" name="create_date">
+
   </div>
   <!-- -------------- -->
   <div id="editor" class="editor" contenteditable="false">
+
     <div class="contentnews">
+      <!-- Mục lục -->
+      <div class="contentnews-listindex">
+        <button id="toggle-button"><i class="fa-solid fa-bars"></i></button>
+        <p>Mục lục</p>
+      </div>
+      <!-- End Mục lục -->
       <?php echo $content; ?>
     </div>
 

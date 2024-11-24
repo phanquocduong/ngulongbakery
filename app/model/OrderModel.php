@@ -34,5 +34,17 @@
             $sql = "UPDATE orders SET status = ? WHERE id = ?";
             return $this->db->execute($sql, [$status, $id]);
         }
+
+        function createOrder($idClient, $fullname, $email, $phone, $address, $total, $method, $note, $discountId) {
+            $sql = "INSERT INTO orders (`user_id`, `customer`, `email`, `phone`, `shipping_address`, `total_amount`, `payment_method`, `note`, `discount_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $this->db->execute($sql, [$idClient, $fullname, $email, $phone, $address, $total, $method, $note, $discountId]);
+            $lastId = $this->db->lastInsertId();
+            return $lastId;
+        }
+
+        function createOrderDetails($orderId, $unitPrice, $quantity, $name, $image) {
+            $sql = "INSERT INTO orderdetails (`order_id`, `unit_price`, `quantity`, `product_name`, `product_image`) VALUES (?, ?, ?, ?, ?)";
+            $this->db->execute($sql, [$orderId, $unitPrice, $quantity, $name, $image]);
+        }
     }
 ?>

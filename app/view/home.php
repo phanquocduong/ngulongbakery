@@ -8,8 +8,8 @@
                     <img src="public/upload/slider/slider3.png" alt="" class="slide" />
                 </div>
 
-                <a class="slideshow-prev" onclick="changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></a>
-                <a class="slideshow-next" onclick="changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></a>
+                <a class="slideshow-prev"><i class="fa-solid fa-chevron-left"></i></a>
+                <a class="slideshow-next"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
 
             <div class="banner-mobile">
@@ -287,10 +287,6 @@
             <!-- End promtional products section -->
 
             <!-- Start review section -->
-            <?php 
-                $review1 = $data['featuredReviews'][0];
-                $review2 = $data['featuredReviews'][1];
-            ?>
             <section class="review-section">
                 <h2 class="section-title">ĐÁNH GIÁ CỦA KHÁCH HÀNG</h2>
                 <div class="grid wide">
@@ -299,17 +295,17 @@
                             <div class="review-item">
                                 <div class="review-item__rating">
                                     <?php for ($i = 1; $i <= 5; $i++): ?>
-                                        <i class="star-icon-large fa-<?= $i <= $review1['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
+                                        <i class="star-icon-large fa-<?= $i <= $data['featuredReviews'][0]['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
                                     <?php endfor; ?>
                                 </div>
                                 <p class="review-item__content">Bánh rất ngon, mềm mịn và ngọt vừa phải. Dịch vụ giao hàng nhanh chóng, đóng gói cẩn thận. Mình rất hài lòng và sẽ ủng hộ tiệm lâu dài!</p>
                                 <div class="review-item__user">
                                     <img
-                                        src="public/upload/avatar/<?=$review1['avatar']?>"
+                                        src="public/upload/avatar/<?=$data['featuredReviews'][0]['avatar']?>"
                                         alt=""
                                         class="review-item__user-avatar"
                                     />
-                                    <span class="review-item__user-name"><?=$review1['full_name']?></span>
+                                    <span class="review-item__user-name"><?=$data['featuredReviews'][0]['full_name']?></span>
                                 </div>
                             </div>
                         </div>
@@ -327,17 +323,17 @@
                             <div class="review-item">
                                 <div class="review-item__rating">
                                     <?php for ($i = 1; $i <= 5; $i++): ?>
-                                        <i class="star-icon-large fa-<?= $i <= $review2['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
+                                        <i class="star-icon-large fa-<?= $i <= $data['featuredReviews'][1]['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
                                     <?php endfor; ?>
                                 </div>
-                                <p class="review-item__content"><?=$review2['comment']?></p>
+                                <p class="review-item__content"><?=$data['featuredReviews'][1]['comment']?></p>
                                 <div class="review-item__user">
                                     <img
-                                        src="public/upload/avatar/<?=$review2['avatar']?>"
+                                        src="public/upload/avatar/<?=$data['featuredReviews'][1]['avatar']?>"
                                         alt=""
                                         class="review-item__user-avatar"
                                     />
-                                    <span class="review-item__user-name"><?=$review2['full_name']?></span>
+                                    <span class="review-item__user-name"><?=$data['featuredReviews'][1]['full_name']?></span>
                                 </div>
                             </div>
                         </div>
