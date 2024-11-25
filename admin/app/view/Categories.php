@@ -48,10 +48,7 @@
                         <tbody>
                             <?php
                             foreach ($listCate as $key => $value) {
-                                $id = $value['id'];
-                                $name = $value['name'];
-                                $type = $value['type'];
-                                $image = $value['image'];
+                                extract($value);
                                 echo '<tr>
                                 <td>' . $id . '</td>
                                 <td>' . $name . '</td>
