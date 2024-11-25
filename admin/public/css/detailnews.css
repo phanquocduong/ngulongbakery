@@ -13,10 +13,6 @@ main{
     background-color: var(--white-color);
     text-align: left;
 }
-.d{
-margin: none;
-padding: 0;
-}
 .contentnews .contentnews-title{
     padding-top: 100px;
     padding-left: 100px;

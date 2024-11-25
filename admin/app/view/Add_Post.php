@@ -1,11 +1,10 @@
 <!-- Main Start -->
 <form action="index.php?page=addPost" method="POST" class="form form-group" enctype="multipart/form-data">
-    <div class="container" style="margin: none;
-padding: 0;">
+    <div class="container">
         <h1>Thêm bài viết</h1>
 
         <!-- Ngày tạo bài viết -->
-        <input type="text" class="date-create form-control" style="margin:0;" readonly value="" name="create_date">
+        <input type="text" class="date-create form-control" readonly value="" name="create_date" >
     </div>
     <br>
     <!-- -------------- -->
@@ -88,7 +87,7 @@ padding: 0;">
                 $categories = $categoryModel->getCate();
                 foreach ($categories as $category) {
                     extract($category);
-                    echo '<option value="' . $id . '">' . $name . '</option>';
+                    echo '<option value="' . $id . '">' . $name. '</option>';
                 }
                 ?>
             </select>
@@ -124,10 +123,8 @@ padding: 0;">
     <!-- -------------- -->
 
     <div class="container">
-        <a href="index.php?page=post_manage" class="btn btn-primary btn-danger" style="margin-left:20px;">Quay lại</a>
-        <input type="submit" name="submit" class="btn btn-primary m-2" style="width:5%">
-
+        <input type="submit" name="submit" class="btn btn-primary m-2" style="width:100%">
     </div>
 </form>
-
+<a href="index.php?page=post_manage" class="btn btn-primary btn-danger" style="margin-left:20px;">Quay lại</a>
 <!-- Main End -->

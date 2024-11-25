@@ -60,6 +60,7 @@ main {
 
 .contact_main-box-in-input {
     width: 100%;
+    height: 100%;
     border: 10px solid;
     padding: 20px 0;
     border-image-slice: 30; /* Cắt hình ảnh thành các phần viền */
