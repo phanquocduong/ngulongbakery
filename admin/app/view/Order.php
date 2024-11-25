@@ -5,10 +5,10 @@
       <h2 class="mb-0">Danh Sách Đơn Hàng</h2>
     </div>
     <!-- form search -->
-    <form class="d-none d-md-flex ms-4">
+    <form class="d-none d-md-flex ms-4" method="POST">
       <div class="input-group">
-        <input class="form-control border-0" type="search" placeholder="Tìm kiếm đơn hàng" />
-        <button class="btn">
+        <input class="form-control border-0" type="search" name='search_order' placeholder="Tìm kiếm đơn hàng" />
+        <button class="btn" name='button_order'>
           <span class="input-group-text bg-transparent border-0">
             <i class="fa fa-search"></i>
           </span>
@@ -30,11 +30,19 @@
           </tr>
         </thead>
         <tbody>
+          
           <?php
-          $order = new OrderModel();
-          $viewOrder = $order->getOrder();
-          ?>
-
+    // Including necessary files for controllers and models
+          require_once './app/controller/AdOrderController.php';
+          require_once './app/model/OrderModel.php';
+          $ordersController = new AdOrderController();
+          $ordersModel = new OrderModel();
+          if (isset($_POST['button_order']) && !empty($_POST['search_order'])) {
+          $viewOrder = $ordersController->searchOrder($_POST['search_order']);
+          } else {
+          $viewOrder = $ordersModel->getOrder();
+          }
+    ?>
           <?php
           foreach ($viewOrder as $key => $value) {
             extract($value);

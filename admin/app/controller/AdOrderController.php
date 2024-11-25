@@ -24,5 +24,22 @@ class AdOrderController
     {
         $this->renderview('order_detail', $this->data);
     }
+    public function searchOrder()
+    {
+        if (isset($_POST['button_order'])) {
+            $keyword = $_POST['search_order'];
+        } else {
+            echo "No keyword provided.";
+            return;
+        }
+    
+        $sql = "SELECT * FROM orders WHERE customer LIKE :keyword";
+        $params = [':keyword' => '%' . $keyword . '%'];
+    
+        $db = new Database(); // Ensure this uses your Database class
+        $results = $db->getAll($sql, $params);
+        $db = new Database();
+        return $db->getAll($sql, $params);
+    }
 }
 ?>

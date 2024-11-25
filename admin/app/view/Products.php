@@ -42,7 +42,7 @@
       $categoryMap[$category['id']] = $category['name'];
     }
     ?>
-
+    
     <!-- Product table -->
     <div class="table-responsive">
       <table class="table table-bordered">
