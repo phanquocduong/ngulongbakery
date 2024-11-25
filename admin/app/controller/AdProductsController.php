@@ -49,7 +49,10 @@ class AdProductsController
     {
         $this->renderview('edit_products', $this->data);
     }
-
+    public function getCategories()
+    {
+        return $this->category->getCate();
+    }
     public function addPro()
     {
         if (isset($_POST['submit'])) {
@@ -199,7 +202,7 @@ class AdProductsController
         }
         echo '<script>location.href="index.php?page=products"</script>';
     }
-    
+
     public function searchProducts()
     {
         if (isset($_POST['button_product'])) {
@@ -208,15 +211,15 @@ class AdProductsController
             echo "No keyword provided.";
             return;
         }
-    
+
         $sql = "SELECT * FROM products WHERE name LIKE :keyword";
         $params = [':keyword' => '%' . $keyword . '%'];
-    
+
         $db = new Database(); // Ensure this uses your Database class
         $results = $db->getAll($sql, $params);
         $db = new Database();
         return $db->getAll($sql, $params);
     }
-    
+
 }
 ?>

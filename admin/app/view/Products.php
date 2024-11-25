@@ -36,7 +36,7 @@
     }
 
     // Fetch categories
-    $listCate = $productsController->category->getCate();
+    $listCate = $productsController->getCategories();
     $categoryMap = [];
     foreach ($listCate as $category) {
       $categoryMap[$category['id']] = $category['name'];
