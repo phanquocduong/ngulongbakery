@@ -33,7 +33,7 @@ class UserModel{
         $params = [$data['email'], $data['full_name'], $data['phone'], $data['address'], $data['role_id'], $data['avatar'], $data['status'], $data['id']];
     
         // Debug dữ liệu
-        print_r($params);
+        // print_r($params);
     
         return $this->db->update($sql, $params);
     }
