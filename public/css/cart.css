@@ -8,7 +8,8 @@ main {
 
 .cart-body-left {
     background-color: var(--white-color);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .cart-body-left__content--mobile {
@@ -39,7 +40,6 @@ main {
 .product-link {
     font-size: 2rem;
     color: var(--black-color);
-    text-decoration: none;
 }
 
 .product-link__img {
@@ -71,11 +71,13 @@ main {
     align-items: center;
 }
 
-.quantity-minus {
+.quantity-minus,
+.quantity-plus {
     width: 38px;
     height: 38px;
     border: 1px solid #0e1c22;
     background-color: var(--white-color);
+    border-radius: 10px;
 }
 
 .quantity {
@@ -86,17 +88,10 @@ main {
     outline: none;
 }
 
-.quantity-plus {
-    width: 38px;
-    height: 38px;
-    border: 1px solid #0e1c22;
-    background-color: var(--white-color);
-}
-
 .quantity-minus:hover,
 .quantity-plus:hover {
-    background-color: #adafc6;
-    color: var(--white-color);
+    background-color: var(--linear-color);
+    color: var(--secondary-color);
     cursor: pointer;
 }
 
@@ -114,13 +109,13 @@ main {
     font-size: 1.5rem;
     color: #0e1c22;
     font-weight: bold;
-    text-decoration: none;
 }
 
 .cart-body-right {
     padding: 32px 24px 24px;
     background-color: var(--white-color);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .cart-total {
@@ -147,11 +142,16 @@ main {
 .cart-btn {
     font-size: 2.2rem;
     padding: 20px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color-bold);
     width: 100%;
-    border: 1px solid #0e1c22;
+    border: 1px solid #ebebeb;
     color: var(--white-color);
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-btn:hover {
+    filter: brightness(1.1);
 }
 
 .order-item + .order-item {
@@ -159,9 +159,10 @@ main {
 }
 
 .cart-empty {
-    padding: 16px;
+    padding: 20px;
     background-color: var(--white-color);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .cart-empty__title {
@@ -174,13 +175,17 @@ main {
 .continue-buy__btn {
     background-color: var(--primary-color-bold);
     display: inline-block;
-    border-radius: 0;
     line-height: 2.4rem;
     margin-top: 24px;
     padding: 20px;
     font-size: 2.2rem;
     color: var(--white-color);
-    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+}
+
+.continue-buy__btn:hover {
+    filter: brightness(1.1);
 }
 
 /* Tablet - PC low resolution */

@@ -12,17 +12,17 @@
             $this->favorite_products = new FavoriteProductsModel();
         }
 
-        private function renderView($view, $css, $js, $data = null, $numberPages = null) {
+        private function renderView($view, $css, $js, $data = [], $numberPages = null) {
             $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1", []);
             require_once 'app/view/template.php';
         }
 
         private function viewProducts($view, $css, $js, $condition = '', $params = [], $order = '') {
             $num = $_GET['num'] ?? 1;
-            $start = ($num - 1) * 9;
-            $data = $this->product->getProducts($condition, $params, $order, $start, 9);
+            $start = ($num - 1) * 12;
+            $data = $this->product->getProducts($condition, $params, $order, $start, 12);
             $quantity = $this->product->getProductCount($condition, $params);
-            $numberPages = ceil($quantity / 9);
+            $numberPages = ceil($quantity / 12);
             $this->renderView($view, $css, $js, $data, $numberPages);
         }
 
@@ -45,7 +45,7 @@
             $params = [];
         
             // Điều kiện lọc theo category_id
-            if (!empty($categoryId)) {
+            if ($categoryId != 0) {
                 $conditions[] = "category_id = ?";
                 $params[] = $categoryId;
             }
@@ -119,14 +119,14 @@
         private function renderPagination($currentPage, $numberPages) {
             $html = '';
             if ($currentPage > 1) {
-                $html .= '<a href="#" data-page="' . ($currentPage - 1) . '" class="pagination-link__icon-prev"><i class="fa-solid fa-chevron-left"></i></a>';
+                $html .= '<a href="#" data-page="'.($currentPage - 1).'" class="pagination-link__icon-prev"><i class="fa-solid fa-chevron-left"></i></a>';
             }
             for ($i = 1; $i <= $numberPages; $i++) {
-                $activeClass = $i == $currentPage ? 'pagination-link--active' : '';
-                $html .= '<a href="#" data-page="' . $i . '" class="pagination-link ' . $activeClass . '">' . $i . '</a>';
+                $activeClass = ($i == $currentPage) ? 'pagination-link--active' : '';
+                $html .= '<a href="#" data-page="'.$i.'" class="pagination-link '.$activeClass.'">'.$i.'</a>';
             }
             if ($currentPage < $numberPages) {
-                $html .= '<a href="#" data-page="' . ($currentPage + 1) . '" class="pagination-link__icon-next"><i class="fa-solid fa-chevron-right"></i></a>';
+                $html .= '<a href="#" data-page="'.($currentPage + 1).'" class="pagination-link__icon-next"><i class="fa-solid fa-chevron-right"></i></a>';
             }
             return $html;
         }
@@ -134,11 +134,11 @@
         public function viewProductDetails($css, $js) {
             if (isset($_GET['id'])) {
                 $data['product'] = $this->product->getProduct($_GET['id']);
-                if ($data['product'] == null) {
+                if (empty($data['product'])) {
                     echo '<script>window.location.href = "index.php";</script>';
                 } else {
                     $this->product->increaseProductViews($_GET['id']);
-                    $data['relatedProducts'] = $this->product->getRelatedProducts($data['product']['category_id'], $_GET['id']);
+                    $data['relatedProducts'] = $this->product->getRelatedProducts($data['product']['category_id'], $_GET['id'], $data['product']['tags']);
                     if (isset($_SESSION['user'])) {
                         $favorite =  $this->favorite_products->getFavoriteProduct($_SESSION['user']['id'], $_GET['id']);
                         if ($favorite) {
@@ -148,10 +148,10 @@
                     $this->renderView('product-details', $css, $js, $data);
                 }
             }
-        }
+        }   
 
         public function viewSearchProducts($css, $js) {
-            $this->viewProducts('search-products', $css, $js, 'WHERE name LIKE "%'.$_GET['keyword'].'%" AND status = 1 AND stock_quantity > 0', []);
+            $this->viewProducts('search-products', $css, $js, 'WHERE (name LIKE "%'.$_GET['keyword'].'%" OR tags LIKE "%'.$_GET['keyword'].'%") AND status = 1 AND stock_quantity > 0', []);
         }
 
         public function handleFavoriteProduct() {

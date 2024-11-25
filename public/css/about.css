@@ -31,26 +31,28 @@
     font-size: 3.5rem;
     font-weight: 500;
     width: 100%;
+    text-align: justify;
+}
+
+p {
+    text-align: justify;
 }
 
 .box_intro-dl ul {
     list-style: none;
-
     padding: 20px 0%;
     padding-top: 0;
     margin: 0;
 }
 
 .box_intro-dl ul li {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: var(--text-color);
 }
 
 .intro_web-nav {
     width: 100%;
-
     margin: 100px 0;
-
     display: flex;
     align-items: center;
     justify-content: center;

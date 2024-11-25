@@ -25,14 +25,13 @@ document.getElementById('province').addEventListener('change', function () {
     // Cập nhật phí vận chuyển trên giao diện
     const transportFeeElement = document.querySelector('.transport-fee__price');
     const transportFeeElementHidden = document.querySelector('.transport-fee__price--hidden');
-    transportFeeElement.textContent = new Intl.NumberFormat('en-US').format(transportFee) + 'đ';
-    transportFeeElementHidden.value = new Intl.NumberFormat('en-US').format(transportFee) + 'đ';
+    transportFeeElement.textContent = new Intl.NumberFormat().format(transportFee) + 'đ';
+    transportFeeElementHidden.value = transportFee;
 
     const grandTotal = parseInt(document.getElementById('total-payment').textContent.replace(/[^\d]/g, ''));
     const newTotal = grandTotal + transportFee;
-    document.getElementById('total-payment').textContent = new Intl.NumberFormat('en-US').format(newTotal) + 'đ';
-    const totalPaymentHidden = document.getElementById('total-payment-hidden');
-    totalPaymentHidden.value = newTotal;
+    document.getElementById('total-payment').textContent = new Intl.NumberFormat().format(newTotal) + 'đ';
+    document.getElementById('total-payment-hidden').value = newTotal;
 
     fetch(`index.php?page=get-districts&province_id=${provinceId}`)
         .then(response => response.json())

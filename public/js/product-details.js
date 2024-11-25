@@ -106,6 +106,7 @@ function closeImageModal() {
 document.addEventListener('DOMContentLoaded', () => {
     const reviewContainer = document.querySelector('#reviews');
     const productId = document.getElementById('productId').value;
+    const reviewsTab = document.getElementById('reviews-tab');
     let num = 1; // Khai báo num với giá trị mặc định là 1
 
     // Hàm loadReviews: Tải danh sách đánh giá từ server
@@ -115,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.success) {
                     reviewContainer.innerHTML = data.reviews.map(renderReviews).join('').concat(data.pagination);
+                    reviewsTab.innerText = `Đánh giá (${data.reviewCount})`;
 
                     // Lắng nghe sự kiện phân trang
                     const paginationContainer = document.querySelector('.pagination');

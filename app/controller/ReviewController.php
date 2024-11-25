@@ -16,13 +16,29 @@
             $comment = htmlspecialchars($_POST['comment']); // Lọc XSS
         
             // Xử lý upload ảnh
-            $images = null;
-            if (isset($_FILES['imageUpload']) && $_FILES['imageUpload']['error'] === UPLOAD_ERR_OK) {
-                $images = time() . '_' . basename($_FILES['imageUpload']['name']);
-                $targetFilePath = './public/upload/review/' . $images;
-                if (!move_uploaded_file($_FILES['imageUpload']['tmp_name'], $targetFilePath)) {
-                    echo '<script>alert("Lỗi khi upload hình ảnh.");</script>';
+            $uploadedImages = [];
+            if (isset($_FILES['imageUpload'])) {
+                $fileCount = count($_FILES['imageUpload']['name']);
+        
+                if ($fileCount > 3) {
+                    $_SESSION['error'] = "Bạn chỉ được phép tải lên tối đa 3 ảnh.";
+                    header("Location: index.php?page=account");
                     exit;
+                }
+        
+                for ($i = 0; $i < $fileCount; $i++) {
+                    if ($_FILES['imageUpload']['error'][$i] === UPLOAD_ERR_OK) {
+                        $fileName = time() . '_' . $_FILES['imageUpload']['name'][$i];
+                        $targetFilePath = './public/upload/review/' . $fileName;
+        
+                        if (move_uploaded_file($_FILES['imageUpload']['tmp_name'][$i], $targetFilePath)) {
+                            $uploadedImages[] = $fileName;
+                        } else {
+                            $_SESSION['error'] = "Lỗi khi upload hình ảnh.";
+                            header("Location: index.php?page=account");
+                            exit;
+                        }
+                    }
                 }
             }
         
@@ -30,10 +46,12 @@
             $productsDetails = $this->order->getOrderDetails($orderId);
             foreach ($productsDetails as $productDetails) {
                 $product = $this->product->getProductByName($productDetails['product_name']);
-                $result = $this->review->addReview($_SESSION['user']['id'], $rating, $images, $comment, $product['id']);
-                if (!$result) {
-                    echo '<script>alert("Có lỗi xảy ra, vui lòng thử lại.");</script>';
-                    echo '<script>window.location.href = "index.php?page=account";</script>';
+                $uploadedImagesString = implode(',', $uploadedImages);
+                $result = $this->review->addReview($_SESSION['user']['id'], $rating, $uploadedImagesString, $comment, $product['id'], 1);
+                $updateStatusResult = $this->order->updateReviewStatusOfOrder($orderId);
+                if (!$result || !$updateStatusResult) {
+                    $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại.";
+                    header("Location: index.php?page=account");
                     exit;
                 }
             }
@@ -54,14 +72,15 @@
             $order = 'created_at DESC';
 
             $reviews = $this->review->getReviewsOfProduct($whereConditions, $params, $order, $start, $limit);
-            $totalProducts = $this->review->getReviewCount($whereConditions, $params);
-            $numberPages = ceil($totalProducts / $limit);
+            $totalReviews = $this->review->getReviewCount($whereConditions, $params);
+            $numberPages = ceil($totalReviews / $limit);
     
             header('Content-Type: application/json');
             echo json_encode([
                 'success' => true,
                 'reviews' => $reviews,
-                'pagination' => $this->renderPagination($num, $numberPages)
+                'pagination' => $this->renderPagination($num, $numberPages),
+                'reviewCount' => $totalReviews
             ]);
         }
 

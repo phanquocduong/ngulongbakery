@@ -6,7 +6,8 @@ main {
 .details-box {
     padding: 85px 0 50px;
     background-color: var(--white-color);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .details-header__left {
@@ -21,6 +22,7 @@ main {
     margin-bottom: 14px;
     transition: opacity 0.5s ease; /* Hiệu ứng mờ dần */
     cursor: zoom-in;
+    border-radius: 2px;
 }
 
 .fade-in {
@@ -54,6 +56,7 @@ main {
     opacity: 0.5;
     cursor: pointer;
     transition: opacity 0.3s ease;
+    border-radius: 2px;
 }
 
 .extra-image.extra-image--bright {
@@ -133,6 +136,7 @@ main {
     border: 1px solid rgba(14, 28, 34, 0.3);
     background-color: var(--white-color);
     cursor: pointer;
+    border-radius: 4px;
 }
 
 .quantity-selection__action-edit {
@@ -169,7 +173,6 @@ main {
 
 .product-cate__link {
     color: var(--primary-color-bold);
-    text-decoration: none;
 }
 
 .heart-icon {
@@ -223,7 +226,7 @@ main {
     line-height: 4rem;
     color: var(--text-color);
     margin: 0;
-    margin: 0 0 20px 0;
+    margin: 0 0 13px 0;
 }
 
 .passage {
@@ -237,13 +240,14 @@ main {
 .image {
     width: 100%;
     margin: 0 0 26px 0;
+    border-radius: 4px;
 }
 
 .sub-title {
     font-size: 2.2rem;
     line-height: 3rem;
     color: var(--text-color);
-    margin: 0 0 20px 0;
+    margin: 0 0 13px 0;
 }
 
 .list {
@@ -318,7 +322,6 @@ main {
 .pagination-link__icon-next {
     display: inline-block;
     font-size: 2.4rem;
-    text-decoration: none;
     color: var(--secondary-color);
     padding: 6px;
 }

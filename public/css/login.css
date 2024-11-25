@@ -9,8 +9,9 @@ main {
     padding: 40px 48px 48px;
     background-color: var(--white-color);
     margin: 0 auto;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     display: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .login-form.login-form--active,
@@ -29,101 +30,98 @@ main {
     color: var(--secondary-color);
 }
 
-.email-form {
-    margin-bottom: 10px;
+.email-form,
+.password-form {
+    margin-bottom: 24px;
 }
 
 .form-label {
-    line-height: 2.1rem;
-    margin-bottom: 14px;
     font-size: 1.4rem;
-    color: #0e1c22;
-    opacity: 0.6;
-    display: block;
     font-weight: 700;
-    letter-spacing: 0.1rem;
+    color: #333;
+    margin-bottom: 12px;
+    display: block;
 }
 
 .form-control {
-    line-height: 3.4rem;
-    font-size: 1.8rem;
     width: 100%;
-    padding: 0 0 8px 0;
-    border: none;
-    border-bottom: 1px solid rgba(14, 28, 34, 0.4);
-    border-radius: 0;
+    padding: 12px;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     outline: none;
 }
 
-.password-form {
-    margin: 49px 0 10px 0;
+.form-control:focus {
+    box-shadow: 0 0 8px rgba(208, 154, 64, 0.5);
+    border: none;
 }
 
 .login-action,
 .submit-action {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .login-btn,
 .submit-btn {
-    line-height: 2rem;
-    display: inline-block;
-    border: 1px solid var(--secondary-color);
-    border-radius: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0 0 24px 0;
-    background-color: var(--white-color);
+    font-size: 1.8rem;
+    font-weight: 600;
+    background-color: #dca54a;
+    color: var(--white-color);
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    color: var(--secondary-color);
+    line-height: 2.2rem;
     transition: all 0.3s ease;
-}
-
-.login-btn {
-    padding: 12px 35px;
-}
-
-.submit-btn {
-    padding: 12px 60px;
 }
 
 .login-btn:hover,
 .submit-btn:hover {
-    background-color: var(--secondary-color);
-    color: var(--white-color);
+    filter: brightness(1.1);
+}
+
+.login-btn {
+    padding: 12px 30px;
+}
+
+.submit-btn {
+    padding: 12px 36px;
 }
 
 .register-title {
-    line-height: 2.4rem;
     font-size: 1.5rem;
-    margin-bottom: 56px;
+    color: var(--secondary-color);
+    display: block;
+    margin-top: 16px;
 }
 
 .back-login-title {
-    line-height: 2.4rem;
     font-size: 1.5rem;
+    color: var(--secondary-color);
+    display: block;
+    margin-top: 16px;
 }
 
 .register-title__link,
 .back-login-title__link {
-    text-decoration: none;
-    color: var(--secondary-color);
-    font-weight: bold;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    color: var(--primary-color-bold);
     cursor: pointer;
 }
 
 .forgot-pass__link {
-    color: var(--secondary-color);
-    font-weight: bold;
+    font-weight: 600;
+    color: var(--primary-color-bold);
     font-size: 1.5rem;
     cursor: pointer;
+    display: block;
+    margin-top: 50px;
 }
 
 .remember-me-box {
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    margin-left: 7px;
 }
 
 .remember-me__check-box {
@@ -145,29 +143,29 @@ main {
 }
 
 .errors {
-    border-radius: 3px;
-    padding: 6px 12px;
-    margin-bottom: 15px;
-    border: 1px solid transparent;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    text-align: left;
-    color: #d02e2e;
-    background-color: #fff6f6;
-    border-color: #d02e2e;
+    background-color: #fff3f3;
+    border-left: 5px solid #f4516c;
+    padding: 12px;
+    margin-bottom: 20px;
+    color: #f4516c;
+    font-size: 1.4rem;
 }
 
 .errors ul {
     margin: 0;
     padding: 0;
-    margin-left: 20px;
+    list-style-type: none;
+}
+
+.errors li {
+    padding-left: 20px;
 }
 
 /* Tablet - PC low resolution */
 @media (min-width: 740px) and (max-width: 1024px) {
     .login-form,
     .forgot-pass-form {
-        width: 500px;
+        width: 90%;
     }
 }
 

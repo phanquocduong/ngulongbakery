@@ -5,9 +5,9 @@ main {
 
 .main-content {
     background-color: var(--white-color);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     padding: 30px;
-    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .payment-section-title {
@@ -18,7 +18,6 @@ main {
 }
 
 .login-link {
-    text-decoration: none;
     color: var(--primary-color-bold);
 }
 
@@ -117,7 +116,6 @@ main {
 }
 
 .step-footer-previous-link {
-    text-decoration: none;
     color: var(--primary-color-bold);
     font-size: 1.4rem;
 }
@@ -186,7 +184,8 @@ main {
     padding: 56px 32px 0;
     background-color: #fafafa;
     border: 1px solid #d9d9d9;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     height: 100%;
 }
 
@@ -380,7 +379,6 @@ main {
     font-size: 1.4rem;
     margin-top: 5px;
     display: inline-block;
-    text-decoration: none;
 }
 
 .form-message {
@@ -391,6 +389,10 @@ main {
 
 /* Tablet - PC low resolution */
 @media (min-width: 740px) and (max-width: 1024px) {
+    .sidebar-wrap {
+        margin-top: 30px;
+    }
+
     .sidebar {
         padding: 56px 32px;
     }
@@ -398,6 +400,10 @@ main {
 
 /* Mobile */
 @media (max-width: 739px) {
+    .sidebar-wrap {
+        margin-top: 30px;
+    }
+
     .sidebar {
         padding: 56px 32px;
     }

@@ -50,6 +50,10 @@
                 </div>
                 <div class="update-action">
                     <button class="update-btn">Lưu</button>
+                    <div class="back-account-title">
+                        Trở lại
+                        <span class="back-account-title__link"><a href="index.php?page=account">Tài khoản</a></span>
+                    </div>
                 </div>
             </form>
         </main>
