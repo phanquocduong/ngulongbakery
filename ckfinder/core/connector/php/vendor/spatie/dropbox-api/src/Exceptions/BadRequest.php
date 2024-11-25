@@ -7,10 +7,22 @@ use Psr\Http\Message\ResponseInterface;
 
 class BadRequest extends Exception
 {
-    public ?string $dropboxCode = null;
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    public $response;
 
-    public function __construct(public ResponseInterface $response)
+    /**
+     * The dropbox error code supplied in the response.
+     *
+     * @var string|null
+     */
+    public $dropboxCode;
+
+    public function __construct(ResponseInterface $response)
     {
+        $this->response = $response;
+
         $body = json_decode($response->getBody(), true);
 
         if ($body !== null) {

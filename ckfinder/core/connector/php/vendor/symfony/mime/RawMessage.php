@@ -16,12 +16,14 @@ use Symfony\Component\Mime\Exception\LogicException;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class RawMessage
+class RawMessage implements \Serializable
 {
-    private iterable|string $message;
-    private bool $isGeneratorClosed;
+    private $message;
 
-    public function __construct(iterable|string $message)
+    /**
+     * @param iterable|string $message
+     */
+    public function __construct($message)
     {
         $this->message = $message;
     }
@@ -31,49 +33,50 @@ class RawMessage
         if (\is_string($this->message)) {
             return $this->message;
         }
-
-        $message = '';
-        foreach ($this->message as $chunk) {
-            $message .= $chunk;
+        if ($this->message instanceof \Traversable) {
+            $this->message = iterator_to_array($this->message, false);
         }
 
-        return $this->message = $message;
+        return $this->message = implode('', $this->message);
     }
 
     public function toIterable(): iterable
     {
-        if ($this->isGeneratorClosed ?? false) {
-            throw new LogicException('Unable to send the email as its generator is already closed.');
-        }
-
         if (\is_string($this->message)) {
             yield $this->message;
 
             return;
         }
 
-        if ($this->message instanceof \Generator) {
-            $message = '';
-            foreach ($this->message as $chunk) {
-                $message .= $chunk;
-                yield $chunk;
-            }
-            $this->isGeneratorClosed = !$this->message->valid();
-            $this->message = $message;
-
-            return;
-        }
-
+        $message = '';
         foreach ($this->message as $chunk) {
+            $message .= $chunk;
             yield $chunk;
         }
+        $this->message = $message;
     }
 
     /**
      * @throws LogicException if the message is not valid
      */
-    public function ensureValidity(): void
+    public function ensureValidity()
     {
+    }
+
+    /**
+     * @internal
+     */
+    final public function serialize(): string
+    {
+        return serialize($this->__serialize());
+    }
+
+    /**
+     * @internal
+     */
+    final public function unserialize($serialized)
+    {
+        $this->__unserialize(unserialize($serialized));
     }
 
     public function __serialize(): array

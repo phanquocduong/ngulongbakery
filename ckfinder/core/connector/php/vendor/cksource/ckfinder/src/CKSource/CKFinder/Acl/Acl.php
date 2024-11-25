@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -83,21 +83,20 @@ class Acl implements AclInterface
      *      'FILE_RENAME'   => true,
      *      'FILE_DELETE'   => true
      * )
-     *
      * @endcode
      *
      * If any permission is missing, it is inherited from the parent folder.
      *
      * @param array $aclConfigNodes Access Control Lists configuration nodes
      */
-    public function setRules(array $aclConfigNodes)
+    public function setRules($aclConfigNodes)
     {
         foreach ($aclConfigNodes as $node) {
-            $role = $node['role'] ?? '*';
+            $role = isset($node['role']) ? $node['role'] : '*';
 
-            $resourceType = $node['resourceType'] ?? '*';
+            $resourceType = isset($node['resourceType']) ? $node['resourceType'] : '*';
 
-            $folder = $node['folder'] ?? '/';
+            $folder = isset($node['folder']) ? $node['folder'] : '/';
 
             $permissions = Permission::getAll();
 

@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -52,7 +52,7 @@ class ArgumentResolver implements ArgumentResolverInterface
      *
      * @return array arguments used during the command callable execution
      */
-    public function getArguments(Request $request, callable $command, ?\ReflectionFunctionAbstract $reflector = null): array
+    public function getArguments(Request $request, callable $command)
     {
         $r = new \ReflectionMethod($command[0], $command[1]);
 
@@ -81,32 +81,26 @@ class ArgumentResolver implements ArgumentResolverInterface
                         $arguments[] = $this->app['backend_factory'];
 
                         break;
-
                     case 'ResourceTypeFactory':
                         $arguments[] = $this->app['resource_type_factory'];
 
                         break;
-
                     case 'Acl':
                         $arguments[] = $this->app['acl'];
 
                         break;
-
                     case 'WorkingFolder':
                         $arguments[] = $this->app['working_folder'];
 
                         break;
-
                     case 'ThumbnailRepository':
                         $arguments[] = $this->app['thumbnail_repository'];
 
                         break;
-
                     case 'ResizedImageRepository':
                         $arguments[] = $this->app['resized_image_repository'];
 
                         break;
-
                     case 'CacheManager':
                         $arguments[] = $this->app['cache'];
 

@@ -18,7 +18,7 @@
       language: "vi",
       ckfinder: {
         uploadUrl:
-          "ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json",
+          "/ngulongbakery/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json",
       },
       toolbar: {
         items: [
@@ -62,12 +62,13 @@
       },
     })
       .then((editor) => {
-        console.log(editor);
+        console.log("CKEditor initialized successfully!", editor);
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Error initializing CKEditor:", error);
       });
   });
+
   // định nghĩa popup ckfinder
   document.addEventListener("DOMContentLoaded", function () {
     function openPopup(idobj) {

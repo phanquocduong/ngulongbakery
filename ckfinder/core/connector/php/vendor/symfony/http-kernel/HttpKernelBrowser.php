@@ -30,13 +30,13 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HttpKernelBrowser extends AbstractBrowser
 {
-    protected HttpKernelInterface $kernel;
-    private bool $catchExceptions = true;
+    protected $kernel;
+    private $catchExceptions = true;
 
     /**
      * @param array $server The server parameters (equivalent of $_SERVER)
      */
-    public function __construct(HttpKernelInterface $kernel, array $server = [], ?History $history = null, ?CookieJar $cookieJar = null)
+    public function __construct(HttpKernelInterface $kernel, array $server = [], History $history = null, CookieJar $cookieJar = null)
     {
         // These class properties must be set before calling the parent constructor, as it may depend on it.
         $this->kernel = $kernel;
@@ -48,15 +48,19 @@ class HttpKernelBrowser extends AbstractBrowser
     /**
      * Sets whether to catch exceptions when the kernel is handling a request.
      */
-    public function catchExceptions(bool $catchExceptions): void
+    public function catchExceptions(bool $catchExceptions)
     {
         $this->catchExceptions = $catchExceptions;
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param Request $request
+     *
+     * @return Response
      */
-    protected function doRequest(object $request): Response
+    protected function doRequest(object $request)
     {
         $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, $this->catchExceptions);
 
@@ -68,9 +72,13 @@ class HttpKernelBrowser extends AbstractBrowser
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param Request $request
+     *
+     * @return string
      */
-    protected function getScript(object $request): string
+    protected function getScript(object $request)
     {
         $kernel = var_export(serialize($this->kernel), true);
         $request = var_export(serialize($request), true);
@@ -79,7 +87,7 @@ class HttpKernelBrowser extends AbstractBrowser
 
         $requires = '';
         foreach (get_declared_classes() as $class) {
-            if (str_starts_with($class, 'ComposerAutoloaderInit')) {
+            if (0 === strpos($class, 'ComposerAutoloaderInit')) {
                 $r = new \ReflectionClass($class);
                 $file = \dirname($r->getFileName(), 2).'/autoload.php';
                 if (file_exists($file)) {
@@ -106,7 +114,7 @@ EOF;
         return $code.$this->getHandleScript();
     }
 
-    protected function getHandleScript(): string
+    protected function getHandleScript()
     {
         return <<<'EOF'
 $response = $kernel->handle($request);
@@ -119,7 +127,12 @@ echo serialize($response);
 EOF;
     }
 
-    protected function filterRequest(DomRequest $request): Request
+    /**
+     * {@inheritdoc}
+     *
+     * @return Request
+     */
+    protected function filterRequest(DomRequest $request)
     {
         $httpRequest = Request::create($request->getUri(), $request->getMethod(), $request->getParameters(), $request->getCookies(), $request->getFiles(), $server = $request->getServer(), $request->getContent());
         if (!isset($server['HTTP_ACCEPT'])) {
@@ -143,8 +156,10 @@ EOF;
      * an invalid UploadedFile is returned with an error set to UPLOAD_ERR_INI_SIZE.
      *
      * @see UploadedFile
+     *
+     * @return array
      */
-    protected function filterFiles(array $files): array
+    protected function filterFiles(array $files)
     {
         $filtered = [];
         foreach ($files as $key => $value) {
@@ -175,9 +190,13 @@ EOF;
     }
 
     /**
-     * @param Response $response
+     * {@inheritdoc}
+     *
+     * @param Request $request
+     *
+     * @return DomResponse
      */
-    protected function filterResponse(object $response): DomResponse
+    protected function filterResponse(object $response)
     {
         // this is needed to support StreamedResponse
         ob_start();

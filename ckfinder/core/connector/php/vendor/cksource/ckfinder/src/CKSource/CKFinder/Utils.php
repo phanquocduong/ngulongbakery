@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -180,7 +180,7 @@ class Utils
 
     /**
      * Removes any cache headers that might be set by the session cache limiter.
-     * See @see http://php.net/manual/en/function.session-cache-limiter.php.
+     * See @link http://php.net/manual/en/function.session-cache-limiter.php.
      */
     public static function removeSessionCacheHeaders()
     {
@@ -252,19 +252,19 @@ class Utils
             }
         }
 
-        // type = javascript
+        //type = javascript
         if (preg_match('!type\s*=\s*[\'"]?\s*(?:\w*/)?(?:ecma|java)!sim', $chunk)) {
             return true;
         }
 
-        // href = javascript
-        // src = javascript
-        // data = javascript
+        //href = javascript
+        //src = javascript
+        //data = javascript
         if (preg_match('!(?:href|src|data)\s*=\s*[\'"]?\s*(?:ecma|java)script:!sim', $chunk)) {
             return true;
         }
 
-        // url(javascript
+        //url(javascript
         if (preg_match('!url\s*\(\s*[\'"]?\s*(?:ecma|java)script:!sim', $chunk)) {
             return true;
         }

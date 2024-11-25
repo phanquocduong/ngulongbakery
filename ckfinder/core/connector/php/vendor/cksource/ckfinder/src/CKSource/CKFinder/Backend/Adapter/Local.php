@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -22,10 +22,7 @@ use CKSource\CKFinder\Exception\FolderNotFoundException;
 use CKSource\CKFinder\Filesystem\Path;
 use CKSource\CKFinder\ResourceType\ResourceType;
 use CKSource\CKFinder\Utils;
-use League\Flysystem\FilesystemException;
-use League\Flysystem\Local\LocalFilesystemAdapter;
-use League\Flysystem\PathPrefixer;
-use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
+use SplFileInfo;
 
 /**
  * Local file system adapter.
@@ -34,15 +31,8 @@ use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
  * additions for `chmod` permissions management and conversions
  * between the file system and connector file name encoding.
  */
-class Local extends LocalFilesystemAdapter
+class Local extends \League\Flysystem\Adapter\Local
 {
-    /**
-     * Prefix service.
-     *
-     * @var PathPrefixer
-     */
-    public $pathPrefixer;
-
     /**
      * Backend configuration node.
      *
@@ -76,31 +66,23 @@ class Local extends LocalFilesystemAdapter
             throw new AccessDeniedException(sprintf('The root folder of backend "%s" is not readable (%s)', $backendConfig['name'], $backendConfig['root']));
         }
 
-        $this->pathPrefixer = new PathPrefixer($backendConfig['root'] ?? '');
-
-        $visibilityConverter = PortableVisibilityConverter::fromArray([
-            'file' => [
-                'public' => $backendConfig['chmodFiles'],
-                'private' => $backendConfig['chmodFiles'],
-            ],
-            'dir' => [
-                'public' => $backendConfig['chmodFolders'],
-                'private' => $backendConfig['chmodFolders'],
-            ],
+        parent::__construct($backendConfig['root'], LOCK_EX, self::SKIP_LINKS, [
+            'file' => ['public' => $backendConfig['chmodFiles']],
+            'dir' => ['public' => $backendConfig['chmodFolders']],
         ]);
-
-        parent::__construct($backendConfig['root'], $visibilityConverter, self::SKIP_LINKS);
     }
 
     /**
      * Creates a stream for writing to a file.
      *
-     * @return bool|resource
+     * @param string $path
+     *
+     * @return resource
      */
-    public function createWriteStream(string $path): bool
+    public function createWriteStream($path)
     {
-        $location = $this->pathPrefixer->prefixPath($path);
-        $this->ensureDirectoryExists(\dirname($location), LOCK_EX);
+        $location = $this->applyPathPrefix($path);
+        $this->ensureDirectory(\dirname($location));
         $chmodFiles = $this->backendConfig['chmodFiles'];
 
         if (!$stream = fopen($location, 'a+')) {
@@ -116,10 +98,14 @@ class Local extends LocalFilesystemAdapter
 
     /**
      * Checks if the directory contains subdirectories.
+     *
+     * @param string $clientPath
+     *
+     * @return bool
      */
-    public function containsDirectories(Backend $backend, ResourceType $resourceType, string $clientPath, Acl $acl): bool
+    public function containsDirectories(Backend $backend, ResourceType $resourceType, $clientPath, Acl $acl)
     {
-        $location = rtrim($this->pathPrefixer->prefixPath(Path::combine($resourceType->getDirectory(), $clientPath)), '/\\').'/';
+        $location = rtrim($this->applyPathPrefix(Path::combine($resourceType->getDirectory(), $clientPath)), '/\\').'/';
 
         if (!is_dir($location) || (false === $fh = @opendir($location))) {
             return false;
@@ -155,20 +141,44 @@ class Local extends LocalFilesystemAdapter
     /**
      * {@inheritdoc}
      */
-    public function deleteDir($dirname): bool
+    public function deleteDir($dirname)
     {
-        $location = $this->pathPrefixer->prefixPath($dirname);
+        $location = $this->applyPathPrefix($dirname);
 
         if ($this->backendConfig['followSymlinks'] && is_link($location)) {
             return unlink($location);
         }
 
-        try {
-            parent::deleteDirectory($dirname);
-        } catch (FilesystemException $e) {
-            return false;
+        return parent::deleteDir($dirname);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function normalizeFileInfo(SplFileInfo $file)
+    {
+        if ($this->backendConfig['followSymlinks']) {
+            return $this->mapFileInfo($file);
         }
 
-        return true;
+        return parent::normalizeFileInfo($file);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function mapFileInfo(SplFileInfo $file)
+    {
+        $normalized = parent::mapFileInfo($file);
+
+        if ($this->backendConfig['followSymlinks'] && $file->isLink()) {
+            $normalized['type'] = $file->isDir() ? 'dir' : 'file';
+
+            if ('file' === $normalized['type']) {
+                $normalized['size'] = $file->getSize();
+            }
+        }
+
+        return $normalized;
     }
 }

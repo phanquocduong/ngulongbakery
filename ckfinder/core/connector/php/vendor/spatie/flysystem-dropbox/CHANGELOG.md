@@ -2,26 +2,6 @@
 
 All notable changes to `flysystem-dropbox` will be documented in this file
 
-## 2.0.4 - 2021-04-26
-
-- avoid listing the base directory itself in listContents calls (#73)
-
-## 2.0.3 - 2021-04-25
-
-- make listing a non-created directory not throw an exception (#72)
-
-## 2.0.2 - 2021-03-31
-
-- use generator in listContents call for upstream compliance (#66)
-
-## 2.0.1 - 2021-03-31
-
-- fix bugs discovered after real-world use (#63)
-
-## 2.0.0 - 2021-03-28
-
-- add support from Flysystem v2
-
 ## 1.2.3 - 2020-12-27
 
 - add support for PHP 8

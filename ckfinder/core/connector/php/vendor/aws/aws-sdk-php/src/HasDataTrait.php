@@ -10,9 +10,6 @@ trait HasDataTrait
     /** @var array */
     private $data = [];
 
-    /**
-     * @return \Traversable
-     */
     #[\ReturnTypeWillChange]
     public function getIterator()
     {
@@ -38,27 +35,18 @@ trait HasDataTrait
         return $value;
     }
 
-    /**
-     * @return void
-     */
     #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->data[$offset] = $value;
     }
 
-    /**
-     * @return bool
-     */
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->data[$offset]);
     }
 
-    /**
-     * @return void
-     */
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
@@ -70,9 +58,6 @@ trait HasDataTrait
         return $this->data;
     }
 
-    /**
-     * @return int
-     */
     #[\ReturnTypeWillChange]
     public function count()
     {

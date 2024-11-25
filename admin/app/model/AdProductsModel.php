@@ -7,13 +7,32 @@ class AdProductsModel
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
-    public function getProducts()
+    public function getProducts($limit = 10, $offset = 0)
     {
+        // Đảm bảo rằng giá trị offset không âm
+        $offset = max(0, $offset);
+    
         $sql = "SELECT products.*, categories.name AS category_name
-                FROM products
-                JOIN categories ON products.category_id = categories.id ORDER BY products.id DESC";
-        return $this->db->getAll($sql);
+            FROM products
+            JOIN categories ON products.category_id = categories.id
+            ORDER BY products.id DESC
+            LIMIT :limit OFFSET :offset";
+    
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getTotalProducts()
+    {
+        $sql = "SELECT COUNT(*) as total FROM products";
+        $stmt = $this->db->query($sql);
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
     public function getProductById($id)
     {
         $sql = "SELECT * FROM products WHERE id = ?";
@@ -53,6 +72,14 @@ class AdProductsModel
         $sql = "DELETE FROM products WHERE id = ?";
         $param = [$id];
         return $this->db->delete($sql, $param);
+    }
+    public function getReviews()
+    {
+        $sql = "SELECT products.id AS product_id, reviews.id AS review_id, reviews.comment AS contents, reviews.created_at AS date_comments, reviews.rating AS rating, reviews.images AS img, users.id AS user_id, users.full_name AS username
+                FROM products 
+                JOIN reviews ON reviews.product_id = products.id 
+                JOIN users ON reviews.user_id = users.id";
+        return $this->db->getAll($sql);
     }
 }
 

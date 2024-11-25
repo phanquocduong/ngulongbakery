@@ -14,7 +14,7 @@ namespace Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 /**
@@ -22,23 +22,26 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class ServiceValueResolver implements ValueResolverInterface
+final class ServiceValueResolver implements ArgumentValueResolverInterface
 {
-    private ContainerInterface $container;
+    private $container;
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
-    public function resolve(Request $request, ArgumentMetadata $argument): array
+    /**
+     * {@inheritdoc}
+     */
+    public function supports(Request $request, ArgumentMetadata $argument): bool
     {
         $controller = $request->attributes->get('_controller');
 
         if (\is_array($controller) && \is_callable($controller, true) && \is_string($controller[0])) {
             $controller = $controller[0].'::'.$controller[1];
         } elseif (!\is_string($controller) || '' === $controller) {
-            return [];
+            return false;
         }
 
         if ('\\' === $controller[0]) {
@@ -49,12 +52,29 @@ final class ServiceValueResolver implements ValueResolverInterface
             $controller = substr($controller, 0, $i).strtolower(substr($controller, $i));
         }
 
-        if (!$this->container->has($controller) || !$this->container->get($controller)->has($argument->getName())) {
-            return [];
+        return $this->container->has($controller) && $this->container->get($controller)->has($argument->getName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resolve(Request $request, ArgumentMetadata $argument): iterable
+    {
+        if (\is_array($controller = $request->attributes->get('_controller'))) {
+            $controller = $controller[0].'::'.$controller[1];
+        }
+
+        if ('\\' === $controller[0]) {
+            $controller = ltrim($controller, '\\');
+        }
+
+        if (!$this->container->has($controller)) {
+            $i = strrpos($controller, ':');
+            $controller = substr($controller, 0, $i).strtolower(substr($controller, $i));
         }
 
         try {
-            return [$this->container->get($controller)->get($argument->getName())];
+            yield $this->container->get($controller)->get($argument->getName());
         } catch (RuntimeException $e) {
             $what = sprintf('argument $%s of "%s()"', $argument->getName(), $controller);
             $message = preg_replace('/service "\.service_locator\.[^"]++"/', $what, $e->getMessage());
@@ -64,6 +84,7 @@ final class ServiceValueResolver implements ValueResolverInterface
             }
 
             $r = new \ReflectionProperty($e, 'message');
+            $r->setAccessible(true);
             $r->setValue($e, $message);
 
             throw $e;

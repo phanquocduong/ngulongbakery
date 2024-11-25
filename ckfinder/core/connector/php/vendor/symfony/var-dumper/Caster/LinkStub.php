@@ -18,16 +18,19 @@ namespace Symfony\Component\VarDumper\Caster;
  */
 class LinkStub extends ConstStub
 {
-    public bool $inVendor = false;
+    public $inVendor = false;
 
     private static array $vendorRoots;
     private static array $composerRoots = [];
 
-    public function __construct(string $label, int $line = 0, ?string $href = null)
+    public function __construct(string $label, int $line = 0, string $href = null)
     {
         $this->value = $label;
 
-        if (!\is_string($href ??= $label)) {
+        if (null === $href) {
+            $href = $label;
+        }
+        if (!\is_string($href)) {
             return;
         }
         if (str_starts_with($href, 'file://')) {
@@ -60,7 +63,7 @@ class LinkStub extends ConstStub
         }
     }
 
-    private function getComposerRoot(string $file, bool &$inVendor): string|false
+    private function getComposerRoot(string $file, bool &$inVendor)
     {
         if (!isset(self::$vendorRoots)) {
             self::$vendorRoots = [];

@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -34,7 +34,7 @@ class CommandResolver implements ControllerResolverInterface
     /**
      * The name of the method to execute in commands classes.
      */
-    public const COMMAND_EXECUTE_METHOD = 'execute';
+    const COMMAND_EXECUTE_METHOD = 'execute';
 
     /**
      * The commands class namespace.
@@ -91,12 +91,12 @@ class CommandResolver implements ControllerResolverInterface
      *
      * @param Request $request current Request instance
      *
-     * @return callable|false callable built to execute the command
-     *
      * @throws InvalidCommandException   if a valid command cannot be found
      * @throws MethodNotAllowedException if a command was called using an invalid HTTP method
+     *
+     * @return callable callable built to execute the command
      */
-    public function getController(Request $request): callable|false
+    public function getController(Request $request)
     {
         $commandName = ucfirst((string) $request->get('command'));
 

@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -17,7 +17,6 @@ namespace CKSource\CKFinder\Command;
 use CKSource\CKFinder\Acl\Permission;
 use CKSource\CKFinder\Filesystem\Folder\WorkingFolder;
 use CKSource\CKFinder\Utils;
-use League\Flysystem\FileAttributes;
 
 class GetFiles extends CommandAbstract
 {
@@ -30,13 +29,11 @@ class GetFiles extends CommandAbstract
 
         $data->files = [];
 
-        /** @var FileAttributes $file */
         foreach ($files as $file) {
-            $path_parts = pathinfo($file->path());
             $fileObject = [
-                'name' => $path_parts['basename'],
-                'date' => Utils::formatDate($file->lastModified()),
-                'size' => Utils::formatSize($file->fileSize()),
+                'name' => $file['basename'],
+                'date' => Utils::formatDate($file['timestamp']),
+                'size' => Utils::formatSize($file['size']),
             ];
 
             $data->files[] = $fileObject;

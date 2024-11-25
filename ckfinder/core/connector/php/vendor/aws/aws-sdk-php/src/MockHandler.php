@@ -33,12 +33,11 @@ class MockHandler implements \Countable
         callable $onFulfilled = null,
         callable $onRejected = null
     ) {
-        $this->queue = [];
         $this->onFulfilled = $onFulfilled;
         $this->onRejected = $onRejected;
 
         if ($resultOrQueue) {
-            call_user_func_array([$this, 'append'], array_values($resultOrQueue));
+            call_user_func_array([$this, 'append'], $resultOrQueue);
         }
     }
 

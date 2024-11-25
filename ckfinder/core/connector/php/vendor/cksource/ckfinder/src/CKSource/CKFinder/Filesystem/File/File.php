@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -30,7 +30,7 @@ abstract class File
     /**
      * Constant used to mark files without extension.
      */
-    public const NO_EXTENSION = 'NO_EXT';
+    const NO_EXTENSION = 'NO_EXT';
 
     /**
      * File name.
@@ -211,7 +211,7 @@ abstract class File
      */
     public static function secureName($fileName, $disallowUnsafeCharacters = true, $forceAscii = false)
     {
-        $fileName = $fileName ? str_replace([':', '*', '?', '|', '/'], '_', $fileName) : '';
+        $fileName = str_replace([':', '*', '?', '|', '/'], '_', $fileName);
 
         if ($disallowUnsafeCharacters) {
             $fileName = str_replace(';', '_', $fileName);

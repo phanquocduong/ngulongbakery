@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -20,8 +20,6 @@ use CKSource\CKFinder\Event\RenameFileEvent;
 use CKSource\CKFinder\Exception\InvalidNameException;
 use CKSource\CKFinder\Filesystem\File\RenamedFile;
 use CKSource\CKFinder\Filesystem\Folder\WorkingFolder;
-use Exception;
-use League\Flysystem\FilesystemException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,11 +29,7 @@ class RenameFile extends CommandAbstract
 
     protected $requires = [Permission::FILE_RENAME];
 
-    /**
-     * @throws InvalidNameException
-     * @throws Exception|FilesystemException
-     */
-    public function execute(Request $request, WorkingFolder $workingFolder, EventDispatcher $dispatcher): array
+    public function execute(Request $request, WorkingFolder $workingFolder, EventDispatcher $dispatcher)
     {
         $fileName = (string) $request->query->get('fileName');
         $newFileName = (string) $request->query->get('newFileName');

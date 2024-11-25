@@ -24,9 +24,9 @@ class ResponseHeaderBag extends HeaderBag
     public const DISPOSITION_ATTACHMENT = 'attachment';
     public const DISPOSITION_INLINE = 'inline';
 
-    protected array $computedCacheControl = [];
-    protected array $cookies = [];
-    protected array $headerNames = [];
+    protected $computedCacheControl = [];
+    protected $cookies = [];
+    protected $headerNames = [];
 
     public function __construct(array $headers = [])
     {
@@ -44,8 +44,10 @@ class ResponseHeaderBag extends HeaderBag
 
     /**
      * Returns the headers, with original capitalizations.
+     *
+     * @return array
      */
-    public function allPreserveCase(): array
+    public function allPreserveCase()
     {
         $headers = [];
         foreach ($this->all() as $name => $value) {
@@ -55,7 +57,7 @@ class ResponseHeaderBag extends HeaderBag
         return $headers;
     }
 
-    public function allPreserveCaseWithoutCookies(): array
+    public function allPreserveCaseWithoutCookies()
     {
         $headers = $this->allPreserveCase();
         if (isset($this->headerNames['set-cookie'])) {
@@ -65,7 +67,10 @@ class ResponseHeaderBag extends HeaderBag
         return $headers;
     }
 
-    public function replace(array $headers = []): void
+    /**
+     * {@inheritdoc}
+     */
+    public function replace(array $headers = [])
     {
         $this->headerNames = [];
 
@@ -80,7 +85,10 @@ class ResponseHeaderBag extends HeaderBag
         }
     }
 
-    public function all(?string $key = null): array
+    /**
+     * {@inheritdoc}
+     */
+    public function all(string $key = null)
     {
         $headers = parent::all();
 
@@ -97,7 +105,10 @@ class ResponseHeaderBag extends HeaderBag
         return $headers;
     }
 
-    public function set(string $key, string|array|null $values, bool $replace = true): void
+    /**
+     * {@inheritdoc}
+     */
+    public function set(string $key, $values, bool $replace = true)
     {
         $uniqueKey = strtr($key, self::UPPER, self::LOWER);
 
@@ -125,7 +136,10 @@ class ResponseHeaderBag extends HeaderBag
         }
     }
 
-    public function remove(string $key): void
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(string $key)
     {
         $uniqueKey = strtr($key, self::UPPER, self::LOWER);
         unset($this->headerNames[$uniqueKey]);
@@ -147,17 +161,23 @@ class ResponseHeaderBag extends HeaderBag
         }
     }
 
-    public function hasCacheControlDirective(string $key): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCacheControlDirective(string $key)
     {
         return \array_key_exists($key, $this->computedCacheControl);
     }
 
-    public function getCacheControlDirective(string $key): bool|string|null
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheControlDirective(string $key)
     {
         return $this->computedCacheControl[$key] ?? null;
     }
 
-    public function setCookie(Cookie $cookie): void
+    public function setCookie(Cookie $cookie)
     {
         $this->cookies[$cookie->getDomain()][$cookie->getPath()][$cookie->getName()] = $cookie;
         $this->headerNames['set-cookie'] = 'Set-Cookie';
@@ -166,9 +186,11 @@ class ResponseHeaderBag extends HeaderBag
     /**
      * Removes a cookie from the array, but does not unset it in the browser.
      */
-    public function removeCookie(string $name, ?string $path = '/', ?string $domain = null): void
+    public function removeCookie(string $name, ?string $path = '/', string $domain = null)
     {
-        $path ??= '/';
+        if (null === $path) {
+            $path = '/';
+        }
 
         unset($this->cookies[$domain][$path][$name]);
 
@@ -192,7 +214,7 @@ class ResponseHeaderBag extends HeaderBag
      *
      * @throws \InvalidArgumentException When the $format is invalid
      */
-    public function getCookies(string $format = self::COOKIES_FLAT): array
+    public function getCookies(string $format = self::COOKIES_FLAT)
     {
         if (!\in_array($format, [self::COOKIES_FLAT, self::COOKIES_ARRAY])) {
             throw new \InvalidArgumentException(sprintf('Format "%s" invalid (%s).', $format, implode(', ', [self::COOKIES_FLAT, self::COOKIES_ARRAY])));
@@ -216,20 +238,16 @@ class ResponseHeaderBag extends HeaderBag
 
     /**
      * Clears a cookie in the browser.
-     *
-     * @param bool $partitioned
      */
-    public function clearCookie(string $name, ?string $path = '/', ?string $domain = null, bool $secure = false, bool $httpOnly = true, ?string $sameSite = null /* , bool $partitioned = false */): void
+    public function clearCookie(string $name, ?string $path = '/', string $domain = null, bool $secure = false, bool $httpOnly = true, string $sameSite = null)
     {
-        $partitioned = 6 < \func_num_args() ? \func_get_arg(6) : false;
-
-        $this->setCookie(new Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, false, $sameSite, $partitioned));
+        $this->setCookie(new Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, false, $sameSite));
     }
 
     /**
      * @see HeaderUtils::makeDisposition()
      */
-    public function makeDisposition(string $disposition, string $filename, string $filenameFallback = ''): string
+    public function makeDisposition(string $disposition, string $filename, string $filenameFallback = '')
     {
         return HeaderUtils::makeDisposition($disposition, $filename, $filenameFallback);
     }
@@ -239,8 +257,10 @@ class ResponseHeaderBag extends HeaderBag
      *
      * This considers several other headers and calculates or modifies the
      * cache-control header to a sensible, conservative value.
+     *
+     * @return string
      */
-    protected function computeCacheControlValue(): string
+    protected function computeCacheControlValue()
     {
         if (!$this->cacheControl) {
             if ($this->has('Last-Modified') || $this->has('Expires')) {

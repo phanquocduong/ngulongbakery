@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -84,14 +84,14 @@ class EditedFile extends ExistingFile
     /**
      * Validates the file.
      *
-     * @return bool `true` if the file passed validation
-     *
      * @throws AlreadyExistsException
      * @throws FileNotFoundException
      * @throws InvalidExtensionException
      * @throws InvalidNameException
      * @throws InvalidRequestException
      * @throws InvalidUploadException
+     *
+     * @return bool `true` if the file passed validation
      */
     public function isValid()
     {
@@ -138,8 +138,8 @@ class EditedFile extends ExistingFile
         }
 
         if ($this->newContents) {
-            if (Utils::containsHtml(substr($this->newContents, 0, 1024))
-                && !\in_array(strtolower($this->newFileName ? $this->getNewExtension() : $this->getExtension()), $this->config->get('htmlExtensions'), true)) {
+            if (Utils::containsHtml(substr($this->newContents, 0, 1024)) &&
+                !\in_array(strtolower($this->newFileName ? $this->getNewExtension() : $this->getExtension()), $this->config->get('htmlExtensions'), true)) {
                 throw new InvalidUploadException('HTML detected in disallowed file type', Error::UPLOADED_WRONG_HTML_FILE);
             }
 
@@ -186,8 +186,10 @@ class EditedFile extends ExistingFile
      *
      * @param string      $contents new file contents
      * @param null|string $filePath optional path if new contents should be saved in a new file
+     *
+     * @return bool
      */
-    public function save($contents, $filePath = null): bool
+    public function save($contents, $filePath = null)
     {
         return parent::save($contents, $this->newFileName ? Path::combine($this->getPath(), $this->newFileName) : null);
     }

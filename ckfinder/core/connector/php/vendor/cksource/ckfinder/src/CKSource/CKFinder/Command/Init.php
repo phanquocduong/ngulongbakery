@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -87,18 +87,18 @@ class Init extends CommandAbstract
         if (!empty($resourceTypesNames)) {
             $phpMaxSize = 0;
 
-            $maxUpload = Utils::returnBytes(\ini_get('upload_max_filesize'));
+            $maxUpload = Utils::returnBytes(ini_get('upload_max_filesize'));
             if ($maxUpload) {
                 $phpMaxSize = $maxUpload;
             }
 
-            $maxPost = Utils::returnBytes(\ini_get('post_max_size'));
+            $maxPost = Utils::returnBytes(ini_get('post_max_size'));
             if ($maxPost) {
                 $phpMaxSize = $phpMaxSize ? min($phpMaxSize, $maxPost) : $maxPost;
             }
 
-            // ini_get('memory_limit') only works if compiled with "--enable-memory-limit"
-            $memoryLimit = Utils::returnBytes(@\ini_get('memory_limit'));
+            //ini_get('memory_limit') only works if compiled with "--enable-memory-limit"
+            $memoryLimit = Utils::returnBytes(@ini_get('memory_limit'));
             if ($memoryLimit && -1 !== $memoryLimit) {
                 $phpMaxSize = $phpMaxSize ? min($phpMaxSize, $memoryLimit) : $memoryLimit;
             }

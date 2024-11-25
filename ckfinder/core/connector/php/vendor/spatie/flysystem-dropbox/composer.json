@@ -20,13 +20,12 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "league/flysystem": "^2.0.4 || ^3.0.0",
-        "spatie/dropbox-api": "^1.17.1"
+        "php": "^7.0 || ^8.0",
+        "league/flysystem": "^1.0.20",
+        "spatie/dropbox-api": "^1.1.0"
     },
     "require-dev": {
-        "phpspec/prophecy-phpunit": "^2.0.1",
-        "phpunit/phpunit": "^9.5.4"
+        "phpunit/phpunit": "^6.5.14 || ^7.5.20 || ^8.5.11 || ^9.4.3"
     },
     "autoload": {
         "psr-4": {

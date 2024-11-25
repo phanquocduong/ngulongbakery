@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -19,7 +19,6 @@ use CKSource\CKFinder\Acl\Permission;
 use CKSource\CKFinder\Error;
 use CKSource\CKFinder\Event\CKFinderEvent;
 use CKSource\CKFinder\Event\DeleteFileEvent;
-use CKSource\CKFinder\Exception\InvalidExtensionException;
 use CKSource\CKFinder\Exception\InvalidRequestException;
 use CKSource\CKFinder\Exception\UnauthorizedException;
 use CKSource\CKFinder\Filesystem\File\DeletedFile;
@@ -35,14 +34,9 @@ class DeleteFiles extends CommandAbstract
         Permission::FILE_DELETE,
     ];
 
-    /**
-     * @throws InvalidExtensionException
-     * @throws InvalidRequestException
-     * @throws UnauthorizedException
-     */
-    public function execute(Request $request, ResourceTypeFactory $resourceTypeFactory, Acl $acl, EventDispatcher $dispatcher): array
+    public function execute(Request $request, ResourceTypeFactory $resourceTypeFactory, Acl $acl, EventDispatcher $dispatcher)
     {
-        $deletedFiles = $request->request->all('files');
+        $deletedFiles = (array) $request->request->get('files');
 
         $deleted = 0;
 
