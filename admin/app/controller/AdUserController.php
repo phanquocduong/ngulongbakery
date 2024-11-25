@@ -107,6 +107,12 @@ class AdAccountsController{
             echo "Không tìm thấy thông tin cần thiết!";
         }
     }
+    public function logout() {
+        unset($_SESSION['user']);
+        setcookie('rememberMe', '', time() - 3600, '/');
+        header("Location: http://localhost/ngulongbakery/");
+
+    }
 }
 
 ?>

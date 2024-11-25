@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if ($_SESSION['user']['role_id'] !== 1) {
+    echo 'Không có quyền truy cập';
+    exit();
+}
 ob_start();
 require_once '.././app/model/database.php';
 require_once './app/view/Header.php';
@@ -103,6 +108,10 @@ if (isset($_GET['page'])) {
         case 'deluser':
             $acc = new AdAccountsController();
             $acc->delUser();
+            break;
+        case 'logout':
+            $acc = new AdAccountsController();
+            $acc->logout();
             break;
         case 'blockuser':
             $acc = new AdAccountsController();

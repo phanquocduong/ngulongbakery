@@ -19,18 +19,18 @@
                     </div>
                 </form>
                 <br />
-<?php
-    require_once './app/controller/AdCategoriesController.php';
-    require_once './app/model/CategoryModel.php';
-    $categoriesController = new AdCategoriesController();
-    $productsModel = new CategoryModel();
-    if (isset($_POST['button_category']) && !empty($_POST['search_category'])) {
-      $listCate = $categoriesController->searchCategories($_POST['search_category']);
-    } else {
-      // Fetch all products if no search term is provided
-      $listCate = $productsModel->getCate();
-    }
-?>
+                <?php
+                    require_once './app/controller/AdCategoriesController.php';
+                    require_once './app/model/CategoryModel.php';
+                    $categoriesController = new AdCategoriesController();
+                    $productsModel = new CategoryModel();
+                    if (isset($_POST['button_category']) && !empty($_POST['search_category'])) {
+                    $listCate = $categoriesController->searchCategories($_POST['search_category']);
+                    } else {
+                    // Fetch all products if no search term is provided
+                    $listCate = $productsModel->getCate();
+                    }
+                ?>
 
                 <!-- form search end -->
                 <div class="table-responsive">
