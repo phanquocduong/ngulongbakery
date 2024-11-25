@@ -1,97 +1,62 @@
 main {
-    padding: 48px 0;
+    padding: 60px 0;
     background: linear-gradient(to bottom, var(--linear-color), var(--white-color));
 }
 
 .register-form {
-    width: 792px;
-    padding: 40px 48px 48px;
+    width: 588px;
+    padding: 40px 50px;
     background-color: var(--white-color);
     margin: 0 auto;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .register-title {
-    line-height: 3.5rem;
-    font-size: 2.6rem;
-    font-weight: bold;
-    margin: 0 0 50px 0;
-    padding-bottom: 16px;
-    border-bottom: 2px solid rgba(238, 238, 238, 0.5);
+    font-size: 2.4rem;
+    font-weight: 700;
     color: var(--secondary-color);
+    border-bottom: 2px solid rgba(238, 238, 238, 0.5);
+    padding-bottom: 15px;
+    margin-bottom: 40px;
 }
 
 .full-name__form {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 48px;
+    gap: 24px;
+    margin-bottom: 24px;
 }
 
 .form-group__half {
-    width: calc(50% - 12px);
-}
-
-.form-label {
-    line-height: 2.1rem;
-    margin-bottom: 14px;
-    font-size: 1.4rem;
-    color: #0e1c22;
-    opacity: 0.6;
-    display: block;
-    font-weight: 700;
-    letter-spacing: 0.1rem;
-}
-
-.form-control {
-    line-height: 3.4rem;
-    font-size: 1.8rem;
-    width: 100%;
-    padding: 0 0 8px 0;
-    border: none;
-    border-bottom: 1px solid rgba(14, 28, 34, 0.4);
-    border-radius: 0;
-    outline: none;
+    width: 48%;
 }
 
 .form-group__full {
     width: 100%;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
-.register-action {
-    margin-top: 32px;
-}
-
-.register-btn {
-    line-height: 2rem;
-    padding: 12px 46px;
-    display: inline-block;
-    border: 1px solid var(--secondary-color);
-    border-radius: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0 0 24px 0;
-    background-color: var(--white-color);
-    color: var(--secondary-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.register-btn:hover {
-    background-color: var(--secondary-color);
-    color: var(--white-color);
-}
-
-.login-title {
-    color: var(--secondary-color);
-    text-decoration: none;
+.form-label {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 12px;
     display: block;
-    line-height: 2.4rem;
-    font-size: 1.5rem;
 }
 
-.login-title__link {
-    font-weight: bold;
+.form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 8px rgba(208, 154, 64, 0.5);
+    border: none;
 }
 
 .form-message {
@@ -100,34 +65,65 @@ main {
     padding-top: 6px;
 }
 
+.register-action {
+    margin-top: 20px;
+}
+
+.register-btn {
+    font-size: 1.8rem;
+    font-weight: 600;
+    padding: 12px 36px;
+    background-color: #dca54a;
+    color: var(--white-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 2.2rem;
+}
+
+.register-btn:hover {
+    filter: brightness(1.1);
+}
+
+.login-title {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    display: block;
+    margin-top: 16px;
+}
+
+.login-title__link {
+    font-weight: 600;
+    color: var(--primary-color-bold);
+}
+
 .errors {
-    border-radius: 3px;
-    padding: 6px 12px;
-    margin-bottom: 15px;
-    border: 1px solid transparent;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    text-align: left;
-    color: #d02e2e;
-    background-color: #fff6f6;
-    border-color: #d02e2e;
+    background-color: #fff3f3;
+    border-left: 5px solid #f4516c;
+    padding: 12px;
+    margin-bottom: 20px;
+    color: #f4516c;
+    font-size: 1.4rem;
 }
 
 .errors ul {
     margin: 0;
     padding: 0;
-    margin-left: 20px;
+    list-style-type: none;
 }
 
-/* Tablet - PC low resolution */
-@media (min-width: 740px) and (max-width: 1024px) {
+.errors li {
+    padding-left: 20px;
+}
+
+@media (max-width: 1024px) {
     .register-form {
-        width: 500px;
+        width: 90%;
     }
 }
 
-/* Mobile */
-@media (max-width: 739px) {
+@media (max-width: 740px) {
     .register-form {
         width: 100%;
     }

@@ -9,8 +9,14 @@
         
         public function getFeaturedReviews() {
             $sql = "SELECT r.*, u.full_name, u.avatar 
-                    FROM reviews r INNER JOIN users u ON r.user_id = u.id 
-                    WHERE r.rating >= 4 AND r.status = 1 
+                    FROM reviews r 
+                    INNER JOIN users u ON r.user_id = u.id 
+                    WHERE r.id IN (
+                        SELECT MAX(r2.id) 
+                        FROM reviews r2 
+                        WHERE r2.rating >= 4 AND r2.status = 1 
+                        GROUP BY r2.user_id
+                    ) 
                     ORDER BY r.created_at DESC 
                     LIMIT 2";
             return $this->db->getAll($sql);
@@ -35,6 +41,7 @@
 
         function getReviewCount($condition = '', $params = []) {
             $sql = "SELECT count(*) AS quantity FROM reviews $condition";
+            $sql .= " AND status = 1";
             return $this->db->get($sql, $params)['quantity'];
         }
         

@@ -66,7 +66,7 @@
                     </div>
                     <div class="box_intro-dl-avata">
                         <div class="box_intro-dl-avata-user">
-                            <img src="public/upload/avatar/maitruongduy.webp" alt="" />
+                            <img src="public/upload/avatar/1732026314_z4851552575799_f907b4271cef02e78eea96a1b553ec41.jpg" alt="" />
                         </div>
                         <div class="box_intro-dl-avata-name">Trường Duy</div>
                     </div>
@@ -76,11 +76,11 @@
                 <div class="box_intro-dl col l-5 c-12 m-6">
                     <div class="box_intro-dl-comit">
                         <div class="box_intro-dl-comit-logo">
-                            <img src="./assets/image/logo/logo.png" alt="" />
+                            <img src="public/upload/logo/logo.png" alt="" />
                         </div>
                         <div class="box_intro-dl-comit-top">
                             <h1>đã được kiểm chứng</h1>
-                            <p style="font-size: 1.2rem">
+                            <p style="font-size: 1.6rem">
                                 Chứng nhận sản phẩm đạt tiêu chuẩn, nguyên liệu tươi sạch 100%
                             </p>
                         </div>

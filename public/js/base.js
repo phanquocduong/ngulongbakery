@@ -1,59 +1,59 @@
 // ============================
-// START MODAL MENU FOR MOBILE
+// MODAL MENU CHO MOBILE
 // ============================
 
-// Select DOM elements for modal menu and overlay
+// Chọn các elements trong modal menu và overlay
 const menuToggle = document.querySelector('.menu-bars');
 const modalMenu = document.getElementById('modalMenu');
 const closeBtn = document.getElementById('closeBtn');
 const overlay = document.getElementById('overlay');
 
-// Function to open the modal menu
+// Hàm để mở modal menu
 menuToggle.addEventListener('click', () => {
     modalMenu.classList.add('active');
     overlay.classList.add('active');
 });
 
-// Function to close the modal menu (for both the close button and overlay)
+// Hàm để đóng model menu (khi nhấn vào button close hoặc nhấn ngoài overlay)
 const closeModal = () => {
     modalMenu.classList.remove('active');
     overlay.classList.remove('active');
 };
 
-// Add event listeners to close the modal menu
+// Thêm sự kiện để đóng modal menu
 closeBtn.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
 // ============================
-// DROPDOWN MENU FOR MOBILE AND TABLET
+// MENU XỔ XUỐNG CHO MOBILE VÀ TABLET CỦA MODAL MENU
 // ============================
 
-// Select dropdown elements
+// Chọn các elements để thêm sự kiện menu xổ xuống
 const menuItemDrop = document.getElementById('menu-item-drop');
 const menuItemDropOnTablet = document.getElementById('menu-item-drop--tablet');
 const modalSubMenu = document.querySelector('.modal-sub-menu__list');
 
-// Toggle sub-menu for mobile (desktop can be handled similarly)
+// Sự kiện menu xổ xuống cho Mobile
 menuItemDrop.onclick = e => {
     e.preventDefault();
     modalSubMenu.classList.toggle('active');
 };
 
-// Disable functionality on tablet menu item (no action)
+// Vô hiệu hoá thẻ a cho elements có sự kiện menu xố xuống cho Tablet
 menuItemDropOnTablet.onclick = e => {
     e.preventDefault();
 };
 
 // ============================
-// SEARCH BUTTON FUNCTIONALITY FOR MOBILE
+// HÀM XỬ LÝ NÚT SEARCH TRÊN MOBILE
 // ============================
 
-// Select DOM elements for search functionality
+// Chọn các phần tử cho hàm xử lý nút search trên mobile
 const searchBtn = document.querySelector('.header-search__btn.header-search__btn--mobile');
 const searchInput = document.querySelector('.header-search__input--mobile');
 const searchDiv = document.querySelector('.header-search--mobile');
 
-// Toggle search input visibility on mobile
+// Hàm xử lý đóng/mở trên mobile
 searchBtn.onclick = () => {
     if (searchInput.classList.contains('block')) {
         searchInput.classList.remove('block');
@@ -65,47 +65,34 @@ searchBtn.onclick = () => {
 };
 
 // ============================
-// ADD TO CART FUNCTIONALITY
+// HÀM THÊM VÀO GIỎ HÀNG
 // ============================
 
-// Function to send the product data to the backend (via AJAX)
-function sendAddToCartRequest(product) {
-    return fetch('index.php?page=handle-add-to-cart', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(product)
-    }).then(response => response.json());
-}
-
-// Function to handle adding a product to the shopping cart
-function addToCart(button, productId, productName, productPrice, productImage) {
-    // Get the selected quantity (default to 1 if not set)
+// Hàm để thêm 1 sản phẩm vào giỏ hàng
+function addToCart(button, productId) {
+    // Lấy số lượng sản phẩm (mặc định là 1 nếu không có chọn số lượng)
     const quantityElement = document.querySelector('.quantity-selection__action-edit');
     let quantity = 1;
     if (quantityElement) {
         quantity = quantityElement.value;
     }
 
-    // Create product object to send to the server
-    const product = {
-        id: productId,
-        name: productName,
-        price: productPrice,
-        image: productImage,
-        quantity: quantity
-    };
-
-    // Send the product to the backend and update the cart
-    sendAddToCartRequest(product)
+    // Gửi yêu cầu đến backend với ID sản phẩm và số lượng
+    fetch('index.php?page=handle-add-to-cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: productId, quantity: quantity })
+    })
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Update the cart quantity on the UI
+                // Cập nhật số lượng giỏ hàng trên UI
                 const cartQuantityElement = document.querySelector('#cart-quantity');
                 cartQuantityElement.textContent = data.cartQuantity;
 
-                // Mark the button as active and disable further clicks
+                // Đánh dấu check cho button và vô hiệu hóa lần thêm kế tiếp
                 button.classList.add('active');
                 button.onclick = null;
             } else {

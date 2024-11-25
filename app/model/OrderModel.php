@@ -46,5 +46,10 @@
             $sql = "INSERT INTO orderdetails (`order_id`, `unit_price`, `quantity`, `product_name`, `product_image`) VALUES (?, ?, ?, ?, ?)";
             $this->db->execute($sql, [$orderId, $unitPrice, $quantity, $name, $image]);
         }
+
+        function updateReviewStatusOfOrder($orderId) {
+            $sql = "UPDATE orders SET is_reviewed = 1 WHERE id = ? AND status = 'Giao hàng thành công'";
+            return $this->db->execute($sql, [$orderId]);
+        } 
     }
 ?>

@@ -18,6 +18,10 @@ html {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* Start Header */
 header {
     display: flex;
@@ -61,9 +65,13 @@ header {
     line-height: 5.5rem;
     font-size: 1.6rem;
     font-weight: 450;
-    text-decoration: none;
     color: var(--secondary-color);
     transition: color 0.4s ease;
+}
+
+.header-menu__item-link.header-menu__item-link--active,
+.header-menu__item-link.header-menu__item-link--active i {
+    color: var(--primary-color-bold);
 }
 
 .chevron-down-icon {
@@ -103,7 +111,6 @@ header {
 }
 
 .header-sub-menu__item-link {
-    text-decoration: none;
     font-size: 1.6rem;
     color: var(--secondary-color);
     font-weight: 400;
@@ -239,7 +246,6 @@ header {
     display: block;
     line-height: 3.2rem;
     font-size: 1.6rem;
-    text-decoration: none;
     color: var(--secondary-color);
 }
 
@@ -286,10 +292,7 @@ header {
     background-size: cover;
     background-position: top center;
     transition: all 0.3s ease;
-}
-
-.product-item__title-link {
-    text-decoration: none;
+    border-radius: 2px;
 }
 
 .product-item__title-link:hover .product-item__name {
@@ -369,7 +372,7 @@ header {
     border-radius: 5px;
     cursor: pointer;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .add-to-cart-btn:hover {
@@ -406,6 +409,11 @@ header {
     transition: opacity 0.3s ease;
 }
 
+.buy-now-btn a,
+.buy-now-btn--bigger a {
+    color: var(--white-color);
+}
+
 .buy-now-btn--bigger {
     padding: 15px 35px;
 }
@@ -416,7 +424,6 @@ header {
 }
 
 .buy-now-btn__link {
-    text-decoration: none;
     color: var(--white-color);
 }
 
@@ -452,7 +459,7 @@ header {
 
 .footer-menu__heading {
     font-size: 2.2rem;
-    line-height: 2rem;
+    line-height: 3rem;
     margin: 0;
     margin-bottom: 20px;
     color: var(--white-color);
@@ -468,7 +475,6 @@ header {
 }
 
 .footer-menu__item-link {
-    text-decoration: none;
     color: var(--white-color);
     padding: 4px 0;
     display: block;
@@ -548,6 +554,10 @@ header {
 
 @media (min-width: 740px) and (max-width: 1024px) {
     /* Start footer */
+    .footer-menu__heading {
+        margin-top: 40px;
+    }
+
     .footer-item {
         text-align: center;
     }
@@ -627,6 +637,11 @@ header {
         opacity: 1;
     }
 
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
     .modal-menu {
         position: fixed;
         top: 0;
@@ -646,7 +661,7 @@ header {
         transform: translateX(0);
     }
 
-    .close-btn {
+    #closeBtn {
         position: absolute;
         top: 20px;
         right: 20px;
@@ -674,7 +689,6 @@ header {
 
     .modal-menu__item-link,
     .modal-sub-menu__item-link {
-        text-decoration: none;
         font-size: 1.8rem;
         color: var(--secondary-color);
         display: block;

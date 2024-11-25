@@ -21,13 +21,5 @@
             $sql = "INSERT INTO favorite_products (user_id, product_id) VALUES (?, ?)";
             return $this->db->execute($sql, [$user_id, $product_id]);
         }
-
-        public function getProductOfFavorite($userId) {
-            $sql = "SELECT p.* 
-                    FROM products p
-                    INNER JOIN favorite_products f ON p.id = f.product_id
-                    WHERE f.user_id = ?";
-            return $this->db->getAll($sql, [$userId]);    
-        }
     }
 ?>
