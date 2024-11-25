@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user']['role_id']) !== 1) {
+if (!isset($_SESSION['user']['role_id']) || $_SESSION['user']['role_id'] !== 1) {
     echo 'Không có quyền truy cập';
     exit();
 }
