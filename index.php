@@ -11,6 +11,8 @@
     require_once 'app/model/FavoriteProductsModel.php';
     require_once 'app/model/LocationModel.php';
     require_once 'app/model/DiscountModel.php';
+    require_once 'app/model/NewsModel.php';
+    require_once 'app/model/CommentsModel.php';
     require_once 'app/controller/HomeController.php';
     require_once 'app/controller/ProductController.php';
     require_once 'app/controller/UserController.php';
@@ -21,6 +23,7 @@
     require_once 'app/controller/OrderController.php';
     require_once 'app/controller/ReviewController.php';
     require_once 'app/controller/MailController.php';
+    require_once 'app/controller/NewsController.php';
 
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
@@ -200,6 +203,22 @@
             case 'handle-orders-display':
                 $order = new OrderController();
                 $order->handleOrdersDisplay();
+                break;
+            case 'news':
+                $css = 'news.css';
+                $js = 'news.js';
+                $news = new NewsController();
+                $news->viewNews($css, $js);
+                break;
+            case 'news-details':
+                $css = 'detailnews.css';
+                $js = 'detailnews.js';
+                $news = new NewsController();
+                $news->viewNewsDetail($css, $js);
+                break;
+            case 'addCmt':
+                $cmt = new NewsController();
+                $cmt->addComment();
                 break;
             default:
                 $css = 'home.css';
