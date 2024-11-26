@@ -1,4 +1,14 @@
 <!-- main -->
+<?php
+require_once './app/model/OrderModel.php';
+use App\Model\OrderModel;
+$order = new OrderModel();
+$total_amount = $order->getTotalAmount();
+$total_fee = $order->getTotalFee();
+
+$totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
+
+?>
 <!-- Danh Sách Đơn Hàng -->
 <div class="container-fluid pt-4 px-4">
   <div class="row g-4">
@@ -7,7 +17,7 @@
         <i class="fa fa-chart-bar fa-3x text-primary"></i>
         <div class="ms-3">
           <p class="mb-2">Tổng doanh thu</p>
-          <h6 class="mb-0">3000đ</h6>
+          <h6 class="mb-0"><?= number_format($total_amount['total'], 0); ?> VNĐ</h6>
         </div>
       </div>
     </div>
@@ -16,7 +26,7 @@
         <i class="fa fa-chart-area fa-3x text-primary"></i>
         <div class="ms-3">
           <p class="mb-2">Doanh thu hôm nay</p>
-          <h6 class="mb-0">2000đ</h6>
+          <h6 class="mb-0"><?= number_format($totalToday, 0) ?> VNĐ</h6>
         </div>
       </div>
     </div>
@@ -29,10 +39,10 @@
   <div class="bg-light text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h6 class="mb-0">Danh Sách Đơn Hàng</h6>
-      <a href="">Hiện Tất Cả</a>
+      <a href="javascript:void(0);" class="toggleButton">Hiện Tất Cả</a>
     </div>
     <div class="table-responsive">
-      <table class="table text-start align-middle table-bordered table-hover mb-0">
+      <table class="table text-start align-middle table-bordered table-hover mb-0 productTable">
         <thead>
           <tr class="text-dark">
             <th scope="col">STT</th>
@@ -45,22 +55,33 @@
         </thead>
         <tbody>
           <?php
-          require_once './app/model/OrderModel.php';
+          // require_once './app/model/OrderModel.php';
+          // use App\Model\OrderModel;
           $order = new OrderModel();
           $viewOrder = $order->getOrder();
           ?>
 
           <?php
+          $stt = 1;
           foreach ($viewOrder as $key => $value) {
             extract($value);
-            echo "<tr>";
-            echo "<td>$id</td>";
+            if (strtotime($created_at) !== false) {
+              // Tạo đối tượng DateTime trực tiếp với múi giờ Việt Nam
+              $date = new DateTime($created_at, new DateTimeZone('Asia/Ho_Chi_Minh'));
+
+              // Định dạng lại thời gian
+              $vn_format = $date->format('d/m/Y');
+            } else {
+              $vn_format = "Invalid date";
+            }
+            echo "<tr class='product-row'>";
+            echo "<td>".$stt++."</td>";
             echo "
             <td>
               <a href='index.php?page=order_detail&id=$id'>$customer</a>
               </td>";
-            echo "<td>$total_amount</td>";
-            echo "<td>$created_at</td>";
+            echo "<td>" . number_format($total_amount, 0) . " VNĐ</td>";
+            echo "<td>$vn_format</td>";
             echo "<td>$status</td>";
             echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
             echo "</tr>";
@@ -80,10 +101,10 @@
   <div class="bg-light text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h6 class="mb-0">Số Lượng Sản Phẩm Từng Danh Mục</h6>
-      <a href="">Hiện Tất Cả</a>
+      <a href="javascript:void(0);" class="toggleButton">Hiện Tất Cả</a>
     </div>
     <div class="table-responsive">
-      <table class="table text-start align-middle table-bordered table-hover mb-0">
+      <table class="table text-start align-middle table-bordered table-hover mb-0 productTable">
         <thead>
           <tr class="text-dark">
             <th scope="col">STT</th>
@@ -107,10 +128,11 @@
           foreach ($listCate as $category) {
             $categoryMap[$category['id']] = $category['name'];
           }
+          $stt = 1;
           foreach ($listCate as $key => $value) {
             extract($value);
-            echo "<tr>";
-            echo "<td>$id</td>";
+            echo "<tr class='product-row'>";
+            echo "<td>" . $stt++ . "</td>";
             echo "<td>$name</td>";
             $count = 0;
             foreach ($listPro as $key => $value) {
@@ -134,10 +156,10 @@
   <div class="bg-light text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h6 class="mb-0">Số Lượng Sản Phẩm Bán Chạy</h6>
-      <a href="">Hiện Tất Cả</a>
+      <a href="javascript:void(0);" class="toggleButton">Hiện Tất Cả</a>
     </div>
     <div class="table-responsive">
-      <table class="table text-start align-middle table-bordered table-hover mb-0">
+      <table class="table text-start align-middle table-bordered table-hover mb-0 productTable">
         <thead>
           <tr class="text-dark">
             <th scope="col">STT</th>
@@ -152,10 +174,11 @@
           $viewOrderDetail = $orderDetail->getBestSell();
           ?>
           <?php
+          $stt = 1;
           foreach ($viewOrderDetail as $key => $value) {
             extract($value);
-            echo "<tr>";
-            echo "<td>$id</td>";
+            echo "<tr class='product-row'>";
+            echo "<td>" . $stt++ . "</td>";
             echo "<td>$name</td>";
             echo "<td>$sold</td>";
             echo "</tr>";
@@ -173,10 +196,10 @@
   <div class="bg-light text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h6 class="mb-0">Số Lượng Sản Phẩm Tồn Kho</h6>
-      <a href="">Hiện Tất Cả</a>
+     <a href="javascript:void(0);" class="toggleButton">Hiện Tất Cả</a>
     </div>
-    <div class="table-responsive">
-      <table class="table text-start align-middle table-bordered table-hover mb-0">
+    <div class="table-responsive" id="productTable">
+      <table class="table text-start align-middle table-bordered table-hover mb-0 productTable">
         <thead>
           <tr class="text-dark">
             <th scope="col">STT</th>
@@ -184,17 +207,16 @@
             <th scope="col">Số Lượng Tồn Kho</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="productBody">
           <?php
           require_once './app/model/AdProductsModel.php';
           $stock_quantity = new AdProductsModel();
           $viewStock_quantity = $stock_quantity->stock_quantity();
-          ?>
-          <?php
+          $stt = 1;
           foreach ($viewStock_quantity as $key => $value) {
             extract($value);
-            echo '<tr>';
-            echo '<td>' . $id . '</td>';
+            echo '<tr class="product-row">';
+            echo '<td>' . $stt++ . '</td>';
             echo '<td>' . $name . '</td>';
             echo '<td>' . $stock_quantity . '</td>';
             echo '</tr>';
@@ -205,6 +227,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- Widgets Start -->
 <div class="container-fluid pt-4 px-4">
@@ -279,4 +303,45 @@
   </div>
 </div>
 <!-- Widgets End -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Lấy tất cả các nút toggle và bảng liên quan
+    const toggleButtons = document.querySelectorAll('.toggleButton');
+    const tables = document.querySelectorAll('.productTable');
+
+    // Lặp qua các nút và bảng
+    toggleButtons.forEach((button, index) => {
+      const table = tables[index]; // Kết nối từng nút với bảng tương ứng
+      const rows = table.querySelectorAll('.product-row');
+      const defaultVisible = 5;
+
+      // Ẩn tất cả các hàng sau sản phẩm thứ 5
+      rows.forEach((row, i) => {
+        if (i >= defaultVisible) {
+          row.style.display = 'none';
+        }
+      });
+
+      // Thêm sự kiện click cho từng nút
+      button.addEventListener('click', function () {
+        const isExpanded = button.textContent === 'Thu Gọn';
+
+        if (isExpanded) {
+          // Thu gọn: chỉ hiển thị 5 hàng
+          rows.forEach((row, i) => {
+            row.style.display = i < defaultVisible ? '' : 'none';
+          });
+          button.textContent = 'Hiện Tất Cả';
+        } else {
+          // Hiện tất cả: hiển thị toàn bộ hàng
+          rows.forEach(row => row.style.display = '');
+          button.textContent = 'Thu Gọn';
+        }
+      });
+    });
+  });
+</script>
+
+
+
 <!-- End main -->

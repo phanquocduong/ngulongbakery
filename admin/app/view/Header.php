@@ -164,7 +164,7 @@
               <span class="d-none d-lg-inline-flex"><?=$_SESSION['user']['full_name']?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-              <a href="#" class="dropdown-item">Thông Tin Tài Khoản</a>
+              <a href="ngulongbakery/index.php?page=account" class="dropdown-item">Thông Tin Tài Khoản</a>
               <a href="index.php?page=logout" class="dropdown-item">Đăng Xuất</a>
             </div>
           </div>
