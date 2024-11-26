@@ -57,7 +57,7 @@
             }
         }
 
-        public function sendContactEmailForCustomer($email, $username, $option, $comments) {
+        public function sendContactEmail($email, $username, $option, $comments) {
             try {
                 $this->mailer->setFrom('ngulongbakery@gmail.com', 'Ngũ Long Bakery');
                 $this->mailer->addAddress($email);
@@ -66,6 +66,15 @@
 
                 $this->mailer->AddEmbeddedImage('public/upload/logo/logo.png', 'logo_cid');
                 $this->mailer->Body = $this->renderEmailView('contact-email-for-customer', compact('email', 'username', 'option', 'comments'));
+
+                $this->mailer->send();
+
+                // Gửi email thông báo cho admin
+                $this->mailer->clearAddresses(); 
+                $this->mailer->addAddress('ngulongbakery@gmail.com');
+                $this->mailer->Subject = "[ Ngũ Long Bakery ] Có khách hàng mới liên hệ";
+                
+                $this->mailer->Body = $this->renderEmailView('contact-email-for-admin', compact('email', 'username', 'option', 'comments'));
 
                 $this->mailer->send();
             } catch (Exception $e) {
