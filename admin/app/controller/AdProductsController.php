@@ -21,22 +21,26 @@ class AdProductsController
     public function viewProducts()
     {
         $productsModel = new AdProductsModel();
+
+        // Get pagination parameters
+        $currentPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
+        $limit = 10;
+        $offset = ($currentPage - 1) * $limit;
+
+        // Get total products and calculate total pages
         $totalProducts = $productsModel->getTotalProducts();
-        $productsPerPage = 10;
-        $totalPages = ceil($totalProducts / $productsPerPage);
+        $totalPages = ceil($totalProducts / $limit);
 
-        $currentPage = isset($_GET['p']) ? intval($_GET['p']) : 1;
-        $offset = ($currentPage - 1) * $productsPerPage;
+        // Get products for current page
+        $products = $productsModel->getProducts($limit, $offset);
 
-        $products = $productsModel->getProducts($productsPerPage, $offset);
-
+        // Pass data to view
         $this->data['products'] = $products;
         $this->data['totalPages'] = $totalPages;
         $this->data['currentPage'] = $currentPage;
 
         $this->renderview('products', $this->data);
     }
-
     public function viewProducts_Detail()
     {
         $this->renderview('products_detail', $this->data);
@@ -215,7 +219,7 @@ class AdProductsController
         $sql = "SELECT * FROM products WHERE name LIKE :keyword";
         $params = [':keyword' => '%' . $keyword . '%'];
 
-        $db = new Database(); // Ensure this uses your Database class
+        $db = new Database();
         $results = $db->getAll($sql, $params);
         $db = new Database();
         return $db->getAll($sql, $params);
