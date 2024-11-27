@@ -28,11 +28,24 @@
                                 <!-- end -->
                             </div>
                             <div class="backtonews">
-                                <a href="news.html"><i class="fa-solid fa-arrow-left"></i> Trước bài viết</a>
-                                <a href="news.html"
-                                    >Bài viết tiếp theo
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </a>
+                            <?php
+                                $postId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+                                $totalPosts = $data['totalPosts'];
+
+                                if ($postId == 1) {
+                                    echo '<a style="float: right;" href="">Đây là bài viết đầu tiên!!!</a>';
+                                    echo '<a style="float: right;" href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="fa-solid fa-arrow-right"></i></a>';
+                                } elseif ($postId > 1 && $postId < $totalPosts) {
+                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="fa-solid fa-arrow-left"></i> Bài viết trước</a>';
+                                    echo '<a href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="fa-solid fa-arrow-right"></i></a>';
+                                } elseif ($postId == $totalPosts) {
+                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="fa-solid fa-arrow-left"></i> Bài viết trước</a>';
+                                    echo '<a style="float: right;" href="">Đây là bài viết cuối cùng!!!</a>';
+                                } else {
+                                    echo 'Không tìm thấy bài viết';
+                                }
+                            ?>
+                                
                             </div>
                             <div id="quantitycmt" class="commentnews">
                                 <div class="quantitycomment">

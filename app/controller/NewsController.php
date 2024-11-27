@@ -28,11 +28,13 @@ class NewsController {
         // Lấy id bài viết từ URL
         $id = $_GET['id'] ?? 1;
         $news = $this->news->getIdPost($id);
+        $totalPosts = $this->news->getTotalPosts(); // Lấy tổng số bài viết
         $data['news-details'] = $news;
+        $data['totalPosts'] = $totalPosts; // Truyền tổng số bài viết vào view
         $this->renderView('news-details', $css, $js, $data);
     }
-    public function viewComments()
-    {
+
+    public function viewComments() {
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
         $comments = $this->news->getCommentsByPostId($id);
         if (is_array($comments)) {
@@ -42,12 +44,13 @@ class NewsController {
             echo "Not found....";
         }
     }
+
     public function addComment() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $post_id = (int) $_POST['post_id']; // Lấy post_id từ form
             $comment = htmlspecialchars(trim($_POST['comment']));
             $user_id = $_SESSION['user']['id'];
-    
+
             if (empty($comment)) {
                 die("Nội dung bình luận không được để trống!");
             }
