@@ -13,7 +13,7 @@
 
 html {
     font-size: 62.5%;
-    line-height: 1.6rem;
+    line-height: 2rem;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
@@ -553,6 +553,11 @@ header {
 }
 
 @media (min-width: 740px) and (max-width: 1024px) {
+    /* Start header */
+    .header-search__btn {
+        padding: 13px 12px 13px 21px;
+    }
+
     /* Start footer */
     .footer-menu__heading {
         margin-top: 40px;

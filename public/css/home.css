@@ -419,6 +419,10 @@
         background: linear-gradient(to bottom, var(--white-color), var(--linear-color));
     }
 
+    .review-item {
+        height: 300px;
+    }
+
     .review-item-box {
         padding: 16px 8px;
     }
