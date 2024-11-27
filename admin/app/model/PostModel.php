@@ -46,9 +46,10 @@ class PostModel
             $mysqlDate = date('Y-m-d H:i:s', strtotime($date));
             $data['created_at'] = $mysqlDate;
         }
-        $sql = "INSERT INTO posts(title, content, created_at, status, author_id, category_id) VALUES(?,?,?,?,?,?)";
+        $sql = "INSERT INTO posts(title, image, content, created_at, status, author_id, category_id) VALUES(?,?,?,?,?,?,?)";
         $params = [
             $data['title'],
+            $data['image'],
             $data['content'],
             $data['created_at'],
             $data['status'],
@@ -67,9 +68,10 @@ class PostModel
             $data['created_at'] = $mysqlDate;
         }
     
-        $sql = "UPDATE posts SET title = ?, content = ?, created_at = ?, status = ?, author_id = ?, category_id = ? WHERE id = ?";
+        $sql = "UPDATE posts SET title = ?, image = ?, content = ?, created_at = ?, status = ?, author_id = ?, category_id = ? WHERE id = ?";
         $params = [
             $data['title'],
+            $data['image'],
             $data['content'],
             $data['created_at'],
             $data['status'],

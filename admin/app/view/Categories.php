@@ -37,7 +37,7 @@
                     <table class="table table-hover table-borderless">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th>Tên Danh Mục</th>
                                 <th>Ảnh</th>
                                 <th>Loại danh mục</th>
@@ -47,10 +47,11 @@
                         </thead>
                         <tbody>
                             <?php
+                            $stt = 1;
                             foreach ($listCate as $key => $value) {
                                 extract($value);
                                 echo '<tr>
-                                <td>' . $id . '</td>
+                                <td>' . $stt++ . '</td>
                                 <td>' . $name . '</td>
                                 <td>
                                     <img src="../public/upload/category/' . $image . '" alt=""
