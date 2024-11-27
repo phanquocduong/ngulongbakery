@@ -6,7 +6,7 @@
                     <img src="public/upload/logo/logo.png" alt="Logo Ngũ Long Bakery - Tiệm bánh truyền thống" class="footer-logo" loading="lazy"/>
                 </div>
                 <div class="footer-item col l-3 m-4 c-12">
-                    <h3 class="footer-menu__heading">Khám phá thêm</h3>
+                    <div class="footer-menu__heading">Khám phá thêm</div>
                     <ul class="footer-menu__list">
                         <li class="footer-menu__item">
                             <a href="index.php?page=collection" class="footer-menu__item-link">Sản phẩm</a>
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 <div class="footer-item col l-3 m-4 c-12">
-                    <h3 class="footer-menu__heading">Tài khoản của bạn</h3>
+                    <div class="footer-menu__heading">Tài khoản của bạn</div>
                     <ul class="footer-menu__list">
                         <li class="footer-menu__item">
                             <a href="index.php?page=register" class="footer-menu__item-link">Đăng ký</a>
@@ -37,7 +37,7 @@
                     </ul>
                 </div>
                 <div class="footer-item col l-3 m-3 c-12">
-                    <h3 class="footer-menu__heading">Hỗ trợ khách hàng</h3>
+                    <div class="footer-menu__heading">Hỗ trợ khách hàng</div>
                     <ul class="footer-menu__list">
                         <li class="footer-menu__item">
                             <a href="index.php?page=shipping-policy" class="footer-menu__item-link">Chính sách giao hàng</a>
