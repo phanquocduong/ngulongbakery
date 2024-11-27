@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -23,7 +23,7 @@ use CKSource\CKFinder\Exception\CKFinderException;
  */
 class Image
 {
-    protected static $supportedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'webp'];
+    protected static $supportedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
 
     /**
      * Image width.
@@ -112,6 +112,8 @@ class Image
             throw new CKFinderException('Unsupported image type');
         }
 
+        $this->setMemory($this->width, $this->height, $this->bits, $this->channels);
+
         $gdSupportedTypes = @imagetypes();
 
         $supportedFormats = [
@@ -119,7 +121,6 @@ class Image
             'image/jpeg' => $gdSupportedTypes & IMG_JPG,
             'image/png' => $gdSupportedTypes & IMG_PNG,
             'image/wbmp' => $gdSupportedTypes & IMG_WBMP,
-            'image/webp' => $gdSupportedTypes & IMG_WEBP,
             'image/bmp' => $bmpSupport && ($gdSupportedTypes & IMG_JPG),
             'image/x-ms-bmp' => $bmpSupport && ($gdSupportedTypes & IMG_JPG),
         ];
@@ -220,7 +221,6 @@ class Image
             'bmp' => 'image/bmp',
             'png' => 'image/png',
             'wbmp' => 'image/wbmp',
-            'webp' => 'image/webp',
         ];
 
         $extension = strtolower($extension);
@@ -237,7 +237,6 @@ class Image
      *      [width]  => 80
      *      [heigth] => 120
      * )
-     *
      * @endcode
      *
      * @param int  $maxWidth        requested width
@@ -289,6 +288,75 @@ class Image
 
         // Returns the Size
         return $oSize;
+    }
+
+    /**
+     * @see http://pl.php.net/manual/pl/function.imagecreatefromjpeg.php
+     * function posted by e dot a dot schultz at gmail dot com
+     *
+     * @param $imageWidth
+     * @param $imageHeight
+     * @param $imageBits
+     * @param $imageChannels
+     *
+     * @return bool
+     */
+    public function setMemory($imageWidth, $imageHeight, $imageBits, $imageChannels)
+    {
+        $MB = 1048576; // number of bytes in 1M
+        $K64 = 65536; // number of bytes in 64K
+        $TWEAKFACTOR = 2.4; // Or whatever works for you
+        $memoryNeeded = round(
+            (
+                $imageWidth * $imageHeight
+                    * $imageBits
+                    * $imageChannels / 8
+                    + $K64
+            ) * $TWEAKFACTOR
+        ) + 3 * $MB;
+
+        //ini_get('memory_limit') only works if compiled with "--enable-memory-limit" also
+        //Default memory limit is 8MB so well stick with that.
+        //To find out what yours is, view your php.ini file.
+        $memoryLimit = Utils::returnBytes(@ini_get('memory_limit')) / $MB;
+        // There are no memory limits, nothing to do
+        if (-1 === $memoryLimit) {
+            return true;
+        }
+        if (!$memoryLimit) {
+            $memoryLimit = 8;
+        }
+
+        $memoryLimitMB = $memoryLimit * $MB;
+        if (\function_exists('memory_get_usage')) {
+            if (memory_get_usage() + $memoryNeeded > $memoryLimitMB) {
+                $newLimit = $memoryLimit + ceil(
+                    (
+                        memory_get_usage()
+                            + $memoryNeeded
+                            - $memoryLimitMB
+                    ) / $MB
+                );
+                if (false === @ini_set('memory_limit', $newLimit.'M')) {
+                    return false;
+                }
+            }
+        } else {
+            if ($memoryNeeded + 3 * $MB > $memoryLimitMB) {
+                $newLimit = $memoryLimit + ceil(
+                    (
+                        3 * $MB
+                            + $memoryNeeded
+                            - $memoryLimitMB
+                    ) / $MB
+                );
+                if (false === @ini_set('memory_limit', $newLimit.'M')) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -351,7 +419,7 @@ class Image
         fwrite($stream, $data);
         rewind($stream);
 
-        // 20 seconds seems to be a reasonable value to not kill a server and process images up to 1680x1050
+        //20 seconds seems to be a reasonable value to not kill a server and process images up to 1680x1050
         @set_time_limit(20);
 
         if (!\is_resource($stream)) {
@@ -367,7 +435,7 @@ class Image
             '/Vcompression/Vsize_bitmap/Vhoriz_resolution'.
             '/Vvert_resolution/Vcolors_used/Vcolors_important', fread($stream, 40));
 
-        $BMP['colors'] = 2 ** $BMP['bits_per_pixel'];
+        $BMP['colors'] = pow(2, $BMP['bits_per_pixel']);
 
         if (0 === $BMP['size_bitmap']) {
             $BMP['size_bitmap'] = $FILE['file_size'] - $FILE['bitmap_offset'];
@@ -388,7 +456,7 @@ class Image
             $PALETTE = unpack('V'.$BMP['colors'], fread($stream, $BMP['colors'] * 4));
         }
 
-        // 2048x1536px@24bit don't even try to process larger files as it will probably fail
+        //2048x1536px@24bit don't even try to process larger files as it will probably fail
         if ($BMP['size_bitmap'] > 3 * 2048 * 1536) {
             return null;
         }
@@ -503,7 +571,7 @@ class Image
 
         $targetImage = imagecreatetruecolor($targetWidth, $targetHeight);
 
-        if (in_array($this->mime, ['image/png', 'image/webp'])) {
+        if ('image/png' === $this->mime) {
             $bg = imagecolorallocatealpha($targetImage, 255, 255, 255, 127);
             imagefill($targetImage, 0, 0, $bg);
             imagealphablending($targetImage, false);
@@ -551,7 +619,6 @@ class Image
                 imagegif($this->gdImage);
 
                 break;
-
             case 'image/jpeg':
             case 'image/bmp':
             case 'image/x-ms-bmp':
@@ -559,23 +626,14 @@ class Image
                 imagejpeg($this->gdImage, null, $quality);
 
                 break;
-
             case 'image/png':
                 imagealphablending($this->gdImage, false);
                 imagesavealpha($this->gdImage, true);
                 imagepng($this->gdImage);
 
                 break;
-
             case 'image/wbmp':
                 imagewbmp($this->gdImage);
-
-                break;
-
-            case 'image/webp':
-                imagealphablending($this->gdImage, false);
-                imagesavealpha($this->gdImage, true);
-                imagewebp($this->gdImage);
 
                 break;
         }
@@ -639,7 +697,7 @@ class Image
     {
         $targetImage = imagecreatetruecolor($width, $height);
 
-        if (in_array($this->mime, ['image/png', 'image/webp'])) {
+        if ('image/png' === $this->mime) {
             $bg = imagecolorallocatealpha($targetImage, 255, 255, 255, 127);
             imagefill($targetImage, 0, 0, $bg);
             imagealphablending($targetImage, false);
@@ -658,7 +716,7 @@ class Image
 
     public function rotate($degrees, $bgcolor = 0)
     {
-        if (in_array($this->mime, ['image/png', 'image/webp'])) {
+        if ('image/png' === $this->mime) {
             imagesavealpha($this->gdImage, true);
             $bgcolor = imagecolorallocatealpha($this->gdImage, 0, 0, 0, 127);
         }

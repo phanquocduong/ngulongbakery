@@ -20,6 +20,7 @@
     require_once 'app/controller/PaymentController.php';
     require_once 'app/controller/OrderController.php';
     require_once 'app/controller/ReviewController.php';
+    require_once 'app/controller/MailController.php';
 
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
@@ -144,7 +145,7 @@
                 break;
             case 'search':
                 $css = 'search-products.css';
-                $js = 'search-products.js';
+                $js = '';
                 $product = new ProductController();
                 $product->viewSearchProducts($css, $js);
                 break;
@@ -159,8 +160,10 @@
                 $contact->viewContact($css, $js);
                 break;
             case 'handle-contact':
+                $css = 'contact.css';
+                $js = '';
                 $contact = new ContactController();
-                $contact->handleContact();
+                $contact->handleContact($css, $js);
                 break;
             case 'payment':
                 $css = 'payment.css';
@@ -193,6 +196,11 @@
                 $js = 'about.js';
                 $about = new AboutController();
                 $about->viewAbout($css, $js);
+                break;
+            case 'handle-orders-display':
+                $order = new OrderController();
+                $order->handleOrdersDisplay();
+                break;
             default:
                 $css = 'home.css';
                 $js = 'home.js';

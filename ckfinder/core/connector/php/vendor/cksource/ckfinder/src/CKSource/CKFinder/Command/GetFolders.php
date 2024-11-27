@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -34,10 +34,9 @@ class GetFolders extends CommandAbstract
         $resourceType = $workingFolder->getResourceType();
 
         foreach ($directories as $directory) {
-            $basename = pathinfo($directory['directory']['path'], PATHINFO_BASENAME);
             $data->folders[] = [
-                'name' => $basename,
-                'hasChildren' => $backend->containsDirectories($resourceType, Path::combine($workingFolder->getClientCurrentFolder(), $basename)),
+                'name' => $directory['basename'],
+                'hasChildren' => $backend->containsDirectories($resourceType, Path::combine($workingFolder->getClientCurrentFolder(), $directory['basename'])),
                 'acl' => $directory['acl'],
             ];
         }

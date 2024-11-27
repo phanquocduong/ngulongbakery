@@ -26,20 +26,29 @@ class MemoryDataCollector extends DataCollector implements LateDataCollectorInte
         $this->reset();
     }
 
-    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
+    /**
+     * {@inheritdoc}
+     */
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         $this->updateMemoryUsage();
     }
 
-    public function reset(): void
+    /**
+     * {@inheritdoc}
+     */
+    public function reset()
     {
         $this->data = [
             'memory' => 0,
-            'memory_limit' => $this->convertToBytes(\ini_get('memory_limit')),
+            'memory_limit' => $this->convertToBytes(ini_get('memory_limit')),
         ];
     }
 
-    public function lateCollect(): void
+    /**
+     * {@inheritdoc}
+     */
+    public function lateCollect()
     {
         $this->updateMemoryUsage();
     }
@@ -49,22 +58,28 @@ class MemoryDataCollector extends DataCollector implements LateDataCollectorInte
         return $this->data['memory'];
     }
 
-    public function getMemoryLimit(): int|float
+    public function getMemoryLimit(): int
     {
         return $this->data['memory_limit'];
     }
 
-    public function updateMemoryUsage(): void
+    public function updateMemoryUsage()
     {
         $this->data['memory'] = memory_get_peak_usage(true);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'memory';
     }
 
-    private function convertToBytes(string $memoryLimit): int|float
+    /**
+     * @return int|float
+     */
+    private function convertToBytes(string $memoryLimit)
     {
         if ('-1' === $memoryLimit) {
             return -1;
@@ -82,11 +97,11 @@ class MemoryDataCollector extends DataCollector implements LateDataCollectorInte
 
         switch (substr($memoryLimit, -1)) {
             case 't': $max *= 1024;
-                // no break
+            // no break
             case 'g': $max *= 1024;
-                // no break
+            // no break
             case 'm': $max *= 1024;
-                // no break
+            // no break
             case 'k': $max *= 1024;
         }
 

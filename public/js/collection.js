@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     productContainer.innerHTML = `<p class="no-products-message">${data.message}</p>`;
                 } else {
                     // Hiển thị danh sách sản phẩm
+                    productContainer.style.justifyContent = '';
                     productContainer.innerHTML = data.products.map(renderProduct).join('');
                 }
                 // Cập nhật thông tin danh mục và phân trang
@@ -67,23 +68,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             class="product-item__img"
                         ></div>
                     </a>
-                    <a href="index.php?page=product-details&id='.${product.id}.'" class="product-item__title-link">
+                    <a href="index.php?page=product-details&id=${product.id}" class="product-item__title-link">
                         <h4 class="product-item__name">${product.name}</h4>
                     </a>
                     <div class="product-item__rating">
                         ${renderStars(product.rating)}
                     </div>
                     <div class="product-item__price">
-                        ${product.sale ? `<span class="product-item__price-old">${formatPrice(product.price)}đ</span>` : ''}
-                        <span class="product-item__price-current">${formatPrice(product.sale || product.price)}đ</span>
+                        ${product.sale ? `<span class="product-item__price-old">${new Intl.NumberFormat().format(product.price)}đ</span>` : ''}
+                        <span class="product-item__price-current">${new Intl.NumberFormat().format(product.sale || product.price)}đ</span>
                     </div>
                     ${product.sale ? `<div class="product-item__sale-off">-${calculateDiscount(product.price, product.sale)}%</div>` : ''}
                     <div class="add-to-cart-box">
                         <button 
                             class="add-to-cart-btn" 
-                            onclick="addToCart(this, ${product.id}, '${product.name}', ${product.sale || product.price}, '${
-            product.image
-        }')"
+                            onclick="addToCart(this, ${product.id}, '${product.name}', ${product.sale || product.price}, '${product.image}')"
                         >
                             THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                         </button>
@@ -100,11 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
             starsHtml += `<i class="star-icon fa-${i <= rating ? 'solid' : 'regular'} fa-star"></i>`;
         }
         return starsHtml;
-    }
-
-    // Hàm định dạng giá sản phẩm
-    function formatPrice(price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     // Hàm tính toán phần trăm giảm giá
@@ -131,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lắng nghe thay đổi của bộ lọc giá
     priceFilters.forEach(filter =>
         filter.addEventListener('change', function () {
+            // Dùng Array.from để duyệt những phương thức duyệt mảng nâng cao vì priceFilters là một NodeList
             filters.price = Array.from(priceFilters)
                 .filter(filter => filter.checked)
                 .map(filter => filter.id);

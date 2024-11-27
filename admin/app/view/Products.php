@@ -65,7 +65,7 @@
             echo "<tr>";
             echo "<td>$id</td>";
             echo "<td>$name</td>";
-            echo "<td>".number_format($price, 0, ',', '.')." VNĐ</td>";
+            echo "<td>" . number_format($price, 0, ',', '.') . " VNĐ</td>";
             echo "<td><img src='../public/upload/product/$image' alt='' style='width: 50px; height: 50px' /></td>";
             echo "<td>$views</td>";
             $categoryName = isset($categoryMap[$category_id]) ? $categoryMap[$category_id] : 'Không xác định';
@@ -77,7 +77,7 @@
               <a href='index.php?page=viewEdit_products&id=$id'><button class='btn btn-warning btn-sm btn-color-text'>
                   Sửa
                 </button></a>";
-                echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $id . ')">
+            echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $id . ')">
                 <button class="btn btn-danger btn-sm btn-color-text">
                   xoá
                 </button>
@@ -99,6 +99,35 @@
 
         </tbody>
       </table>
+      <div id="pagination">
+        <?php
+        $totalPages = $this->data['totalPages'];
+        $currentPage = $this->data['currentPage'];
+        for ($i = 1; $i <= $totalPages; $i++): ?>
+          <a href="index.php?page=products&p=<?php echo $i; ?>"
+            class="<?php echo ($currentPage == $i) ? 'active' : ''; ?>">
+            <?php echo $i; ?>
+          </a>
+        <?php endfor; ?>
+      </div>
+
+      <style>
+        .pagination a {
+          display: inline-block;
+          padding: 5px 10px;
+          margin: 0 50px;
+          text-decoration: none;
+          color: #007bff;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+
+        .pagination a.active {
+          background-color: #007bff;
+          color: white;
+          border: 1px solid #007bff;
+        }
+      </style>
     </div>
 
     <script>

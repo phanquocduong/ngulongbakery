@@ -40,23 +40,25 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="pagination">
-            <?php
-                $current_page = isset($_GET['num']) ? (int)$_GET['num'] : 1;
-                $previous_page = $current_page - 1;
-                $next_page = $current_page + 1;
-            ?>
-            <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$previous_page?>" class="pagination-link__icon-prev <?= $current_page == 1 ? 'none' : '' ?>">
-                <i class="fa-solid fa-chevron-left"></i>
-            </a>
-            <?php 
-            for ($i = 1; $i <= $numberPages; $i++): ?>
-                <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$i?>" class="pagination-link <?= $i == $current_page ? 'active' : '' ?>"><?= $i ?></a>
-            <?php endfor; ?>
-            <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$next_page?>" class="pagination-link__icon-next <?= $current_page == $numberPages ? 'none' : '' ?>">
-                <i class="fa-solid fa-chevron-right"></i>
-            </a>
-        </div>
+        <?php if(!empty($data)): ?>
+            <div class="pagination">
+                <?php
+                    $current_page = isset($_GET['num']) ? (int)$_GET['num'] : 1;
+                    $previous_page = $current_page - 1;
+                    $next_page = $current_page + 1;
+                ?>
+                <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$previous_page?>" class="pagination-link__icon-prev <?= $current_page == 1 ? 'none' : '' ?>">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <?php 
+                for ($i = 1; $i <= $numberPages; $i++): ?>
+                    <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$i?>" class="pagination-link <?= $i == $current_page ? 'pagination-link--active' : '' ?>"><?= $i ?></a>
+                <?php endfor; ?>
+                <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$next_page?>" class="pagination-link__icon-next <?= $current_page == $numberPages ? 'none' : '' ?>">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
 </main>
 

@@ -29,9 +29,8 @@
 <script src="./public/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="./public/js/main.js?v= < php echo time(); >? "></script>
-<script src="../ckfinder/ckfinder.js"></script>
-
+<script src="./public/js/main.js"></script>
+ <script src="../ckfinder/ckfinder.js"></script>
 <!-- <script src="./ckeditor5/ckeditor5.js"></script> -->
  <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 <script src="./public/js/detailnews.js"></script>

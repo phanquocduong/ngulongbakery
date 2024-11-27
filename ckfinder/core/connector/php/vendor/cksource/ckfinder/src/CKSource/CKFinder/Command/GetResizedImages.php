@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -22,17 +22,12 @@ use CKSource\CKFinder\Filesystem\Folder\WorkingFolder;
 use CKSource\CKFinder\Filesystem\Path;
 use CKSource\CKFinder\Image;
 use CKSource\CKFinder\ResizedImage\ResizedImageRepository;
-use League\Flysystem\FilesystemException;
 use Symfony\Component\HttpFoundation\Request;
 
 class GetResizedImages extends CommandAbstract
 {
     protected $requires = [Permission::FILE_VIEW];
 
-    /**
-     * @throws FilesystemException
-     * @throws InvalidRequestException
-     */
     public function execute(Request $request, WorkingFolder $workingFolder, ResizedImageRepository $resizedImageRepository, Config $config, CacheManager $cache)
     {
         $fileName = (string) $request->get('fileName');
@@ -47,7 +42,7 @@ class GetResizedImages extends CommandAbstract
         if ($sizes) {
             $sizes = explode(',', $sizes);
             if (array_diff($sizes, array_keys($config->get('images.sizes')))) {
-                throw new InvalidRequestException('Invalid size requested');
+                throw new InvalidRequestException(sprintf('Invalid size requested'));
             }
         }
 

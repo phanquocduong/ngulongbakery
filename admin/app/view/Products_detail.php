@@ -54,7 +54,7 @@
             echo "<tr>";
             echo "<td>$id</td>";
             echo "<td>$name</td>";
-            echo "<td>".number_format($price, 0, ',', '.')." VNĐ</td>";
+            echo "<td>" . number_format($price, 0, ',', '.') . " VNĐ</td>";
             echo "<td>$sale</td>";
             echo "<td><img src='../public/upload/product/$image' alt='' style='width: 50px; height: 50px' /></td>";
             // Tách chuỗi chứa tên các file ảnh thành mảng
@@ -74,51 +74,12 @@
           } else {
             echo "<tr><td colspan='12'>Không tìm thấy sản phẩm</td></tr>";
           }
-
           ?>
-          <!-- <tr>
-                    <td>1</td>
-                    <td>Bánh mì thịt</td>
-                    <td>100,000 VND</td>
-                    <td>90,000 VND</td>
-                    <td>
-                      <img
-                        src="img/products/banh-mi.jpg"
-                        alt="Hình Sản Phẩm"
-                        style="width: 50px; height: 50px"
-                      />
-                    </td>
-                    <td>
-                      <img
-                        src="img/products/banhmi1.jpg"
-                        alt="Hình Con"
-                        style="width: 50px; height: 50px"
-                      />
-                      <img
-                        src="img/products/banhmi2.jpg"
-                        alt="Hình Con"
-                        style="width: 50px; height: 50px"
-                      />
-                      <img
-                        src="img/products/banhmi3.jpg"
-                        alt="Hình Con"
-                        style="width: 50px; height: 50px"
-                      />
-                    </td>
-                    <td>Bánh mì ngon</td>
-                    <td>Bánh mì ngon với hương vị đặc biệt</td>
-                    <td>50</td>
-                    <td>100</td>
-                    <td>Bánh mì</td>
-                    <td>Thực phẩm</td>
-                  </tr> -->
-          <!-- Add more rows as needed -->
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
 <!-- Product review -->
 <h2 class="text text-center text-padding">Đánh Giá Sản Phẩm</h2>
 <div class="container-fluid pt-4 px-4">
@@ -131,70 +92,55 @@
             <th>Tên Người Dùng</th>
             <th>Đánh Giá Sao</th>
             <th>Nội Dung Đánh Giá</th>
+            <th>Ảnh đánh giá từ người dùng</th>
             <th>Ngày</th>
             <th>Đánh Dấu</th>
             <th>Thao Tác</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Con Mèo Ngu Ngốc</td>
-            <td class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="bi bi-star"></i>
-            </td>
-            <td>Sản phẩm rất tốt</td>
-            <td>08-11-2024</td>
-            <td>
-              <button class="btn toggle-star">
-                <i class="fa fa-star"></i>
-              </button>
-            </td>
-            <td><button class="btn btn-danger">Xoá</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Tran Thi Đẹp</td>
-            <td class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="bi bi-star"></i>
-            </td>
-            <td>Giá cả hợp lý</td>
-            <td>08-11-2024</td>
-            <td>
-              <button class="btn toggle-star">
-                <i class="fa fa-star"></i>
-              </button>
-            </td>
-            <td><button class="btn btn-danger">Xoá</button></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Con Sói Cô Độc</td>
-            <td class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </td>
-            <td>Chất lượng tuyệt vời</td>
-            <td>07-11-2024</td>
-            <td>
-              <button class="btn toggle-star">
-                <i class="fa fa-star"></i>
-              </button>
-            </td>
-            <td><button class="btn btn-danger">Xoá</button></td>
-          </tr>
-          <!-- Add more rows as needed -->
+        <?php
+        if (isset($_GET['id'])) {
+          $id = intval($_GET['id']); // Bảo vệ giá trị đầu vào
+          $reviews = $productsModel->getReviews(); // Lấy danh sách đánh giá
+          $stt = 1;
+          $hasReview = false;
+
+          if ($reviews) {
+            foreach ($reviews as $review) {
+              extract($review);
+              if ($id == $product_id) { // So sánh với product_id
+                $hasReview = true;
+                echo "<tr>";
+                echo "<td>" . $stt++ . "</td>";
+                echo "<td>" . htmlspecialchars($username) . "</td>"; // Escaping output
+                echo "<td class='rating'>";
+                for ($i = 0; $i < $rating; $i++) {
+                  echo "<i class='fa fa-star'></i>";
+                }
+                echo "</td>";
+                echo "<td style='width:300px;'>" . htmlspecialchars($contents) . "</td>";
+                echo "<td style='text-align:center;'><img src='../public/upload/review/$img' alt='' style='width: 50px; height: 50px' /></td>";
+                echo "<td>" . htmlspecialchars($date_comments) . "</td>";
+                echo "<td>";
+                if ($status == 1) {
+                  echo "<button class='btn toggle-star'><i class='fa fa-star'></i></button>";
+                } else {
+                  echo "<button class='btn toggle-star'><i class='bi bi-star'></i></button>";
+                }
+                echo "</td>";
+                echo "<td><button class='btn btn-danger'>Xoá</button></td>";
+                echo "</tr>";
+              }
+            }
+          }
+          if (!$hasReview) {
+            echo "<tr><td colspan='7'><h6>Chưa có đánh giá nào</h6></td></tr>";
+          }
+        } else {
+          echo "<tr><td colspan='7'>Không có ID sản phẩm được cung cấp</td></tr>";
+        }
+        ?>
         </tbody>
       </table>
     </div>

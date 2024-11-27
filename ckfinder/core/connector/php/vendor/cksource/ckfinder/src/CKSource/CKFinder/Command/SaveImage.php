@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -90,8 +90,8 @@ class SaveImage extends CommandAbstract
 
         $imagesConfig = $config->get('images');
 
-        if ($imagesConfig['maxWidth'] && $uploadedImage->getWidth() > $imagesConfig['maxWidth']
-            || $imagesConfig['maxHeight'] && $uploadedImage->getHeight() > $imagesConfig['maxHeight']) {
+        if ($imagesConfig['maxWidth'] && $uploadedImage->getWidth() > $imagesConfig['maxWidth'] ||
+            $imagesConfig['maxHeight'] && $uploadedImage->getHeight() > $imagesConfig['maxHeight']) {
             $uploadedImage->resize($imagesConfig['maxWidth'], $imagesConfig['maxHeight'], $imagesConfig['quality']);
         }
 
@@ -126,7 +126,7 @@ class SaveImage extends CommandAbstract
                 throw new AccessDeniedException("Couldn't save image file");
             }
 
-            // Remove thumbnails and resized images in case if file is overwritten
+            //Remove thumbnails and resized images in case if file is overwritten
             if (!$saveAsNew && $saved) {
                 $resourceType = $workingFolder->getResourceType();
                 $thumbnailRepository->deleteThumbnails($resourceType, $workingFolder->getClientCurrentFolder(), $fileName);

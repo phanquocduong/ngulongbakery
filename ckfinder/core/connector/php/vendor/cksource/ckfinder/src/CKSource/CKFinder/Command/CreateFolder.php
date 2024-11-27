@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -17,11 +17,7 @@ namespace CKSource\CKFinder\Command;
 use CKSource\CKFinder\Acl\Permission;
 use CKSource\CKFinder\Event\CKFinderEvent;
 use CKSource\CKFinder\Event\CreateFolderEvent;
-use CKSource\CKFinder\Exception\AccessDeniedException;
-use CKSource\CKFinder\Exception\AlreadyExistsException;
-use CKSource\CKFinder\Exception\InvalidNameException;
 use CKSource\CKFinder\Filesystem\Folder\WorkingFolder;
-use League\Flysystem\FilesystemException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,13 +27,7 @@ class CreateFolder extends CommandAbstract
 
     protected $requires = [Permission::FOLDER_CREATE];
 
-    /**
-     * @throws InvalidNameException
-     * @throws AccessDeniedException
-     * @throws AlreadyExistsException
-     * @throws FilesystemException
-     */
-    public function execute(Request $request, WorkingFolder $workingFolder, EventDispatcher $dispatcher): array
+    public function execute(Request $request, WorkingFolder $workingFolder, EventDispatcher $dispatcher)
     {
         $newFolderName = (string) $request->query->get('newFolderName', '');
 
@@ -50,7 +40,7 @@ class CreateFolder extends CommandAbstract
 
         if (!$createFolderEvent->isPropagationStopped()) {
             $newFolderName = $createFolderEvent->getNewFolderName();
-            list($createdFolderName, $created) = $workingFolder->createDirectory($newFolderName);
+            list($createdFolderName, $created) = $workingFolder->createDir($newFolderName);
         }
 
         return ['newFolder' => $createdFolderName, 'created' => (int) $created];

@@ -250,8 +250,7 @@
 
 /* Start review section */
 .review-section {
-    background: url(../upload/background-icon/banhbonglan.png),
-        linear-gradient(to bottom, var(--white-color), var(--linear-color));
+    background: url(../upload/background-icon/banhbonglan.png), linear-gradient(to bottom, var(--white-color), var(--linear-color));
     padding: 100px 0;
     background-repeat: no-repeat;
     background-position: top left;
@@ -319,6 +318,7 @@
     padding: 60px 50px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .promotion-item__title {
@@ -328,16 +328,11 @@
     margin: 0;
     margin-bottom: 125px;
     color: var(--white-color);
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
 }
 /* End review section */
 
 /* Tablet - PC low resolution */
 @media (min-width: 740px) and (max-width: 1024px) {
-    .slideshow-container {
-        height: 376px;
-    }
-
     .benefit-item-box {
         padding: 8px;
     }

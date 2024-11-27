@@ -14,7 +14,7 @@ namespace Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 /**
@@ -22,21 +22,46 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
  *
  * @author Simeon Kolev <simeon.kolev9@gmail.com>
  */
-final class NotTaggedControllerValueResolver implements ValueResolverInterface
+final class NotTaggedControllerValueResolver implements ArgumentValueResolverInterface
 {
-    public function __construct(
-        private ContainerInterface $container,
-    ) {
+    private $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
     }
 
-    public function resolve(Request $request, ArgumentMetadata $argument): array
+    /**
+     * {@inheritdoc}
+     */
+    public function supports(Request $request, ArgumentMetadata $argument): bool
     {
         $controller = $request->attributes->get('_controller');
 
         if (\is_array($controller) && \is_callable($controller, true) && \is_string($controller[0])) {
             $controller = $controller[0].'::'.$controller[1];
         } elseif (!\is_string($controller) || '' === $controller) {
-            return [];
+            return false;
+        }
+
+        if ('\\' === $controller[0]) {
+            $controller = ltrim($controller, '\\');
+        }
+
+        if (!$this->container->has($controller) && false !== $i = strrpos($controller, ':')) {
+            $controller = substr($controller, 0, $i).strtolower(substr($controller, $i));
+        }
+
+        return false === $this->container->has($controller);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resolve(Request $request, ArgumentMetadata $argument): iterable
+    {
+        if (\is_array($controller = $request->attributes->get('_controller'))) {
+            $controller = $controller[0].'::'.$controller[1];
         }
 
         if ('\\' === $controller[0]) {
@@ -44,13 +69,8 @@ final class NotTaggedControllerValueResolver implements ValueResolverInterface
         }
 
         if (!$this->container->has($controller)) {
-            $controller = (false !== $i = strrpos($controller, ':'))
-                ? substr($controller, 0, $i).strtolower(substr($controller, $i))
-                : $controller.'::__invoke';
-        }
-
-        if ($this->container->has($controller)) {
-            return [];
+            $i = strrpos($controller, ':');
+            $controller = substr($controller, 0, $i).strtolower(substr($controller, $i));
         }
 
         $what = sprintf('argument $%s of "%s()"', $argument->getName(), $controller);

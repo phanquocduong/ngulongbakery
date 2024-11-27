@@ -7,8 +7,6 @@ use Aws\AwsClient;
  * This client is used to interact with the **Amazon Chime SDK Meetings** service.
  * @method \Aws\Result batchCreateAttendee(array $args = [])
  * @method \GuzzleHttp\Promise\Promise batchCreateAttendeeAsync(array $args = [])
- * @method \Aws\Result batchUpdateAttendeeCapabilitiesExcept(array $args = [])
- * @method \GuzzleHttp\Promise\Promise batchUpdateAttendeeCapabilitiesExceptAsync(array $args = [])
  * @method \Aws\Result createAttendee(array $args = [])
  * @method \GuzzleHttp\Promise\Promise createAttendeeAsync(array $args = [])
  * @method \Aws\Result createMeeting(array $args = [])
@@ -25,17 +23,9 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise getMeetingAsync(array $args = [])
  * @method \Aws\Result listAttendees(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listAttendeesAsync(array $args = [])
- * @method \Aws\Result listTagsForResource(array $args = [])
- * @method \GuzzleHttp\Promise\Promise listTagsForResourceAsync(array $args = [])
  * @method \Aws\Result startMeetingTranscription(array $args = [])
  * @method \GuzzleHttp\Promise\Promise startMeetingTranscriptionAsync(array $args = [])
  * @method \Aws\Result stopMeetingTranscription(array $args = [])
  * @method \GuzzleHttp\Promise\Promise stopMeetingTranscriptionAsync(array $args = [])
- * @method \Aws\Result tagResource(array $args = [])
- * @method \GuzzleHttp\Promise\Promise tagResourceAsync(array $args = [])
- * @method \Aws\Result untagResource(array $args = [])
- * @method \GuzzleHttp\Promise\Promise untagResourceAsync(array $args = [])
- * @method \Aws\Result updateAttendeeCapabilities(array $args = [])
- * @method \GuzzleHttp\Promise\Promise updateAttendeeCapabilitiesAsync(array $args = [])
  */
 class ChimeSDKMeetingsClient extends AwsClient {}

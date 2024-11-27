@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 /*
  * This file is part of the Monolog package.
@@ -11,68 +11,73 @@
 
 namespace Monolog\Formatter;
 
-use Monolog\LogRecord;
-
 /**
  * formats the record to be used in the FlowdockHandler
  *
  * @author Dominik Liebler <liebler.dominik@gmail.com>
- * @deprecated Since 2.9.0 and 3.3.0, Flowdock was shutdown we will thus drop this handler in Monolog 4
  */
 class FlowdockFormatter implements FormatterInterface
 {
-    private string $source;
+    /**
+     * @var string
+     */
+    private $source;
 
-    private string $sourceEmail;
+    /**
+     * @var string
+     */
+    private $sourceEmail;
 
-    public function __construct(string $source, string $sourceEmail)
+    /**
+     * @param string $source
+     * @param string $sourceEmail
+     */
+    public function __construct($source, $sourceEmail)
     {
         $this->source = $source;
         $this->sourceEmail = $sourceEmail;
     }
 
     /**
-     * @inheritDoc
-     *
-     * @return mixed[]
+     * {@inheritdoc}
      */
-    public function format(LogRecord $record): array
+    public function format(array $record)
     {
-        $tags = [
+        $tags = array(
             '#logs',
-            '#' . $record->level->toPsrLogLevel(),
-            '#' . $record->channel,
-        ];
+            '#' . strtolower($record['level_name']),
+            '#' . $record['channel'],
+        );
 
-        foreach ($record->extra as $value) {
+        foreach ($record['extra'] as $value) {
             $tags[] = '#' . $value;
         }
 
         $subject = sprintf(
             'in %s: %s - %s',
             $this->source,
-            $record->level->getName(),
-            $this->getShortMessage($record->message)
+            $record['level_name'],
+            $this->getShortMessage($record['message'])
         );
 
-        return [
+        $record['flowdock'] = array(
             'source' => $this->source,
             'from_address' => $this->sourceEmail,
             'subject' => $subject,
-            'content' => $record->message,
+            'content' => $record['message'],
             'tags' => $tags,
             'project' => $this->source,
-        ];
+        );
+
+        return $record;
     }
 
     /**
-     * @inheritDoc
-     *
-     * @return mixed[][]
+     * {@inheritdoc}
      */
-    public function formatBatch(array $records): array
+    public function formatBatch(array $records)
     {
-        $formatted = [];
+        $formatted = array();
 
         foreach ($records as $record) {
             $formatted[] = $this->format($record);
@@ -81,7 +86,12 @@ class FlowdockFormatter implements FormatterInterface
         return $formatted;
     }
 
-    public function getShortMessage(string $message): string
+    /**
+     * @param string $message
+     *
+     * @return string
+     */
+    public function getShortMessage($message)
     {
         static $hasMbString;
 

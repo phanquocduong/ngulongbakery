@@ -12,9 +12,6 @@ abstract class AbstractModel implements \ArrayAccess
     /** @var ShapeMap */
     protected $shapeMap;
 
-    /** @var array */
-    protected $contextParam;
-
     /**
      * @param array    $definition Service description
      * @param ShapeMap $shapeMap   Shapemap used for creating shapes
@@ -23,9 +20,6 @@ abstract class AbstractModel implements \ArrayAccess
     {
         $this->definition = $definition;
         $this->shapeMap = $shapeMap;
-        if (isset($definition['contextParam'])) {
-            $this->contextParam = $definition['contextParam'];
-        }
     }
 
     public function toArray()
@@ -33,9 +27,6 @@ abstract class AbstractModel implements \ArrayAccess
         return $this->definition;
     }
 
-    /**
-     * @return mixed|null
-     */
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
@@ -43,27 +34,18 @@ abstract class AbstractModel implements \ArrayAccess
             ? $this->definition[$offset] : null;
     }
 
-    /**
-     * @return void
-     */
     #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->definition[$offset] = $value;
     }
 
-    /**
-     * @return bool
-     */
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->definition[$offset]);
     }
 
-    /**
-     * @return void
-     */
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {

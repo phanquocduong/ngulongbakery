@@ -27,19 +27,25 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Esi extends AbstractSurrogate
 {
-    public function getName(): string
+    public function getName()
     {
         return 'esi';
     }
 
-    public function addSurrogateControl(Response $response): void
+    /**
+     * {@inheritdoc}
+     */
+    public function addSurrogateControl(Response $response)
     {
         if (str_contains($response->getContent(), '<esi:include')) {
             $response->headers->set('Surrogate-Control', 'content="ESI/1.0"');
         }
     }
 
-    public function renderIncludeTag(string $uri, ?string $alt = null, bool $ignoreErrors = true, string $comment = ''): string
+    /**
+     * {@inheritdoc}
+     */
+    public function renderIncludeTag(string $uri, string $alt = null, bool $ignoreErrors = true, string $comment = '')
     {
         $html = sprintf('<esi:include src="%s"%s%s />',
             $uri,
@@ -54,7 +60,10 @@ class Esi extends AbstractSurrogate
         return $html;
     }
 
-    public function process(Request $request, Response $response): Response
+    /**
+     * {@inheritdoc}
+     */
+    public function process(Request $request, Response $response)
     {
         $type = $response->headers->get('Content-Type');
         if (empty($type)) {
@@ -71,8 +80,8 @@ class Esi extends AbstractSurrogate
         $content = preg_replace('#<esi\:remove>.*?</esi\:remove>#s', '', $content);
         $content = preg_replace('#<esi\:comment[^>]+>#s', '', $content);
 
-        $boundary = self::generateBodyEvalBoundary();
         $chunks = preg_split('#<esi\:include\s+(.*?)\s*(?:/|</esi\:include)>#', $content, -1, \PREG_SPLIT_DELIM_CAPTURE);
+        $chunks[0] = str_replace($this->phpEscapeMap[0], $this->phpEscapeMap[1], $chunks[0]);
 
         $i = 1;
         while (isset($chunks[$i])) {
@@ -86,10 +95,16 @@ class Esi extends AbstractSurrogate
                 throw new \RuntimeException('Unable to process an ESI tag without a "src" attribute.');
             }
 
-            $chunks[$i] = $boundary.$options['src']."\n".($options['alt'] ?? '')."\n".('continue' === ($options['onerror'] ?? ''))."\n";
-            $i += 2;
+            $chunks[$i] = sprintf('<?php echo $this->surrogate->handle($this, %s, %s, %s) ?>'."\n",
+                var_export($options['src'], true),
+                var_export($options['alt'] ?? '', true),
+                isset($options['onerror']) && 'continue' === $options['onerror'] ? 'true' : 'false'
+            );
+            ++$i;
+            $chunks[$i] = str_replace($this->phpEscapeMap[0], $this->phpEscapeMap[1], $chunks[$i]);
+            ++$i;
         }
-        $content = $boundary.implode('', $chunks).$boundary;
+        $content = implode('', $chunks);
 
         $response->setContent($content);
         $response->headers->set('X-Body-Eval', 'ESI');

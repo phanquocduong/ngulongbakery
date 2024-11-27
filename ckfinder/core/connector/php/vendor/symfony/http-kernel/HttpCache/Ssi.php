@@ -21,24 +21,36 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Ssi extends AbstractSurrogate
 {
-    public function getName(): string
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
     {
         return 'ssi';
     }
 
-    public function addSurrogateControl(Response $response): void
+    /**
+     * {@inheritdoc}
+     */
+    public function addSurrogateControl(Response $response)
     {
         if (str_contains($response->getContent(), '<!--#include')) {
             $response->headers->set('Surrogate-Control', 'content="SSI/1.0"');
         }
     }
 
-    public function renderIncludeTag(string $uri, ?string $alt = null, bool $ignoreErrors = true, string $comment = ''): string
+    /**
+     * {@inheritdoc}
+     */
+    public function renderIncludeTag(string $uri, string $alt = null, bool $ignoreErrors = true, string $comment = '')
     {
         return sprintf('<!--#include virtual="%s" -->', $uri);
     }
 
-    public function process(Request $request, Response $response): Response
+    /**
+     * {@inheritdoc}
+     */
+    public function process(Request $request, Response $response)
     {
         $type = $response->headers->get('Content-Type');
         if (empty($type)) {
@@ -52,8 +64,9 @@ class Ssi extends AbstractSurrogate
 
         // we don't use a proper XML parser here as we can have SSI tags in a plain text response
         $content = $response->getContent();
-        $boundary = self::generateBodyEvalBoundary();
+
         $chunks = preg_split('#<!--\#include\s+(.*?)\s*-->#', $content, -1, \PREG_SPLIT_DELIM_CAPTURE);
+        $chunks[0] = str_replace($this->phpEscapeMap[0], $this->phpEscapeMap[1], $chunks[0]);
 
         $i = 1;
         while (isset($chunks[$i])) {
@@ -67,10 +80,14 @@ class Ssi extends AbstractSurrogate
                 throw new \RuntimeException('Unable to process an SSI tag without a "virtual" attribute.');
             }
 
-            $chunks[$i] = $boundary.$options['virtual']."\n\n\n";
-            $i += 2;
+            $chunks[$i] = sprintf('<?php echo $this->surrogate->handle($this, %s, \'\', false) ?>'."\n",
+                var_export($options['virtual'], true)
+            );
+            ++$i;
+            $chunks[$i] = str_replace($this->phpEscapeMap[0], $this->phpEscapeMap[1], $chunks[$i]);
+            ++$i;
         }
-        $content = $boundary.implode('', $chunks).$boundary;
+        $content = implode('', $chunks);
 
         $response->setContent($content);
         $response->headers->set('X-Body-Eval', 'SSI');

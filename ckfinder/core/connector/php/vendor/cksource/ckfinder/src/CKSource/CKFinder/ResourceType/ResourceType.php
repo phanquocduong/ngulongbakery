@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -47,17 +47,17 @@ class ResourceType
         return $this->configNode['directory'];
     }
 
-    public function getBackend(): Backend
+    public function getBackend()
     {
         return $this->backend;
     }
 
-    public function getThumbnailRepository(): ThumbnailRepository
+    public function getThumbnailRepository()
     {
         return $this->thumbnailRepository;
     }
 
-    public function getResizedImageRepository(): ResizedImageRepository
+    public function getResizedImageRepository()
     {
         return $this->resizedImageRepository;
     }
@@ -79,15 +79,15 @@ class ResourceType
 
     public function getLabel()
     {
-        return $this->configNode['label'] ?? null;
+        return isset($this->configNode['label']) ? $this->configNode['label'] : null;
     }
 
-    public function isLazyLoaded(): bool
+    public function isLazyLoaded()
     {
         return isset($this->configNode['lazyLoad']) && $this->configNode['lazyLoad'];
     }
 
-    public function isAllowedExtension($extension): bool
+    public function isAllowedExtension($extension)
     {
         $extension = strtolower(ltrim($extension, '.'));
 
@@ -102,8 +102,8 @@ class ResourceType
         $allowed = $this->configNode['allowedExtensions'];
         $denied = $this->configNode['deniedExtensions'];
 
-        if (!empty($allowed) && !\in_array($extension, $allowed, true)
-            || !empty($denied) && \in_array($extension, $denied, true)) {
+        if (!empty($allowed) && !\in_array($extension, $allowed, true) ||
+            !empty($denied) && \in_array($extension, $denied, true)) {
             return false;
         }
 
@@ -115,7 +115,7 @@ class ResourceType
      *
      * @return string hash string
      */
-    public function getHash(): string
+    public function getHash()
     {
         return substr(md5($this->configNode['name'].$this->configNode['backend'].$this->configNode['directory'].$this->backend->getBaseUrl().$this->backend->getRootDirectory()), 0, 16);
     }

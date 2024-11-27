@@ -17,24 +17,14 @@ use Symfony\Component\RateLimiter\Policy\NoLimiter;
 use Symfony\Component\RateLimiter\RateLimit;
 
 /**
- * An implementation of PeekableRequestRateLimiterInterface that
+ * An implementation of RequestRateLimiterInterface that
  * fits most use-cases.
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-abstract class AbstractRequestRateLimiter implements PeekableRequestRateLimiterInterface
+abstract class AbstractRequestRateLimiter implements RequestRateLimiterInterface
 {
     public function consume(Request $request): RateLimit
-    {
-        return $this->doConsume($request, 1);
-    }
-
-    public function peek(Request $request): RateLimit
-    {
-        return $this->doConsume($request, 0);
-    }
-
-    private function doConsume(Request $request, int $tokens): RateLimit
     {
         $limiters = $this->getLimiters($request);
         if (0 === \count($limiters)) {
@@ -43,9 +33,11 @@ abstract class AbstractRequestRateLimiter implements PeekableRequestRateLimiterI
 
         $minimalRateLimit = null;
         foreach ($limiters as $limiter) {
-            $rateLimit = $limiter->consume($tokens);
+            $rateLimit = $limiter->consume(1);
 
-            $minimalRateLimit = $minimalRateLimit ? self::getMinimalRateLimit($minimalRateLimit, $rateLimit) : $rateLimit;
+            if (null === $minimalRateLimit || $rateLimit->getRemainingTokens() < $minimalRateLimit->getRemainingTokens()) {
+                $minimalRateLimit = $rateLimit;
+            }
         }
 
         return $minimalRateLimit;
@@ -62,20 +54,4 @@ abstract class AbstractRequestRateLimiter implements PeekableRequestRateLimiterI
      * @return LimiterInterface[] a set of limiters using keys extracted from the request
      */
     abstract protected function getLimiters(Request $request): array;
-
-    private static function getMinimalRateLimit(RateLimit $first, RateLimit $second): RateLimit
-    {
-        if ($first->isAccepted() !== $second->isAccepted()) {
-            return $first->isAccepted() ? $second : $first;
-        }
-
-        $firstRemainingTokens = $first->getRemainingTokens();
-        $secondRemainingTokens = $second->getRemainingTokens();
-
-        if ($firstRemainingTokens === $secondRemainingTokens) {
-            return $first->getRetryAfter() < $second->getRetryAfter() ? $second : $first;
-        }
-
-        return $firstRemainingTokens > $secondRemainingTokens ? $second : $first;
-    }
 }

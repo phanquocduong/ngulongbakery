@@ -2,6 +2,7 @@
 namespace Aws\Endpoint\UseFipsEndpoint;
 
 use Aws;
+use Aws\ClientResolver;
 use Aws\Endpoint\UseFipsEndpoint\Exception\ConfigurationException;
 
 class Configuration implements ConfigurationInterface

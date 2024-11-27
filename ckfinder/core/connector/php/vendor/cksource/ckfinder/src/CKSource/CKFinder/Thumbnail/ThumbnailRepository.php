@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -21,7 +21,6 @@ use CKSource\CKFinder\Event\CKFinderEvent;
 use CKSource\CKFinder\Event\ResizeImageEvent;
 use CKSource\CKFinder\Filesystem\Path;
 use CKSource\CKFinder\ResourceType\ResourceType;
-use League\Flysystem\FilesystemException;
 
 /**
  * The ThumbnailRepository class.
@@ -49,6 +48,8 @@ class ThumbnailRepository
 
     /**
      * Event dispatcher.
+     *
+     * @var
      */
     protected $dispatcher;
 
@@ -126,8 +127,10 @@ class ThumbnailRepository
      * @param int          $requestedHeight requested thumbnail height
      *
      * @throws \Exception
+     *
+     * @return Thumbnail
      */
-    public function getThumbnail(ResourceType $resourceType, string $path, string $fileName, int $requestedWidth, int $requestedHeight): Thumbnail
+    public function getThumbnail(ResourceType $resourceType, $path, $fileName, $requestedWidth, $requestedHeight)
     {
         $thumbnail = new Thumbnail($this, $resourceType, $path, $fileName, $requestedWidth, $requestedHeight);
 
@@ -152,22 +155,17 @@ class ThumbnailRepository
      * Deletes all thumbnails under the given path defined by the resource type,
      * path and file name.
      *
-     * @return bool `true` if deleted successfully
+     * @param string $path
+     * @param string $fileName
      *
-     * @throws FilesystemException
+     * @return bool `true` if deleted successfully
      */
-    public function deleteThumbnails(ResourceType $resourceType, string $path, string $fileName = null): bool
+    public function deleteThumbnails(ResourceType $resourceType, $path, $fileName = null)
     {
         $path = Path::combine($this->getThumbnailsPath(), $resourceType->getName(), $path, $fileName);
 
         if ($this->thumbsBackend->has($path)) {
-            try {
-                $this->thumbsBackend->deleteDirectory($path);
-
-                return true;
-            } catch (FilesystemException $e) {
-                return false;
-            }
+            return $this->thumbsBackend->deleteDir($path);
         }
 
         return false;

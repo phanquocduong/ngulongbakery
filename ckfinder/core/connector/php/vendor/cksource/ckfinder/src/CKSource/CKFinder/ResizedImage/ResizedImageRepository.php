@@ -4,7 +4,7 @@
  * CKFinder
  * ========
  * https://ckeditor.com/ckfinder/
- * Copyright (c) 2007-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * Copyright (c) 2007-2021, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -24,8 +24,6 @@ use CKSource\CKFinder\Exception\FileNotFoundException;
 use CKSource\CKFinder\Exception\UnauthorizedException;
 use CKSource\CKFinder\Filesystem\Path;
 use CKSource\CKFinder\ResourceType\ResourceType;
-use Exception;
-use League\Flysystem\FilesystemException;
 
 /**
  * The ThumbnailRepository class.
@@ -53,6 +51,8 @@ class ResizedImageRepository
 
     /**
      * Event dispatcher.
+     *
+     * @var
      */
     protected $dispatcher;
 
@@ -69,16 +69,17 @@ class ResizedImageRepository
      *
      * If an appropriate resized version already exists, it is reused.
      *
-     * @throws FileNotFoundException
-     * @throws UnauthorizedException
+     * @param string $sourceFileDir
+     * @param string $sourceFileName
+     * @param int    $requestedWidth
+     * @param int    $requestedHeight
+     *
+     * @throws \Exception
+     *
+     * @return ResizedImage
      */
-    public function getResizedImage(
-        ResourceType $sourceFileResourceType,
-        string $sourceFileDir,
-        string $sourceFileName,
-        int $requestedWidth,
-        int $requestedHeight
-    ): ResizedImage {
+    public function getResizedImage(ResourceType $sourceFileResourceType, $sourceFileDir, $sourceFileName, $requestedWidth, $requestedHeight)
+    {
         $resizedImage = new ResizedImage(
             $this,
             $sourceFileResourceType,
@@ -88,8 +89,8 @@ class ResizedImageRepository
             $requestedHeight
         );
 
-        if (!$this->acl->isAllowed($sourceFileResourceType->getName(), $sourceFileDir, Permission::IMAGE_RESIZE_CUSTOM)
-            && !$this->isSizeAllowedInConfig($requestedWidth, $requestedHeight)) {
+        if (!$this->acl->isAllowed($sourceFileResourceType->getName(), $sourceFileDir, Permission::IMAGE_RESIZE_CUSTOM) &&
+            !$this->isSizeAllowedInConfig($requestedWidth, $requestedHeight)) {
             throw new UnauthorizedException('Provided size is not allowed in images.sizes configuration');
         }
 
@@ -111,16 +112,16 @@ class ResizedImageRepository
     /**
      * Returns an existing resized image.
      *
+     * @param string $sourceFileDir
+     * @param string $sourceFileName
+     * @param string $thumbnailFileName
+     *
      * @throws FileNotFoundException
-     * @throws FilesystemException
-     * @throws Exception
+     *
+     * @return ResizedImage
      */
-    public function getExistingResizedImage(
-        ResourceType $sourceFileResourceType,
-        string $sourceFileDir,
-        string $sourceFileName,
-        string $thumbnailFileName
-    ): ResizedImage {
+    public function getExistingResizedImage(ResourceType $sourceFileResourceType, $sourceFileDir, $sourceFileName, $thumbnailFileName)
+    {
         $size = ResizedImage::getSizeFromFilename($thumbnailFileName);
 
         $resizedImage = new ResizedImage(
@@ -142,7 +143,10 @@ class ResizedImageRepository
         return $resizedImage;
     }
 
-    public function getContainer(): CKFinder
+    /**
+     * @return CKFinder
+     */
+    public function getContainer()
     {
         return $this->app;
     }
@@ -150,40 +154,40 @@ class ResizedImageRepository
     /**
      * Deletes all resized images for a given file.
      *
+     * @param string $sourceFilePath
+     * @param string $sourceFileName
+     *
      * @return bool `true` if deleted
      */
-    public function deleteResizedImages(ResourceType $sourceFileResourceType, string $sourceFilePath, string $sourceFileName): bool
+    public function deleteResizedImages(ResourceType $sourceFileResourceType, $sourceFilePath, $sourceFileName)
     {
         $resizedImagesPath = Path::combine($sourceFileResourceType->getDirectory(), $sourceFilePath, ResizedImage::DIR, $sourceFileName);
 
         $backend = $sourceFileResourceType->getBackend();
 
         if ($backend->hasDirectory($resizedImagesPath)) {
-            try {
-                $backend->deleteDirectory($resizedImagesPath);
-
-                return true;
-            } catch (FilesystemException $e) {
-                return false;
-            }
-        } else {
-            return false;
+            return $backend->deleteDir($resizedImagesPath);
         }
+
+        return false;
     }
 
     /**
      * Copies all resized images for a given file.
      *
-     * @throws FilesystemException
+     * @param string $sourceFilePath
+     * @param string $sourceFileName
+     * @param string $targetFilePath
+     * @param string $targetFileName
      */
     public function copyResizedImages(
         ResourceType $sourceFileResourceType,
-        string $sourceFilePath,
-        string $sourceFileName,
+        $sourceFilePath,
+        $sourceFileName,
         ResourceType $targetFileResourceType,
-        string $targetFilePath,
-        string $targetFileName
-    ): void {
+        $targetFilePath,
+        $targetFileName
+    ) {
         $sourceResizedImagesPath = Path::combine($sourceFileResourceType->getDirectory(), $sourceFilePath, ResizedImage::DIR, $sourceFileName);
         $targetResizedImagesPath = Path::combine($targetFileResourceType->getDirectory(), $targetFilePath, ResizedImage::DIR, $targetFileName);
 
@@ -191,7 +195,7 @@ class ResizedImageRepository
         $targetBackend = $targetFileResourceType->getBackend();
 
         if ($sourceBackend->hasDirectory($sourceResizedImagesPath)) {
-            $resizedImages = $sourceBackend->listContents($sourceResizedImagesPath)->toArray();
+            $resizedImages = $sourceBackend->listContents($sourceResizedImagesPath);
 
             foreach ($resizedImages as $resizedImage) {
                 if (!isset($resizedImage['path'])) {
@@ -200,10 +204,10 @@ class ResizedImageRepository
 
                 $resizedImageStream = $sourceBackend->readStream($resizedImage['path']);
 
-                $sourceImageSize = ResizedImage::getSizeFromFilename(pathinfo($resizedImage['path'], PATHINFO_BASENAME));
+                $sourceImageSize = ResizedImage::getSizeFromFilename($resizedImage['basename']);
                 $targetImageFilename = ResizedImage::createFilename($targetFileName, $sourceImageSize['width'], $sourceImageSize['height']);
 
-                $targetBackend->writeStream(Path::combine($targetResizedImagesPath, $targetImageFilename), $resizedImageStream);
+                $targetBackend->putStream(Path::combine($targetResizedImagesPath, $targetImageFilename), $resizedImageStream);
             }
         }
     }
@@ -211,14 +215,12 @@ class ResizedImageRepository
     /**
      * Renames all resized images created for a given file.
      *
-     * @throws FilesystemException
+     * @param string $sourceFilePath
+     * @param string $originalSourceFileName
+     * @param string $newSourceFileName
      */
-    public function renameResizedImages(
-        ResourceType $sourceFileResourceType,
-        string $sourceFilePath,
-        string $originalSourceFileName,
-        string $newSourceFileName
-    ): void {
+    public function renameResizedImages(ResourceType $sourceFileResourceType, $sourceFilePath, $originalSourceFileName, $newSourceFileName)
+    {
         $resizedImagesDir = Path::combine($sourceFileResourceType->getDirectory(), $sourceFilePath, ResizedImage::DIR);
         $resizedImagesPath = Path::combine($resizedImagesDir, $originalSourceFileName);
         $newResizedImagesPath = Path::combine($resizedImagesDir, $newSourceFileName);
@@ -227,15 +229,14 @@ class ResizedImageRepository
 
         if ($backend->hasDirectory($resizedImagesPath)) {
             if ($backend->rename($resizedImagesPath, $newResizedImagesPath)) {
-                $resizedImages = $backend->listContents($newResizedImagesPath)->toArray();
+                $resizedImages = $backend->listContents($newResizedImagesPath);
 
                 foreach ($resizedImages as $resizedImage) {
                     if (!isset($resizedImage['path'])) {
                         continue;
                     }
 
-                    $sourceImageSize = ResizedImage::getSizeFromFilename(pathinfo($resizedImage['path'], PATHINFO_BASENAME));
-
+                    $sourceImageSize = ResizedImage::getSizeFromFilename($resizedImage['basename']);
                     $newResizedImageFilename = ResizedImage::createFilename($newSourceFileName, $sourceImageSize['width'], $sourceImageSize['height']);
 
                     $backend->rename($resizedImage['path'], Path::combine($newResizedImagesPath, $newResizedImageFilename));
@@ -253,14 +254,10 @@ class ResizedImageRepository
      * @param array        $filterSizes            array containing names of sizes defined
      *                                             in the `images.sizes` configuration
      *
-     * @throws FilesystemException
+     * @return array
      */
-    public function getResizedImagesList(
-        ResourceType $sourceFileResourceType,
-        string $sourceFilePath,
-        string $sourceFileName,
-        array $filterSizes = []
-    ): array {
+    public function getResizedImagesList(ResourceType $sourceFileResourceType, $sourceFilePath, $sourceFileName, $filterSizes = [])
+    {
         $resizedImagesPath = Path::combine($sourceFileResourceType->getDirectory(), $sourceFilePath, ResizedImage::DIR, $sourceFileName);
 
         $backend = $sourceFileResourceType->getBackend();
@@ -272,20 +269,16 @@ class ResizedImageRepository
         }
 
         $resizedImagesFiles = array_filter(
-            $backend->listContents($resizedImagesPath)->toArray(),
-            function ($v) use ($sourceFileResourceType) {
-                return
-                    isset($v['type'])
-                    && 'file' === $v['type']
-                    && \in_array(pathinfo($v['path'], PATHINFO_EXTENSION), $sourceFileResourceType->getAllowedExtensions(), true);
+            $backend->listContents($resizedImagesPath),
+            function ($v) {
+                return isset($v['type']) && 'file' === $v['type'];
             }
         );
 
         foreach ($resizedImagesFiles as $resizedImage) {
-            $size = ResizedImage::getSizeFromFilename(pathinfo($resizedImage['path'], PATHINFO_BASENAME));
+            $size = ResizedImage::getSizeFromFilename($resizedImage['basename']);
 
-            $sizeName = $this->getSizeNameFromConfig($size['width'], $size['height']);
-            if ($sizeName) {
+            if ($sizeName = $this->getSizeNameFromConfig($size['width'], $size['height'])) {
                 if (empty($filterSizes) || \in_array($sizeName, $filterSizes, true)) {
                     $resizedImages[$sizeName] = $this->createNodeValue($resizedImage);
                 }
@@ -302,24 +295,19 @@ class ResizedImageRepository
             }
         }
 
-        if (isset($resizedImages['__custom'])) {
-            $resizedImages['__custom'] = $this->sortImagesBySize($resizedImages['__custom']);
-        }
-
         return $resizedImages;
     }
 
     /**
-     * @throws FilesystemException
-     * @throws Exception
+     * @param string $sourceFilePath
+     * @param string $sourceFileName
+     * @param int    $width
+     * @param int    $height
+     *
+     * @return null|ResizedImage
      */
-    public function getResizedImageBySize(
-        ResourceType $sourceFileResourceType,
-        string $sourceFilePath,
-        string $sourceFileName,
-        int $width,
-        int $height
-    ): ?ResizedImage {
+    public function getResizedImageBySize(ResourceType $sourceFileResourceType, $sourceFilePath, $sourceFileName, $width, $height)
+    {
         $resizedImagesPath = Path::combine($sourceFileResourceType->getDirectory(), $sourceFilePath, ResizedImage::DIR, $sourceFileName);
 
         $backend = $sourceFileResourceType->getBackend();
@@ -329,7 +317,7 @@ class ResizedImageRepository
         }
 
         $resizedImagesFiles = array_filter(
-            $backend->listContents($resizedImagesPath)->toArray(),
+            $backend->listContents($resizedImagesPath),
             function ($v) {
                 return isset($v['type']) && 'file' === $v['type'];
             }
@@ -339,7 +327,7 @@ class ResizedImageRepository
         $thresholdPercent = (float) $this->config->get('images.threshold.percent') / 100;
 
         foreach ($resizedImagesFiles as $resizedImage) {
-            $resizedImageSize = ResizedImage::getSizeFromFilename(pathinfo($resizedImage['path'], PATHINFO_BASENAME));
+            $resizedImageSize = ResizedImage::getSizeFromFilename($resizedImage['basename']);
             $resizedImageWidth = $resizedImageSize['width'];
             $resizedImageHeight = $resizedImageSize['height'];
             if ($resizedImageWidth >= $width && ($resizedImageWidth <= $width + $thresholdPixels || $resizedImageWidth <= $width + $width * $thresholdPercent)
@@ -370,9 +358,12 @@ class ResizedImageRepository
      * This is checked when `Permission::IMAGE_RESIZE_CUSTOM`
      * is not allowed in the source file folder.
      *
+     * @param int $width
+     * @param int $height
+     *
      * @return bool `true` if the provided size is allowed in the configuration
      */
-    protected function isSizeAllowedInConfig(int $width, int $height): bool
+    protected function isSizeAllowedInConfig($width, $height)
     {
         $configSizes = $this->config->get('images.sizes');
 
@@ -392,8 +383,13 @@ class ResizedImageRepository
      * Resized images keep the original image aspect ratio.
      * When an image is resized using the size from the configuration,
      * at least one of the borders has the same length.
+     *
+     * @param int $width
+     * @param int $height
+     *
+     * @return bool `true` if the size from the configuration was used
      */
-    protected function getSizeNameFromConfig(int $width, int $height): ?string
+    protected function getSizeNameFromConfig($width, $height)
     {
         $configSizes = $this->config->get('images.sizes');
 
@@ -408,30 +404,13 @@ class ResizedImageRepository
 
     protected function createNodeValue($resizedImage)
     {
-        $pathParts = pathinfo($resizedImage['path']);
-
         if (isset($resizedImage['url'])) {
             return [
-                'name' => $pathParts['basename'],
+                'name' => $resizedImage['basename'],
                 'url' => $resizedImage['url'],
             ];
         }
 
-        return $pathParts['basename'];
-    }
-
-    protected function sortImagesBySize(array $custom): array
-    {
-        $values = [];
-        $keys = [];
-
-        foreach ($custom as $key => $image) {
-            $size = ResizedImage::getSizeFromFilename($image);
-            $values[$size['width']] = $image;
-            $keys[] = $key;
-        }
-        ksort($values);
-
-        return array_combine($keys, $values);
+        return $resizedImage['basename'];
     }
 }
