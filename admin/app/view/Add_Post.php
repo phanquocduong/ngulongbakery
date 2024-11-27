@@ -12,7 +12,9 @@
     <div class="mb-3">
         <label for="title" class="form-label">Tiêu đề</label>
         <textarea type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề"></textarea>
-        <br>    
+        <br>   
+        <label for="avt-post" class="form-lable">Ảnh bìa bài viết</label><br>
+        <input type="file" class="form-control" name="avt-post" id="avt-post" ><br><br>
     <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
   </div>
     <br />
