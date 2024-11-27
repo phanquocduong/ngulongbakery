@@ -1,6 +1,7 @@
 <!-- body start -->
 <?php
 require_once './app/model/OrderModel.php';
+use App\Model\OrderModel;
 $orderModel = new OrderModel();
 
 // Lấy ID đơn hàng từ URL

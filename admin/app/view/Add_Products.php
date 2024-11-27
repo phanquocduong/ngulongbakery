@@ -49,7 +49,7 @@
                                                 <!-- -------------- -->
 
                                                 <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-                                               <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
+                                               <textarea id="content" name="contain_description" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
                                                 <br />                                          
                                                 <!-- ----------------------- -->
                                             </div>
