@@ -11,7 +11,7 @@
                         <div class="news-item">
                         <a href="index.php?page=news-details&id='.$id.'" class="news-item__img-link">
                             <img
-                                src="./public/upload/product/'.$image.'"
+                                src="./public/upload/post/images/'.$image.'"
                                 alt="Ảnh sản phẩm"
                                 class="news-item__img"
                             />
