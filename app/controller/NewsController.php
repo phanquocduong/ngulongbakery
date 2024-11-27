@@ -2,13 +2,16 @@
 class NewsController {
     private $news;
     private $comments;
+    private $category;
 
     function __construct() {
         $this->news = new PostModel();
         $this->comments = new CommentsModel();
+        $this->category = new CategoryModel();
     }
 
     private function renderView($view, $css, $js, $data = []) {
+        $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1", []);
         require_once 'app/view/template.php';
     }
 
