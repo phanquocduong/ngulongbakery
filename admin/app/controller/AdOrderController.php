@@ -1,13 +1,16 @@
 <?php
+use App\Model\OrderModel;
 class AdOrderController
 {
     private $data; // biến lưu trữ dữ liệu từ controller sang view
+    private $orderModel;
 
     public function __construct()
     {
         require_once './app/model/OrderModel.php';
-        $this->data = new OrderModel();
-        // $this->data = [];
+        // $this->data = new OrderModel();
+        $this->orderModel = new OrderModel();
+        $this->data = [];
     }
     public function renderview($view, $data = null)
     {
@@ -17,7 +20,7 @@ class AdOrderController
 
     public function viewOrder()
     {
-        $this->data = $this->data->getOrder();
+        $this->data['orders'] = $this->orderModel->getOrder();
         $this->renderview('order', $this->data);
     }
     public function viewOrder_Detail()

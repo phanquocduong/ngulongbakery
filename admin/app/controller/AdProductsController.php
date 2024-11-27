@@ -21,22 +21,29 @@ class AdProductsController
     public function viewProducts()
     {
         $productsModel = new AdProductsModel();
-        $totalProducts = $productsModel->getTotalProducts();
-        $productsPerPage = 10;
-        $totalPages = ceil($totalProducts / $productsPerPage);
+        $currentPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
+        $limit = 10;
+        $offset = ($currentPage - 1) * $limit;
 
-        $currentPage = isset($_GET['p']) ? intval($_GET['p']) : 1;
-        $offset = ($currentPage - 1) * $productsPerPage;
+        // Handle search
+        if (isset($_POST['button_product']) && !empty($_POST['search_product'])) {
+            $keyword = $_POST['search_product'];
+            $products = $productsModel->searchProducts($keyword, $limit, $offset);
+            $totalProducts = $productsModel->getTotalSearchResults($keyword);
+        } else {
+            $products = $productsModel->getProducts($limit, $offset);
+            $totalProducts = $productsModel->getTotalProducts();
+        }
 
-        $products = $productsModel->getProducts($productsPerPage, $offset);
+        $totalPages = ceil($totalProducts / $limit);
 
         $this->data['products'] = $products;
         $this->data['totalPages'] = $totalPages;
         $this->data['currentPage'] = $currentPage;
+        $this->data['searchKeyword'] = $_POST['search_product'] ?? '';
 
         $this->renderview('products', $this->data);
     }
-
     public function viewProducts_Detail()
     {
         $this->renderview('products_detail', $this->data);
@@ -49,7 +56,10 @@ class AdProductsController
     {
         $this->renderview('edit_products', $this->data);
     }
-
+    public function getCategories()
+    {
+        return $this->category->getCate();
+    }
     public function addPro()
     {
         if (isset($_POST['submit'])) {
@@ -199,7 +209,7 @@ class AdProductsController
         }
         echo '<script>location.href="index.php?page=products"</script>';
     }
-    
+
     public function searchProducts()
     {
         if (isset($_POST['button_product'])) {
@@ -208,15 +218,15 @@ class AdProductsController
             echo "No keyword provided.";
             return;
         }
-    
+
         $sql = "SELECT * FROM products WHERE name LIKE :keyword";
         $params = [':keyword' => '%' . $keyword . '%'];
-    
-        $db = new Database(); // Ensure this uses your Database class
+
+        $db = new Database();
         $results = $db->getAll($sql, $params);
         $db = new Database();
         return $db->getAll($sql, $params);
     }
-    
+
 }
 ?>

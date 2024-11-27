@@ -32,36 +32,37 @@
         <tbody>
           
           <?php
-    // Including necessary files for controllers and models
-          require_once './app/controller/AdOrderController.php';
-          require_once './app/model/OrderModel.php';
-          $ordersController = new AdOrderController();
-          $ordersModel = new OrderModel();
-          if (isset($_POST['button_order']) && !empty($_POST['search_order'])) {
-          $viewOrder = $ordersController->searchOrder($_POST['search_order']);
-          } else {
-          $viewOrder = $ordersModel->getOrder();
-          }
-    ?>
+            require_once './app/controller/AdOrderController.php';
+            require_once './app/model/OrderModel.php';
+            use App\Model\OrderModel;
+            $ordersController = new AdOrderController();
+            $ordersModel = new OrderModel();
+            if (isset($_POST['button_order']) && !empty($_POST['search_order'])) {
+            $viewOrder = $ordersController->searchOrder($_POST['search_order']);
+            } else {
+            $viewOrder = $ordersModel->getOrder();
+            }
+          ?>
+
           <?php
           foreach ($viewOrder as $key => $value) {
             extract($value);
-            $timestamp = strtotime($created_at);
-            // Tạo đối tượng DateTime từ chuỗi thời gian
-            $date = new DateTime($created_at, new DateTimeZone("UTC"));
+            if (strtotime($created_at) !== false) {
+              // Tạo đối tượng DateTime trực tiếp với múi giờ Việt Nam
+              $date = new DateTime($created_at, new DateTimeZone('Asia/Ho_Chi_Minh'));
 
-            // Chuyển đổi sang múi giờ UTC+7
-            $date->setTimezone(new DateTimeZone("Asia/Ho_Chi_Minh"));
-
-            // Định dạng lại thời gian
-            $vn_format = $date->format("d/m/Y");
+              // Định dạng lại thời gian
+              $vn_format = $date->format('d/m/Y');
+            } else {
+              $vn_format = "Invalid date";
+            }
             echo "<tr>";
             echo "<td>$id</td>";
             echo "
             <td>
               <a href='index.php?page=order_detail&id=$id'>$customer</a>
               </td>";
-              echo "<td>$total_amount</td>";
+              echo "<td>".number_format($total_amount,0)."</td>";
               echo "<td>$vn_format</td>";
               echo "<td>$status</td>";
               echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
