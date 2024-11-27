@@ -17,7 +17,7 @@ main {
     display: block;
     padding-top: 100px;
     padding-left: 100px;
-    line-height: 30px;
+    line-height: 35px;
     font-size: 40px;
     font-weight: bold;
     padding-bottom: 20px;
@@ -198,6 +198,8 @@ section .contentnews-infor {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
+    color: #fff;
+
 }
 .writecomment .writecomment-btn button a {
     color: var(--white-color);
@@ -207,6 +209,7 @@ section .contentnews-infor {
 }
 .writecomment .writecomment-btn button:hover {
     background-color: #deac55;
+    color: rgb(227, 221, 221);
 }
 .contentnews-listindex {
     margin-left: 100px;
