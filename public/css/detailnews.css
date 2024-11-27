@@ -14,7 +14,17 @@ main {
     text-align: left;
 }
 .contentnews .contentnews-title {
+    display: block;
     padding-top: 100px;
+    padding-left: 100px;
+    line-height: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    color: var(--primary-color);
+}
+section h2 {
+    /* padding-top: 10px; */
     padding-left: 100px;
     line-height: 30px;
     font-size: 30px;
@@ -30,7 +40,7 @@ main {
     color: var(--primary-color-bold);
 }
 
-.contentnews .contentnews-content {
+section p {
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 20px;
@@ -38,34 +48,35 @@ main {
     font-size: 18px;
     font-weight: 350;
 }
-.contentnews-titlecontent {
+section h3 {
     padding-left: 100px;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 25px;
 }
-.contentnews .contentnews-img .contentnews-img__products {
-    margin-left: 100px;
-    width: 83%;
+section img {
+    margin-left: 60px;
+    width: 90%;
     height: 500px;
     object-fit: cover;
     padding-bottom: 20px;
 }
-.contentnews .contentnews-infor {
+section .contentnews-infor {
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 20px;
     line-height: 2.5rem;
     font-size: 16px;
 }
-.contentnews .contentnews-infor a {
+section .contentnews-infor a {
     color: var(--primary-color-bold);
     font-weight: bold;
 }
-.contentnews .contentnews-infor {
+section .contentnews-infor {
     padding-bottom: 80px;
 }
 .backtonews {
+    color: var(--primary-color-bold);
     font-size: 18px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -93,14 +104,14 @@ main {
 }
 .commentnews .commentnews-user {
     padding-top: 50px;
-    padding-left: 100px;
+    padding-left: 30px;
     display: flex;
 }
-.commentnews .commentnews-user .commentnews-user__avt-img {
-    width: 60px;
-    height: 60px;
+.commentnews .commentnews-user img {
+    width: 70px;
+    height: 90px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 10px 20px 30px 40px;
 }
 .commentnews-user .commentnews-user__name-date {
     padding-left: 15px;
@@ -157,7 +168,7 @@ main {
     padding-left: 100px;
     padding-right: 100px;
 }
-.writecomment .writecomment-content .comment-input {
+.writecomment .writecomment-content input {
     width: 100%;
     height: 100px;
     font-size: 16px;
@@ -168,8 +179,7 @@ main {
     color: #333;
     transition: border-color 0.3s;
 }
-
-.writecomment .writecomment-content .comment-input:focus {
+.writecomment .writecomment-content input:focus {
     border-color: var(--primary-color);
 }
 .writecomment .writecomment-btn {
@@ -198,7 +208,7 @@ main {
 .writecomment .writecomment-btn button:hover {
     background-color: #deac55;
 }
-.contentnews .contentnews-listindex {
+.contentnews-listindex {
     margin-left: 100px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -209,7 +219,7 @@ main {
     min-height: 20px;
     position: relative;
 }
-.contentnews .contentnews-listindex button {
+.contentnews-listindex button {
     position: absolute;
     min-width: 30px;
     height: 30px;
@@ -221,18 +231,18 @@ main {
     border-radius: 5px;
     cursor: pointer;
 }
-.contentnews .contentnews-listindex a {
+.contentnews-listindex a {
     color: black;
     font-weight: 350;
     transition: all 1.3ms;
 }
-.contentnews .contentnews-listindex a:hover {
+.contentnews-listindex a:hover {
     color: var(--primary-color-bold);
     font-weight: bold;
     text-decoration: underline;
 }
 @media (max-width: 739px) {
-    .contentnews,
+    section,
     .commentnews,
     .writecomment {
         padding-left: 15px;
@@ -240,16 +250,25 @@ main {
         margin-top: 20px;
     }
     .contentnews .contentnews-title {
+        padding-top: 60px;
+        padding-left: 0px;
+        font-size: 16px;
+        line-height: 2rem;
+        line-height: 3rem;
+    }
+    section h2 {
         padding-top: 20px;
         padding-left: 0;
         font-size: 24px;
         line-height: 1.9rem;
     }
-    .contentnews .contentnews-author,
-    .contentnews .contentnews-titledescription,
-    .contentnews .contentnews-content,
-    .contentnews-titlecontent,
-    .contentnews .contentnews-infor,
+    .contentnews .contentnews-author{
+        padding-left: 0px;
+    }
+    section .contentnews-author,
+    section p,
+    section h3,
+    section .contentnews-infor,
     .backtonews,
     .commentnews .quantitycomment,
     .commentnews .commentnews-content,
@@ -262,17 +281,17 @@ main {
         font-size: 14px;
         line-height: 2rem;
     }
-    .contentnews .contentnews-img .contentnews-img__products {
+    section img {
         width: 100%;
         height: auto;
         margin-left: 0;
         padding-bottom: 10px;
     }
-    .contentnews .contentnews-title,
-    .contentnews .contentnews-author,
-    .contentnews .contentnews-titledescription,
-    .contentnews-titlecontent,
-    .contentnews .contentnews-infor a,
+    section h2,
+    section .contentnews-author,
+    section p,
+    section h3,
+    section .contentnews-infor a,
     .backtonews a,
     .commentnews .quantitycomment,
     .commentnews .commentnews-user__name-date,
@@ -289,7 +308,7 @@ main {
         width: 100%;
         height: 40px;
     }
-    .contentnews .contentnews-listindex {
+    section .contentnews-listindex {
         margin-left: 0;
         font-size: 14px;
         padding: 10px;
@@ -303,9 +322,11 @@ main {
         padding-right: 15px;
         margin-top: 10px;
     }
-    .commentnews .commentnews-user .commentnews-user__avt-img {
-        width: 50px;
+    .commentnews .commentnews-user img {
+        width: 40px;
         height: 50px;
+        object-fit: cover;
+        border-radius: 10px 20px 30px 40px;
     }
     .commentnews .quantitycomment,
     .commentnews .commentnews-user__name-date,
@@ -327,28 +348,32 @@ main {
     }
 }
 @media (min-width: 740px) and (max-width: 1236px) {
-    .contentnews,
+    section,
     .commentnews,
     .writecomment {
         width: 100%;
-        /* padding-left: 30px; */
-        /* padding-right: 30px; */
         margin-top: 30px;
     }
-
     .contentnews .contentnews-title {
         padding-top: 60px;
         padding-left: 30px;
-        font-size: 26px;
+        font-size: 16px;
         line-height: 2rem;
         line-height: 3rem;
     }
-
-    .contentnews .contentnews-author,
-    .contentnews .contentnews-titledescription,
-    .contentnews .contentnews-content,
-    .contentnews-titlecontent,
-    .contentnews .contentnews-infor,
+    section h2 {
+        padding-top: 60px;
+        padding-left: 30px;
+        font-size: 26px;
+        line-height: 3rem;
+    }
+    .contentnews .contentnews-author{
+        padding-left: 30px;
+    }
+    section .contentnews-author,
+    section p,
+    section h3,
+    section .contentnews-infor,
     .backtonews,
     .commentnews .quantitycomment,
     .commentnews .commentnews-content,
@@ -361,21 +386,18 @@ main {
         font-size: 16px;
         line-height: 2.3rem;
     }
-
-    .contentnews .contentnews-img .contentnews-img__products {
+    section img {
         width: 90%;
         height: auto;
         margin-left: 30px;
         padding-bottom: 15px;
     }
-
-    .contentnews .contentnews-listindex {
+    section .contentnews-listindex {
         margin-left: 30px;
         font-size: 16px;
         padding: 12px;
         max-width: 90%;
     }
-
     .commentnews,
     .commentnews .commentnews-user,
     .commentnews .commentnews-content,
@@ -384,12 +406,19 @@ main {
         padding-right: 30px;
         margin-top: 15px;
     }
-
-    .commentnews .commentnews-user .commentnews-user__avt-img {
-        width: 55px;
-        height: 55px;
+    .commentnews .commentnews-user{
+        padding-top: 20px;
+        padding-left: 1px;
     }
-
+    .commentnews .commentnews-content{
+        padding-top: 10px;
+    }
+    .commentnews .commentnews-user img {
+        width: 55px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 10px 20px 30px 40px;
+    }
     .commentnews .quantitycomment,
     .commentnews .commentnews-user__name-date,
     .commentnews .commentnews-content,
@@ -397,7 +426,6 @@ main {
         font-size: 14px;
         line-height: 1.8rem;
     }
-
     .writecomment .writecomment-btn button {
         width: 100%;
         height: 45px;

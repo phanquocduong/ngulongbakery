@@ -12,7 +12,7 @@ main {
 }
 .news-item {
     background-color: var(--white-color);
-    min-height: 580px;
+    min-height: 300px;
     margin-bottom: 50px;
     border: 1px solid var(--white-color);
     border-radius: 10px;

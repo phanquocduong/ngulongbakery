@@ -5,10 +5,10 @@
       <h2 class="mb-0">Danh Sách Đơn Hàng</h2>
     </div>
     <!-- form search -->
-    <form class="d-none d-md-flex ms-4">
+    <form class="d-none d-md-flex ms-4" method="POST">
       <div class="input-group">
-        <input class="form-control border-0" type="search" placeholder="Tìm kiếm đơn hàng" />
-        <button class="btn">
+        <input class="form-control border-0" type="search" name="search_order" placeholder="Tìm kiếm đơn hàng" />
+        <button class="btn" name="button_order">
           <span class="input-group-text bg-transparent border-0">
             <i class="fa fa-search"></i>
           </span>
@@ -55,11 +55,11 @@
             <td>
               <a href='index.php?page=order_detail&id=$id'>$customer</a>
               </td>";
-              echo "<td>".number_format($total_amount,0)."</td>";
-              echo "<td>$vn_format</td>";
-              echo "<td>$status</td>";
-              echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
-              echo "</tr>";
+            echo "<td>" . number_format($total_amount, 0) . "</td>";
+            echo "<td>$vn_format</td>";
+            echo "<td>$status</td>";
+            echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
+            echo "</tr>";
           }
 
           ?>

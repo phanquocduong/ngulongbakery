@@ -33,6 +33,43 @@ class AdProductsModel
         return (int) $result['total'];
     }
 
+
+    // hàm tìm kiếm sản phẩm
+    public function searchProducts($keyword, $limit = 10, $offset = 0)
+    {
+        // Escape special characters and add wildcards
+        $keyword = "%" . str_replace(['%', '_'], ['\\%', '\\_'], $keyword) . "%";
+    
+        $sql = "SELECT p.*, c.name as category_name 
+                FROM products p 
+                LEFT JOIN categories c ON p.category_id = c.id 
+                WHERE p.name LIKE :keyword
+                ORDER BY p.id DESC 
+                LIMIT :limit OFFSET :offset";
+    
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':keyword', $keyword, PDO::PARAM_STR);
+        $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getTotalSearchResults($keyword) 
+    {
+        $keyword = "%" . str_replace(['%', '_'], ['\\%', '\\_'], $keyword) . "%";
+    
+        $sql = "SELECT COUNT(*) as total 
+                FROM products 
+                WHERE name LIKE :keyword";
+    
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':keyword', $keyword, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
     public function getProductById($id)
     {
         $sql = "SELECT * FROM products WHERE id = ?";

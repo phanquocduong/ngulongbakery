@@ -21,23 +21,26 @@ class AdProductsController
     public function viewProducts()
     {
         $productsModel = new AdProductsModel();
-
-        // Get pagination parameters
         $currentPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
         $limit = 10;
         $offset = ($currentPage - 1) * $limit;
 
-        // Get total products and calculate total pages
-        $totalProducts = $productsModel->getTotalProducts();
+        // Handle search
+        if (isset($_POST['button_product']) && !empty($_POST['search_product'])) {
+            $keyword = $_POST['search_product'];
+            $products = $productsModel->searchProducts($keyword, $limit, $offset);
+            $totalProducts = $productsModel->getTotalSearchResults($keyword);
+        } else {
+            $products = $productsModel->getProducts($limit, $offset);
+            $totalProducts = $productsModel->getTotalProducts();
+        }
+
         $totalPages = ceil($totalProducts / $limit);
 
-        // Get products for current page
-        $products = $productsModel->getProducts($limit, $offset);
-
-        // Pass data to view
         $this->data['products'] = $products;
         $this->data['totalPages'] = $totalPages;
         $this->data['currentPage'] = $currentPage;
+        $this->data['searchKeyword'] = $_POST['search_product'] ?? '';
 
         $this->renderview('products', $this->data);
     }

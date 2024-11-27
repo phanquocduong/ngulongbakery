@@ -7,11 +7,14 @@
                 <?php
                 foreach ($data['news'] as $item) {
                     extract($item);
-                    echo '<div class="col l-4 m-6 c-10 c-offset-1">
+                    if($status == 0){
+                        echo '';
+                    }else{
+                        echo '<div class="col l-4 m-6 c-10 c-offset-1">
                         <div class="news-item">
                         <a href="index.php?page=news-details&id='.$id.'" class="news-item__img-link">
                             <img
-                                src="./public/upload/product/'.$image.'"
+                                src="./public/upload/post/images/'.$image.'"
                                 alt="Ảnh sản phẩm"
                                 class="news-item__img"
                             />
@@ -47,6 +50,8 @@
                         </div>
                     </div>
                 </div>';
+                    }
+                    
                 }
                 ?> 
             </div>

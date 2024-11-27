@@ -29,4 +29,10 @@ class PostModel
             return null;
         }
     }
+    public function getTotalPosts() {
+        $sql = "SELECT COUNT(*) as total FROM posts";
+        $stmt = $this->db->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
 }
