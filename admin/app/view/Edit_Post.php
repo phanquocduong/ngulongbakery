@@ -79,7 +79,7 @@
                 $categoryModel = new CategoryModel();
 
                 // Lấy danh sách thể loại bài viết
-                $categories = $categoryModel->getCate();
+                $categories = $categoryModel->getPostCate();
                 $data['categories'] = $categories;
 
                 foreach ($data['categories'] as $item) {
