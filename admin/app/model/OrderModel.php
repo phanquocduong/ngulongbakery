@@ -2,7 +2,8 @@
 namespace App\Model;
 class OrderModel
 {
-    public $db;
+    private $conn;
+    private $db;
     public function __construct()
     {
         require_once '../app/model/database.php';
@@ -15,7 +16,12 @@ class OrderModel
         $sql = "SELECT * FROM orders ORDER BY created_at DESC";
         return $this->db->getAll($sql);
     }
-
+    function getNewOrders()
+    {
+        $sql = "SELECT * FROM orders WHERE DATE(created_at) = CURDATE()"; // Lấy ra các đơn hàng mới trong ngày
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC); // Use global namespace for PDO
+    }
     // lấy tổng doanh thu
     public function getTotalAmount()
     {

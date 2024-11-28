@@ -12,11 +12,6 @@ class CategoryModel
         $sql = "SELECT * FROM categories  order by id desc";
         return $this->db->getAll($sql);
     }
-    function getCatebyType()
-    {
-        $sql = "SELECT * FROM categories WHERE type = 'Tin tức' AND status = 1";
-        return $this->db->getAll($sql, $params);
-    }
     public function getIdPro($id)
     {
         $sql = "SELECT * FROM products WHERE category_id = ? LIMIT 1";

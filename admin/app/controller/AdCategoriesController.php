@@ -157,6 +157,12 @@ class AdCategoriesController
         $db = new Database();
         return $db->getAll($sql, $params);
     }
+
+    public function getCategoriesByType($type)
+    {
+        $categoryModel = new CategoryModel();
+        return $categoryModel->getCategoriesByType($type);
+    }
     
 }
 
