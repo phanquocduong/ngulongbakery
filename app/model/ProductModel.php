@@ -76,9 +76,9 @@
             return $this->db->execute($sql, [$id]);
         }
 
-        public function updateSoldOfProduct($product_name) {
-            $sql = "UPDATE products SET sold = sold + 1 WHERE name = ? AND status = 1 AND stock_quantity > 0";
-            return $this->db->execute($sql, [$product_name]);
+        public function updateSoldOfProduct($product_name, $quantity) {
+            $sql = "UPDATE products SET sold = sold + ? WHERE name = ? AND status = 1 AND stock_quantity > 0";
+            return $this->db->execute($sql, [$quantity, $product_name]);
         }
 
         public function updateStockQuantityOfProduct($product_name, $quantity) {

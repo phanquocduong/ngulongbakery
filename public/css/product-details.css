@@ -221,15 +221,14 @@ main {
     display: block;
 }
 
-.main-title {
+#detailed-desc h2 {
     font-size: 2.8rem;
     line-height: 4rem;
     color: var(--text-color);
-    margin: 0;
     margin: 0 0 13px 0;
 }
 
-.passage {
+#detailed-desc p {
     font-size: 1.6rem;
     line-height: 2.5rem;
     color: var(--text-color);
@@ -237,27 +236,27 @@ main {
     margin: 0 0 26px 0;
 }
 
-.image {
+#detailed-desc img {
     width: 100%;
     margin: 0 0 26px 0;
     border-radius: 4px;
 }
 
-.sub-title {
+#detailed-desc h3 {
     font-size: 2.2rem;
     line-height: 3rem;
     color: var(--text-color);
     margin: 0 0 13px 0;
 }
 
-.list {
+#detailed-desc ul {
     font-size: 1.6rem;
     line-height: 2.5rem;
     color: var(--text-color);
     margin: 0 0 25px 0;
 }
 
-.item + .item {
+#detailed-desc li + li {
     padding-top: 10px;
 }
 
@@ -300,7 +299,7 @@ main {
 
 .review-item__comment {
     font-size: 1.6rem;
-    line-height: 2rem;
+    line-height: 2.2rem;
     color: var(--text-color);
 }
 
@@ -440,7 +439,7 @@ main {
         flex-wrap: wrap;
     }
 
-    .main-title {
+    #detailed-des h2 {
         font-size: 2.5rem;
         line-height: 3.4rem;
     }

@@ -33,7 +33,7 @@
         public function handleProductsDisplay() {
             // Lấy các tham số từ URL
             $num = isset($_GET['num']) ? (int)$_GET['num'] : 1;
-            $limit = 9;
+            $limit = 12;
             $start = ($num - 1) * $limit;
 
             $categoryId = isset($_GET['category']) ? $_GET['category'] : '';

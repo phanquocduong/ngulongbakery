@@ -29,7 +29,7 @@
         public function handleOrdersDisplay() {
             $userId = $_SESSION['user']['id'];
             $num = isset($_GET['num']) ? (int)$_GET['num'] : 1;
-            $limit = 3;
+            $limit = 10;
             $start = ($num - 1) * $limit;
 
             $orders = $this->order->getOrders('WHERE user_id = ?', [$userId], 'id DESC', $start, $limit);
