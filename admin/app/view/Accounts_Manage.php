@@ -48,9 +48,7 @@
                           Xem
                         </button></a
                       >
-                      <a href="index.php?page=edit_account&id='.$id.'" class="btn btn-warning btn-sm btn-color-text">
-                        Sửa
-                      </a>
+                   
                       <a href="index.php?page=deluser&id='.$id.'" class="btn btn-warning btn-sm btn-color-text">
                         Xóa
                       </a>

@@ -84,7 +84,7 @@ class AdAccountsController{
             $data = $this->user->getIdUser($id);
     
             // Xoá ảnh chính
-            $file = '../public/upload/avatar/' . $data['image'];
+            $file = '../public/upload/avatar/' . $data['avatar'];
             if (file_exists($file)) {
                 unlink($file);
             }

@@ -55,13 +55,13 @@
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
           <div class="position-relative">
-            <img class="rounded-circle" src="../public/upload/avatar/<?=$_SESSION['user']['avatar']?>" alt="<?=$_SESSION['user']['full_name']?>"
-              style="width: 40px; height: 40px" />
+            <img class="rounded-circle" src="../public/upload/avatar/<?= $_SESSION['user']['avatar'] ?>"
+              alt="<?= $_SESSION['user']['full_name'] ?>" style="width: 40px; height: 40px" />
             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
             </div>
           </div>
           <div class="ms-3">
-            <h6 class="mb-0"><?=$_SESSION['user']['full_name']?></h6>
+            <h6 class="mb-0"><?= $_SESSION['user']['full_name'] ?></h6>
             <span>Admin</span>
           </div>
         </div>
@@ -90,9 +90,6 @@
         <a href="#" class="sidebar-toggler flex-shrink-0">
           <i class="fa fa-bars"></i>
         </a>
-        <!-- <form class="d-none d-md-flex ms-4">
-          <input class="form-control border-0" type="search" placeholder="Search" />
-        </form> -->
         <div class="navbar-nav align-items-center ms-auto">
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -112,30 +109,7 @@
                 </div>
               </a>
               <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <img class="rounded-circle" src="../img/meo2.jpg" alt="" style="width: 40px; height: 40px" />
-                  <div class="ms-2">
-                    <h6 class="fw-normal mb-0">
-                      Con Mèo Cute đã gửi cho bạn một tin nhắn
-                    </h6>
-                    <small>10 phút trước</small>
-                  </div>
-                </div>
-              </a>
-              <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <img class="rounded-circle" src="../img/meo3.jpg" alt="" style="width: 40px; height: 40px" />
-                  <div class="ms-2">
-                    <h6 class="fw-normal mb-0">
-                      Kẻ Huỷ Diệt đã gửi cho bạn một tin nhắn
-                    </h6>
-                    <small>15 phút trước</small>
-                  </div>
-                </div>
-              </a>
-              <hr class="dropdown-divider" />
+            
               <a href="#" class="dropdown-item text-center">Xem Thêm</a>
             </div>
           </div>
@@ -144,24 +118,68 @@
               <i class="fa fa-bell me-lg-2"></i>
               <span class="d-none d-lg-inline-flex">Thông Báo</span>
             </a>
+            <?php
+            use App\Model\OrderModel;
+            require_once './app/model/OrderModel.php';
+            $orderModel = new OrderModel();
+            $newOrders = $orderModel->getNewOrders();
+            ?>
+
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-              <a href="#" class="dropdown-item">
-                <h6 class="fw-normal mb-0">Thông tin đã được cập nhật</h6>
-                <small>Vừa xong</small>
-              </a>
-              <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item">
-                <h6 class="fw-normal mb-0">Mật khẩu đã được thay đổi</h6>
-                <small>2 phút trước</small>
-              </a>
-              <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item text-center">Hiện Toàn Bộ Thông Báo</a>
+              <?php if (!empty($newOrders)) { ?>
+                <?php
+                // Hàm tính thời gian
+                function timeAgo($datetime)
+                {
+                  date_default_timezone_set('Asia/Ho_Chi_Minh'); // Set timezone to Vietnam
+                  $now = new DateTime();
+                  $ago = new DateTime($datetime);
+                  $diff = $now->diff($ago);
+
+                  if ($diff->y > 0) {
+                    return $diff->y . ' năm trước';
+                  }
+                  if ($diff->m > 0) {
+                    return $diff->m . ' tháng trước';
+                  }
+                  if ($diff->d > 0) {
+                    if ($diff->d == 1) {
+                      return 'Hôm qua';
+                    }
+                    return $diff->d . ' ngày trước';
+                  }
+                  if ($diff->h > 0) {
+                    return $diff->h . ' giờ trước';
+                  }
+                  if ($diff->i > 0) {
+                    return $diff->i . ' phút trước';
+                  }
+                  if ($diff->s > 30) {
+                    return $diff->s . ' giây trước';
+                  }
+                  return 'Vừa xong';
+                }
+                // Thay đổi trong phần hiển thị thông báo
+                ?>
+                <a href="index.php?page=order" class="dropdown-item">
+                  <h6 class="fw-normal mb-0">Có 1 đơn hàng mới</h6>
+                  <small><?php echo timeAgo($newOrders[0]['created_at']); ?></small>
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item text-center">Hiện Toàn Bộ Thông Báo</a>
+              <?php } else { ?>
+                <a href="#" class="dropdown-item">
+                  <h6 class="fw-normal mb-0">Không có thông báo</h6>
+                </a>
+              <?php } ?>
+              <!-- <hr class="dropdown-divider" /> -->
             </div>
           </div>
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-              <img class="rounded-circle me-lg-2" src="../public/upload/avatar/<?=$_SESSION['user']['avatar']?>" alt="<?=$_SESSION['user']['full_name']?>" style="width: 40px; height: 40px" />
-              <span class="d-none d-lg-inline-flex"><?=$_SESSION['user']['full_name']?></span>
+              <img class="rounded-circle me-lg-2" src="../public/upload/avatar/<?= $_SESSION['user']['avatar'] ?>"
+                alt="<?= $_SESSION['user']['full_name'] ?>" style="width: 40px; height: 40px" />
+              <span class="d-none d-lg-inline-flex"><?= $_SESSION['user']['full_name'] ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
               <a href="ngulongbakery/index.php?page=account" class="dropdown-item">Thông Tin Tài Khoản</a>
