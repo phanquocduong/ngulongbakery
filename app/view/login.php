@@ -25,14 +25,17 @@
                 </div>
                 <div class="form-group password-form">
                     <label for="customerPassword" class="form-label">MẬT KHẨU</label>
-                    <input
-                        type="password"
-                        id="customerPassword"
-                        name="customerPassword"
-                        rules="required"
-                        class="form-control"
-                        placeholder="Nhập Mật khẩu"
-                    />
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="customerPassword"
+                            name="customerPassword"
+                            rules="required"
+                            class="form-control"
+                            placeholder="Nhập Mật khẩu"
+                        />
+                        <button type="button" class="toggle-password" onclick="togglePassword('customerPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
+                    </div>
                     <div class="form-message"></div>
                 </div>
                 <div class="remember-me-box">

@@ -31,24 +31,30 @@
         </div>
         <div class="form-group form-group__full">
             <label for="password" class="form-label">MẬT KHẨU:</label>
-            <input
-                type="password"
-                name="password"
-                rules="required|min:8|passwordComplexity"
-                id="password"
-                class="form-control"
-            />
+            <div class="password-wrapper">
+                <input
+                    type="password"
+                    name="password"
+                    rules="required|min:8|passwordComplexity"
+                    id="password"
+                    class="form-control"
+                />
+                <button type="button" class="toggle-password" onclick="togglePassword('password', this)"><i class="fa-solid fa-eye-slash"></i></button>
+            </div>
             <div class="form-message"></div>
         </div>
         <div class="form-group form-group__full">
             <label for="repassword" class="form-label">NHẬP LẠI MẬT KHẨU:</label>
-            <input
-                type="password"
-                name="repassword"
-                rules="required"
-                id="repassword"
-                class="form-control"
-            />
+            <div class="password-wrapper">
+                <input
+                    type="password"
+                    name="repassword"
+                    rules="required"
+                    id="repassword"
+                    class="form-control"
+                />
+                <button type="button" class="toggle-password" onclick="togglePassword('repassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
+            </div>
             <div class="form-message"><?php echo isset($_SESSION['error']['repassword']) ? $_SESSION['error']['repassword'] : ''; ?></div>
         </div>
         <?php 

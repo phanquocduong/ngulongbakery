@@ -14,38 +14,47 @@
                 ?>
                 <div class="form-group current-password-form">
                     <label for="currentPassword" class="form-label">MẬT KHẨU HIỆN TẠI</label>
-                    <input
-                        type="password"
-                        id="currentPassword"
-                        name="currentPassword"
-                        rules="required"
-                        class="form-control"
-                        placeholder="Nhập mật khẩu hiện tại"
-                    />
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="currentPassword"
+                            name="currentPassword"
+                            rules="required"
+                            class="form-control"
+                            placeholder="Nhập mật khẩu hiện tại"
+                        />
+                        <button type="button" class="toggle-password" onclick="togglePassword('currentPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
+                    </div>
                     <div class="form-message"></div>
                 </div>
                 <div class="form-group new-password-form">
                     <label for="newPassword" class="form-label">MẬT KHẨU MỚI</label>
-                    <input
-                        type="password"
-                        id="newPassword"
-                        name="newPassword"
-                        rules="required|min:8|passwordComplexity"
-                        class="form-control"
-                        placeholder="Nhập mật khẩu mới"
-                    />
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="newPassword"
+                            name="newPassword"
+                            rules="required|min:8|passwordComplexity"
+                            class="form-control"
+                            placeholder="Nhập mật khẩu mới"
+                        />
+                        <button type="button" class="toggle-password" onclick="togglePassword('newPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
+                    </div>
                     <div class="form-message"></div>
                 </div>
                 <div class="form-group confirm-password-form">
                     <label for="confirmPassword" class="form-label">XÁC NHẬN MẬT KHẨU</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        rules="required"
-                        class="form-control"
-                        placeholder="Nhập lại mật khẩu mới"
-                    />
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            rules="required"
+                            class="form-control"
+                            placeholder="Nhập lại mật khẩu mới"
+                        />
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
+                    </div>
                     <div class="form-message"></div>
                 </div>
                 <div class="update-action">
