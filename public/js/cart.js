@@ -9,7 +9,7 @@ function updateQuantity(button, delta, stock) {
         quantityInput.value = quantityValue;
 
         // Sử dụng Fetch API
-        fetch('index.php?page=handle-update-cart', {
+        fetch(`${$baseUrl}/index.php?page=handle-update-cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ function deleteProduct(id) {
         cancelButtonText: 'Hủy'
     }).then(result => {
         if (result.isConfirmed) {
-            window.location.href = `index.php?page=handle-delete-cart&index=${id}`;
+            window.location.href = `${baseUrl}/index.php?page=handle-delete-cart&index=${id}`;
         }
     });
 }

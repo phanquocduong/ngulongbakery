@@ -93,5 +93,10 @@
                     WHERE f.user_id = ?";
             return $this->db->getAll($sql, [$userId]);    
         }
+
+        public function updateRatingOfProduct($id, $rating) {
+            $sql = "UPDATE products SET rating = ? WHERE id = ?";
+            return $this->db->execute($sql, [$rating, $id]);
+        }
     }
 ?>

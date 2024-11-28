@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col l-9 m-12 c-10 c-offset-1">
-                <img class="banner-collection" src="public/upload/banner/banner-collection.png" alt="" />
+                <img class="banner-collection" src="<?=$base_url?>/public/upload/banner/banner-collection.png" alt="" />
                 <div class="collection-main">
                     <div class="collection-main__heading">
                         <h1 class="collection-name"></h1>

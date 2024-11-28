@@ -1,6 +1,6 @@
 <!-- Start main -->
 <main>
-    <form action="index.php?page=handle-register" method="POST" class="register-form">
+    <form action="<?=$base_url?>/handle-register" method="POST" class="register-form">
         <h4 class="register-title">Đăng ký</h4>
         <?php if(isset($_SESSION['error']['unknown'])): ?>
             <div class="errors">
@@ -64,7 +64,7 @@
         ?>
         <div class="register-action">
             <button class="register-btn">Đăng ký</button>
-            <a href="index.php?page=login" class="login-title">
+            <a href="<?=$base_url?>/login" class="login-title">
                 Bạn đã có tài khoản?
                 <span class="login-title__link">Đăng nhập</span>
             </a>

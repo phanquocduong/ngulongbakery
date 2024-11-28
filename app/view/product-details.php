@@ -9,7 +9,7 @@
                             <div
                                 onclick="openImageModal(this)"
                                 class="main-image"
-                                style="background-image: url('public/upload/product/<?=$data['product']['image']?>')"
+                                style="background-image: url('<?=$base_url?>/public/upload/product/<?=$data['product']['image']?>')"
                             ></div>
                             <?php if(!empty($data['product']['sale']) && $data['product']['sale'] < $data['product']['price']): ?>
                                 <?php $percentDiscount = round(($data['product']['price'] - $data['product']['sale']) / $data['product']['price'] * 100); ?>
@@ -19,7 +19,7 @@
                             <div class="extra-images">
                                 <img
                                     onclick="changeDisplayImage(this)"
-                                    src="public/upload/product/<?=$data['product']['image']?>"
+                                    src="<?=$base_url?>/public/upload/product/<?=$data['product']['image']?>"
                                     alt="<?=$data['product']['name']?>"
                                     class="extra-image extra-image--bright"
                                 />
@@ -29,7 +29,7 @@
                                         if (!empty($extra_image)): ?>
                                             <img
                                                 onclick="changeDisplayImage(this)"
-                                                src="public/upload/product/<?=htmlspecialchars($extra_image)?>"
+                                                src="<?=$base_url?>/public/upload/product/<?=htmlspecialchars($extra_image)?>"
                                                 alt="Product Extra Image"
                                                 class="extra-image"
                                             />
@@ -77,7 +77,7 @@
                                 <span class="product-code">Đang có: <?=$data['product']['stock_quantity']?></span>
                                 <span class="product-cate">
                                     Danh mục: 
-                                    <a class="product-cate__link" href="index.php?page=collection&id=<?=$data['product']['category_id']?>"><?=$data['product']['category_name']?></a>
+                                    <a class="product-cate__link" href="<?=$base_url?>/collection/<?=$data['product']['category_id']?>"><?=$data['product']['category_name']?></a>
                                 </span>
                                 <?php if (isset($_SESSION['user'])): ?>
                                     <div class="favorite-action">
@@ -97,7 +97,8 @@
                         </li>
                         <li onclick="activeTab(this, 'reviews')" id="reviews-tab" class="tab-item">Đánh giá ()</li>
                     </ul>
-                    <div id="detailed-desc" class="tab-content tab-content--active"><?= $data['product']['detailed_description'] ?></div>
+                    <?php $updated_description = preg_replace('/<img src="([^"]+)"/', '<img src="' . $base_url . '/$1"', $data['product']['detailed_description']); ?>
+                    <div id="detailed-desc" class="tab-content tab-content--active"><?= $updated_description ?></div>
                     <input id="productId" type="hidden" value="<?=$data['product']['id']?>">
                     <div id="reviews" class="tab-content"></div>
                 </div>
@@ -108,15 +109,15 @@
                             <?php foreach($data['relatedProducts'] as $product): ?>
                                 <div class="col l-3 m-6 c-12">
                                 <div class="product-item">
-                                        <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__img-link">
+                                        <a href="<?=$base_url?>/product-details/<?=$product['id']?>" class="product-item__img-link">
                                             <div
                                                 style="
-                                                    background-image: url(public/upload/product/<?=$product['image']?>);
+                                                    background-image: url(<?=$base_url?>/public/upload/product/<?=$product['image']?>);
                                                 "
                                                 class="product-item__img"
                                             ></div>
                                         </a>
-                                        <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__title-link">
+                                        <a href="<?=$base_url?>/product-details&id=<?=$product['id']?>" class="product-item__title-link">
                                             <h4 class="product-item__name"><?=$product['name']?></h4>
                                         </a>
                                         <div class="product-item__rating">
