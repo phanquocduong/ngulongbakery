@@ -14,15 +14,24 @@ main {
     text-align: left;
 }
 .contentnews .contentnews-title {
-    display: block;
     padding-top: 100px;
     padding-left: 100px;
+    padding-bottom: 20px;
+    padding-right: 10px;
     line-height: 35px;
     font-size: 40px;
     font-weight: bold;
-    padding-bottom: 20px;
     color: var(--primary-color);
+
+    /* Đảm bảo phần tử là khối và quản lý dòng tốt */
+    display: block; /* Đảm bảo phần tử là khối */
+    white-space: normal; /* Cho phép văn bản xuống dòng */
+    word-wrap: break-word; /* Hỗ trợ bẻ từ */
+    word-break: break-word; /* Bẻ từ nếu cần */
+    overflow-wrap: break-word; /* Thay thế cho word-wrap */
+    overflow: hidden; /* Tránh tràn nội dung */
 }
+
 section h2 {
     /* padding-top: 10px; */
     padding-left: 100px;
@@ -254,11 +263,18 @@ section .contentnews-infor {
     }
     .contentnews .contentnews-title {
         padding-top: 60px;
-        padding-left: 0px;
-        font-size: 16px;
-        line-height: 2rem;
-        line-height: 3rem;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 20px;
+        line-height: 1.5rem;
+    
+        white-space: normal;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        overflow: hidden;
     }
+    
     section h2 {
         padding-top: 20px;
         padding-left: 0;
@@ -359,11 +375,18 @@ section .contentnews-infor {
     }
     .contentnews .contentnews-title {
         padding-top: 60px;
-        padding-left: 30px;
-        font-size: 16px;
-        line-height: 2rem;
-        line-height: 3rem;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 20px;
+        line-height: 1.5rem;
+    
+        white-space: normal;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        overflow: hidden;
     }
+    
     section h2 {
         padding-top: 60px;
         padding-left: 30px;

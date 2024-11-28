@@ -21,7 +21,7 @@
                             <div class="overlay"></div>
                         </a>
                         <a href="index.php?page=news-details&id='.$id.'" class="news-item__title-link">
-                            <div class="news-item__name">
+                            <div class="single-line-text">
                                 '.$title.'
                             </div>
                         </a>
