@@ -46,6 +46,10 @@ class UserModel{
     public function isForeignKey($id) {
         // Giả sử cột lưu trữ ID người dùng trong bảng posts là 'user_id'
         $query = "SELECT COUNT(*) as count FROM posts WHERE author_id = :id";
+        $query = "SELECT COUNT(*) as count FROM comments  WHERE comments  = :id";
+        $query = "SELECT COUNT(*) as count FROM favorite_products   WHERE user_id  = :id";
+        $query = "SELECT COUNT(*) as count FROM reviews  WHERE user_id  = :id";
+        $query = "SELECT COUNT(*) as count FROM orders  WHERE user_id  = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
