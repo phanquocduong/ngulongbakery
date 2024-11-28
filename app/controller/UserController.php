@@ -144,7 +144,7 @@
                 header("Location: index.php?page=login");
                 exit;
             } else {
-                $_SESSION['error'] = "Email không tồn tại.";
+                $_SESSION['error'] = "Thông tin tài khoản không hợp lệ.";
                 $this->renderView('login', $css, $js);
             }
         }

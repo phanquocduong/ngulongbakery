@@ -57,7 +57,8 @@
             }
         
             // Redirect sau khi xử lý xong
-            header('Location: index.php?page=account');
+            $_SESSION['success'] = "Đánh giá thành công";
+            header("Location: index.php");
             exit;
         }
 

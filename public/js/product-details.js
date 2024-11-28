@@ -149,7 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             review.images
                                 ? review.images
                                       .split(',')
-                                      .map(image => `<img class="review-item__image" src="public/upload/review/${image}" alt="" />`)
+                                      .map(
+                                          image =>
+                                              `<img onclick="openImageModal(this)" class="review-item__image" src="public/upload/review/${image}" alt="" />`
+                                      )
                                       .join('')
                                 : ''
                         }

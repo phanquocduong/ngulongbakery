@@ -220,6 +220,7 @@ main {
     background-color: rgba(153, 153, 153, 0.9);
     top: -10px;
     right: -10px;
+    line-height: 1.6rem;
 }
 
 .product-order__dsc {

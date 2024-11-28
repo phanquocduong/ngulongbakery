@@ -64,7 +64,7 @@
         
                 if ($coupon) {
                     $discountValue = $coupon['discount_value'];
-                    $newTotal = $grandTotal - ($grandTotal * $discountValue / 100);
+                    $newTotal = round($grandTotal - ($grandTotal * $discountValue / 100), 2);
 
                     // Lưu trạng thái vào session
                     $_SESSION['discount_applied'] = true;
@@ -113,8 +113,11 @@
                             <td style='text-align: right; padding: 10px; border: 1px solid #ddd;'>" . number_format($lineTotal, 0, ',', '.') . "đ</td>
                         </tr>
                     ";
-                    $this->product->updateSoldOfProduct($item['name']);
+                    $this->product->updateSoldOfProduct($item['name'], $item['quantity']);
                     $this->product->updateStockQuantityOfProduct($item['name'], $item['quantity']);
+                    if ($discount['usage_limit'] != null) {
+                        $this->discount->updateUsageLimitOfDiscount($discount['id']);
+                    }
                 }
         
                 // Gửi email hóa đơn

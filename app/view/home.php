@@ -296,7 +296,7 @@
                                     <i class="star-icon-large fa-<?= $i <= $data['featuredReviews'][0]['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
                                 <?php endfor; ?>
                             </div>
-                            <p class="review-item__content">Bánh rất ngon, mềm mịn và ngọt vừa phải. Dịch vụ giao hàng nhanh chóng, đóng gói cẩn thận. Mình rất hài lòng và sẽ ủng hộ tiệm lâu dài!</p>
+                            <p class="review-item__content"><?=$data['featuredReviews'][0]['comment']?></p>
                             <div class="review-item__user">
                                 <img
                                     src="public/upload/avatar/<?=$data['featuredReviews'][0]['avatar']?>"
