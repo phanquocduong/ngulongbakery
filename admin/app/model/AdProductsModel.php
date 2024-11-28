@@ -9,11 +9,30 @@ class AdProductsModel
     }
     public function getProducts()
     {
-        $sql = "SELECT products.*, categories.name AS category_name
-                FROM products
-                JOIN categories ON products.category_id = categories.id ORDER BY products.id DESC";
-        return $this->db->getAll($sql);
+        // Đảm bảo offset không âm
+        $offset = max(0, $offset);
+
+        $sql = "SELECT p.*, c.name as category_name 
+            FROM products p 
+            LEFT JOIN categories c ON p.category_id = c.id 
+            ORDER BY p.id DESC 
+            LIMIT :limit OFFSET :offset";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getTotalProducts()
+    {
+        $sql = "SELECT COUNT(*) as total FROM products";
+        $result = $this->db->getOne($sql);
+        return (int) $result['total'];
+    }
+
     public function getProductById($id)
     {
         $sql = "SELECT * FROM products WHERE id = ?";

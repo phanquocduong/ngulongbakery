@@ -7,35 +7,13 @@
         <input type="text" class="date-create form-control" readonly value="" name="create_date" >
     </div>
     <br>
-    <!-- -------------- -->
-    <input type="text" name="title" class="form-control" style="font-size:20px; font-weight: bold;"
-        placeholder="Nhập tiêu đề bài viết" required>
-    <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-    <div id="app">
-        <!-- Vùng nhập liệu có thể chỉnh sửa, hỗ trợ các thẻ HTML -->
-        <div id="editor" class="editor" contenteditable="true" @input="updateText($event)">
-        </div>
-
-        <!-- Textarea chứa dữ liệu HTML -->
-        <textarea name="content" id="contain_description" rows="20" cols="100" style="display:none;">{{ inpText }}</textarea>
-    </div>
-
-    <script>
-        const app = Vue.createApp({
-            data() {
-                return {
-                    inpText: ''
-                }
-            },
-            methods: {
-                updateText(event) {
-                    // Lấy nội dung HTML từ contenteditable
-                    this.inpText = event.target.innerHTML;
-                }
-            }
-        });
-        app.mount('#app');
-    </script>
+    <!-- -------Phần nhập bài viết------- -->
+    <div class="mb-3">
+        <label for="title" class="form-label">Tiêu đề</label>
+        <textarea type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề"></textarea>
+        <br>    
+    <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
+  </div>
     <br />
     <!-- -------------- -->
 

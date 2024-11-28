@@ -46,9 +46,10 @@ class PostModel
             $mysqlDate = date('Y-m-d H:i:s', strtotime($date));
             $data['created_at'] = $mysqlDate;
         }
-        $sql = "INSERT INTO posts(title, content, created_at, status, author_id, category_id) VALUES(?,?,?,?,?,?)";
+        $sql = "INSERT INTO posts(title, image, content, created_at, status, author_id, category_id) VALUES(?,?,?,?,?,?,?)";
         $params = [
             $data['title'],
+            $data['image'],
             $data['content'],
             $data['created_at'],
             $data['status'],
@@ -67,9 +68,10 @@ class PostModel
             $data['created_at'] = $mysqlDate;
         }
     
-        $sql = "UPDATE posts SET title = ?, content = ?, created_at = ?, status = ?, author_id = ?, category_id = ? WHERE id = ?";
+        $sql = "UPDATE posts SET title = ?, image = ?, content = ?, created_at = ?, status = ?, author_id = ?, category_id = ? WHERE id = ?";
         $params = [
             $data['title'],
+            $data['image'],
             $data['content'],
             $data['created_at'],
             $data['status'],
@@ -81,9 +83,26 @@ class PostModel
         return $this->db->update($sql, $params);
     }
     public function deletePost($postId)
-    {
-        $sql = "DELETE FROM posts WHERE id = ?";
-        return $this->db->delete($sql, [$postId]);
+{
+    if ($this->isForeignKey($postId)) {
+        // Xóa các bình luận trước khi xóa bài viết
+        $this->deleteRelatedData($postId);
     }
+
+    // Xóa bài viết
+    $sql = "DELETE FROM posts WHERE id = ?";
+    return $this->db->delete($sql, [$postId]);
+}
+
+    public function isForeignKey($postId) {
+        $commentsCount = $this->db->query("SELECT COUNT(*) as count FROM comments WHERE post_id = ?", [$postId])->fetch()['count'];
+        return $commentsCount > 0;
+    }
+    
+    public function deleteRelatedData($postId)
+{
+    // Xóa dữ liệu liên quan trong bảng comments
+    $this->db->query("DELETE FROM comments WHERE post_id = ?", [$postId]);
+}
 
 }

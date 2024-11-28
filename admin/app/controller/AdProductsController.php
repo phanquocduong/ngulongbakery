@@ -21,7 +21,25 @@ class AdProductsController
 
     public function viewProducts()
     {
-        $this->data = $this->products->getProducts();
+        $productsModel = new AdProductsModel();
+
+        // Get pagination parameters
+        $currentPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
+        $limit = 10;
+        $offset = ($currentPage - 1) * $limit;
+
+        // Get total products and calculate total pages
+        $totalProducts = $productsModel->getTotalProducts();
+        $totalPages = ceil($totalProducts / $limit);
+
+        // Get products for current page
+        $products = $productsModel->getProducts($limit, $offset);
+
+        // Pass data to view
+        $this->data['products'] = $products;
+        $this->data['totalPages'] = $totalPages;
+        $this->data['currentPage'] = $currentPage;
+
         $this->renderview('products', $this->data);
     }
     public function viewProducts_Detail()

@@ -24,7 +24,7 @@
                     <table class="table table-hover table-borderless">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th>Tên Danh Mục</th>
                                 <th>Ảnh</th>
                                 <th>Loại danh mục</th>
@@ -34,10 +34,13 @@
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($data['cate'] as $item) {
-                                extract($item);
+                            foreach ($listCate as $key => $value) {
+                                $id = $value['id'];
+                                $name = $value['name'];
+                                $type = $value['type'];
+                                $image = $value['image'];
                                 echo '<tr>
-                                <td>' . $id . '</td>
+                                <td>' . $stt++ . '</td>
                                 <td>' . $name . '</td>
                                 <td>
                                     <img src="../public/upload/category/' . $image . '" alt=""

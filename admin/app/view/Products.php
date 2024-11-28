@@ -5,19 +5,21 @@
       <h4 class="mb-0">Danh sách sản phẩm</h4>
       <a href="index.php?page=viewAddPro"><button class="btn btn-primary">Thêm sản phẩm</button></a>
     </div>
-    <!-- form search -->
-    <form class="d-none d-md-flex ms-4">
+
+    <!-- Form search -->
+    <form class="d-none d-md-flex ms-4" method="POST">
       <div class="input-group">
-        <input class="form-control border-0" type="search" placeholder="Tìm kiếm sản phẩm" />
-        <button class="btn">
+        <input class="form-control border-0" type="text" placeholder="Tìm kiếm sản phẩm" name="search_product" />
+        <button class="btn" type="submit" name="button_product">
           <span class="input-group-text bg-transparent border-0">
-            <i class="fa fa-search"></i>
+            <a href="index.php?page=search_products"><i class="fa fa-search"></i></a>
           </span>
         </button>
       </div>
     </form>
     <br />
-    <!-- form search end -->
+    <!-- Form search end -->
+
     <?php
     require_once './app/model/CategoryModel.php';
     require_once './app/model/AdProductsModel.php';
@@ -37,7 +39,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>STT</th>
             <th>Tên sản phẩm</th>
             <th>Giá</th>
             <th>Hình ảnh</th>
@@ -47,48 +49,90 @@
           </tr>
         </thead>
         <tbody>
-
-
-
-          <?php
-          foreach ($listPro as $key => $value) {
-            extract($value);
-            echo "<tr>";
-            echo "<td>$id</td>";
-            echo "<td>$name</td>";
-            echo "<td>$price</td>";
-            echo "<td><img src='../public/upload/product/$image' alt='' style='width: 50px; height: 50px' /></td>";
-            echo "<td>$views</td>";
-            $categoryName = isset($categoryMap[$category_id]) ? $categoryMap[$category_id] : 'Không xác định';
-            echo "<td>$categoryName</td>";
-            echo "<td>
-              <a href='index.php?page=products_detail&id=$id'><button class='btn btn-info btn-sm btn-color-text'>
-                  Xem
-                </button></a>
-              <a href='index.php?page=viewEdit_products&id=$id'><button class='btn btn-warning btn-sm btn-color-text'>
-                  Sửa
-                </button></a>";
-                echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $id . ')">
-                <button class="btn btn-danger btn-sm btn-color-text">
-                  xoá
-                </button>
-                </a>';
-            ?>
-            <script>
-              function confirmDelete(id) {
-                const url = "index.php?page=delProducts&id=" + id;
-                if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
-                  window.location.href = url;
-                }
-              }
-            </script>
-            <?php
-            echo "</td>";
-            echo "</tr>";
-          }
-          ?>
+          <?php foreach ($this->data['products'] as $product): ?>
+            <tr>
+              <td><?php echo $product['id']; ?></td>
+              <td><?php echo $product['name']; ?></td>
+              <td><?php echo number_format($product['price'], 0, ',', '.'); ?> VNĐ</td>
+              <td><img src="../public/upload/product/<?php echo $product['image']; ?>" alt=""
+                  style="width: 50px; height: 50px"></td>
+              <td><?php echo $product['views']; ?></td>
+              <td><?php echo $product['category_name']; ?></td>
+              <td>
+                <a href="index.php?page=products_detail&id=<?php echo $product['id']; ?>"
+                  class="btn btn-info btn-sm">Xem</a>
+                <a href="index.php?page=viewEdit_products&id=<?php echo $product['id']; ?>"
+                  class="btn btn-warning btn-sm">Sửa</a>
+                <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $product['id']; ?>)"
+                  class="btn btn-danger btn-sm">Xóa</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
+
+      <!-- Phân trang -->
+      <?php
+      // Get current page from URL parameter
+      $currentPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
+      $limit = 10;
+      $offset = ($currentPage - 1) * $limit;
+
+      // Get products with pagination
+      $listPro = $productsModel->getProducts($limit, $offset);
+      ?>
+      <?php if (isset($this->data['totalPages']) && $this->data['totalPages'] > 1): ?>
+        <div class="pagination">
+          <?php if ($this->data['currentPage'] > 1): ?>
+            <a href="index.php?page=products&p=<?php echo ($this->data['currentPage'] - 1); ?>"><</a>
+          <?php endif; ?>
+
+          <?php for ($i = 1; $i <= $this->data['totalPages']; $i++): ?>
+            <a href="index.php?page=products&p=<?php echo $i; ?>"
+              class="<?php echo ($this->data['currentPage'] == $i) ? 'active' : ''; ?>">
+              <?php echo $i; ?>
+            </a>
+          <?php endfor; ?>
+
+          <?php if ($this->data['currentPage'] < $this->data['totalPages']): ?>
+            <a href="index.php?page=products&p=<?php echo ($this->data['currentPage'] + 1); ?>">></a>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
+
+      <style>
+        .pagination a {
+          display: inline-block;
+          padding: 8px 16px;
+          margin: 0 4px;
+          text-decoration: none;
+          color: #007bff;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a.active {
+          background-color: #007bff;
+          color: white;
+          border: 1px solid #007bff;
+        }
+
+        .pagination a:hover:not(.active) {
+          background-color: #ddd;
+          color: #007bff;
+        }
+      </style>
     </div>
+
+    <script>
+      function confirmDelete(id) {
+        const url = "index.php?page=delProducts&id=" + id;
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+          window.location.href = url;
+        }
+      }
+    </script>
+
   </div>
 </div>

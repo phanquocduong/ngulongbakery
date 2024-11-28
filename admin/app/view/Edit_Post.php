@@ -14,6 +14,9 @@
         <input type="text" name="title" value="<?= $title ?>" class="form-control" >
         <!-- </h1> -->
         <hr />
+        <label for="" class="form-lable" >Ảnh bìa bài viết</label><br>
+        <img src="../public/upload/post/images/<?= $image ?>" alt="" style="width: 200px; height: 200px;">
+        <input type="file" class="form-control" name="avt-post1" ><br><br>
         <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
         <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
         <hr />
