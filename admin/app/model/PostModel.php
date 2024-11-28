@@ -83,9 +83,26 @@ class PostModel
         return $this->db->update($sql, $params);
     }
     public function deletePost($postId)
-    {
-        $sql = "DELETE FROM posts WHERE id = ?";
-        return $this->db->delete($sql, [$postId]);
+{
+    if ($this->isForeignKey($postId)) {
+        // Xóa các bình luận trước khi xóa bài viết
+        $this->deleteRelatedData($postId);
     }
+
+    // Xóa bài viết
+    $sql = "DELETE FROM posts WHERE id = ?";
+    return $this->db->delete($sql, [$postId]);
+}
+
+    public function isForeignKey($postId) {
+        $commentsCount = $this->db->query("SELECT COUNT(*) as count FROM comments WHERE post_id = ?", [$postId])->fetch()['count'];
+        return $commentsCount > 0;
+    }
+    
+    public function deleteRelatedData($postId)
+{
+    // Xóa dữ liệu liên quan trong bảng comments
+    $this->db->query("DELETE FROM comments WHERE post_id = ?", [$postId]);
+}
 
 }
