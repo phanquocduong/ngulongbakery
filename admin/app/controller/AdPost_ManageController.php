@@ -101,10 +101,10 @@ class AdPost_ManageController
         }
 
         public function deletePost(){
-            if ($this->post->isForeignKey($_GET['id'])) {
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            if ($this->post->isForeignKey($id)) {
                 $this->post->deleteRelatedData($id);
             }
-            $id = isset($_GET['id']) ? $_GET['id'] : 0;
             $this->post->deletePost($id);
             echo '<script>alert("Xóa bài viết thành công")</script>';
             echo '<script>location.href="index.php?page=post_manage"</script>';

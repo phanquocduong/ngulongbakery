@@ -143,7 +143,7 @@ if ($type == 1) {
                                         echo '<td><span class="badge bg-danger">Ẩn</span></td>';
                                     }
                                     echo '<td>
-                            <a href="index.php?page=categories_detail&id=' . $category['id'] . '" class="btn btn-info btn-sm">Xem</a>
+                            <a href="index.php?page=view_categories&id=' . $category['id'] . '" class="btn btn-info btn-sm">Xem</a>
                             <a href="index.php?page=viewEdit_categories&id=' . $category['id'] . '" class="btn btn-warning btn-sm">Sửa</a>
                             <a href="javascript:void(0);" onclick="confirmDelete(' . $category['id'] . ')" class="btn btn-danger btn-sm">Xóa</a>
                           </td>';
