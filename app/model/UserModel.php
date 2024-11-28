@@ -32,10 +32,10 @@
             return false; // Không tìm thấy mã
         }
         
-        function getUserByEmail($email) {
-            $sql = "SELECT * FROM users WHERE email = ? AND status = 1";
-            return $this->db->get($sql, [$email]);
-        }        
+            function getUserByEmail($email) {
+                $sql = "SELECT * FROM users WHERE email = ? AND status = 1";
+                return $this->db->get($sql, [$email]);
+            }        
 
         function saveResetCode($email, $resetCode) {
             $sql = "UPDATE users SET reset_code = ? WHERE email = ? AND status = 1";

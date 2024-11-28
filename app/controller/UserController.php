@@ -131,8 +131,8 @@ class UserController
 
         // Kiểm tra mật khẩu
         if ($user && password_verify($password, $user['password'])) {
+
             echo '<script>alert("Đăng nhập thành công")</script>';
-            $_SESSION['user'] = $user;
             // Nếu chọn "Nhớ mật khẩu"
             if ($rememberMe) {
                 // Tạo chuỗi dữ liệu lưu trữ trong cookie
