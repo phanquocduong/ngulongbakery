@@ -28,30 +28,26 @@ class UserModel{
     function updateUser($data) {
         $data['status'] = isset($data['status']) ? intval($data['status']) : 0;
         $data['created_at'] = !empty($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i:s');
-    
         $sql = "UPDATE users SET email = ?, full_name = ?, phone = ?, address = ?, role_id = ?, avatar = ?, status = ? WHERE id = ?";
         $params = [$data['email'], $data['full_name'], $data['phone'], $data['address'], $data['role_id'], $data['avatar'], $data['status'], $data['id']];
-    
-        // Debug dữ liệu
-        // print_r($params);
-    
         return $this->db->update($sql, $params);
     }
-    function deleteUser($id)
+    public function deleteUser($id)
     {
+        $this->deleteRelatedData($id);
         $sql = "DELETE FROM users WHERE id = ?";
         $param = [$id];
         return $this->db->delete($sql, $param);
     }
-    public function isForeignKey($id) {
-        // Giả sử cột lưu trữ ID người dùng trong bảng posts là 'user_id'
-        $query = "SELECT COUNT(*) as count FROM posts WHERE author_id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        return $result['count'] > 0;
+
+        public function isForeignKey($id)
+    {
+        $ordersCount = $this->db->query("SELECT COUNT(*) as count FROM orders WHERE user_id = ?", [$id])->fetch()['count'];
+        $commentsCount = $this->db->query("SELECT COUNT(*) as count FROM comments WHERE user_id = ?", [$id])->fetch()['count'];
+        $favoritesCount = $this->db->query("SELECT COUNT(*) as count FROM favorite_products WHERE user_id = ?", [$id])->fetch()['count'];
+        $reviewsCount = $this->db->query("SELECT COUNT(*) as count FROM reviews WHERE user_id = ?", [$id])->fetch()['count'];
+        $postsCount = $this->db->query("SELECT COUNT(*) as count FROM posts WHERE author_id = ?", [$id])->fetch()['count'];
+        return ($ordersCount > 0 || $commentsCount > 0 || $favoritesCount > 0 || $reviewsCount > 0 || $postsCount > 0);
     }
     public function updateStatus($id, $status){
         $newStatus = ($status == 1) ? 0 : 1;
@@ -62,5 +58,14 @@ class UserModel{
         $stmt->execute();
         return $newStatus;
     }
-    
+    public function deleteRelatedData($id)
+    {
+        $this->db->query("DELETE FROM comments WHERE post_id IN (SELECT id FROM posts WHERE author_id = ?)", [$id]);
+        $this->db->query("DELETE FROM posts WHERE author_id = ?", [$id]);
+        $this->db->query("DELETE FROM orderdetails WHERE order_id IN (SELECT id FROM orders WHERE user_id = ?)", [$id]);
+        $this->db->query("DELETE FROM orders WHERE user_id = ?", [$id]);
+        $this->db->query("DELETE FROM favorite_products WHERE user_id = ?", [$id]);
+        $this->db->query("DELETE FROM reviews WHERE user_id = ?", [$id]);
+        $this->db->query("DELETE FROM posts WHERE author_id = ?", [$id]);
+    }
 }
