@@ -84,7 +84,7 @@ class AdAccountsController{
             $data = $this->user->getIdUser($id);
     
             // Xoá ảnh chính
-            $file = '../public/upload/avatar/' . $data['avatar'];
+            $file = '../public/upload/avatar/' . $data['image'];
             if (file_exists($file)) {
                 unlink($file);
             }
@@ -99,8 +99,6 @@ class AdAccountsController{
             $id = $_GET['id'];
             $status = $_GET['status'];
             $newStatus = $this->user->updateStatus($id, $status);
-
-            // Điều hướng lại về trang danh sách người dùng sau khi thay đổi
             echo '<script>location.href="index.php?page=accounts"</script>';
             exit();
         } else {

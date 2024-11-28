@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const indexListContainer = document.querySelector(".contentnews-listindex");
-    const headings = document.querySelectorAll(".contentnews-titlecontent");
+    const headings = document.querySelectorAll("h3");
     const toggleButton = document.getElementById("toggle-button");
 
     const indexList = document.createElement("div");
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
             toggleButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
         } else {
             indexList.style.display = "none";
-            // indexListContainer.style.min-height="20px";
             toggleButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
         }
     });

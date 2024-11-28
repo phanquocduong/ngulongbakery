@@ -29,7 +29,7 @@ main {
 .news-item:hover {
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.295);
 }
-.news-item__title-link .news-item__name {
+.news-item__title-link .single-line-text {
     font-size: 22px;
     color: var(--black-color);
     text-align: left;
@@ -37,7 +37,11 @@ main {
     line-height: 25px;
     padding: 15px;
     font-weight: bold;
-    display: inline-block;
+    display: block;
+    white-space: normal; /* Cho phép xuống dòng */
+    word-wrap: break-word; /* Bẻ từ nếu từ quá dài */
+    word-break: break-word; /* Hỗ trợ bẻ từ trên các trình duyệt khác */
+    overflow: visible; /* Đảm bảo không cắt phần chữ bị tràn */
 }
 .news-item__description {
     font-size: 14px;
@@ -48,6 +52,11 @@ main {
     padding-right: 20px;
     padding-bottom: 5px;
     text-align: left;
+    display: block;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow: visible; /
 }
 .news-item__readmore-link .news-item__readmore {
     font-size: 14px;
