@@ -46,7 +46,7 @@
                 require_once './app/model/CategoryModel.php';
                 require_once './app/model/PostModel.php';
                 $categoryModel = new CategoryModel();
-                $categories = $categoryModel->getPostCategory();
+                $categories = $categoryModel->getCate();
                 foreach ($categories as $category) {
                     extract($category);
                     echo '<option value="' . $id . '">' . $name. '</option>';

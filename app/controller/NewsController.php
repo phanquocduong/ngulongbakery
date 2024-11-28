@@ -54,13 +54,16 @@ class NewsController {
             if (empty($comment)) {
                 die("Nội dung bình luận không được để trống!");
             }
+
             $data = [
                 'comment' => $comment,
                 'user_id' => $user_id,
                 'post_id' => $post_id
             ];
             $this->comments->insertComment($data);
-            echo '<script>location.href="index.php?page=news-details&id='.$post_id.'#quantitycmt"</script>';
-        }   
+            $_SESSION['success'] = "Bình luận thành công!";
+            header("Location: index.php?page=news-details&id=" . $post_id . "#quantitycmt");
+            exit;
+        }
     }
 }
