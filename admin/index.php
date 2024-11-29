@@ -18,6 +18,9 @@ require_once './app/controller/AdVoucherController.php';
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
     switch ($page) {
+        case 'account_admin':
+            echo '<script>location.href="/ngulongbakery/index.php?page=account"</script>';
+            break;
         case 'products':
             $products = new AdProductsController();
             $products->viewProducts();
