@@ -105,7 +105,7 @@ class AdAccountsController{
     public function logout() {
         unset($_SESSION['user']);
         setcookie('rememberMe', '', time() - 3600, '/');
-        header("Location: http://localhost/ngulongbakery/");
+        header("Location: /ngulongbakery/");
 
     }
 }
