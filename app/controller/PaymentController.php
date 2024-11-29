@@ -21,10 +21,10 @@
             require_once 'app/view/template.php';
         }
 
-        public function viewPayment($css, $js) {
+        public function viewPayment($base_url, $css, $js) {
             if (!isset($_SESSION['user'])) {
                 $_SESSION['redirectto'] = $_SERVER['REQUEST_URI'];
-                header("Location: index.php?page=login");
+                header("Location: $base_url/login");
             } else {
                 if (isset($_SESSION['discount_applied'])) {
                     unset($_SESSION['discount_applied']);
@@ -84,7 +84,7 @@
             }
         }
 
-        public function handlePayment() {
+        public function handlePayment($base_url) {
             $idClient = $_SESSION['user']['id'];
             $fullname = trim($_POST['fullname']);
             $email = trim($_POST['email']);
@@ -130,7 +130,7 @@
                 }
         
                 $_SESSION['success'] = "Đặt hàng thành công, vui lòng kiểm tra email!";
-                header("Location: index.php");
+                header("Location: $base_url");
                 exit;
             }
         }

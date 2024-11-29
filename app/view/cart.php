@@ -38,16 +38,16 @@
                                         <div class="col l-11 m-11 c-11">
                                             <div class="row">
                                                 <div class="col l-2 m-2 c-2">
-                                                    <a href="index.php?page=product-details&id=<?=$item['id']?>" class="product-link">
+                                                    <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
                                                         <img
-                                                            src="public/upload/product/<?=$item['image']?>"
-                                                            alt=""
+                                                            src="<?=$base_url?>/public/upload/product/<?=$item['image']?>"
+                                                            alt="<?=$item['name']?>"
                                                             class="product-link__img"
                                                         />
                                                     </a>
                                                 </div>
                                                 <div class="col l-3 m-3 c-3">
-                                                    <a href="index.php?page=product-details&id=<?=$item['id']?>" class="product-link">
+                                                    <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
                                                         <h5 class="product-link__title"><?=$item['name']?></h5>
                                                     </a>
                                                     <div class="product-classify">
@@ -58,7 +58,7 @@
                                                     <span class="product-price"><?=number_format($item['price'])?>đ</span>
                                                 </div>
                                                 <div class="col l-3 m-3 c-3">
-                                                    <form action="index.php?page=handle-update-cart" method="POST" class="quantity-form">
+                                                    <form class="quantity-form">
                                                         <input type="hidden" name="index" value="<?=$index?>">
                                                         <div class="quantity-wrapper">
                                                             <button type="button" onclick="decreaseQuantityInCart(this, <?=$item['stock']?>)" class="quantity-minus">-</button>
@@ -83,16 +83,16 @@
                                 <?php foreach($_SESSION['cart'] as $item): ?>
                                     <div class="row order-item">
                                         <div class="col c-5">
-                                            <a href="index.php?page=product-details&id=<?=$item['id']?>" class="product-link">
+                                            <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
                                                 <img
-                                                    src="public/upload/product/<?=$item['image']?>"
-                                                    alt=""
+                                                    src="<?=$base_url?>/public/upload/product/<?=$item['image']?>"
+                                                    alt="<?=$item['name']?>"
                                                     class="product-link__img"
                                                 />
                                             </a>
                                         </div>
                                         <div class="col c-5">
-                                            <a href="index.php?page=product-details&id=<?=$item['id']?>" class="product-link">
+                                            <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
                                                 <h5 class="product-link__title"><?=$item['name']?></h5>
                                             </a>
                                             <div class="product-classify">
@@ -100,7 +100,7 @@
                                             </div>
                                             <span class="product-price"><?=number_format($item['price'])?>đ</span>
                                             <div class="quantity-wrapper">
-                                                <form action="index.php?page=handle-update-cart" method="POST" class="quantity-form">
+                                                <form class="quantity-form">
                                                     <input type="hidden" name="index" value="<?=$index?>">
                                                     <div class="quantity-wrapper">
                                                         <button type="button" onclick="decreaseQuantityInCart(this)" class="quantity-minus">-</button>
@@ -123,7 +123,7 @@
                                 <div class="row">
                                     <div class="col l-1 m-1 c-1"></div>
                                     <div class="col l-11 m-11 c-11">
-                                        <a href="index.php?page=collection" class="continue-shopping">
+                                        <a href="<?=$base_url?>/collection" class="continue-shopping">
                                             <i class="fa-solid fa-angle-left"></i>
                                             TIẾP TỤC MUA SẮM
                                         </a>
@@ -138,7 +138,7 @@
                                 <label for="" class="total-label">Thành tiền</label>
                                 <span class="total-price"><?=number_format($total)?>đ</span>
                             </div>
-                            <a class="cart-btn-link" href="index.php?page=payment">
+                            <a class="cart-btn-link" href="<?=$base_url?>/payment">
                                 <button class="cart-btn">Thanh toán</button>
                             </a>
                         </div>
@@ -147,7 +147,7 @@
             <?php else: ?>
                 <div class="cart-empty">
                     <h2 class="cart-empty__title">Giỏ hàng của bạn đang trống!</h2>
-                    <a href="index.php?page=allproducts" class="continue-buy__btn">Tiếp tục mua hàng</a>
+                    <a href="<?=$base_url?>/collection" class="continue-buy__btn">Tiếp tục mua hàng</a>
                 </div>
             <?php endif; ?>
         </div>

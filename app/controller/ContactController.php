@@ -19,14 +19,14 @@
             $this->renderView('contact', $css, $js);
         }
 
-        public function handleContact() {
+        public function handleContact($base_url) {
             $emailuser = $_POST['email'];
             $username = $_POST['name'];
             $optionuser = $_POST['select-fix'];
             $comments = $_POST['comments'];
             $this->mailController->sendContactEmail($emailuser, $username, $optionuser, $comments);
             $_SESSION['success'] = "Chúng tôi sẽ cố gắng liên hệ lại với bạn trong thời gian sớm nhất!";
-            header("Location: index.php?page=contact");
+            header("Location: $base_url/contact");
             exit;
         }
     }

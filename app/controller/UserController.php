@@ -25,7 +25,7 @@
             $this->renderView('register', $css, $js);
         }
 
-        public function handleRegister($css, $js) {
+        public function handleRegister($base_url, $css, $js) {
             $fullname = trim($_POST['lastname']) . ' ' . trim($_POST['firstname']);
             $password = trim($_POST['password']);
             $repassword = trim($_POST['repassword']);
@@ -46,7 +46,7 @@
                 if ($result) {
                     $this->mailController->sendVerificationEmail($email, $verificationCode);
                     $_SESSION['info'] = "Vui lòng kiểm tra email để xác thực tài khoản";
-                    header("Location: index.php?page=login");
+                    header("Location: $base_url/login");
                     exit;
                 } else {
                     $_SESSION['error']['unknown'] = "Có lỗi xảy ra. Vui lòng thử lại!";
@@ -55,23 +55,23 @@
             }
         }   
 
-        public function verify() {
+        public function verify($base_url) {
             $code = $_GET['code'] ?? '';
             if ($this->user->verify($code)) {
                 $_SESSION['success'] = "Đăng ký thành công!";
-                header("Location: index.php?page=login");
+                header("Location: $base_url/login");
                 exit;
             } else {
                 echo "Liên kết xác minh không hợp lệ hoặc đã hết hạn.";
             }
         }
 
-        public function viewLogin($css, $js) {
-            $this->autoLogin();
+        public function viewLogin($base_url, $css, $js) {
+            $this->autoLogin($base_url);
             $this->renderView('login', $css, $js);
         }
 
-        public function handleLogin($css, $js) {
+        public function handleLogin($base_url, $css, $js) {
             $email = trim($_POST['customerEmail']);
             $password = trim($_POST['customerPassword']);
             $rememberMe = isset($_POST['rememberMe']) ? true : false;
@@ -94,9 +94,11 @@
                     unset($_SESSION['redirectto']);
                 } else {
                     if ($_SESSION['user']['role_id'] == 1) {
-                        echo '<script>window.location.href = "admin/index.php";</script>';
+                        header("Location: $base_url/admin");
+                        exit;
                     } else {
-                        echo '<script>window.location.href = "index.php";</script>';
+                        header("Location: $base_url");
+                        exit;
                     }
                 }
             } else {
@@ -105,7 +107,7 @@
             }
         }
 
-        public function autoLogin() {
+        public function autoLogin($base_url) {
             if (isset($_COOKIE['rememberMe'])) {
                 // Giải mã dữ liệu cookie
                 $cookieData = json_decode(base64_decode($_COOKIE['rememberMe']), true);
@@ -121,15 +123,17 @@
                     $_SESSION['user'] = $user;
                     // Điều hướng đến trang phù hợp
                     if ($_SESSION['user']['role_id'] == 1) {
-                        echo '<script>window.location.href = "admin/index.php";</script>';
+                        header("Location: $base_url/admin");
+                        exit;
                     } else {
-                        echo '<script>window.location.href = "index.php";</script>';
+                        header("Location: $base_url");
+                        exit;
                     }
                 }
             }
         }
 
-        public function handleForgotPassword($css, $js) {
+        public function handleForgotPassword($base_url, $css, $js) {
             $email = trim($_POST['email']);
             // Kiểm tra xem email có tồn tại trong cơ sở dữ liệu không
             $user = $this->user->getUserByEmail($email);
@@ -141,7 +145,7 @@
                 // Gửi email đặt lại mật khẩu
                 $this->mailController->sendResetPasswordEmail($email, $resetCode);
                 $_SESSION['info'] = "Vui lòng kiểm tra email của bạn để đặt lại mật khẩu.";
-                header("Location: index.php?page=login");
+                header("Location: $base_url/login");
                 exit;
             } else {
                 $_SESSION['error'] = "Thông tin tài khoản không hợp lệ.";
@@ -153,7 +157,7 @@
             $this->renderView('reset-password', $css, $js);
         }
 
-        public function handleResetPassword($css, $js) {
+        public function handleResetPassword($base_url, $css, $js) {
             $resetCode = $_POST['resetCode'];
             $newPassword = trim($_POST['newPassword']);
             $confirmPassword = trim($_POST['confirmPassword']);
@@ -165,7 +169,7 @@
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                 if ($this->user->resetPassword($resetCode, $hashedPassword)) {
                     $_SESSION['success'] = "Mật khẩu đã được đặt lại thành công!";
-                    header("Location: index.php?page=login");
+                    header("Location: $base_url/login");
                     exit;
                 } else {
                     $_SESSION['error'] = "Mã xác thực không hợp lệ hoặc đã hết hạn.";
@@ -174,10 +178,11 @@
             }
         }        
 
-        public function logout() {
+        public function logout($base_url) {
             unset($_SESSION['user']);
             setcookie('rememberMe', '', time() - 3600, '/');
-            echo '<script>window.location.href = "index.php";</script>';
+            header("Location: $base_url");
+            exit;
         }
 
         public function viewAccount($css, $js) {
@@ -186,7 +191,7 @@
             $this->renderView('account', $css, $js, $data);
         }
 
-        public function handleUpdateInformation() {
+        public function handleUpdateInformation($base_url) {
             $fullname = trim($_POST['fullname']);
             $phone = trim($_POST['phone']);
             $address = trim($_POST['address']);
@@ -197,12 +202,12 @@
                 $allowedTypes = ['image/jpeg', 'image/png'];
                 if (!in_array($_FILES['avatar']['type'], $allowedTypes)) {
                     $_SESSION['error'] = "Chỉ hỗ trợ file ảnh PNG và JPEG!";
-                    header("Location: index.php?page=account");
+                    header("Location: $base_url/account");
                     exit;
                 }
                 if ($_FILES['avatar']['size'] > 5000000) {  // 5MB
                     $_SESSION['error'] = "Kích thước file quá lớn! Vui lòng chọn ảnh nhỏ hơn 5MB.";
-                    header("Location: index.php?page=account");
+                    header("Location: $base_url/account");
                     exit;
                 }
             } else {
@@ -224,16 +229,16 @@
                     $_SESSION['user']['address'] = $address;
                     $_SESSION['user']['avatar'] = $avatar;
                     $_SESSION['success'] = "Cập nhật thông tin thành công";
-                    header("Location: index.php?page=account");
+                    header("Location: $base_url/account");
                     exit;
                 } else {
                     $_SESSION['error'] = "Có lỗi khi tải lên hình ảnh. Vui lòng thử lại sau!";
-                    header("Location: index.php?page=account");
+                    header("Location: $base_url/account");
                     exit;
                 }
             } else {
                 $_SESSION['error'] = "Có lỗi không mong muốn xảy ra. Vui lòng thử lại sau!";
-                header("Location: index.php?page=account");
+                header("Location: $base_url/account");
                 exit;
             }
         }
@@ -242,7 +247,7 @@
             $this->renderView('change-password', $css, $js);
         }
 
-        public function handleChangePassword($css, $js) {
+        public function handleChangePassword($base_url, $css, $js) {
             $currentPassword = trim($_POST['currentPassword']);
             if (password_verify($currentPassword, $_SESSION['user']['password'])) {
                 $newPassword = trim($_POST['newPassword']);
@@ -254,7 +259,7 @@
                     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                     if ($this->user->changePassword($_SESSION['user']['id'], $hashedPassword)) {
                         $_SESSION['success'] = "Mật khẩu đã được cập nhật thành công!";
-                        header("Location: index.php?page=account");
+                        header("Location: $base_url/account");
                         exit;
                     } else {
                         $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại";

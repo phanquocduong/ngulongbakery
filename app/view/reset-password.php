@@ -1,6 +1,6 @@
 <!-- Start main -->
         <main>
-            <form action="index.php?page=handle-reset-password" method="POST" class="reset-password-form">
+            <form action="<?=$base_url?>/handle-reset-password" method="POST" class="reset-password-form">
                 <h4 class="reset-password-title">Đặt lại mật khẩu</h4>
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="errors">

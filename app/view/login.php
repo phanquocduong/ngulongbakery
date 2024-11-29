@@ -1,6 +1,6 @@
 <!-- Start main -->
         <main>
-            <form action="index.php?page=handle-login" method="POST" id="loginForm" class="login-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Email không tồn tại.') ? '' : 'login-form--active' ?>">
+            <form action="<?=$base_url?>/handle-login" method="POST" id="loginForm" class="login-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Email không tồn tại.') ? '' : 'login-form--active' ?>">
                 <h4 class="login-title">Đăng nhập</h4>
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="errors">
@@ -46,13 +46,13 @@
                     <button class="login-btn">Đăng nhập</button>
                     <div class="register-title">
                         Bạn chưa có tài khoản?
-                        <a href="index.php?page=register" class="register-title__link">Đăng ký ngay</a>
+                        <a href="<?=$base_url?>/register" class="register-title__link">Đăng ký ngay</a>
                     </div>
                     <span class="forgot-pass__link" onclick="openForgotPassForm()">Quên mật khẩu?</span>
                 </div>
             </form>
 
-            <form action="index.php?page=handle-forgot-pass" method="POST" id="forgotPassForm" class="forgot-pass-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Email không tồn tại.') ? 'forgot-pass-form--active' : '' ?>">
+            <form action="<?=$base_url?>/handle-forgot-pass" method="POST" id="forgotPassForm" class="forgot-pass-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Email không tồn tại.') ? 'forgot-pass-form--active' : '' ?>">
                 <h4 class="forgot-pass-title">Quên mật khẩu</h4>
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="errors">

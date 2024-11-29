@@ -6,21 +6,21 @@
             $this->order = new OrderModel();
         }
 
-        function cancelOrder() {
+        function cancelOrder($base_url) {
             if (isset($_GET['id'])) {
                 if($this->order->changeStatus($_GET['id'], 'Đã huỷ')) {
                     $_SESSION['success'] = "Huỷ đơn hàng thành công";
-                    header("Location: index.php?page=account");
+                    header("Location: $base_url/account");
                     exit;
                 }
             }
         }
 
-        function buyBackOrder() {
+        function buyBackOrder($base_url) {
             if (isset($_GET['id'])) {
                 if($this->order->changeStatus($_GET['id'], 'Chờ xác nhận')) {
                     $_SESSION['success'] = "Đặt lại đơn hàng thành công";
-                    header("Location: index.php?page=account");
+                    header("Location: $base_url/account");
                     exit;
                 }
             }
