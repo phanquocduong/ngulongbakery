@@ -65,17 +65,32 @@
             <span>Admin</span>
           </div>
         </div>
-        <div class="navbar-nav w-100">
-          <a href="index.php?page=main" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
-          <a href="index.php?page=products" class="nav-item nav-link"><i class="fa fa-box me-2"></i>Sản phẩm</a>
-          <a href="index.php?page=categories" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Danh mục</a>
-          <a href="index.php?page=order" class="nav-item nav-link"><i class="fa fa-shopping-cart me-2"></i>Đơn hàng</a>
-          <a href="index.php?page=accounts" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Tài khoản</a>
-          <a href="index.php?page=post_manage" class="nav-item nav-link"><i class="fa fa-newspaper me-2"></i>Bài
-            viết</a>
-          <a href="index.php?page=voucher" class="nav-item nav-link"><i class="fa fa-ticket-alt me-2"></i>Mã giảm
-            giá</a>
-        </div>
+        <?php
+        $menuItems = [
+          'main' => ['icon' => 'fa-tachometer-alt', 'label' => 'Thống kê'],
+          'products' => ['icon' => 'fa-box', 'label' => 'Sản phẩm'],
+          'categories' => ['icon' => 'fa-th', 'label' => 'Danh mục'],
+          'order' => ['icon' => 'fa-shopping-cart', 'label' => 'Đơn hàng'],
+          'accounts' => ['icon' => 'fa-users', 'label' => 'Tài khoản'],
+          'post_manage' => ['icon' => 'fa-newspaper', 'label' => 'Bài viết'],
+          'voucher' => ['icon' => 'fa-ticket-alt', 'label' => 'Mã giảm giá']
+        ];
+
+        $currentPage = $_GET['page'] ?? 'main';
+
+        echo '<div class="navbar-nav w-100">';
+        foreach ($menuItems as $page => $item) {
+          $activeClass = ($currentPage === $page) ? 'active' : '';
+          printf(
+            '<a href="index.php?page=%s" class="nav-item nav-link %s"><i class="fa %s me-2"></i>%s</a>',
+            $page,
+            $activeClass,
+            $item['icon'],
+            $item['label']
+          );
+        }
+        echo '</div>';
+        ?>
       </nav>
     </div>
     <!-- Sidebar End -->
@@ -91,28 +106,6 @@
           <i class="fa fa-bars"></i>
         </a>
         <div class="navbar-nav align-items-center ms-auto">
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-              <i class="fa fa-envelope me-lg-2"></i>
-              <span class="d-none d-lg-inline-flex">Tin Nhắn</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-              <a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <img class="rounded-circle" src="../img/meo1.jpg" alt="" style="width: 40px; height: 40px" />
-                  <div class="ms-2">
-                    <h6 class="fw-normal mb-0">
-                      Em Gái Mưa đã gửi cho bạn một tin nhắn
-                    </h6>
-                    <small>5 phút trước</small>
-                  </div>
-                </div>
-              </a>
-              <hr class="dropdown-divider" />
-            
-              <a href="#" class="dropdown-item text-center">Xem Thêm</a>
-            </div>
-          </div>
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               <i class="fa fa-bell me-lg-2"></i>
