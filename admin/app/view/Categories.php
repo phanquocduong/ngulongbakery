@@ -45,7 +45,7 @@ if ($type == 1) {
         <div class="col-12">
             <div class="bg-light rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Danh Mục Sản Phẩm</h6>
+                    <h6 class="mb-0">Quản lí danh Mục</h6>
                     <a href="index.php?page=addCategories" class="btn btn-primary">Thêm Mới</a>
                 </div>
                 <!-- form search -->
@@ -92,12 +92,12 @@ if ($type == 1) {
                 <?php
                 require_once './app/controller/AdCategoriesController.php';
                 require_once './app/model/CategoryModel.php';
-                
+
                 $categoriesController = new AdCategoriesController();
                 $productsModel = new CategoryModel();
-                
+
                 $type = isset($_GET['type']) ? $_GET['type'] : 0;
-                
+
                 if ($type == 1) {
                     // Lọc danh mục sản phẩm
                     $listCate = $categoriesController->getCategoriesByType('Sản phẩm');
@@ -172,4 +172,11 @@ if ($type == 1) {
         }
         window.location.href = url;
     });
+
+    // Xác nhận xóa
+    function confirmDelete(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa danh mục này không?')) {
+            window.location.href = 'index.php?page=delete_categories&id=' + id;
+        }
+    }
 </script>
