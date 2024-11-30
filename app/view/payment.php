@@ -27,7 +27,7 @@
                                         />
                                     </div>
                                     <div class="address-group">
-                                        <input required type="text" name="address" class="form-address__control" placeholder="Địa chỉ">
+                                        <input required type="text" name="address" class="form-address__control" placeholder="Địa chỉ" value="<?=$_SESSION['user']['address']?>">
                                         <div class="form-group">
                                             <select id="province" required name="province" class="address-select">
                                                 <option value="">Tỉnh / thành</option>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col l-5 m-12 c-12">
+                    <div class="sidebar-wrap col l-5 m-12 c-12">
                         <div class="sidebar">
                             <?php 
                                 foreach ($_SESSION['cart'] as $item):
@@ -124,7 +124,7 @@
                                     <div class="product-order__dsc">
                                         <span class="product-order__dsc-name"><?=$item['name']?></span>
                                     </div>
-                                    <div class="product-order__price"><?=number_format($lineTotal)?>đ</div>
+                                    <div class="product-order__price"><?=number_format($lineTotal, 0, ',', '.')?>đ</div>
                                 </div>
                             <?php endforeach; ?>
                             <div class="discount-code">
@@ -135,7 +135,7 @@
                             <div class="payment-details">
                                 <div class="provisional">
                                     <span class="provisional-title">Tạm tính</span>
-                                    <span class="provisional-price"><?=number_format($grandTotal)?>đ</span>
+                                    <span class="provisional-price"><?=number_format($grandTotal, 0, ',', '.')?>đ</span>
                                 </div>
                                 <div class="transport-fee">
                                     <span class="transport-fee__title">Phí vận chuyển</span>
@@ -146,7 +146,7 @@
                                 <span class="total-payment__title">Tổng cộng</span>
                                 <span class="total-payment__price">
                                     <span class="total-payment__price-unit">VND</span>
-                                    <span id="total-payment" class="total-payment__price-main"><?=number_format($grandTotal)?>đ</span>
+                                    <span id="total-payment" class="total-payment__price-main"><?=number_format($grandTotal, 0, ',', '.')?>đ</span>
                                 </span>
                             </div>
                         </div>

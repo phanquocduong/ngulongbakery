@@ -83,10 +83,11 @@
 /* star */
 
 .star-active {
-  color: rgb(253, 211, 0);
+  color: rgb(151, 128, 15);
 }
+
 .rating>i {
-  color: gold;
+  color: rgb(185, 160, 19);
 }
 /*** Text ***/
 .text-padding {

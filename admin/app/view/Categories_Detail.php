@@ -41,16 +41,16 @@
                             </thead>
                             <tbody>';
                     foreach ($products as $index => $item) {
-                        
+                        extract($item);
                         echo '<tr>';
                         echo '<td>' . ($index + 1) . '</td>';
-                        echo '<td>' . $item['name'] . '</td>';
-                        echo '<td>' . number_format($item['price'], 0, ',', '.') . ' VND</td>';
-                        echo '<td>' . $item['stock_quantity'] . '</td>';
+                        echo '<td>' . $name . '</td>';
+                        echo '<td>' . number_format($price, 0, ',', '.') . ' VND</td>';
+                        echo '<td>' . $stock_quantity . '</td>';
                         echo '<td>
-                                <a class="btn btn-sm btn-primary" href="index.php?page=products_detail&id=' . $item['id'] . '">Xem chi tiết</a>
-                                <a class="btn btn-sm btn-primary" href="index.php?page=edit_products&id=' . $item['id'] . '">Sửa</a>
-                                <a class="btn btn-sm btn-danger" href="index.php?page=delete_products&id=' . $item['id'] . '">Xóa</a>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=products_detail&id=' . $id. '">Xem chi tiết</a>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=edit_products&id=' . $id. '">Sửa</a>
+                                <a class="btn btn-sm btn-danger" href="index.php?page=delete_products&id=' . $id. '">Xóa</a>
                             </td>';
                         echo '</tr>';
                     }
@@ -74,12 +74,13 @@
                         echo '<td>' . $category_name. '</td>';
                         echo '<td>' . $author_name. '</td>';
                         echo '<td>
-                                <a class="btn btn-sm btn-primary" href="index.php?page=post_detail&id=' . $item['id'] . '">Xem chi tiết</a>
-                                <a class="btn btn-sm btn-primary" href="index.php?page=edit_post&id=' . $item['id'] . '">Sửa</a>
-                                <a class="btn btn-sm btn-danger" href="index.php?page=delete_posts&id=' . $item['id'] . '">Xóa</a>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=post_detail&id=' . $id . '">Xem chi tiết</a>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=edit_post&id=' . $id . '">Sửa</a>
+                                <a class="btn btn-sm btn-danger" href="index.php?page=delete_posts&id=' . $id . '">Xóa</a>
                             </td>';
                         echo '</tr>';
                     }
+                    // không hiện được !
                 }elseif($countProducts<0 && $countProducts<0) {
                         echo '<thead>
                                 <tr class="text-dark">

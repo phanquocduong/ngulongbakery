@@ -1,19 +1,19 @@
 html {
     scroll-behavior: smooth;
 }
-main{
+main {
     max-width: 100%;
     min-height: 800px;
     background-color: var(--linear-color);
 }
-.contentnews{
+.contentnews {
     margin-top: 70px;
     width: 100%;
     min-height: 300px;
     background-color: var(--white-color);
     text-align: left;
 }
-.contentnews .contentnews-title{
+.contentnews .contentnews-title {
     padding-top: 100px;
     padding-left: 100px;
     padding-bottom: 20px;
@@ -36,17 +36,16 @@ section h2 {
     font-weight: bold;
     color: var(--primary-color);
 }
-.contentnews .contentnews-author{
+.contentnews .contentnews-author {
     padding-left: 100px;
     line-height: 30px;
     font-size: 17px;
 }
-.contentnews-author a{
-    text-decoration: none;
+.contentnews-author a {
     color: var(--primary-color-bold);
 }
 
-.contentnews .contentnews-content {
+section p {
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 20px;
@@ -54,82 +53,79 @@ section h2 {
     font-size: 18px;
     font-weight: 350;
 }
-.contentnews-titlecontent {
+section h3 {
     padding-left: 100px;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 25px;
 }
-.contentnews .contentnews-img .contentnews-img__products {
-    margin-left: 100px;
-    width: 83%;
+section img {
+    margin-left: 60px;
+    width: 90%;
     height: 500px;
     object-fit: cover;
     padding-bottom: 20px;
 }
-.contentnews .contentnews-infor {
+section .contentnews-infor {
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 20px;
     line-height: 2.5rem;
     font-size: 16px;
 }
-.contentnews .contentnews-infor a {
+section .contentnews-infor a {
     color: var(--primary-color-bold);
     font-weight: bold;
 }
-.contentnews .contentnews-infor {
+section .contentnews-infor {
     padding-bottom: 80px;
-
 }
 .backtonews {
+    color: var(--primary-color-bold);
     font-size: 18px;
     padding-top: 50px;
     padding-bottom: 50px;
     display: flex;
     font-weight: 400;
     justify-content: space-between;
-
 }
-.backtonews a{
-    text-decoration: none;
-    
+.backtonews a {
     color: var(--primary-color-bold);
 }
-.backtonews i{
+.backtonews i {
     font-size: 16px;
 }
-.commentnews{
+.commentnews {
     width: 100%;
     min-height: 300px;
     background-color: var(--white-color);
     text-align: left;
 }
-.commentnews .quantitycomment{
+.commentnews .quantitycomment {
     padding-left: 100px;
     padding-top: 40px;
     padding-bottom: 20px;
     font-size: 23px;
 }
-.commentnews .commentnews-user{
+.commentnews .commentnews-user {
     padding-top: 50px;
     padding-left: 30px;
     display: flex;
 }
-.commentnews .commentnews-user .commentnews-user__avt-img {
-    width: 60px;
-    height: 60px;
+.commentnews .commentnews-user img {
+    width: 70px;
+    height: 90px;
     object-fit: cover;
     border-radius: 10px 20px 30px 40px;
 }
-.commentnews-user .commentnews-user__name-date{
+.commentnews-user .commentnews-user__name-date {
     padding-left: 15px;
     padding-top: 10px;
     font-size: 16px;
     line-height: 2rem;
     color: var(--primary-color-bold);
 }
-.commentnews .commentnews-content{
+.commentnews .commentnews-content {
     padding-left: 100px;
     padding-top: 30px;
     padding-bottom: 20px;
@@ -137,20 +133,19 @@ section h2 {
     font-size: 16px;
     font-weight: 350;
 }
-.commentnews .commentnews-manage{
+.commentnews .commentnews-manage {
     padding-left: 100px;
     padding-bottom: 50px;
     padding-right: 100px;
     display: flex;
     justify-content: space-between;
 }
-.commentnews .commentnews-manage a{
-    text-decoration: none;
+.commentnews .commentnews-manage a {
     font-size: 16px;
     color: var(--primary-color-bold);
     font-weight: bold;
 }
-.writecomment{
+.writecomment {
     margin-bottom: 100px;
     margin-top: 30px;
     width: 100%;
@@ -158,27 +153,25 @@ section h2 {
     background-color: var(--white-color);
     text-align: left;
 }
-.writecomment .writecomment-title{
+.writecomment .writecomment-title {
     padding-left: 100px;
     padding-top: 70px;
     font-size: 23px;
 }
-.writecomment .writecomment-title__link{
+.writecomment .writecomment-title__link {
     padding-left: 100px;
     padding-top: 20px;
     font-size: 16px;
 }
-.writecomment .writecomment-title__link a{
-    text-decoration: none;
+.writecomment .writecomment-title__link a {
     color: var(--primary-color-bold);
     font-weight: bold;
 }
-.writecomment .writecomment-content{
+.writecomment .writecomment-content {
     padding-top: 30px;
     margin-bottom: 30px;
     padding-left: 100px;
     padding-right: 100px;
-    
 }
 .writecomment .writecomment-content input {
     width: 100%;
@@ -194,14 +187,14 @@ section h2 {
 .writecomment .writecomment-content input:focus {
     border-color: var(--primary-color);
 }
-.writecomment .writecomment-btn{
+.writecomment .writecomment-btn {
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 20px;
     padding-bottom: 50px;
     font-size: 16px;
 }
-.writecomment .writecomment-btn button{
+.writecomment .writecomment-btn button {
     width: 200px;
     background-color: var(--primary-color-bold);
     height: 50px;
@@ -213,19 +206,17 @@ section h2 {
     color: #fff;
 
 }
-.writecomment .writecomment-btn button a{
+.writecomment .writecomment-btn button a {
     color: var(--white-color);
-    text-decoration: none;
-
 }
-.writecomment .writecomment-btn button i{
+.writecomment .writecomment-btn button i {
     font-size: 14px;
 }
-.writecomment .writecomment-btn button:hover{
+.writecomment .writecomment-btn button:hover {
     background-color: #deac55;
     color: rgb(227, 221, 221);
 }
-.contentnews .contentnews-listindex {
+.contentnews-listindex {
     margin-left: 100px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -236,7 +227,7 @@ section h2 {
     min-height: 20px;
     position: relative;
 }
-.contentnews .contentnews-listindex button {
+.contentnews-listindex button {
     position: absolute;
     min-width: 30px;
     height: 30px;
@@ -248,18 +239,18 @@ section h2 {
     border-radius: 5px;
     cursor: pointer;
 }
-.contentnews .contentnews-listindex a {
+.contentnews-listindex a {
     color: black;
     font-weight: 350;
     transition: all 1.3ms;
 }
-.contentnews .contentnews-listindex a:hover {
+.contentnews-listindex a:hover {
     color: var(--primary-color-bold);
     font-weight: bold;
     text-decoration: underline;
 }
 @media (max-width: 739px) {
-    .contentnews,
+    section,
     .commentnews,
     .writecomment {
         padding-left: 15px;
@@ -331,7 +322,10 @@ section h2 {
         padding: 10px;
         max-width: 100%;
     }
-    .commentnews, .commentnews .commentnews-user, .commentnews .commentnews-content, .commentnews .commentnews-manage {
+    .commentnews,
+    .commentnews .commentnews-user,
+    .commentnews .commentnews-content,
+    .commentnews .commentnews-manage {
         padding-left: 15px;
         padding-right: 15px;
         margin-top: 10px;
@@ -342,9 +336,9 @@ section h2 {
         object-fit: cover;
         border-radius: 10px 20px 30px 40px;
     }
-    .commentnews .quantitycomment, 
-    .commentnews .commentnews-user__name-date, 
-    .commentnews .commentnews-content, 
+    .commentnews .quantitycomment,
+    .commentnews .commentnews-user__name-date,
+    .commentnews .commentnews-content,
     .commentnews .commentnews-manage a {
         font-size: 12px;
         line-height: 1.5rem;
@@ -374,7 +368,6 @@ section h2 {
         font-size: 16px;
         line-height: 2rem;
         line-height: 3rem;
-
     }
     section h2 {
         padding-top: 60px;
@@ -445,5 +438,4 @@ section h2 {
         width: 100%;
         height: 45px;
     }
-    
 }

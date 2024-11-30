@@ -10,8 +10,8 @@
         $post = $postModel->getIdPost($id);
         extract($post);
         ?>
-        <label for="title" style="font-size:25px; font-weight:bold;" >Tiêu đề</label>
-        <input type="text" name="title" value="<?= $title ?>" class="form-control" >
+        <label for="title" style="font-size:25px; font-weight:bold;">Tiêu đề</label>
+        <input type="text" name="title" value="<?= $title ?>" class="form-control">
         <!-- </h1> -->
         <hr />
         <label for="" class="form-lable" >Ảnh bìa bài viết</label><br>
@@ -26,80 +26,30 @@
         <input type="hidden" name="id" value="<?= $id ?>">
     </div>
     <!-- -------------- -->
-    <!-- <div id="editor" class="editor" name="content" contenteditable="true">
-
-    </div> -->
     <div id="app">
         <!-- Vùng nhập liệu có thể chỉnh sửa, hỗ trợ các thẻ HTML -->
-        <div id="editor" class="editor" name="description" contenteditable="true" @input="updateText($event)">
+        <div class="mb-3">
             <?php
             $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
             require_once './app/model/PostModel.php';
             $postModel = new PostModel();
             $post = $postModel->getIdPost($id);
-
-            if ($post) {
-                extract($post);
-                echo '<div class="contentnews">';
-                echo '<h1>' . htmlspecialchars($title) . '</h1>';
-                echo '<p>' . $content . '</p>';
-                echo '</div>';
-            } else {
-                echo '<p>Không tìm thấy bài viết.</p>';
-            }
             ?>
+            <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control">
+                        <?php
+                        if ($post) {
+                            extract($post);
+                            echo '<div class="contentnews">';
+                            echo '<p>' . $content . '</p>';
+                            echo '</div>';
+                        } else {
+                            echo '<p>Không tìm thấy bài viết.</p>';
+                        }
+                        ?>
+            </textarea>
         </div>
-
-        <!-- Textarea chứa dữ liệu HTML -->
-        <textarea name="content" id="contain_description" rows="20" cols="100"
-            style="display:none;">{{ inpText }}</textarea>
+        <br />
     </div>
-
-    <script>
-        const app = Vue.createApp({
-            data() {
-                return {
-                    inpText: `
-                    <?php 
-                     if ($post) {
-                extract($post);
-                echo '<div class="contentnews">';
-                echo '<h1>' . htmlspecialchars($title) . '</h1>';
-                echo '<p>' . $content . '</p>';
-                echo '</div>';
-            } else {
-                echo '<p>Không tìm thấy bài viết.</p>';
-            }
-                     ?>
-                    ` // Nội dung HTML của vùng contenteditable
-                }
-            },
-            methods: {
-                updateText(event) {
-                    // Lấy nội dung HTML từ contenteditable
-                    this.inpText = event.target.innerHTML;
-                }
-            }
-        });
-        app.mount('#app');
-    </script>
-    <div class="add-element">
-        <select id="element-type" class="form-select m-2">
-            <option value="h1">Tiêu đề H1</option>
-            <option value="h2">Tiêu đề H2</option>
-            <option value="h3">Tiêu đề H3</option>
-            <option value="h4">Tiêu đề H4</option>
-            <option value="h5">Tiêu đề H5</option>
-            <option value="h6">Tiêu đề H6</option>
-            <option value="p">Nội dung (Paragraph)</option>
-            <option value="img">Hình ảnh</option>
-        </select>
-        <button type="button" id="add-element-btn" class="btn btn-primary m-2" style="margin-left: 7px">
-            Thêm thẻ
-        </button>
-        <input type="file" id="image-input" accept="image/*" style="display: none" />
-    </div>
-
     <br />
     <!-- trạng thái ẩn/hiện bài viết -->
     <div class="container">

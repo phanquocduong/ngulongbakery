@@ -43,13 +43,12 @@
                       <div class='mb-3'>
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <label for='name' class='form-label'>Tên Sản Phẩm</label>
-                        <input type='text' class='form-control' id='name' name='name'
-                          value='<?php echo $name; ?>' />
+                        <input type='text' class='form-control' id='name' name='name' value='<?php echo $name; ?>' />
                       </div>
                       <div class='mb-3'>
                         <label for='price' class='form-label'>Giá Gốc (VNĐ)</label>
                         <input type='number' class='form-control' id='price' name='price'
-                          value='<?php echo  $price; ?>' />
+                          value='<?php echo $price; ?>' />
                       </div>
                       <div class='mb-3'>
                         <label for='price' class='form-label'>Giá Khuyến Mãi (VNĐ)</label>
@@ -58,11 +57,10 @@
                         <br />
                         <div class='mb-3'>
                           <label for='image' class='form-label'>Hình Ảnh</label><br />
-                          <img src='../public/upload/product/<?php echo $image; ?>'
-                            alt='Product Image' class='img-thumbnail' style='width: 100px;' />
+                          <img src='../public/upload/product/<?php echo $image; ?>' alt='Product Image'
+                            class='img-thumbnail' style='width: 100px;' />
                           <input class='form-control' type='file' id='image' name='image' />
-                          <input type="hidden" name="existing_image"
-                            value="<?php echo $image; ?>" />
+                          <input type="hidden" name="existing_image" value="<?php echo $image; ?>" />
                           <br />
                           <label for='image' class='form-label'>Hình Ảnh Con</label>
                           <hr />
@@ -72,12 +70,10 @@
                           foreach ($imageArray as $extra_image) {
                           ?>
                             <div class='mb-3'>
-                              <img
-                                src='../public/upload/product/<?php echo $extra_image; ?>'
-                                alt='Product Image' class='img-thumbnail' style='width: 100px;' />
+                              <img src='../public/upload/product/<?php echo $extra_image; ?>' alt='Product Image'
+                                class='img-thumbnail' style='width: 100px;' />
                               <input class='form-control' type='file' id='ex_image' name='ex_image[]' />
-                              <input type="hidden" name="existing_extra_image[]"
-                                value="<?php echo $extra_image; ?>" />
+                              <input type="hidden" name="existing_extra_image[]" value="<?php echo $extra_image; ?>" />
                             <?php
                           }
                             ?>
@@ -90,26 +86,10 @@
                           <textarea class='form-control' id='short_description' name='short_description'
                             rows='5'><?php echo $short_description; ?></textarea>
                           <br />
-                          <label for='description'>Mô Tả Chi Tiết</label>
-                          <div id="editor" class="editor" contenteditable="true">
-                            <?php echo $detailed_description; ?>
-                          </div>
-                          <div class="add-element">
-                            <select id="element-type" class="form-select m-2">
-                              <option value="h2">Tiêu đề H2</option>
-                              <option value="h3">Tiêu đề H3</option>
-                              <option value="h4">Tiêu đề H4</option>
-                              <option value="h5">Tiêu đề H5</option>
-                              <option value="h6">Tiêu đề H6</option>
-                              <option value="p">Nội dung (Paragraph)</option>
-                              <option value="img">Hình ảnh</option>
-                            </select>
-                            <button type="button" id="add-element-btn" class="btn btn-primary m-2"
-                              style="margin-left: 7px">
-                              Thêm thẻ
-                            </button>
-                            <input type="file" id="image-input" accept="image/*" style="display: none" />
-                          </div>
+                          <label for='description'>Mô Tả Chi Tiết</label><br>
+                          <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control">
+                                <?php echo $detailed_description; ?>
+                            </textarea>
                         </div>
                         <div class='mb-3'>
                           <label for='stock_quantity' class='form-label'>Số Lượng Hàng Tồn Kho</label>
@@ -118,13 +98,12 @@
                         </div>
                         <div class='mb-3'>
                           <label for='views' class='form-label'>Số Lượt Xem</label>
-                          <input type='number' class='form-control' id='views' name='views'
-                            value='<?php echo $views; ?>' readonly />
+                          <input type='number' class='form-control' id='views' name='views' value='<?php echo $views; ?>'
+                            readonly />
                         </div>
                         <div class='mb-3'>
                           <label for='tag' class='form-label'>Thẻ</label>
-                          <input type='text' class='form-control' id='tag' name='tag'
-                            value='<?php echo $tags; ?>' />
+                          <input type='text' class='form-control' id='tag' name='tag' value='<?php echo $tags; ?>' />
                         </div>
                         <div class='mb-3'>
                           <label for='parent' class='form-label'>Loại danh mục</label>
@@ -141,10 +120,11 @@
                       }
                         ?>
                         </div>
-                        <a href="index.php?page=products" style="width: 10%;background-color: red;margin: 0;" class="btn btn-primary">
+
+                        <a href="index.php?page=products" style="width: 10%;background: red; border: none;" class="btn btn-primary">
                           Quay lại
                         </a>
-                        <input type='submit' style="width: 10%;" name="submit" class='btn btn-primary btn-sub' />
+                        <input  style="width: 10%;margin: 0 10px; border: none;" value="Sửa sản phẩm" type='submit' name="submit" class='btn btn-primary btn-sub' />
                         <br />
                       </div>
                     </div>

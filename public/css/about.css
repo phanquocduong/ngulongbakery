@@ -28,9 +28,14 @@
 }
 
 .box_intro-dl-btop {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
     font-weight: 500;
     width: 100%;
+    text-align: justify;
+}
+
+p {
+    text-align: justify;
 }
 
 .box_intro-dl ul {
@@ -41,15 +46,13 @@
 }
 
 .box_intro-dl ul li {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--text-color);
 }
 
 .intro_web-nav {
     width: 100%;
-
     margin: 100px 0;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,7 +94,7 @@
 }
 
 .box_intro-img {
-    max-width: 1457px;
+    max-width: 1200px;
     margin: auto;
     line-height: normal;
     justify-content: space-around;
@@ -181,14 +184,7 @@
     /* padding: 20px 0; */
 }
 
-.comit_box_intro-dl {
-    color: var(--secondary-color);
-}
-
 .box_intro-dl-comit-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     max-width: 100px;
 }
 
@@ -198,8 +194,8 @@
 
 .box_intro-dl-comit-top {
     margin-left: 20px;
+    max-width: 250px;
     color: var(--text-color);
-    font-size: 2rem;
 }
 
 .box_intro-dl-comit-top h1 {
@@ -211,14 +207,12 @@
     padding-bottom: 20px;
     width: 100%;
 }
-
 .box_intro-dl-check ul:last-child {
     padding: 0 20px;
 }
-
 .box_intro-dl-check ul li {
-    font-size: 2.5rem;
-    margin: 20px 10px;
+    font-size: 1.5rem;
+    margin: 10px 0;
 }
 
 .box_intro-dl-check ul li i {
@@ -226,24 +220,16 @@
     padding-right: 10px;
 }
 
-.box-add-to-cart-btn {
-    width: 100%;
-
-}
-
 @media (max-width: 740px) {
     .box_intro-dl {
         padding: 2rem;
     }
-
     .box_intro-slice-box {
         max-width: 300px;
     }
-
     .box_intro-slice-box-dl img {
         min-width: 300px;
     }
-
     .box_intro-dl-btop {
         font-size: 2rem;
         font-weight: 500;
@@ -257,50 +243,29 @@
         font-size: 2rem;
         font-weight: 400;
     }
-
-    .box_intro-dl-check ul li {
-        font-size: 1.5rem;
-    }
-
-    .box_intro-dl-comit-top h1 {
-        font-size: 3rem;
-    }
-
     .box_intro-dl-comit {
         justify-content: center;
     }
-
     .box_intro-dl-comit-logo {
         display: none;
     }
-
     .intro_web-top {
         height: 100px;
     }
-
     .box_intro-dl-comit-top {
         text-align: center;
         padding: 20px 0;
         margin: 0;
     }
-
-    .box-add-to-cart-btn {
-        width: 100%;
-       text-align: center;
-    }
-
     .box_intro-dl-check {
         justify-content: space-around;
         padding: 0;
     }
-
     .box_intro-dl-check h1 {
         text-align: center;
     }
-
     .comit_box_intro-dl {
         text-align: center;
         display: none;
-        color: var(--secondary-color);
     }
 }

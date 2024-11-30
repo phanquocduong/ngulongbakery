@@ -31,24 +31,35 @@
         </thead>
         <tbody>
           <?php
-          $order = new OrderModel();
-          $viewOrder = $order->getOrder();
+          require_once './app/model/OrderModel.php';
+          use App\Model\OrderModel;
+          $orderModel = new OrderModel();
+          $viewOrder = $orderModel->getOrder();
           ?>
 
           <?php
           foreach ($viewOrder as $key => $value) {
             extract($value);
+            if (strtotime($created_at) !== false) {
+              // Tạo đối tượng DateTime trực tiếp với múi giờ Việt Nam
+              $date = new DateTime($created_at, new DateTimeZone('Asia/Ho_Chi_Minh'));
+
+              // Định dạng lại thời gian
+              $vn_format = $date->format('d/m/Y');
+            } else {
+              $vn_format = "Invalid date";
+            }
             echo "<tr>";
             echo "<td>$id</td>";
             echo "
             <td>
               <a href='index.php?page=order_detail&id=$id'>$customer</a>
               </td>";
-              echo "<td>".number_format($total_amount,0)."</td>";
-              echo "<td>$vn_format</td>";
-              echo "<td>$status</td>";
-              echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
-              echo "</tr>";
+            echo "<td>" . number_format($total_amount, 0) . "</td>";
+            echo "<td>$vn_format</td>";
+            echo "<td>$status</td>";
+            echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
+            echo "</tr>";
           }
 
           ?>

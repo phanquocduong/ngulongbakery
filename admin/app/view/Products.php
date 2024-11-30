@@ -1,4 +1,4 @@
-<!-- Main start  -->
+<!-- Main start -->
 <div class="container-fluid pt-4 px-4">
   <div class="bg-light rounded p-4">
     <div class="d-flex justify-content-between mb-4">
@@ -7,34 +7,50 @@
     </div>
 
     <!-- Form search -->
-    <form class="d-none d-md-flex ms-4" method="POST">
-      <div class="input-group">
-        <input class="form-control border-0" type="text" placeholder="Tìm kiếm sản phẩm" name="search_product" />
-        <button class="btn" type="submit" name="button_product">
-          <span class="input-group-text bg-transparent border-0">
-            <a href="index.php?page=search_products"><i class="fa fa-search"></i></a>
-          </span>
-        </button>
-      </div>
-    </form>
+   <form class="d-none d-md-flex ms-4" method="POST" action="index.php?page=products">
+    <div class="input-group">
+        <input class="form-control border-0" type="text" placeholder="Tìm kiếm sản phẩm" 
+               name="search_product" value="<?php echo isset($_POST['search_product']) ? htmlspecialchars($_POST['search_product']) : ''; ?>" />
+      <button class="btn" type="submit" name="button_product">
+        <span class="input-group-text bg-transparent border-0">
+          <i class="fa fa-search"></i>
+        </span>
+      </button>
+    </div>
+  </form>
     <br />
     <!-- Form search end -->
-
+<?php if (isset($_POST['search_product']) && !empty($_POST['search_product'])): ?>
+  <div class="alert alert-info">
+    Kết quả tìm kiếm cho: "<?php echo htmlspecialchars($_POST['search_product']); ?>"
+    (<?php echo count($this->data['products']); ?> kết quả)
+    <a href="index.php?page=products" class="float-end">Xóa tìm kiếm</a>
+  </div>
+<?php endif; ?>
     <?php
-    require_once './app/model/CategoryModel.php';
-    require_once './app/model/AdProductsModel.php';
+    // Including necessary files for controllers and models
     require_once './app/controller/AdProductsController.php';
-    require_once './app/controller/AdCategoriesController.php';
-    $products = new AdProductsModel();
-    $cate = new CategoryModel();
-    $listCate = $cate->getCate();
-    $listPro = $products->getProducts();
+    require_once './app/model/AdProductsModel.php';
+    $productsController = new AdProductsController();
+    $productsModel = new AdProductsModel();
+    // Check if search form is submitted
+    if (isset($_POST['button_product']) && !empty($_POST['search_product'])) {
+      // Fetch the list of products based on the search term
+      $listPro = $productsController->searchProducts($_POST['search_product']);
+    } else {
+      // Fetch all products if no search term is provided
+      $listPro = $productsModel->getProducts();
+    }
 
+    // Fetch categories
+    $listCate = $productsController->getCategories();
     $categoryMap = [];
     foreach ($listCate as $category) {
       $categoryMap[$category['id']] = $category['name'];
     }
     ?>
+
+    <!-- Product table -->
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
@@ -49,9 +65,12 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($this->data['products'] as $product): ?>
+          <?php
+          $page = isset($_GET['p']) ? (int)$_GET['p'] : 1;
+          $stt = ($page - 1) * 10 + 1;
+          foreach ($this->data['products'] as $product): ?>
             <tr>
-              <td><?php echo $product['id']; ?></td>
+              <td><?php echo $stt++; ?></td>
               <td><?php echo $product['name']; ?></td>
               <td><?php echo number_format($product['price'], 0, ',', '.'); ?> VNĐ</td>
               <td><img src="../public/upload/product/<?php echo $product['image']; ?>" alt=""
@@ -92,7 +111,7 @@
               class="<?php echo ($this->data['currentPage'] == $i) ? 'active' : ''; ?>">
               <?php echo $i; ?>
             </a>
-          <?php endfor; ?>
+          <?php endfor; ?>  
 
           <?php if ($this->data['currentPage'] < $this->data['totalPages']): ?>
             <a href="index.php?page=products&p=<?php echo ($this->data['currentPage'] + 1); ?>">></a>

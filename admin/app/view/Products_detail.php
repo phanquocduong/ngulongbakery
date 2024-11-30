@@ -129,13 +129,16 @@
 
                             ?>
                           </select>
-                        <?php
-                      }
-                        ?>
+                        <?php }?>
+
+
+                        
+
+
                         <div class="" style="display: flex; margin-top: 30px;"> <a href="index.php?page=products" style="width: 10%;background: red; border: none;" class="btn btn-primary">
                             Quay lại
                           </a><br>
-                          <a href="index.php?page=products" style="width: 10%;margin: 0 10px; border: none;" class="btn btn-primary">
+                          <a href="index.php?page=viewEdit_products&id=" style="width: 10%;margin: 0 10px; border: none;" class="btn btn-primary">
                             sửa sản phẩm
                           </a>
                         </div>

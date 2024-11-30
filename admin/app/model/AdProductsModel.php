@@ -7,7 +7,7 @@ class AdProductsModel
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
-    public function getProducts()
+    public function getProducts($limit = 10, $offset = 0)
     {
         // Đảm bảo offset không âm
         $offset = max(0, $offset);
@@ -33,6 +33,43 @@ class AdProductsModel
         return (int) $result['total'];
     }
 
+
+    // hàm tìm kiếm sản phẩm
+    public function searchProducts($keyword, $limit = 10, $offset = 0)
+    {
+        // Escape special characters and add wildcards
+        $keyword = "%" . str_replace(['%', '_'], ['\\%', '\\_'], $keyword) . "%";
+    
+        $sql = "SELECT p.*, c.name as category_name 
+                FROM products p 
+                LEFT JOIN categories c ON p.category_id = c.id 
+                WHERE p.name LIKE :keyword
+                ORDER BY p.id DESC 
+                LIMIT :limit OFFSET :offset";
+    
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':keyword', $keyword, PDO::PARAM_STR);
+        $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getTotalSearchResults($keyword) 
+    {
+        $keyword = "%" . str_replace(['%', '_'], ['\\%', '\\_'], $keyword) . "%";
+    
+        $sql = "SELECT COUNT(*) as total 
+                FROM products 
+                WHERE name LIKE :keyword";
+    
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':keyword', $keyword, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
     public function getProductById($id)
     {
         $sql = "SELECT * FROM products WHERE id = ?";
@@ -72,6 +109,14 @@ class AdProductsModel
         $sql = "DELETE FROM products WHERE id = ?";
         $param = [$id];
         return $this->db->delete($sql, $param);
+    }
+    public function getReviews()
+    {
+        $sql = "SELECT products.id AS product_id, reviews.id AS review_id, reviews.comment AS contents, reviews.created_at AS date_comments, reviews.rating AS rating, reviews.images AS img, users.id AS user_id, users.full_name AS username
+                FROM products 
+                JOIN reviews ON reviews.product_id = products.id 
+                JOIN users ON reviews.user_id = users.id";
+        return $this->db->getAll($sql);
     }
 }
 

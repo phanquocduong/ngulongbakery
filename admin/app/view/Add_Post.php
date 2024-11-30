@@ -4,6 +4,7 @@
         <h1>Thêm bài viết</h1>
 
         <!-- Ngày tạo bài viết -->
+        <label for="create_date">Ngày tạo</label>
         <input type="text" class="date-create form-control" readonly value="" name="create_date" >
     </div>
     <br>
@@ -11,29 +12,12 @@
     <div class="mb-3">
         <label for="title" class="form-label">Tiêu đề</label>
         <textarea type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề"></textarea>
-        <br>    
+        <br>   
+        <label for="avt-post" class="form-lable">Ảnh bìa bài viết</label><br>
+        <input type="file" class="form-control" name="avt-post" id="avt-post" ><br><br>
     <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
   </div>
     <br />
-    <!-- -------------- -->
-
-    <!-- input để thêm bài viết -->
-    <div class="add-element">
-        <select id="element-type" class="form-select m-2">
-            <!-- <option value="h1">Tiêu đề H1</option> -->
-            <option value="h2">Tiêu đề H2</option>
-            <option value="h3">Tiêu đề H3</option>
-            <option value="h4">Tiêu đề H4</option>
-            <option value="h5">Tiêu đề H5</option>
-            <option value="h6">Tiêu đề H6</option>
-            <option value="p">Nội dung (Paragraph)</option>
-            <option value="img">Hình ảnh</option>
-        </select>
-        <button type="button" id="add-element-btn" class="btn btn-primary m-2" style="margin-left: 7px">
-            Thêm thẻ
-        </button>
-        <input type="file" id="image-input" accept="image/*" style="display: none" />
-    </div>
     <!-- ----------------------- -->
 
     <!-- trạng thái ẩn/hiện bài viết -->

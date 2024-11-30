@@ -18,27 +18,29 @@ class AdProductsController
         $view = './app/view/' . $view . '.php';
         require_once $view;
     }
-
     public function viewProducts()
     {
         $productsModel = new AdProductsModel();
-
-        // Get pagination parameters
         $currentPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
         $limit = 10;
         $offset = ($currentPage - 1) * $limit;
 
-        // Get total products and calculate total pages
-        $totalProducts = $productsModel->getTotalProducts();
+        // Handle search
+        if (isset($_POST['button_product']) && !empty($_POST['search_product'])) {
+            $keyword = $_POST['search_product'];
+            $products = $productsModel->searchProducts($keyword, $limit, $offset);
+            $totalProducts = $productsModel->getTotalSearchResults($keyword);
+        } else {
+            $products = $productsModel->getProducts($limit, $offset);
+            $totalProducts = $productsModel->getTotalProducts();
+        }
+
         $totalPages = ceil($totalProducts / $limit);
 
-        // Get products for current page
-        $products = $productsModel->getProducts($limit, $offset);
-
-        // Pass data to view
         $this->data['products'] = $products;
         $this->data['totalPages'] = $totalPages;
         $this->data['currentPage'] = $currentPage;
+        $this->data['searchKeyword'] = $_POST['search_product'] ?? '';
 
         $this->renderview('products', $this->data);
     }
@@ -54,7 +56,10 @@ class AdProductsController
     {
         $this->renderview('edit_products', $this->data);
     }
-
+    public function getCategories()
+    {
+        return $this->category->getCate();
+    }
     public function addPro()
     {
         if (isset($_POST['submit'])) {
@@ -204,5 +209,24 @@ class AdProductsController
         }
         echo '<script>location.href="index.php?page=products"</script>';
     }
+
+    public function searchProducts()
+    {
+        if (isset($_POST['button_product'])) {
+            $keyword = $_POST['search_product'];
+        } else {
+            echo "No keyword provided.";
+            return;
+        }
+
+        $sql = "SELECT * FROM products WHERE name LIKE :keyword";
+        $params = [':keyword' => '%' . $keyword . '%'];
+
+        $db = new Database();
+        $results = $db->getAll($sql, $params);
+        $db = new Database();
+        return $db->getAll($sql, $params);
+    }
+
 }
 ?>

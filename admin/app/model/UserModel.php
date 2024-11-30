@@ -30,10 +30,6 @@ class UserModel{
         $data['created_at'] = !empty($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i:s');
         $sql = "UPDATE users SET email = ?, full_name = ?, phone = ?, address = ?, role_id = ?, avatar = ?, status = ? WHERE id = ?";
         $params = [$data['email'], $data['full_name'], $data['phone'], $data['address'], $data['role_id'], $data['avatar'], $data['status'], $data['id']];
-    
-        // Debug dữ liệu
-        // print_r($params);
-    
         return $this->db->update($sql, $params);
     }
     public function deleteUser($id)

@@ -129,7 +129,6 @@ main {
 .pagination-link__icon-next {
     display: inline-block;
     font-size: 2.4rem;
-    text-decoration: none;
     color: var(--secondary-color);
     padding: 6px;
 }

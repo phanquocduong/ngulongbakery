@@ -1,11 +1,18 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['user']['role_id']) || $_SESSION['user']['role_id'] !== 1) {
+    echo 'Không có quyền truy cập';
+    exit();
+}
 ob_start();
+require_once 'vendor/autoload.php';
 require_once '.././app/model/database.php';
 require_once './app/view/Header.php';
 require_once './app/controller/MainController.php';
 require_once './app/controller/AdProductsController.php';
 require_once './app/controller/AdCategoriesController.php';
+require_once './app/controller/adMailController.php';
 require_once './app/controller/AdOrderController.php';
 require_once './app/controller/AdUserController.php';
 require_once './app/controller/AdPost_ManageController.php';
@@ -104,6 +111,10 @@ if (isset($_GET['page'])) {
             $acc = new AdAccountsController();
             $acc->delUser();
             break;
+        case 'logout':
+            $acc = new AdAccountsController();
+            $acc->logout();
+            break;
         case 'blockuser':
             $acc = new AdAccountsController();
             $acc->blockUser();
@@ -160,6 +171,10 @@ if (isset($_GET['page'])) {
             $voucher = new AdVoucherController();
             $voucher->deleteVoucher();
             break;
+        case 'confirm_Oder':
+            $oder = new AdOrderController();
+            $oder->confirmOder();
+            break;
         default:
             $main = new MainController();
             $main->viewMain();
@@ -170,5 +185,3 @@ if (isset($_GET['page'])) {
     $main->viewMain();
 }
 require_once './app/view/Footer.php';
-
-?>
