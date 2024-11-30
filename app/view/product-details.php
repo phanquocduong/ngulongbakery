@@ -104,7 +104,7 @@
                 </div>
                 <?php if (!empty($data['relatedProducts'])): ?>
                     <div class="related-products">
-                        <h2 class="section-title test">SẢN PHẨM LIÊN QUAN</h2>
+                        <h2 class="section-title">SẢN PHẨM LIÊN QUAN</h2>
                         <div class="row">
                             <?php foreach($data['relatedProducts'] as $product): ?>
                                 <div class="col l-3 m-6 c-12">

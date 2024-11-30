@@ -22,7 +22,10 @@
                                     <p>Mục lục</p>
                                 </div>
                                 <!-- End Mục lục -->
-                                <?php echo $content; ?>
+                                <?php 
+                                    $updated_content = preg_replace('/<a href="([^"]+)"/', '<a href="' . $base_url . '/$1"', $content);
+                                    echo $updated_content; 
+                                ?>
                                 
                                 <!-- demo -->
                                 
@@ -35,12 +38,12 @@
 
                                 if ($postId == 1) {
                                     echo '<a style="float: right;" href="">Đây là bài viết đầu tiên!!!</a>';
-                                    echo '<a style="float: right;" href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="fa-solid fa-arrow-right"></i></a>';
+                                    echo '<a style="float: right;" href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="new-right-icon fa-solid fa-arrow-right"></i></a>';
                                 } elseif ($postId > 1 && $postId < $totalPosts) {
-                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="fa-solid fa-arrow-left"></i> Bài viết trước</a>';
-                                    echo '<a href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="fa-solid fa-arrow-right"></i></a>';
+                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="new-left-icon fa-solid fa-arrow-left"></i> Bài viết trước</a>';
+                                    echo '<a href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="new-right-icon fa-solid fa-arrow-right"></i></a>';
                                 } elseif ($postId == $totalPosts) {
-                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="fa-solid fa-arrow-left"></i> Bài viết trước</a>';
+                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="new-left-icon fa-solid fa-arrow-left"></i> Bài viết trước</a>';
                                     echo '<a style="float: right;" href="">Đây là bài viết cuối cùng!!!</a>';
                                 } else {
                                     echo 'Không tìm thấy bài viết';

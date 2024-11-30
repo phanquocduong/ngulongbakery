@@ -340,14 +340,6 @@ main {
     margin-left: 30px;
 }
 
-.related-products__title {
-    font-size: 3rem;
-    line-height: 4rem;
-    background: linear-gradient(to left, var(--linear-color), var(--primary-color-bold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 .image-modal {
     position: fixed;
     top: 0;

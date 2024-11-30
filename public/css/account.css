@@ -95,7 +95,7 @@ main {
     background-color: var(--white-color);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    padding: 20px 30px 50px;
+    padding: 25px 30px 50px;
     display: none;
 }
 

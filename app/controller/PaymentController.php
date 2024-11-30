@@ -88,7 +88,17 @@
             $idClient = $_SESSION['user']['id'];
             $fullname = trim($_POST['fullname']);
             $email = trim($_POST['email']);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $_SESSION['error'] = "Email không hợp lệ";
+                header("Location: $base_url/payment");
+                exit;
+            }
             $phone = trim($_POST['phone']);
+            if (strlen($phone) < 10 || strlen($phone) > 11 || !ctype_digit($phone) || !preg_match('/^(03|07|08|09)\d+$/', $phone)) {
+                $_SESSION['error'] = "Số điện thoại không hợp lệ";
+                header("Location: $base_url/payment");
+                exit;
+            }
             $ward = $this->location->getWard($_POST['ward']);
             $district = $this->location->getDistrict($_POST['district']);
             $province = $this->location->getProvince($_POST['province']);

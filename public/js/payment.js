@@ -33,7 +33,7 @@ document.getElementById('province').addEventListener('change', function () {
     document.getElementById('total-payment').textContent = new Intl.NumberFormat().format(newTotal) + 'đ';
     document.getElementById('total-payment-hidden').value = newTotal;
 
-    fetch(`${$baseUrl}/index.php?page=get-districts&province_id=${provinceId}`)
+    fetch(`${baseUrl}/index.php?page=get-districts&province_id=${provinceId}`)
         .then(response => response.json())
         .then(data => {
             let districtSelect = document.getElementById('district');
@@ -50,7 +50,7 @@ document.getElementById('province').addEventListener('change', function () {
 document.getElementById('district').addEventListener('change', function () {
     let districtId = this.value;
 
-    fetch(`${$baseUrl}/index.php?page=get-wards&district_id=${districtId}`)
+    fetch(`${baseUrl}/index.php?page=get-wards&district_id=${districtId}`)
         .then(response => response.json())
         .then(data => {
             let wardSelect = document.getElementById('ward');
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const grandTotal = parseInt(totalPayment.textContent.replace(/[^\d]/g, ''));
 
         // Gửi Ajax request
-        fetch(`${$baseUrl}/index.php?page=apply-discount`, {
+        fetch(`${baseUrl}/index.php?page=apply-discount`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

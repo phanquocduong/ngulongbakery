@@ -1,7 +1,7 @@
 <header>
     <div class="header-left">
         <div class="header-logo">
-            <a href="index.php" class="header-logo__link">
+            <a href="<?=$base_url?>" class="header-logo__link">
                 <img src="<?=$base_url?>/public/upload/logo/logo.png" alt="Logo Ngũ Long Bakery - Tiệm bánh truyền thống" class="header-logo__img" loading="lazy"/>
             </a>
         </div>
