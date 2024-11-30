@@ -34,7 +34,6 @@ class AdProductsModel
             FROM categories c
             LEFT JOIN products p ON c.id = p.category_id
             GROUP BY c.id, c.name";
-
         return $this->db->getAll($sql);
     }
 
