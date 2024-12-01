@@ -323,6 +323,25 @@ section .contentnews-infor {
 .new-left-icon {
     margin-right: 8px;
 }
+.comment-container {
+    margin-bottom: 15px;
+}
+.btn-show-more {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--primary-color-bold);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-show-more:hover {
+    background-color: var(--primary-color-bold);
+}
+
 @media (max-width: 739px) {
     section,
     .commentnews,

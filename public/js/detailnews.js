@@ -36,3 +36,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     indexListContainer.appendChild(indexList);
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const comments = document.querySelectorAll('.comment-container');
+    const showMoreButton = document.getElementById('show-more-comments');
+    const initialVisibleComments = 3;
+    let visibleCount = initialVisibleComments;
+
+    function updateCommentsDisplay() {
+        comments.forEach((comment, index) => {
+            comment.style.display = index < visibleCount ? 'block' : 'none';
+        });
+
+        if (visibleCount >= comments.length) {
+            showMoreButton.style.display = 'none';
+        }
+    }
+
+    showMoreButton.addEventListener('click', function () {
+        visibleCount += 3;
+        updateCommentsDisplay();
+    });
+
+    updateCommentsDisplay();
+});
+

@@ -15,7 +15,7 @@
                                     <div class="card card-body">
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
-                                            <input type="text" class="form-control" id="name" name="name" value="" required/>
+                                            <input type="text" class="form-control" id="name" name="name" value="" required />
                                         </div>
                                         <div class="mb-3">
                                             <label for="price" class="form-label">Giá Gốc (VNĐ)</label>
@@ -32,25 +32,25 @@
                                                 <input class="form-control" type="file" id="image1" name="image1" required />
                                                 <br />
                                                 <label for="image" class="form-label">Hình Ảnh Con</label>
-                                                <input class="form-control" type="file" id="image2" name="image2"  />
+                                                <input class="form-control" type="file" id="image2" name="image2" />
                                                 <hr />
-                                                <input class="form-control" type="file" id="image3" name="image3"  />
+                                                <input class="form-control" type="file" id="image3" name="image3" />
                                                 <hr />
-                                                <input class="form-control" type="file" id="image4" name="image4"  />
+                                                <input class="form-control" type="file" id="image4" name="image4" />
                                                 <hr />
                                             </div>
                                             <div class="mb-3">
-                                                <label for="short-description" class="form-label" >Mô Tả Ngắn</label>
+                                                <label for="short-description" class="form-label">Mô Tả Ngắn</label>
                                                 <textarea id="short_description" name="short_description"
-                                                    value="" class="form-control" required ></textarea>
+                                                    value="" class="form-control" required></textarea>
                                                 <br />
                                                 <label for="description" required>Mô Tả Chi Tiết</label>
                                                 <br>
                                                 <!-- -------------- -->
 
                                                 <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-                                               <textarea id="content" name="contain_description" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
-                                                <br />                                          
+                                                <textarea id="content" name="contain_description" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
+                                                <br />
                                                 <!-- ----------------------- -->
                                             </div>
                                             <div class="mb-3">
@@ -101,8 +101,12 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                            <input type="submit" value="Thêm sản phẩm" name="submit"
+                                            <a href="index.php?page=products" style="width: 10%;background-color: red;margin: 0;" class="btn btn-custom">
+                                                Quay lại
+                                            </a>
+                                            <input type="submit" style="width: 10%;" value="Thêm sản phẩm" name="submit"
                                                 class="btn btn-primary btn-sub">
+        
                                             <br />
                                         </div>
                                     </div>
@@ -110,9 +114,7 @@
                             </div>
                         </div>
                     </form>
-                    <a href="index.php?page=products" class="btn btn-custom">
-                        Quay lại
-                    </a>
+
                 </div>
             </div>
         </div>
