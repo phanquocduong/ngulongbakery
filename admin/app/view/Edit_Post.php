@@ -10,8 +10,10 @@
         $post = $postModel->getIdPost($id);
         extract($post);
         ?>
-        <label for="title" style="font-size:25px; font-weight:bold;">Tiêu đề</label>
-        <input type="text" name="title" value="<?= $title ?>" class="form-control">
+        <div class="" style="padding: 20px  0 0 0;">Ngày tạo: <?= $created_at ?> </div><hr>
+        <input type="hidden" class="date-create form-control" readonly value="<?= $created_at ?>" name="create_date">
+        <label for="title" style="font-size:25px; font-weight:bold;">Tiêu đề: <?= $title ?> </label>
+        <input type="hidden" name="title" value="<?= $title ?>" class="form-control">
         <!-- </h1> -->
         <hr />
         <label for="" class="form-lable">Ảnh bìa bài viết</label><br>
@@ -19,11 +21,11 @@
         <input type="hidden" name="existing_image" value="<?php echo $image; ?>" />
         <input type="file" class="form-control" name="avt-post1"><br><br>
         <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-        <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
+
         <hr />
         <hr>
         <!-- Ngày tạo bài viết -->
-        <input type="text" class="date-create form-control" readonly value="<?= $created_at ?>" name="create_date">
+
         <input type="hidden" name="id" value="<?= $id ?>">
     </div>
     <!-- -------------- -->
@@ -118,7 +120,8 @@
     </div>
     <hr />
     <!-- -------------- -->
-    <input type="submit" name="submit" class="btn btn-primary btn-lg" style="width:100%">
+    <a href="index.php?page=post_manage" style="margin-left:20px;width: 150px;background: red; border: none;" class="btn btn-primary">Quay lại</a>
+    <input type="submit" name="submit" class="btn btn-primary" style="width: 150px;;margin: 0 10px; border: none;">
 </form>
 
 <!-- Main End -->
