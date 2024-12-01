@@ -21,10 +21,10 @@
             require_once 'app/view/template.php';
         }
 
-        public function viewPayment($css, $js) {
+        public function viewPayment($base_url, $css, $js) {
             if (!isset($_SESSION['user'])) {
                 $_SESSION['redirectto'] = $_SERVER['REQUEST_URI'];
-                header("Location: index.php?page=login");
+                header("Location: $base_url/login");
             } else {
                 if (isset($_SESSION['discount_applied'])) {
                     unset($_SESSION['discount_applied']);
@@ -64,7 +64,7 @@
         
                 if ($coupon) {
                     $discountValue = $coupon['discount_value'];
-                    $newTotal = $grandTotal - ($grandTotal * $discountValue / 100);
+                    $newTotal = round($grandTotal - ($grandTotal * $discountValue / 100), 2);
 
                     // Lưu trạng thái vào session
                     $_SESSION['discount_applied'] = true;
@@ -84,11 +84,21 @@
             }
         }
 
-        public function handlePayment() {
+        public function handlePayment($base_url) {
             $idClient = $_SESSION['user']['id'];
             $fullname = trim($_POST['fullname']);
             $email = trim($_POST['email']);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $_SESSION['error'] = "Email không hợp lệ";
+                header("Location: $base_url/payment");
+                exit;
+            }
             $phone = trim($_POST['phone']);
+            if (strlen($phone) < 10 || strlen($phone) > 11 || !ctype_digit($phone) || !preg_match('/^(03|07|08|09)\d+$/', $phone)) {
+                $_SESSION['error'] = "Số điện thoại không hợp lệ";
+                header("Location: $base_url/payment");
+                exit;
+            }
             $ward = $this->location->getWard($_POST['ward']);
             $district = $this->location->getDistrict($_POST['district']);
             $province = $this->location->getProvince($_POST['province']);
@@ -113,8 +123,11 @@
                             <td style='text-align: right; padding: 10px; border: 1px solid #ddd;'>" . number_format($lineTotal, 0, ',', '.') . "đ</td>
                         </tr>
                     ";
-                    $this->product->updateSoldOfProduct($item['name']);
+                    $this->product->updateSoldOfProduct($item['name'], $item['quantity']);
                     $this->product->updateStockQuantityOfProduct($item['name'], $item['quantity']);
+                    if ($discount['usage_limit'] != null) {
+                        $this->discount->updateUsageLimitOfDiscount($discount['id']);
+                    }
                 }
         
                 // Gửi email hóa đơn
@@ -127,7 +140,7 @@
                 }
         
                 $_SESSION['success'] = "Đặt hàng thành công, vui lòng kiểm tra email!";
-                header("Location: index.php");
+                header("Location: $base_url");
                 exit;
             }
         }

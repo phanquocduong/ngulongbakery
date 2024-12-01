@@ -181,7 +181,7 @@ main {
 }
 
 .sidebar {
-    padding: 56px 32px 0;
+    padding: 56px 32px;
     background-color: #fafafa;
     border: 1px solid #d9d9d9;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -209,6 +209,7 @@ main {
     width: 64px;
     height: 64px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .product-order__quantity {
@@ -220,6 +221,7 @@ main {
     background-color: rgba(153, 153, 153, 0.9);
     top: -10px;
     right: -10px;
+    line-height: 1.6rem;
 }
 
 .product-order__dsc {
@@ -414,5 +416,18 @@ main {
 
     .discount-code__btn {
         padding: 10px 20px;
+    }
+
+    .form-group {
+        flex-wrap: wrap;
+    }
+
+    .form-email__control {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .form-tel__control {
+        width: 100%;
     }
 }

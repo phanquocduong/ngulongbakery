@@ -72,28 +72,27 @@ class AdAccountsController{
         }
     }
     public function delUser()
-    {
-        if($this->user->isForeignKey($_GET['id'])){
-            echo '<script>alert("Không thể xoá user này vì nó đang được sử dụng")</script>';
-            echo '<script>location.href="index.php?page=accounts"</script>';
-            return;
+{
+    if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+        $id = $_GET['id'];
+        if ($this->user->isForeignKey($id)) {
+            $this->user->deleteRelatedData($id);
+        }
+        $data = $this->user->getIdUser($id);
+        $file = '../public/upload/avatar/' . $data['avatar'];
+        if (file_exists($file)) {
+            unlink($file);
         }
 
-        if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-            $id = $_GET['id'];
-            $data = $this->user->getIdUser($id);
-    
-            // Xoá ảnh chính
-            $file = '../public/upload/avatar/' . $data['image'];
-            if (file_exists($file)) {
-                unlink($file);
-            }
-    
-            $this->user->deleteUser($id);
-            echo '<script>alert("Đã xóa thành công!")</script>';
-        }
-        echo '<script>location.href="index.php?page=accounts"</script>';
+        $this->user->deleteUser($id);
+        echo '<script>alert("Đã xóa thành công!")</script>';
+    } else {
+        echo '<script>alert("ID người dùng không hợp lệ hoặc không tồn tại!")</script>';
     }
+
+    echo '<script>location.href="index.php?page=accounts"</script>';
+}
+
     public function blockUser(){
         if (isset($_GET['id']) && isset($_GET['status'])) {
             $id = $_GET['id'];
@@ -108,7 +107,7 @@ class AdAccountsController{
     public function logout() {
         unset($_SESSION['user']);
         setcookie('rememberMe', '', time() - 3600, '/');
-        header("Location: http://localhost/ngulongbakery/");
+        header("Location: /ngulongbakery/");
 
     }
 }

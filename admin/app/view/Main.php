@@ -75,7 +75,7 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
               $vn_format = "Invalid date";
             }
             echo "<tr class='product-row'>";
-            echo "<td>".$stt++."</td>";
+            echo "<td>" . $stt++ . "</td>";
             echo "
             <td>
               <a href='index.php?page=order_detail&id=$id'>$customer</a>
@@ -113,37 +113,36 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
           </tr>
         </thead>
         <tbody>
-          <?php
-          require_once './app/model/CategoryModel.php';
-          require_once './app/model/AdProductsModel.php';
-          require_once './app/controller/AdProductsController.php';
-          require_once './app/controller/AdCategoriesController.php';
-          $products = new AdProductsModel();
-          $cate = new CategoryModel();
-          $listCate = $cate->getCate();
-          $listPro = $products->getProducts();
-          ?>
-          <?php
-          $categoryMap = [];
+        <?php
+        require_once './app/model/CategoryModel.php';
+        require_once './app/model/AdProductsModel.php';
+
+        $products = new AdProductsModel();
+        $cate = new CategoryModel();
+        $listCate = $cate->getCate();
+        $productCounts = $products->getProductsCount();
+
+        // Create product count mapping
+        $categoryProductCount = [];
+        foreach ($productCounts as $count) {
+          $categoryProductCount[$count['category_id']] = $count['product_count'];
+        }
+
+        // Display categories and product counts
+        $stt = 1;
+        if (!empty($listCate)) {
           foreach ($listCate as $category) {
-            $categoryMap[$category['id']] = $category['name'];
+            $count = isset($categoryProductCount[$category['id']]) ? $categoryProductCount[$category['id']] : 0;
+            ?>
+            <tr class="product-row">
+              <td><?php echo $stt++; ?></td>
+              <td><?php echo htmlspecialchars($category['name']); ?></td>
+              <td><?php echo $count; ?></td>
+            </tr>
+            <?php
           }
-          $stt = 1;
-          foreach ($listCate as $key => $value) {
-            extract($value);
-            echo "<tr class='product-row'>";
-            echo "<td>" . $stt++ . "</td>";
-            echo "<td>$name</td>";
-            $count = 0;
-            foreach ($listPro as $key => $value) {
-              if ($value['category_id'] == $id) {
-                $count++;
-              }
-            }
-            echo "<td>$count</td>";
-            echo "</tr>";
-          }
-          ?>
+        }
+        ?>
         </tbody>
       </table>
     </div>
@@ -196,7 +195,7 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
   <div class="bg-light text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h6 class="mb-0">Số Lượng Sản Phẩm Tồn Kho</h6>
-     <a href="javascript:void(0);" class="toggleButton">Hiện Tất Cả</a>
+      <a href="javascript:void(0);" class="toggleButton">Hiện Tất Cả</a>
     </div>
     <div class="table-responsive" id="productTable">
       <table class="table text-start align-middle table-bordered table-hover mb-0 productTable">

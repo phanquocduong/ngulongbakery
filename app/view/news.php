@@ -1,6 +1,6 @@
 <!-- Start Main -->
 <main>
-    <div class="title-news">Tin tức</div>
+    <h2 class="section-title">TIN TỨC</h2>
     <section class="news-list">
         <div class="grid wide">
             <div class="row">

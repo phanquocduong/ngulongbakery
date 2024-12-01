@@ -33,7 +33,7 @@
         public function handleProductsDisplay() {
             // Lấy các tham số từ URL
             $num = isset($_GET['num']) ? (int)$_GET['num'] : 1;
-            $limit = 9;
+            $limit = 12;
             $start = ($num - 1) * $limit;
 
             $categoryId = isset($_GET['category']) ? $_GET['category'] : '';
@@ -131,11 +131,13 @@
             return $html;
         }
         
-        public function viewProductDetails($css, $js) {
+        public function viewProductDetails($base_url, $css, $js) {
             if (isset($_GET['id'])) {
                 $data['product'] = $this->product->getProduct($_GET['id']);
                 if (empty($data['product'])) {
-                    echo '<script>window.location.href = "index.php";</script>';
+                    $_SESSION['error'] = "Không có sản phẩm này";
+                    header("Location: $base_url");
+                    exit;
                 } else {
                     $this->product->increaseProductViews($_GET['id']);
                     $data['relatedProducts'] = $this->product->getRelatedProducts($data['product']['category_id'], $_GET['id'], $data['product']['tags']);

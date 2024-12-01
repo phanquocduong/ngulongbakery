@@ -41,7 +41,8 @@
                           $vn_format = $date->format("d/m/Y H:i:s");
                           echo '<tr>
                                   <td>'.$stt++.'</td>
-                                  <td>'.$title.'</td>
+
+                                  <td style="width:350px">'.$title.'</td>
                                   <td>'.$category_name.'</td>
                                   <td>'.$vn_format.'</td>
                                   <td>';

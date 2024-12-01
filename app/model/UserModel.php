@@ -20,7 +20,6 @@
         function verify($code) {
             $sql = "UPDATE users SET is_verified = 1 WHERE verification_code = ? AND is_verified = 0";
             return $this->db->execute($sql, [$code]);
-
         }
         
         function getUserByEmail($email) {

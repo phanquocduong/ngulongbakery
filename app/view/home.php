@@ -2,9 +2,9 @@
     <!-- Slideshow hiện trên PC, Tablet -->
     <div class="slideshow-container">
         <div class="slides">
-            <img src="public/upload/slider/slider1.png" alt="Bông lan trứng muối" class="slide" />
-            <img src="public/upload/slider/slider2.png" alt="Xôi xoài" class="slide" />
-            <img src="public/upload/slider/slider3.png" alt="Chả cá" class="slide" />
+            <img src="<?=$base_url?>/public/upload/slider/slider1.png" alt="Bông lan trứng muối" class="slide" />
+            <img src="<?=$base_url?>/public/upload/slider/slider2.png" alt="Xôi xoài" class="slide" />
+            <img src="<?=$base_url?>/public/upload/slider/slider3.png" alt="Chả cá" class="slide" />
         </div>
 
         <a class="slideshow-prev"><i class="fa-solid fa-chevron-left"></i></a>
@@ -24,7 +24,7 @@
                 MUA NGAY
             </a>
         </button>
-        <img src="public/upload/banner/banner-mobile-img.jpg" alt="" class="banner-mobile__img" />
+        <img src="<?=$base_url?>/public/upload/banner/banner-mobile-img.jpg" alt="" class="banner-mobile__img" />
     </div>
 
     <!-- Section lợi ích -->
@@ -79,10 +79,10 @@
                 <?php foreach ($data['featuredProducts'] as $product): ?>
                     <div class="col l-3 m-6 c-10 c-offset-1">
                         <div class="product-item">
-                            <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__img-link">
-                                <div class="product-item__img" style="background-image: url(public/upload/product/<?= $product['image'] ?>);"></div>
+                            <a href="<?=$base_url?>/product-details/<?=$product['id']?>" class="product-item__img-link">
+                                <div class="product-item__img" style="background-image: url(<?=$base_url?>/public/upload/product/<?= $product['image'] ?>);"></div>
                             </a>
-                            <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__title-link">
+                            <a href="<?=$base_url?>/product-details/<?=$product['id']?>" class="product-item__title-link">
                                 <h4 class="product-item__name"><?=$product['name']?></h4>
                             </a>
                             <div class="product-item__rating">
@@ -124,12 +124,12 @@
                 <div class="category-item-box col l-4 m-12 c-10 c-offset-1">
                     <div
                         class="category-item"
-                        style="background-image: url(public/upload/background-icon/banhbonglan.png)"
+                        style="background-image: url(<?=$base_url?>/public/upload/background-icon/banhbonglan.png)"
                     >
                         <h3 class="category-item__name">Bánh bông lan</h3>
                         <p class="category-item__desc">Bánh bông lan mềm mịn, xốp nhẹ, ngọt ngào, thơm ngon.</p>
                         <button class="buy-now-btn">
-                            <a class="buy-now-btn__link" href="index.php?page=collection&id=1"
+                            <a class="buy-now-btn__link" href="<?=$base_url?>/collection/1"
                                 >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                             ></a>
                         </button>
@@ -138,12 +138,12 @@
                 <div class="category-item-box col l-4 m-12 c-10 c-offset-1">
                     <div
                         class="category-item"
-                        style="background-image: url(public/upload/background-icon/banhbo.png)"
+                        style="background-image: url(<?=$base_url?>/public/upload/background-icon/banhbo.png)"
                     >
                         <h3 class="category-item__name">Bánh bò</h3>
                         <p class="category-item__desc">Bánh bò mềm mịn, xốp nhẹ, hương lá dứa thơm lừng.</p>
                         <button class="buy-now-btn">
-                            <a class="buy-now-btn__link" href="index.php?page=collection&id=2"
+                            <a class="buy-now-btn__link" href="<?=$base_url?>/collection/2"
                                 >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                             ></a>
                         </button>
@@ -152,12 +152,12 @@
                 <div class="category-item-box col l-4 m-12 c-10 c-offset-1">
                     <div
                         class="category-item"
-                        style="background-image: url(public/upload/background-icon/banhdalon.png)"
+                        style="background-image: url(<?=$base_url?>/public/upload/background-icon/banhdalon.png)"
                     >
                         <h3 class="category-item__name">Bánh da lợn</h3>
                         <p class="category-item__desc">Bánh da lợn mềm mịn, thơm béo hương truyền thống.</p>
                         <button class="buy-now-btn">
-                            <a class="buy-now-btn__link" href="index.php?page=collection&id=4"
+                            <a class="buy-now-btn__link" href="<?=$base_url?>/collection/4"
                                 >MUA NGAY <i class="arrow-icon fa-solid fa-arrow-right-long"></i
                             ></a>
                         </button>
@@ -172,7 +172,7 @@
         <div class="promotion-section-box grid wide">
             <h1 class="promotion-section__title">Được giảm giá 10% cho lần mua hàng đầu tiên</h1>
             <button class="buy-now-btn--bigger">
-                <a class="buy-now-btn__link" href="index.php?page=collection">
+                <a class="buy-now-btn__link" href="<?=$base_url?>/collection">
                     <i class="shopping-cart-icon fa-solid fa-cart-shopping"></i>
                     MUA NGAY
                 </a>
@@ -194,10 +194,10 @@
                     <?php foreach($data['discountProducts'] as $product): ?>
                         <div class="product-slide">
                             <div class="product-item">
-                                <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__img-link">
-                                    <div class="product-item__img" style="background-image: url(public/upload/product/<?=$product['image']?>);"></div>
+                                <a href="<?=$base_url?>/product-details/<?=$product['id']?>" class="product-item__img-link">
+                                    <div class="product-item__img" style="background-image: url(<?=$base_url?>/public/upload/product/<?=$product['image']?>);"></div>
                                 </a>
-                                <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__title-link">
+                                <a href="<?=$base_url?>/product-details/<?=$product['id']?>" class="product-item__title-link">
                                     <h4 class="product-item__name"><?=$product['name']?></h4>
                                 </a>
                                 <div class="product-item__rating">
@@ -245,10 +245,10 @@
                 ?>
                     <div class="col l-3 m-6 c-10 c-offset-1">
                         <div class="product-item">
-                            <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__img-link">
-                                <div class="product-item__img" style="background-image: url(public/upload/product/<?=$product['image']?>);"></div>
+                            <a href="<?=$base_url?>/product-details/<?=$product['id']?>" class="product-item__img-link">
+                                <div class="product-item__img" style="background-image: url(<?=$base_url?>/public/upload/product/<?=$product['image']?>);"></div>
                             </a>
-                            <a href="index.php?page=product-details&id=<?=$product['id']?>" class="product-item__title-link">
+                            <a href="<?=$base_url?>/product-details/<?=$product['id']?>" class="product-item__title-link">
                                 <h4 class="product-item__name"><?=$product['name']?></h4>
                             </a>
                             <div class="product-item__rating">
@@ -296,10 +296,10 @@
                                     <i class="star-icon-large fa-<?= $i <= $data['featuredReviews'][0]['rating'] ? 'solid' : 'regular' ?> fa-star"></i>
                                 <?php endfor; ?>
                             </div>
-                            <p class="review-item__content">Bánh rất ngon, mềm mịn và ngọt vừa phải. Dịch vụ giao hàng nhanh chóng, đóng gói cẩn thận. Mình rất hài lòng và sẽ ủng hộ tiệm lâu dài!</p>
+                            <p class="review-item__content"><?=$data['featuredReviews'][0]['comment']?></p>
                             <div class="review-item__user">
                                 <img
-                                    src="public/upload/avatar/<?=$data['featuredReviews'][0]['avatar']?>"
+                                    src="<?=$base_url?>/public/upload/avatar/<?=$data['featuredReviews'][0]['avatar']?>"
                                     alt=""
                                     class="review-item__user-avatar"
                                 />
@@ -308,12 +308,12 @@
                         </div>
                     </div>
                     <div class="review-item-box col l-4 m-12 c-10 c-offset-1">
-                        <div class="promotion-item" style="background-image: url(public/upload/banner/small-banner.jpg)">
+                        <div class="promotion-item" style="background-image: url(<?=$base_url?>/public/upload/banner/small-banner.jpg)">
                             <h2 class="promotion-item__title">
                                 Ưu Đãi Trong Ngày Giảm Giá 15% Cho Tất Cả Các Loại Bánh
                             </h2>
                             <button class="buy-now-btn">
-                                <a href="index.php?page=collection">MUA NGAY</a> 
+                                <a href="<?=$base_url?>/collection">MUA NGAY</a> 
                                 <i class="arrow-icon fa-solid fa-arrow-right-long"></i>
                             </button>
                         </div>
@@ -328,7 +328,7 @@
                             <p class="review-item__content"><?=$data['featuredReviews'][1]['comment']?></p>
                             <div class="review-item__user">
                                 <img
-                                    src="public/upload/avatar/<?=$data['featuredReviews'][1]['avatar']?>"
+                                    src="<?=$base_url?>/public/upload/avatar/<?=$data['featuredReviews'][1]['avatar']?>"
                                     alt=""
                                     class="review-item__user-avatar"
                                 />

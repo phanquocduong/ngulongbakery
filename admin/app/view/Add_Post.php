@@ -5,18 +5,18 @@
 
         <!-- Ngày tạo bài viết -->
         <label for="create_date">Ngày tạo</label>
-        <input type="text" class="date-create form-control" readonly value="" name="create_date" >
+        <input type="text" class="date-create form-control" readonly value="" name="create_date">
     </div>
     <br>
     <!-- -------Phần nhập bài viết------- -->
     <div class="mb-3">
         <label for="title" class="form-label">Tiêu đề</label>
         <textarea type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề"></textarea>
-        <br>   
+        <br>
         <label for="avt-post" class="form-lable">Ảnh bìa bài viết</label><br>
-        <input type="file" class="form-control" name="avt-post" id="avt-post" ><br><br>
-    <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
-  </div>
+        <input type="file" class="form-control" name="avt-post" id="avt-post"><br><br>
+        <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control"></textarea>
+    </div>
     <br />
     <!-- ----------------------- -->
 
@@ -46,10 +46,10 @@
                 require_once './app/model/CategoryModel.php';
                 require_once './app/model/PostModel.php';
                 $categoryModel = new CategoryModel();
-                $categories = $categoryModel->getCate();
+                $categories = $categoryModel->getPostCate();
                 foreach ($categories as $category) {
                     extract($category);
-                    echo '<option value="' . $id . '">' . $name. '</option>';
+                    echo '<option value="' . $id . '">' . $name . '</option>';
                 }
                 ?>
             </select>

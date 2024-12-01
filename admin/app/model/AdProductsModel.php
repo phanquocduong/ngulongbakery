@@ -25,6 +25,18 @@ class AdProductsModel
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getProductsCount()
+    {
+        $sql = "SELECT 
+                c.id as category_id,
+                c.name as category_name,
+                COUNT(p.id) as product_count
+            FROM categories c
+            LEFT JOIN products p ON c.id = p.category_id
+            GROUP BY c.id, c.name";
+
+        return $this->db->getAll($sql);
+    }
 
     public function getTotalProducts()
     {

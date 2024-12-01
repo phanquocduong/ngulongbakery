@@ -1,7 +1,8 @@
 main {
     max-width: 100%;
     min-height: 800px;
-    background-color: var(--linear-color);
+    background: linear-gradient(to bottom, var(--linear-color), var(--white-color));
+    padding: 50px 0;
 }
 .title-news {
     font-size: 50px;
@@ -56,7 +57,7 @@ main {
     white-space: normal;
     word-wrap: break-word;
     word-break: break-word;
-    overflow: visible; /
+    overflow: visible;
 }
 .news-item__readmore-link .news-item__readmore {
     font-size: 14px;

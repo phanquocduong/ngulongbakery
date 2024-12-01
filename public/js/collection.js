@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).toString();
 
         // Gửi yêu cầu lấy sản phẩm từ server
-        fetch(`index.php?page=handle-products-display&${queryParams}`)
+        fetch(`${baseUrl}/index.php?page=handle-products-display&${queryParams}`)
             .then(response => response.json())
             .then(data => {
                 loadingSpinner.style.display = 'none'; // Ẩn spinner khi dữ liệu đã được tải
@@ -62,13 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return `
             <div class="col l-4 m-6 c-10 c-offset-1">
                 <div class="product-item">
-                    <a href="index.php?page=product-details&id=${product.id}" class="product-item__img-link">
+                    <a href="${baseUrl}/product-details/${product.id}" class="product-item__img-link">
                         <div
-                            style="background-image: url(public/upload/product/${product.image});"
+                            style="background-image: url(${baseUrl}/public/upload/product/${product.image});"
                             class="product-item__img"
                         ></div>
                     </a>
-                    <a href="index.php?page=product-details&id=${product.id}" class="product-item__title-link">
+                    <a href="${baseUrl}/product-details/${product.id}" class="product-item__title-link">
                         <h4 class="product-item__name">${product.name}</h4>
                     </a>
                     <div class="product-item__rating">

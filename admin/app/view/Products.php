@@ -79,9 +79,9 @@
               <td><?php echo $product['category_name']; ?></td>
               <td>
                 <a href="index.php?page=products_detail&id=<?php echo $product['id']; ?>"
-                  class="btn btn-info btn-sm">Xem</a>
+                  class="btn btn-sm btn-primary">Xem</a>
                 <a href="index.php?page=viewEdit_products&id=<?php echo $product['id']; ?>"
-                  class="btn btn-warning btn-sm">Sửa</a>
+                  class="btn btn-sm btn-primary">Sửa</a>
                 <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $product['id']; ?>)"
                   class="btn btn-danger btn-sm">Xóa</a>
               </td>

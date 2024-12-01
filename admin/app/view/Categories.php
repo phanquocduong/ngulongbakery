@@ -45,7 +45,7 @@ if ($type == 1) {
         <div class="col-12">
             <div class="bg-light rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Danh Mục Sản Phẩm</h6>
+                    <h6 class="mb-0">Quản lí danh Mục</h6>
                     <a href="index.php?page=addCategories" class="btn btn-primary">Thêm Mới</a>
                 </div>
                 <!-- form search -->
@@ -89,29 +89,6 @@ if ($type == 1) {
                 ?>
 
                 <!-- form search end -->
-                <?php
-                require_once './app/controller/AdCategoriesController.php';
-                require_once './app/model/CategoryModel.php';
-                
-                $categoriesController = new AdCategoriesController();
-                $productsModel = new CategoryModel();
-                
-                $type = isset($_GET['type']) ? $_GET['type'] : 0;
-                
-                if ($type == 1) {
-                    // Lọc danh mục sản phẩm
-                    $listCate = $categoriesController->getCategoriesByType('Sản phẩm');
-                } elseif ($type == 2) {
-                    // Lọc danh mục tin tức
-                    $listCate = $categoriesController->getCategoriesByType('Tin tức');
-                } else {
-                    // Hiển thị tất cả danh mục
-                    $listCate = $productsModel->getCate();
-                }
-                ?>
-
-
-
                 <div class="table-responsive">
                     <table class="table table-hover table-borderless">
                         <thead>
@@ -126,31 +103,28 @@ if ($type == 1) {
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($listCate)) {
-                                foreach ($listCate as $index => $category) {
-                                    echo '<tr>';
-                                    echo '<td>' . ($index + 1) . '</td>';
-                                    echo '<td>' . $category['name'] . '</td>';
-                                    if ($category['image'] != '') {
-                                        echo '<td><img src="../public/upload/category/' . $category['image'] . '" alt="" style="width: 50px; height: 50px"></td>';
-                                    } else {
-                                        echo ' <td><i class="fas fa-pen fa-3x"></i></td>';
-                                    }
-                                    echo '<td>' . $category['type'] . '</td>';
-                                    if ($category['status'] == 1) {
-                                        echo '<td><span class="badge bg-success">Hiển thị</span></td>';
-                                    } else {
-                                        echo '<td><span class="badge bg-danger">Ẩn</span></td>';
-                                    }
-                                    echo '<td>
-                            <a href="index.php?page=categories_detail&id=' . $category['id'] . '" class="btn btn-info btn-sm">Xem</a>
-                            <a href="index.php?page=viewEdit_categories&id=' . $category['id'] . '" class="btn btn-warning btn-sm">Sửa</a>
-                            <a href="javascript:void(0);" onclick="confirmDelete(' . $category['id'] . ')" class="btn btn-danger btn-sm">Xóa</a>
-                          </td>';
-                                    echo '</tr>';
-                                }
-                            } else {
-                                echo '<tr><td colspan="6">Không có danh mục nào.</td></tr>';
+                            $stt = 1;
+                            foreach ($listCate as $key => $value) {
+                                extract($value);
+                                echo '<tr>
+                                <td>' . $stt++ . '</td>
+                                <td>' . $name . '</td>
+                                <td>
+                                    <img src="../public/upload/category/' . $image . '" alt=""
+                                        style="width: 40px; height: 40px" />
+                                </td>
+                                <td>' . $type . '</td>';
+                                if($status == 1){
+                                    echo '<td><span class="badge bg-success">Hiển Thị</span></td>';
+                                }else{
+                                    echo '<td><span class="badge bg-danger">Không hiển thị</span></td>';
+                                };
+                                echo'<td>
+                                    <a href="index.php?page=edit_categories&id='.$id.'" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="index.php?page=delete_categories&id='.$id.'" class="btn btn-sm btn-danger">Xoá</a>
+                                    <a href="index.php?page=view_categories&id='.$id.'" class="btn btn-sm btn-success">Xem</a>
+                                </td>
+                            </tr>';
                             }
                             ?>
                         </tbody>
@@ -160,16 +134,3 @@ if ($type == 1) {
         </div>
     </div>
 </div>
-<script>
-    // Lọc danh mục
-    document.getElementById('category-filter').addEventListener('change', function () {
-        var value = this.value;
-        var url = 'index.php?page=categories';
-        if (value == 1) {
-            url = 'index.php?page=categories&type=1';
-        } else if (value == 2) {
-            url = 'index.php?page=categories&type=2';
-        }
-        window.location.href = url;
-    });
-</script>
