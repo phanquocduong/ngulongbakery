@@ -105,7 +105,10 @@ if ($type == 1) {
                             <?php
                             $stt = 1;
                             foreach ($listCate as $key => $value) {
-                                extract($value);
+                                $id = $value['id'];
+                                $name = $value['name'];
+                                $type = $value['type'];
+                                $image = $value['image'];
                                 echo '<tr>
                                 <td>' . $stt++ . '</td>
                                 <td>' . $name . '</td>

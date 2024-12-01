@@ -18,7 +18,7 @@
       language: "vi",
       ckfinder: {
         uploadUrl:
-          "/ngulongbakery/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json",
+          "ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json",
       },
       toolbar: {
         items: [

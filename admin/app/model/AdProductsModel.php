@@ -7,6 +7,8 @@ class AdProductsModel
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
+    // Hàm lấy danh sách sản phẩm với phân trang
+
     public function getProducts($limit = 10, $offset = 0)
     {
         // Đảm bảo offset không âm
@@ -130,6 +132,14 @@ class AdProductsModel
                 JOIN users ON reviews.user_id = users.id";
         return $this->db->getAll($sql);
     }
+    public function getCategoryNameById($categoryId) {
+        $sql = "SELECT name FROM categories WHERE id = :category_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn(); // Lấy tên danh mục
+    }
+    
 }
 
 ?>

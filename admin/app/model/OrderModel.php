@@ -66,11 +66,5 @@ class OrderModel
         $sql = "SELECT * FROM discounts WHERE id = ?";
         return $this->db->getOne($sql, [$discountId]);
     }
-
-    public function chanceStatuspr($status, $id)
-    {
-        $sql = "UPDATE `orders` SET `status` = ? WHERE `orders`.`id` = ?";
-
-        return $this->db->query($sql, [$status, $id]);
-    }
 }
+?>
