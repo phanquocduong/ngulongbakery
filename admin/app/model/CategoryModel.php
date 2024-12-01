@@ -12,7 +12,9 @@ class CategoryModel
         $sql = "SELECT * FROM categories  order by id desc";
         return $this->db->getAll($sql);
     }
-    function getCategoriesByType($type){
+
+    // lấy danh mục theo loại
+    function getCategoriesByType($type = []){
         $sql = "SELECT * FROM categories WHERE type = ?";
         return $this->db->getAll($sql, [$type]);
     }

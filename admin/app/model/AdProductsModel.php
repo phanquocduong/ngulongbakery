@@ -36,7 +36,6 @@ class AdProductsModel
             FROM categories c
             LEFT JOIN products p ON c.id = p.category_id
             GROUP BY c.id, c.name";
-
         return $this->db->getAll($sql);
     }
 
@@ -132,14 +131,6 @@ class AdProductsModel
                 JOIN users ON reviews.user_id = users.id";
         return $this->db->getAll($sql);
     }
-    public function getCategoryNameById($categoryId) {
-        $sql = "SELECT name FROM categories WHERE id = :category_id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchColumn(); // Lấy tên danh mục
-    }
-    
 }
 
 ?>
