@@ -140,7 +140,7 @@ class AdCategoriesController
         }
         echo '<script>location.href="index.php?page=categories"</script>';
     }
-    public function searchCategories()
+    public function searchCategories($keyword)
     {
         if (isset($_POST['button_category'])) {
             $keyword = $_POST['search_category'];
