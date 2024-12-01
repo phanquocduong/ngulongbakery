@@ -7,28 +7,38 @@
                 <?php
                 foreach ($data['news'] as $item) {
                     extract($item);
-                    if($status == 0){
+                    if ($status == 0) {
                         echo '';
-                    }else{
+                    } else {
+                        $doc = new DOMDocument();
+                        libxml_use_internal_errors(true); // Để tránh lỗi khi đọc HTML không hợp lệ
+                        $doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+                        
+                        // Tìm thẻ <p> đầu tiên
+                        $pTags = $doc->getElementsByTagName('p');
+                        if ($pTags->length > 0) {
+                            // Lấy nội dung thẻ <p> đầu tiên
+                            $shortContent = $pTags->item(0)->nodeValue;
+                        }
                         echo '<div class="col l-4 m-6 c-10 c-offset-1">
                         <div class="news-item">
-                        <a href="index.php?page=news-details&id='.$id.'" class="news-item__img-link">
+                        <a href="'.$base_url.'/news-details/'.$id.'" class="news-item__img-link">
                             <img
-                                src="./public/upload/post/images/'.$image.'"
+                                src="'.$base_url.'/public/upload/post/images/'.$image.'"
                                 alt="Ảnh sản phẩm"
                                 class="news-item__img"
                             />
                             <div class="overlay"></div>
                         </a>
-                        <a href="index.php?page=news-details&id='.$id.'" class="news-item__title-link">
+                        <a href="'.$base_url.'/news-details/'.$id.'" class="news-item__title-link">
                             <div class="single-line-text">
                                 '.$title.'
                             </div>
                         </a>
                         <div class="news-item__description">
-                            '.$title.'
+                            '.$shortContent.'
                         </div>
-                        <a href="index.php?page=news-details&id='.$id.'" class="news-item__readmore-link">
+                        <a href="'.$base_url.'news-details/'.$id.'" class="news-item__readmore-link">
                             <div class="news-item__readmore">
                                 ĐỌC THÊM <i class="fa-solid fa-angles-right"></i>
                             </div>

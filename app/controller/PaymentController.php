@@ -94,7 +94,8 @@
                 exit;
             }
             $phone = trim($_POST['phone']);
-            if (strlen($phone) < 10 || strlen($phone) > 11 || !ctype_digit($phone) || !preg_match('/^(03|07|08|09)\d+$/', $phone)) {
+            $phone = preg_replace('/\D/', '', $phone);
+            if (strlen($phone) < 10 || strlen($phone) > 11 || !ctype_digit($phone) || !preg_match('/^(03|05|07|08|09)\d+$/', $phone)) {
                 $_SESSION['error'] = "Số điện thoại không hợp lệ";
                 header("Location: $base_url/payment");
                 exit;
