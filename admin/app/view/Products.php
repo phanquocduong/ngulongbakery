@@ -7,16 +7,17 @@
     </div>
 
     <!-- Form search -->
-    <form class="d-none d-md-flex ms-4" method="POST">
-      <div class="input-group">
-        <input class="form-control border-0" type="text" placeholder="Tìm kiếm sản phẩm" name="search_product" />
-        <button class="btn" type="submit" name="button_product">
-          <span class="input-group-text bg-transparent border-0">
-            <a href="index.php?page=search_products"><i class="fa fa-search"></i></a>
-          </span>
-        </button>
-      </div>
-    </form>
+   <form class="d-none d-md-flex ms-4" method="POST" action="index.php?page=products">
+    <div class="input-group">
+        <input class="form-control border-0" type="text" placeholder="Tìm kiếm sản phẩm" 
+               name="search_product" value="<?php echo isset($_POST['search_product']) ? htmlspecialchars($_POST['search_product']) : ''; ?>" />
+      <button class="btn" type="submit" name="button_product">
+        <span class="input-group-text bg-transparent border-0">
+          <i class="fa fa-search"></i>
+        </span>
+      </button>
+    </div>
+  </form>
     <br />
     <!-- Form search end -->
 <?php if (isset($_POST['search_product']) && !empty($_POST['search_product'])): ?>
@@ -27,38 +28,28 @@
   </div>
 <?php endif; ?>
     <?php
-      require_once './app/controller/AdProductsController.php';
-      require_once './app/model/AdProductsModel.php';
-      $productsController = new AdProductsController();
-      $productsModel = new AdProductsModel();
-        // Kiểm tra xem có tham số tìm kiếm hay không
-      $searchQuery = isset($_POST['search_product']) ? $_POST['search_product'] : '';
-      $currentPage = isset($_POST['p']) ? (int) $_POST['p'] : 1;
-      $limit = 10;
-      $offset = ($currentPage - 1) * $limit;
+    // Including necessary files for controllers and models
+    require_once './app/controller/AdProductsController.php';
+    require_once './app/model/AdProductsModel.php';
+    $productsController = new AdProductsController();
+    $productsModel = new AdProductsModel();
+    // Check if search form is submitted
+    if (isset($_POST['button_product']) && !empty($_POST['search_product'])) {
+      // Fetch the list of products based on the search term
+      $listPro = $productsController->searchProducts($_POST['search_product']);
+    } else {
+      // Fetch all products if no search term is provided
+      $listPro = $productsModel->getProducts();
+    }
 
-      if (!empty($searchQuery)) {
-        // Nếu có tìm kiếm, thực hiện tìm kiếm sản phẩm
-        $listPro = $productsController->searchProducts($_POST['search_product']);
-        $totalPages = $productsModel->getTotalProducts($searchQuery, $limit);
-      } else {
-        // Nếu không có tìm kiếm, hiển thị tất cả sản phẩm
-        $listPro = $productsModel->getProducts($limit, $offset);
-        $totalPages = $productsModel->getTotalProducts($limit);
-      }
-      
-      foreach ($listPro as &$product) {
-        $product['category_name'] = $productsModel->getCategoryNameById($product['category_id']);
-      }
-
-
-        // Truyền dữ liệu phân trang vào view
-      $this->data['products'] = $listPro;
-      $this->data['currentPage'] = $currentPage;
-      $this->data['totalPages'] = $totalPages;
-
+    // Fetch categories
+    $listCate = $productsController->getCategories();
+    $categoryMap = [];
+    foreach ($listCate as $category) {
+      $categoryMap[$category['id']] = $category['name'];
+    }
     ?>
-    
+
     <!-- Product table -->
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -163,4 +154,3 @@
     </script>
 
   </div>
-</div>
