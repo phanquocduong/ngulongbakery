@@ -9,7 +9,40 @@ $total_fee = $order->getTotalFee();
 $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
 
 ?>
-<!-- Danh Sách Đơn Hàng -->
+<style>
+  .form-filter {
+    border: 1px solid wheat;
+    width: 200px;
+  }
+
+  .form-filter:focus {
+    border: 1px solid white;
+  }
+
+  /* comment */
+  .comment-container {
+    flex-direction: column;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.comment-container:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.comment-content {
+    word-wrap: break-word;
+    min-height: 50px;
+    border-left: 3px solid #0d6efd;
+}
+
+@media (max-width: 768px) {
+    .comment-container {
+        margin: 10px 0;
+    }
+}
+</style>
+<!-- Thống kê doanh thu -->
 <div class="container-fluid pt-4 px-4">
   <div class="row g-4">
     <div class="col-sm-6 col-xl-3">
@@ -32,13 +65,40 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
     </div>
   </div>
 </div>
-<!-- Kết thúc danh sách đơn hàng -->
+<!-- Kết thúc doanh thu -->
 
-<!-- Recent Sales Start -->
+<?php
+require_once './app/model/OrderModel.php';
+$orderModel = new OrderModel();
+// $viewOrder = $orderModel->getOrder();
+$day = isset($_GET['day']) ? $_GET['day'] : 0;
+
+if ($day == 1) {
+  $getOrder = $orderModel->getOrderToday();
+} elseif ($day == 2) {
+  $getOrder = $orderModel->getOrderInWeek();
+} else {
+  $getOrder = $orderModel->getOrder();
+}
+
+?>
+<!-- Thống kê đơn hàng -->
 <div class="container-fluid pt-4 px-4">
   <div class="bg-light text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h6 class="mb-0">Danh Sách Đơn Hàng</h6>
+      <form action="index.php" method="GET">
+        <select name="day" id="order-filter" onchange="this.form.submit()" class="form-filter">
+          <option value="0" <?php echo ($day == 0) ? 'selected' : ''; ?>>Tất cả</option>
+          <option value="1" <?php echo ($day == 1) ? 'selected' : ''; ?>>Hôm nay</option>
+          <option value="2" <?php echo ($day == 2) ? 'selected' : ''; ?>>Tuần này</option>
+        </select>
+      </form>
+      <script>
+        document.getElementById('order-filter').addEventListener('change', function () {
+          this.form.submit();
+        });
+      </script>
       <a href="javascript:void(0);" class="toggleButton">Hiện Tất Cả</a>
     </div>
     <div class="table-responsive">
@@ -55,38 +115,37 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
         </thead>
         <tbody>
           <?php
-          // require_once './app/model/OrderModel.php';
-          // use App\Model\OrderModel;
-          $order = new OrderModel();
-          $viewOrder = $order->getOrder();
-          ?>
-
-          <?php
           $stt = 1;
-          foreach ($viewOrder as $key => $value) {
-            extract($value);
-            if (strtotime($created_at) !== false) {
-              // Tạo đối tượng DateTime trực tiếp với múi giờ Việt Nam
-              $date = new DateTime($created_at, new DateTimeZone('Asia/Ho_Chi_Minh'));
-
-              // Định dạng lại thời gian
-              $vn_format = $date->format('d/m/Y');
-            } else {
-              $vn_format = "Invalid date";
-            }
-            echo "<tr class='product-row'>";
-            echo "<td>" . $stt++ . "</td>";
-            echo "
+          if ($getOrder == null) {
+            echo '<tr>  
+            <td>
+           <h6>Không có dữ liệu</h6>
+            </td>
+            </tr>';
+          } else {
+            foreach ($getOrder as $key => $value) {
+              extract($value);
+              if (strtotime($created_at) !== false) {
+                // Tạo đối tượng DateTime trực tiếp với múi giờ Việt Nam
+                $date = new DateTime($created_at, new DateTimeZone('Asia/Ho_Chi_Minh'));
+                // Định dạng lại thời gian
+                $vn_format = $date->format('d/m/Y');
+              } else {
+                $vn_format = "Invalid date";
+              }
+              echo "<tr class='product-row'>";
+              echo "<td>" . $stt++ . "</td>";
+              echo "
             <td>
               <a href='index.php?page=order_detail&id=$id'>$customer</a>
               </td>";
-            echo "<td>" . number_format($total_amount, 0) . " VNĐ</td>";
-            echo "<td>$vn_format</td>";
-            echo "<td>$status</td>";
-            echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
-            echo "</tr>";
+              echo "<td>" . number_format($total_amount, 0) . " VNĐ</td>";
+              echo "<td>$vn_format</td>";
+              echo "<td>$status</td>";
+              echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
+              echo "</tr>";
+            }
           }
-
           ?>
         </tbody>
       </table>
@@ -113,36 +172,36 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
           </tr>
         </thead>
         <tbody>
-        <?php
-        require_once './app/model/CategoryModel.php';
-        require_once './app/model/AdProductsModel.php';
+          <?php
+          require_once './app/model/CategoryModel.php';
+          require_once './app/model/AdProductsModel.php';
 
-        $products = new AdProductsModel();
-        $cate = new CategoryModel();
-        $listCate = $cate->getCate();
-        $productCounts = $products->getProductsCount();
+          $products = new AdProductsModel();
+          $cate = new CategoryModel();
+          $listCate = $cate->getCate();
+          $productCounts = $products->getProductsCount();
 
-        // Create product count mapping
-        $categoryProductCount = [];
-        foreach ($productCounts as $count) {
-          $categoryProductCount[$count['category_id']] = $count['product_count'];
-        }
-
-        // Display categories and product counts
-        $stt = 1;
-        if (!empty($listCate)) {
-          foreach ($listCate as $category) {
-            $count = isset($categoryProductCount[$category['id']]) ? $categoryProductCount[$category['id']] : 0;
-            ?>
-            <tr class="product-row">
-              <td><?php echo $stt++; ?></td>
-              <td><?php echo htmlspecialchars($category['name']); ?></td>
-              <td><?php echo $count; ?></td>
-            </tr>
-            <?php
+          // Create product count mapping
+          $categoryProductCount = [];
+          foreach ($productCounts as $count) {
+            $categoryProductCount[$count['category_id']] = $count['product_count'];
           }
-        }
-        ?>
+
+          // Display categories and product counts
+          $stt = 1;
+          if (!empty($listCate)) {
+            foreach ($listCate as $category) {
+              $count = isset($categoryProductCount[$category['id']]) ? $categoryProductCount[$category['id']] : 0;
+              ?>
+              <tr class="product-row">
+                <td><?php echo $stt++; ?></td>
+                <td><?php echo htmlspecialchars($category['name']); ?></td>
+                <td><?php echo $count; ?></td>
+              </tr>
+              <?php
+            }
+          }
+          ?>
         </tbody>
       </table>
     </div>
@@ -168,19 +227,26 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
         </thead>
         <tbody>
           <?php
-          require_once './app/model/AdProductsModel.php';
-          $orderDetail = new AdProductsModel();
-          $viewOrderDetail = $orderDetail->getBestSell();
+          $getSell = new AdProductsModel();
+          $getProductSell = $getSell->getBestSell();
           ?>
           <?php
           $stt = 1;
-          foreach ($viewOrderDetail as $key => $value) {
-            extract($value);
-            echo "<tr class='product-row'>";
-            echo "<td>" . $stt++ . "</td>";
-            echo "<td>$name</td>";
-            echo "<td>$sold</td>";
-            echo "</tr>";
+          if (empty($getProductSell)) {
+            echo '<tr>
+            <td>
+            <h6>Không có dữ liệu</h6>
+            <td>
+            </tr>';
+          } else {
+            foreach ($getProductSell as $key => $value) {
+              extract($value);
+              echo "<tr class='product-row'>";
+              echo "<td>" . $stt++ . "</td>";
+              echo "<td>$name</td>";
+              echo "<td>$sold</td>";
+              echo "</tr>";
+            }
           }
           ?>
         </tbody>
@@ -241,20 +307,48 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
         <div id="calender"></div>
       </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-xl-4">
+
+
+    <?php
+$reviewNew = new AdProductsModel();
+    $reviewToday = $reviewNew->getReviewsToday();
+
+    ?>
+    <div class="col-sm-12 col-md-6 col-xl-6">
       <div class="h-100 bg-light rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
-          <h6 class="mb-0">Danh Sách Công Việc</h6>
+          <h6 class="mb-0">Những Bình Luận Mới Nhất</h6>
           <a href="">Xem Tất Cả</a>
         </div>
-        <div class="d-flex mb-2">
-          <input class="form-control bg-transparent" type="text" placeholder="Nhập Công Việc" />
-          <button type="button" class="btn btn-primary ms-2">
-            Thêm
-          </button>
-        </div>
-        <div class="d-flex align-items-center border-bottom py-2">
-          <input class="form-check-input m-0" type="checkbox" />
+        <?php
+        if(empty( $reviewToday)) {
+          echo '<h5>Không có dữ liệu</h5>';
+        } else {
+          foreach ($reviewToday as $key => $value) {
+            extract($value);
+            ?>
+                       <div class="comment-container d-flex mb-3 p-3 border rounded">
+                <div class="comment-header mb-2">
+                    <div class="user-comment">
+                        Người dùng <span class="fw-bold text-primary"><?php echo $username; ?></span> 
+                        đã đánh giá sản phẩm
+                        <span class="fw-bold text-secondary"><?php echo $name; ?></span> <span><?= $rating; ?></span> sao với nội dung:
+                    </div>
+                </div>
+                <div class="comment-content mt-2 ms-3 p-2 bg-light rounded">
+                    <?php echo $contents; ?>
+                </div>
+            </div>
+            <?php
+          }
+        }
+        ?>
+        <!-- <div class="d-flex mb-2">
+          <div>Người dùng <b>A</b> đã bình luận trong sản phẩm <b>B</b>:</div>
+          <div style="margin-left:5px;">Bánh rất ngon nhaaa</div>
+        </div> -->
+        <!-- <div class="d-flex align-items-center border-bottom py-2">
+          <input class="form-check-input m-0" day="checkbox" />
           <div class="w-100 ms-3">
             <div class="d-flex w-100 align-items-center justify-content-between">
               <span>Bán 1 tỷ gói mè trong ngày...</span>
@@ -296,7 +390,7 @@ $totalToday = isset($total_fee['totalToday']) ? $total_fee['totalToday'] : 0;
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
