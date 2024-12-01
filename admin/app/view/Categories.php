@@ -126,31 +126,28 @@ if ($type == 1) {
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($listCate)) {
-                                foreach ($listCate as $index => $category) {
-                                    echo '<tr>';
-                                    echo '<td>' . ($index + 1) . '</td>';
-                                    echo '<td>' . $category['name'] . '</td>';
-                                    if ($category['image'] != '') {
-                                        echo '<td><img src="../public/upload/category/' . $category['image'] . '" alt="" style="width: 50px; height: 50px"></td>';
-                                    } else {
-                                        echo ' <td><i class="fas fa-pen fa-3x"></i></td>';
-                                    }
-                                    echo '<td>' . $category['type'] . '</td>';
-                                    if ($category['status'] == 1) {
-                                        echo '<td><span class="badge bg-success">Hiển thị</span></td>';
-                                    } else {
-                                        echo '<td><span class="badge bg-danger">Ẩn</span></td>';
-                                    }
-                                    echo '<td>
-                            <a href="index.php?page=view_categories&id=' . $category['id'] . '" class="btn btn-sm btn-primary">Xem</a>
-                            <a href="index.php?page=edit_categories&id=' . $category['id'] . '" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="javascript:void(0);" onclick="confirmDelete(' . $category['id'] . ')" class="btn btn-danger btn-sm">Xóa</a>
-                          </td>';
-                                    echo '</tr>';
-                                }
-                            } else {
-                                echo '<tr><td colspan="6">Không có danh mục nào.</td></tr>';
+                            $stt = 1;
+                            foreach ($listCate as $key => $value) {
+                                extract($value);
+                                echo '<tr>
+                                <td>' . $stt++ . '</td>
+                                <td>' . $name . '</td>
+                                <td>
+                                    <img src="../public/upload/category/' . $image . '" alt=""
+                                        style="width: 40px; height: 40px" />
+                                </td>
+                                <td>' . $type . '</td>';
+                                if($status == 1){
+                                    echo '<td><span class="badge bg-success">Hiển Thị</span></td>';
+                                }else{
+                                    echo '<td><span class="badge bg-danger">Không hiển thị</span></td>';
+                                };
+                                echo'<td>
+                                    <a href="index.php?page=edit_categories&id='.$id.'" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="index.php?page=delete_categories&id='.$id.'" class="btn btn-sm btn-danger">Xoá</a>
+                                    <a href="index.php?page=view_categories&id='.$id.'" class="btn btn-sm btn-success">Xem</a>
+                                </td>
+                            </tr>';
                             }
                             ?>
                         </tbody>

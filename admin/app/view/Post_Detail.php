@@ -135,7 +135,7 @@
       echo '<div class="comment">';
       echo '<div class="comment-item">';
       echo '<div class="comment-item-header">';
-      echo '<img src="img/meo.jpg" class="rounded-circle" alt="" style="width: 40px; height: 40px" />';
+      echo '<img src="../public/upload/avatar/'.$avatar_user.'" class="rounded-circle" alt="" style="width: 40px; height: 40px" />';
       echo '<div class="comment-item-header-info">';
       echo '<h6>' . htmlspecialchars($full_name) . '</h6>';
       echo '<span>' . htmlspecialchars($created_at) . '</span>';
