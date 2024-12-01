@@ -75,7 +75,6 @@
           'post_manage' => ['icon' => 'fa-newspaper', 'label' => 'Bài viết'],
           'voucher' => ['icon' => 'fa-ticket-alt', 'label' => 'Mã giảm giá']
         ];
-
         $currentPage = $_GET['page'] ?? 'main';
 
         echo '<div class="navbar-nav w-100">';
