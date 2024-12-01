@@ -108,6 +108,51 @@
         <div class="navbar-nav align-items-center ms-auto">
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+              <i class="fa fa-envelope me-lg-2"></i>
+              <span class="d-none d-lg-inline-flex">Tin Nhắn</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+              <a href="#" class="dropdown-item">
+                <div class="d-flex align-items-center">
+                  <img class="rounded-circle" src="../img/meo1.jpg" alt="" style="width: 40px; height: 40px" />
+                  <div class="ms-2">
+                    <h6 class="fw-normal mb-0">
+                      Em Gái Mưa đã gửi cho bạn một tin nhắn
+                    </h6>
+                    <small>5 phút trước</small>
+                  </div>
+                </div>
+              </a>
+              <hr class="dropdown-divider" />
+              <a href="#" class="dropdown-item">
+                <div class="d-flex align-items-center">
+                  <img class="rounded-circle" src="../img/meo2.jpg" alt="" style="width: 40px; height: 40px" />
+                  <div class="ms-2">
+                    <h6 class="fw-normal mb-0">
+                      Con Mèo Cute đã gửi cho bạn một tin nhắn
+                    </h6>
+                    <small>10 phút trước</small>
+                  </div>
+                </div>
+              </a>
+              <hr class="dropdown-divider" />
+              <a href="#" class="dropdown-item">
+                <div class="d-flex align-items-center">
+                  <img class="rounded-circle" src="../img/meo3.jpg" alt="" style="width: 40px; height: 40px" />
+                  <div class="ms-2">
+                    <h6 class="fw-normal mb-0">
+                      Kẻ Huỷ Diệt đã gửi cho bạn một tin nhắn
+                    </h6>
+                    <small>15 phút trước</small>
+                  </div>
+                </div>
+              </a>
+              <hr class="dropdown-divider" />
+              <a href="#" class="dropdown-item text-center">Xem Thêm</a>
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               <i class="fa fa-bell me-lg-2"></i>
               <span class="d-none d-lg-inline-flex">Thông Báo</span>
             </a>

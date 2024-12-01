@@ -38,7 +38,7 @@
                   <?php
                   if ($product) {
                     extract($product);
-                    ?>
+                  ?>
                     <div class='card card-body'>
                       <div class='mb-3'>
                         <input type="hidden" name="id" value="<?= $id ?>">
@@ -68,17 +68,17 @@
                           // Tách chuỗi chứa tên các file ảnh thành mảng
                           $imageArray = explode(',', $extra_image);
                           foreach ($imageArray as $extra_image) {
-                            ?>
+                          ?>
                             <div class='mb-3'>
                               <img src='../public/upload/product/<?php echo $extra_image; ?>' alt='Product Image'
                                 class='img-thumbnail' style='width: 100px;' />
                               <input class='form-control' type='file' id='ex_image' name='ex_image[]' />
                               <input type="hidden" name="existing_extra_image[]" value="<?php echo $extra_image; ?>" />
-                              <?php
+                            <?php
                           }
-                          ?>
+                            ?>
                             <hr />
-                          </div>
+                            </div>
 
                         </div>
                         <div class='mb-3'>
@@ -86,8 +86,8 @@
                           <textarea class='form-control' id='short_description' name='short_description'
                             rows='5'><?php echo $short_description; ?></textarea>
                           <br />
-                          <label for='description'>Mô Tả Chi Tiết</label><br>                           
-                            <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control">
+                          <label for='description'>Mô Tả Chi Tiết</label><br>
+                          <textarea id="content" name="content" rows="20" placeholder="Nhập nội dung" class="form-control">
                                 <?php echo $detailed_description; ?>
                             </textarea>
                         </div>
@@ -116,22 +116,24 @@
                             }
                             ?>
                           </select>
-                          <?php
-                  }
-                  ?>
+                        <?php
+                      }
+                        ?>
+                        </div>
+
+                        <a href="index.php?page=products" style="width: 10%;background: red; border: none;" class="btn btn-primary">
+                          Quay lại
+                        </a>
+                        <input  style="width: 10%;margin: 0 10px; border: none;" value="Sửa sản phẩm" type='submit' name="submit" class='btn btn-primary btn-sub' />
+                        <br />
                       </div>
-                      <input type='submit' name="submit" class='btn btn-primary btn-sub' />
-                      <br />
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
           </form>
           <hr>
-          <a href="index.php?page=products" class="btn btn-primary">
-            Quay lại
-          </a>
+
         </div>
       </div>
     </div>

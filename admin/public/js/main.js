@@ -122,12 +122,36 @@
     const inExportButton = document.getElementById("in-export-button");
 
     orderStatusSelect.addEventListener("change", function () {
-      if (orderStatusSelect.value === "1") {
+      if (orderStatusSelect.value === "Đã Xác Nhận") {
         exportButton.disabled = false;
         exportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.border = "none";
-      } else {
+        console.log(orderStatusSelect.value);
+        inExportButton.innerHTML = `Xác nhận `;
+      }
+      else if (orderStatusSelect.value === "Đang Giao") {
+        exportButton.disabled = false;
+        exportButton.style.backgroundColor = "#2194E6";
+        inExportButton.style.backgroundColor = "#2194E6";
+        inExportButton.style.border = "none";
+        inExportButton.innerHTML = `Xác nhận giao hàng`;
+      }
+      else if (orderStatusSelect.value === "Đã Giao") {
+        exportButton.disabled = false;
+        exportButton.style.backgroundColor = "#2194E6";
+        inExportButton.style.backgroundColor = "#2194E6";
+        inExportButton.style.border = "none";
+        inExportButton.innerHTML = `Xác nhận đã giao hàng`;
+      }
+      else if (orderStatusSelect.value === "Đã Huỷ") {
+        exportButton.disabled = false;
+        exportButton.style.backgroundColor = "red";
+        inExportButton.style.backgroundColor = "red";
+        inExportButton.style.border = "none";
+        inExportButton.innerHTML = `Xác nhận hủy`;
+      }
+      else {
         exportButton.disabled = true;
         exportButton.style.backgroundColor = "#ccc";
         inExportButton.style.backgroundColor = "#ccc";
