@@ -121,10 +121,10 @@
                         ?>
                         </div>
 
-                        <a href="index.php?page=products" style="width: 10%;background: red; border: none;" class="btn btn-primary">
+                        <a href="index.php?page=products" style="width: 150px;;background: red; border: none;" class="btn btn-primary">
                           Quay lại
                         </a>
-                        <input  style="width: 10%;margin: 0 10px; border: none;" value="Sửa sản phẩm" type='submit' name="submit" class='btn btn-primary btn-sub' />
+                        <input  style="width: 150px;;margin: 0 10px; border: none;" value="Sửa sản phẩm" type='submit' name="submit" class='btn btn-primary btn-sub' />
                         <br />
                       </div>
                     </div>

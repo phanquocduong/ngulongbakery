@@ -7,6 +7,8 @@ class AdProductsModel
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
+    // Hàm lấy danh sách sản phẩm với phân trang
+
     public function getProducts($limit = 10, $offset = 0)
     {
         // Đảm bảo offset không âm
@@ -34,7 +36,6 @@ class AdProductsModel
             FROM categories c
             LEFT JOIN products p ON c.id = p.category_id
             GROUP BY c.id, c.name";
-
         return $this->db->getAll($sql);
     }
 
@@ -128,6 +129,17 @@ class AdProductsModel
                 FROM products 
                 JOIN reviews ON reviews.product_id = products.id 
                 JOIN users ON reviews.user_id = users.id";
+        return $this->db->getAll($sql);
+    }
+
+    // lấy bình luận mới nhất trong ngày
+    public function getReviewsToday()
+    {
+        $sql = "SELECT products.id AS product_id, reviews.id AS review_id, reviews.comment AS contents, reviews.created_at AS date_comments, reviews.rating AS rating,  users.id AS user_id, users.full_name AS username
+                FROM products 
+                JOIN reviews ON reviews.product_id = products.id 
+                JOIN users ON reviews.user_id = users.id
+                WHERE DATE(reviews.created_at) = CURDATE()";
         return $this->db->getAll($sql);
     }
 }

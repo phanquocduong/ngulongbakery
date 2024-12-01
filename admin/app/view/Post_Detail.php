@@ -1,20 +1,9 @@
 <!-- Main Start -->
-<form action="" class="form form-group">
+<form action="" class="form form-group" style="">
   <div class="container">
     <?php
     extract($data['postdetail']);
     ?>
-    <h1 style="margin: 10px 0 0 0">
-      <?php echo $title; ?>
-    </h1>
-    <hr />
-    <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-    <a href="index.php?page=post_manage" class="btn btn-primary">Quay lại</a>
-    <a href="index.php?page=edit_post&id=<?= $id; ?>" class="btn btn-primary">Sửa bài viết</a>
-    <hr />
-
-
-    <!-- Ngày tạo bài viết -->
     <?php
     $timestamp = strtotime($created_at);
     // Tạo đối tượng DateTime từ chuỗi thời gian
@@ -26,7 +15,8 @@
     // Định dạng lại thời gian
     $vn_format = $date->format("d/m/Y H:i:s");
     ?>
-    <input type="text" class="date-create form-control" readonly value="<?php
+    <div class="" style="padding-top: 20px;"> ngày tạo: <?= $vn_format ?></div>
+    <input type="hidden" class="date-create form-control" readonly value="<?php
     echo $vn_format;
     ?>" name="create_date">
 
@@ -34,7 +24,10 @@
   <!-- -------------- -->
   <div id="editor" class="editor" contenteditable="false">
 
-    <div class="contentnews">
+    <div class="contentnews" style="border: 1px solid;">
+      <h1 style="margin: 10px 0 0 0; padding: 20px 10px;">
+        <?php echo $title; ?>
+      </h1>
       <!-- Mục lục -->
       <div class="contentnews-listindex">
         <button id="toggle-button"><i class="fa-solid fa-bars"></i></button>
@@ -47,7 +40,7 @@
     <br />
     <!-- trạng thái ẩn/hiện bài viết -->
     <div class="container">
-      <div class="form-group" style="margin-left: 10px">
+      <div class="form-group" style="">
         <label class="form-check-label" for="flexCheckDefault">
           Trạng thái
         </label>
@@ -62,7 +55,7 @@
 
     <!-- Thể loại bài viết -->
     <div class="container">
-      <div class="form-group" style="margin-left: 10px">
+      <div class="form-group" style="">
         <label class="form-check-label" for="flexCheckDefault">
           Thể loại
         </label>
@@ -89,7 +82,7 @@
 
     <!-- Tác giả -->
     <div class="container">
-      <div class="form-group" style="margin-left: 10px">
+      <div class="form-group" style="">
         <label class="form-check-label" for="flexCheckDefault">
           Tác giả
         </label>
@@ -110,12 +103,19 @@
         </select>
       </div>
     </div>
-    <hr />
+    <br>
     <!-- -------------- -->
+    <a href="index.php?page=post_manage" style="margin-left:10px; width: 150px;background: red; border: none;"
+      class="btn btn-primary">Quay lại</a>
+    <a href="index.php?page=edit_post&id=<?= $id; ?>" style="width: 150px;;margin: 0 10px; border: none;"
+      class="btn btn-primary">Sửa bài viết</a>
 </form>
 
+
+
+
 <!-- phần comment -->
-<div class="container">
+<div class="container" style="margin: 20px 0;">
   <h2>Bình luận</h2>
   <hr />
   <!-- -------------------------------------------------------- -->
@@ -135,7 +135,7 @@
       echo '<div class="comment">';
       echo '<div class="comment-item">';
       echo '<div class="comment-item-header">';
-      echo '<img src="img/meo.jpg" class="rounded-circle" alt="" style="width: 40px; height: 40px" />';
+      echo '<img src="../public/upload/avatar/'.$avatar_user.'" class="rounded-circle" alt="" style="width: 40px; height: 40px" />';
       echo '<div class="comment-item-header-info">';
       echo '<h6>' . htmlspecialchars($full_name) . '</h6>';
       echo '<span>' . htmlspecialchars($created_at) . '</span>';
@@ -145,7 +145,6 @@
       echo '<p>' . htmlspecialchars($comment) . '</p>';
       echo '</div>';
       echo '<button class="btn btn-sm btn-danger">Xoá</button>';
-      echo '<button class="btn btn-sm btn-primary">Ẩn</button>';
       echo '</div>';
       echo '</div>';
     }
