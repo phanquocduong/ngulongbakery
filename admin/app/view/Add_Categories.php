@@ -12,7 +12,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Hình Ảnh</label>
-                        <input class="form-control" name="image" type="file" id="image" required/>
+                        <input class="form-control" name="image" type="file" id="image" required />
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Mô Tả</label>
@@ -34,14 +34,17 @@
                             <option value="0">Không Kích Hoạt</option>
                         </select>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary">Thêm</button>
-                    <br />
+                    <div class="" style="display: flex;">
+                        <a style="width: 150px;;background: red; border: none; margin: 0;" href="index.php?page=categories" class="btn btn-custom">
+                            Quay lại
+                        </a>
+                        <button style="width: 150px;;margin: 0 10px; border: none;" type="submit" name="submit" class="btn btn-primary">Thêm</button>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
-<a href="index.php?page=categories" class="btn btn-custom">
-    Quay lại
-</a>
+
 <!-- conttent end -->
