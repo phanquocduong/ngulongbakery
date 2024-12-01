@@ -53,39 +53,39 @@
                             </div>
                             <div id="quantitycmt" class="commentnews">
                                 <div class="quantitycomment">
-                                    Các bình luận trong “<?php echo $title?>”
+                                    Các bình luận trong “<?php echo $title ?>”
                                 </div>
                                 <?php
-                                  require_once './app/model/CommentsModel.php';
-                                  $getComments = new CommentsModel();
-                                
-                                  // Lấy id bài viết từ url
-                                  $postId = isset($_GET['id']) ? intval($_GET['id']) : 0;
-                                  // Lấy danh sách comment theo id bài viết
-                                  $comments = $getComments->getCommentsByPostId($postId);
-                                    foreach ($comments as $comment) {
-                                        extract($comment);
-                                        if($status==0){
-                                            echo '';
-                                        }else{
-                                        echo '
-                                        <div class="commentnews-user">
-                                            <img
-                                                src="./public/upload/avatar/'.$avatar.'"
-                                                alt="avatar"
-                                                class="commentnews-user__avt-img"
-                                            />
-                                            <div class="commentnews-user__name-date">
-                                                <div class="commentnews-user__name">'.$fullname.'</div>
-                                                <div class="commentnews-user__dates">'.$created_at.'</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentnews-content">'.$comment.'</div>';
+                                    require_once './app/model/CommentsModel.php';
+                                    $getComments = new CommentsModel();
+                                    $postId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+                                    $comments = $getComments->getCommentsByPostId($postId);
+
+                                    if (empty($comments)) {
+                                        echo '<p>Chưa có bình luận nào.</p>';
+                                    } else {
+                                        foreach ($comments as $comment) {
+                                            extract($comment);
+                                            if ($status == 0) {
+                                                continue;
+                                            }
+                                            echo '
+                                            <div class="comment-container">
+                                                <div class="commentnews-user">
+                                                    <img src="./public/upload/avatar/' . $avatar . '" alt="avatar" class="commentnews-user__avt-img" />
+                                                    <div class="commentnews-user__name-date">
+                                                        <div class="commentnews-user__name">' . $fullname . '</div>
+                                                        <div class="commentnews-user__dates">' . $created_at . '</div>
+                                                    </div>
+                                                </div>
+                                                <div class="commentnews-content">' . $comment . '</div>
+                                            </div>';
                                         }
                                     }
                                 ?>
-                                <div class="commentnews-manage">
-                                </div>
+                                <button id="show-more-comments" class="btn-show-more">Xem thêm bình luận</button>
+                                <div class="commentnews-manage"></div>
+                            </div>
                             </div>
                             <div class="writecomment">
                                 <?php if (!isset($_SESSION['user']['role_id'])): ?>
