@@ -55,7 +55,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col l-2 m-2 c-2">
-                                                    <span class="product-price"><?=number_format($item['price'])?>đ</span>
+                                                    <span class="product-price"><?=number_format($item['price'], 0, ',', '.')?>đ</span>
                                                 </div>
                                                 <div class="col l-3 m-3 c-3">
                                                     <form class="quantity-form">
@@ -68,7 +68,7 @@
                                                     </form>
                                                 </div>
                                                 <div class="col l-2 m-2 c-2">
-                                                    <span class="line-item-total" data-index="<?=$index?>"><?=number_format($tt)?>đ</span>
+                                                    <span class="line-item-total" data-index="<?=$index?>"><?=number_format($tt, 0, ',', '.')?>đ</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
                                             <div class="product-classify">
                                                 <span class="product-classify__title">Mã SP: <?=$item['id']?></span>
                                             </div>
-                                            <span class="product-price"><?=number_format($item['price'])?>đ</span>
+                                            <span class="product-price"><?=number_format($item['price'], 0, ',', '.')?>đ</span>
                                             <div class="quantity-wrapper">
                                                 <form class="quantity-form">
                                                     <input type="hidden" name="index" value="<?=$index?>">
@@ -136,7 +136,7 @@
                         <div class="cart-body-right">
                             <div class="cart-total">
                                 <label for="" class="total-label">Thành tiền</label>
-                                <span class="total-price"><?=number_format($total)?>đ</span>
+                                <span class="total-price"><?=number_format($total, 0, ',', '.')?>đ</span>
                             </div>
                             <a class="cart-btn-link" href="<?=$base_url?>/payment">
                                 <button class="cart-btn">Thanh toán</button>

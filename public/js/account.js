@@ -130,6 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             num = e.target.getAttribute('data-page'); // Cập nhật num khi người dùng click vào phân trang
                             loadOrders(); // Tải lại danh sách đánh giá với num mới
                         }
+                        if (e.target.tagName === 'I') {
+                            e.preventDefault();
+                            num = e.target.parentElement.getAttribute('data-page');
+                            loadOrders();
+                        }
                     });
                 } else {
                     console.error(data.message); // Log lỗi nếu có

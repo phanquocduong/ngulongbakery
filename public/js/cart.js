@@ -9,7 +9,7 @@ function updateQuantity(button, delta, stock) {
         quantityInput.value = quantityValue;
 
         // Sử dụng Fetch API
-        fetch(`${$baseUrl}/index.php?page=handle-update-cart`, {
+        fetch(`${baseUrl}/index.php?page=handle-update-cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

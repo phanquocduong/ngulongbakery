@@ -140,6 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
             filters.num = e.target.getAttribute('data-page');
             loadProducts();
         }
+        if (e.target.tagName === 'I') {
+            e.preventDefault();
+            filters.num = e.target.parentElement.getAttribute('data-page');
+            loadProducts();
+        }
     });
 
     // Lắng nghe sự kiện sắp xếp sản phẩm
