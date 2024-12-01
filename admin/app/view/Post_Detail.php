@@ -4,15 +4,6 @@
     <?php
     extract($data['postdetail']);
     ?>
-
-
-    <!-- Đoạn để nhập văn bản, sẽ truy xuất đoạn này để thêm vào database -->
-
-
-
-
-    <!-- Ngày tạo bài viết -->
-
     <?php
     $timestamp = strtotime($created_at);
     // Tạo đối tượng DateTime từ chuỗi thời gian
@@ -24,19 +15,19 @@
     // Định dạng lại thời gian
     $vn_format = $date->format("d/m/Y H:i:s");
     ?>
-    <div class=""  style="padding-top: 20px;"> ngày tạo: <?= $vn_format ?></div>
+    <div class="" style="padding-top: 20px;"> ngày tạo: <?= $vn_format ?></div>
     <input type="hidden" class="date-create form-control" readonly value="<?php
-                                                                          echo $vn_format;
-                                                                          ?>" name="create_date">
+    echo $vn_format;
+    ?>" name="create_date">
 
   </div>
   <!-- -------------- -->
   <div id="editor" class="editor" contenteditable="false">
 
     <div class="contentnews" style="border: 1px solid;">
-    <h1 style="margin: 10px 0 0 0; padding: 20px 10px;">
-      <?php echo $title; ?>
-    </h1>
+      <h1 style="margin: 10px 0 0 0; padding: 20px 10px;">
+        <?php echo $title; ?>
+      </h1>
       <!-- Mục lục -->
       <div class="contentnews-listindex">
         <button id="toggle-button"><i class="fa-solid fa-bars"></i></button>
@@ -112,10 +103,12 @@
         </select>
       </div>
     </div>
-<br>
+    <br>
     <!-- -------------- -->
-    <a href="index.php?page=post_manage" style="margin-left:10px; width: 150px;background: red; border: none;" class="btn btn-primary">Quay lại</a>
-    <a href="index.php?page=edit_post&id=<?= $id; ?>" style="width: 150px;;margin: 0 10px; border: none;" class="btn btn-primary">Sửa bài viết</a>
+    <a href="index.php?page=post_manage" style="margin-left:10px; width: 150px;background: red; border: none;"
+      class="btn btn-primary">Quay lại</a>
+    <a href="index.php?page=edit_post&id=<?= $id; ?>" style="width: 150px;;margin: 0 10px; border: none;"
+      class="btn btn-primary">Sửa bài viết</a>
 </form>
 
 
@@ -152,7 +145,6 @@
       echo '<p>' . htmlspecialchars($comment) . '</p>';
       echo '</div>';
       echo '<button class="btn btn-sm btn-danger">Xoá</button>';
-      echo '<button class="btn btn-sm btn-primary">Ẩn</button>';
       echo '</div>';
       echo '</div>';
     }
