@@ -4,7 +4,9 @@
         <div class="slides">
             <img src="<?=$base_url?>/public/upload/slider/slider1.png" alt="Bông lan trứng muối" class="slide" />
             <img src="<?=$base_url?>/public/upload/slider/slider2.png" alt="Xôi xoài" class="slide" />
-            <img src="<?=$base_url?>/public/upload/slider/slider3.png" alt="Chả cá" class="slide" />
+            <img src="<?=$base_url?>/public/upload/slider/slider4.jpg" alt="Ưu đãi Tết" class="slide" />
+            <img src="<?=$base_url?>/public/upload/slider/slider5.jpg" alt="Ưu đãi Noel" class="slide" />
+            <img src="<?=$base_url?>/public/upload/slider/slider3.png" alt="Bánh mì chả cá" class="slide" />
         </div>
 
         <a class="slideshow-prev"><i class="fa-solid fa-chevron-left"></i></a>
