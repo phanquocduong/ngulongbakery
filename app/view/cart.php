@@ -38,7 +38,7 @@
                                         <div class="col l-11 m-11 c-11">
                                             <div class="row">
                                                 <div class="col l-2 m-2 c-2">
-                                                    <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
+                                                    <a href="<?=$base_url?>/product-details/<?=$item['id']?>" class="product-link">
                                                         <img
                                                             src="<?=$base_url?>/public/upload/product/<?=$item['image']?>"
                                                             alt="<?=$item['name']?>"
@@ -47,7 +47,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col l-3 m-3 c-3">
-                                                    <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
+                                                    <a href="<?=$base_url?>/product-details/<?=$item['id']?>" class="product-link">
                                                         <h5 class="product-link__title"><?=$item['name']?></h5>
                                                     </a>
                                                     <div class="product-classify">
@@ -83,7 +83,7 @@
                                 <?php foreach($_SESSION['cart'] as $item): ?>
                                     <div class="row order-item">
                                         <div class="col c-5">
-                                            <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
+                                            <a href="<?=$base_url?>/product-details/<?=$item['id']?>" class="product-link">
                                                 <img
                                                     src="<?=$base_url?>/public/upload/product/<?=$item['image']?>"
                                                     alt="<?=$item['name']?>"
@@ -92,7 +92,7 @@
                                             </a>
                                         </div>
                                         <div class="col c-5">
-                                            <a href="<?=$base_url?>/product-details/id=<?=$item['id']?>" class="product-link">
+                                            <a href="<?=$base_url?>/product-details/<?=$item['id']?>" class="product-link">
                                                 <h5 class="product-link__title"><?=$item['name']?></h5>
                                             </a>
                                             <div class="product-classify">

@@ -38,12 +38,12 @@
 
                                 if ($postId == 1) {
                                     echo '<a style="float: right;" href="">Đây là bài viết đầu tiên!!!</a>';
-                                    echo '<a style="float: right;" href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="new-right-icon fa-solid fa-arrow-right"></i></a>';
+                                    echo '<a style="float: right;" href="'.$base_url.'/news-details/' . ($postId + 1) . '">Bài viết tiếp theo<i class="new-right-icon fa-solid fa-arrow-right"></i></a>';
                                 } elseif ($postId > 1 && $postId < $totalPosts) {
-                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="new-left-icon fa-solid fa-arrow-left"></i> Bài viết trước</a>';
-                                    echo '<a href="index.php?page=news-details&id=' . ($postId + 1) . '">Bài viết tiếp theo<i class="new-right-icon fa-solid fa-arrow-right"></i></a>';
+                                    echo '<a href="'.$base_url.'/news-details/' . ($postId - 1) . '"><i class="new-left-icon fa-solid fa-arrow-left"></i> Bài viết trước</a>';
+                                    echo '<a href="'.$base_url.'/news-details/' . ($postId + 1) . '">Bài viết tiếp theo<i class="new-right-icon fa-solid fa-arrow-right"></i></a>';
                                 } elseif ($postId == $totalPosts) {
-                                    echo '<a href="index.php?page=news-details&id=' . ($postId - 1) . '"><i class="new-left-icon fa-solid fa-arrow-left"></i> Bài viết trước</a>';
+                                    echo '<a href="'.$base_url.'/news-details/' . ($postId - 1) . '"><i class="new-left-icon fa-solid fa-arrow-left"></i> Bài viết trước</a>';
                                     echo '<a style="float: right;" href="">Đây là bài viết cuối cùng!!!</a>';
                                 } else {
                                     echo 'Không tìm thấy bài viết';
@@ -72,7 +72,7 @@
                                             echo '
                                             <div class="comment-container">
                                                 <div class="commentnews-user">
-                                                    <img src="./public/upload/avatar/' . $avatar . '" alt="avatar" class="commentnews-user__avt-img" />
+                                                    <img src="'.$base_url.'/public/upload/avatar/' . $avatar . '" alt="avatar" class="commentnews-user__avt-img" />
                                                     <div class="commentnews-user__name-date">
                                                         <div class="commentnews-user__name">' . $fullname . '</div>
                                                         <div class="commentnews-user__dates">' . $created_at . '</div>
@@ -91,10 +91,10 @@
                                 <?php if (!isset($_SESSION['user']['role_id'])): ?>
                                     <div class="writecomment-title">Bạn chưa đăng nhập. Hãy đăng nhập để bình luận.</div>
                                     <div class="writecomment-title__link">
-                                        <a href="index.php?page=login">Đăng nhập?</a>
+                                        <a href="<?=$base_url?>/login">Đăng nhập?</a>
                                     </div>
                                 <?php else: ?>
-                                    <form action="index.php?page=addCmt" method="POST">
+                                    <form action="<?=$base_url?>/addCmt" method="POST">
                                         <?php
                                         // Lấy post_id từ URL
                                         $post_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -107,8 +107,8 @@
                                         <div class="writecomment-title">Để lại một bình luận</div>
                                         <div class="writecomment-title__link">
                                             Đăng nhập với tên <?= htmlspecialchars($_SESSION['user']['full_name']); ?>
-                                            <a href="index.php?page=account">Chỉnh sửa hồ sơ của bạn</a>
-                                            <a href="index.php?page=logout">Đăng xuất?</a>
+                                            <a href="<?=$base_url?>/account">Chỉnh sửa hồ sơ của bạn</a>
+                                            <a href="<?=$base_url?>/logout">Đăng xuất?</a>
                                             Các trường bắt buộc được đánh dấu *
                                         </div>
                                         <div class="writecomment-content">
