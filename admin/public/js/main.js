@@ -18,7 +18,7 @@
       language: "vi",
       ckfinder: {
         uploadUrl:
-          "ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json",
+          "/ngulongbakery/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json",
       },
       toolbar: {
         items: [
@@ -129,29 +129,25 @@
         inExportButton.style.border = "none";
         console.log(orderStatusSelect.value);
         inExportButton.innerHTML = `Xác nhận `;
-      }
-      else if (orderStatusSelect.value === "Đang Giao") {
+      } else if (orderStatusSelect.value === "Đang Giao") {
         exportButton.disabled = false;
         exportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.border = "none";
         inExportButton.innerHTML = `Xác nhận giao hàng`;
-      }
-      else if (orderStatusSelect.value === "Đã Giao") {
+      } else if (orderStatusSelect.value === "Đã Giao") {
         exportButton.disabled = false;
         exportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.border = "none";
         inExportButton.innerHTML = `Xác nhận đã giao hàng`;
-      }
-      else if (orderStatusSelect.value === "Đã Huỷ") {
+      } else if (orderStatusSelect.value === "Đã Huỷ") {
         exportButton.disabled = false;
         exportButton.style.backgroundColor = "red";
         inExportButton.style.backgroundColor = "red";
         inExportButton.style.border = "none";
         inExportButton.innerHTML = `Xác nhận hủy`;
-      }
-      else {
+      } else {
         exportButton.disabled = true;
         exportButton.style.backgroundColor = "#ccc";
         inExportButton.style.backgroundColor = "#ccc";
