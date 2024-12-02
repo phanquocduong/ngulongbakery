@@ -26,9 +26,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php
-                        $stt=1; 
-                          foreach ($data['post'] as $item) {
+                      <?php
+                      $stt = 1; 
+                      foreach ($data['post'] as $item) {
                           extract($item);
                           $timestamp = strtotime($created_at);
                           // Tạo đối tượng DateTime từ chuỗi thời gian
@@ -41,27 +41,25 @@
                           $vn_format = $date->format("d/m/Y H:i:s");
                           echo '<tr>
                                   <td>'.$stt++.'</td>
-
                                   <td style="width:350px">'.$title.'</td>
                                   <td>'.$category_name.'</td>
                                   <td>'.$vn_format.'</td>
                                   <td>';
-                                  if($status==1){
-                                    echo'<span class="badge bg-success">Đã đăng</span>';
-                                  }else{
-                                    echo '<span class="badge bg-danger">Chưa đăng</span>';
+                                  if($status == 1){
+                                      echo '<span class="badge bg-success">Đã đăng</span>';
+                                  } else {
+                                      echo '<span class="badge bg-danger">Chưa đăng</span>';
                                   }
-                                    
-                                  echo'</td>
+                                  echo '</td>
                                   <td>'.$author_name.'</td>
                                   <td>
-                                    <a href="index.php?page=post_detail&id='.$id.'" class="btn btn-sm btn-primary" >Xem</a>
-                                    <a href="index.php?page=edit_post&id=' . $id . '" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="index.php?page=del_post&id=' . $id . '" class="btn btn-sm btn-danger">Xóa</a>
+                                      <a href="index.php?page=post_detail&id='.$id.'" class="btn btn-sm btn-primary">Xem</a>
+                                      <a href="index.php?page=edit_post&id=' . $id . '" class="btn btn-sm btn-primary">Sửa</a>
+                                      <a href="index.php?page=del_post&id=' . $id . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn xóa bài viết này không?\')">Xóa</a>
                                   </td>
                                 </tr>';
-                          }
-                        ?>
+                        }
+                      ?>
                       </tbody>
                     </table>
                   </div>
