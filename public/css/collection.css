@@ -57,21 +57,10 @@ main {
     color: var(--primary-color-bold);
 }
 
-.banner-collection {
-    width: 100%;
-    border-radius: 20px;
-    height: 350px;
-    object-fit: cover;
-}
-
-.collection-main {
-    margin-top: 30px;
-}
-
 .collection-name {
     font-size: 5rem;
     line-height: 6rem;
-    font-family: 'Aclonica', sans-serif;
+    font-family: 'Bona Nova SC', serif;
     color: var(--text-color);
     letter-spacing: 3px;
     margin: 0;
@@ -81,7 +70,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     flex-wrap: wrap;
 }
 
@@ -114,10 +103,10 @@ main {
 
 .collection-desc {
     font-size: 1.6rem;
-    line-height: 2.4rem;
+    line-height: 2.6rem;
     color: var(--text-color);
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: justify;
 }
 
@@ -176,10 +165,6 @@ main {
         margin-top: 10px;
     }
 
-    .banner-collection {
-        margin-top: 20px;
-    }
-
     .filter-menu__body {
         display: none;
     }
@@ -197,10 +182,6 @@ main {
 
     .filter-menu + .filter-menu {
         margin-top: 10px;
-    }
-
-    .banner-collection {
-        margin-top: 20px;
     }
 
     .filter-menu__body {

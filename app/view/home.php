@@ -2,11 +2,9 @@
     <!-- Slideshow hiện trên PC, Tablet -->
     <div class="slideshow-container">
         <div class="slides">
-            <img src="<?=$base_url?>/public/upload/slider/slider1.png" alt="Bông lan trứng muối" class="slide" />
-            <img src="<?=$base_url?>/public/upload/slider/slider2.png" alt="Xôi xoài" class="slide" />
-            <img src="<?=$base_url?>/public/upload/slider/slider4.jpg" alt="Ưu đãi Tết" class="slide" />
-            <img src="<?=$base_url?>/public/upload/slider/slider5.jpg" alt="Ưu đãi Noel" class="slide" />
-            <img src="<?=$base_url?>/public/upload/slider/slider3.png" alt="Bánh mì chả cá" class="slide" />
+            <?php foreach($data['banner'] as $item): ?>
+                <img src="<?=$base_url?>/public/upload/slider/<?=$item['image']?>" alt="<?=$item['tag']?>" class="slide" />
+            <?php endforeach; ?>
         </div>
 
         <a class="slideshow-prev"><i class="fa-solid fa-chevron-left"></i></a>
@@ -172,7 +170,7 @@
     <!-- Section banner khuyến mãi -->
     <section class="promotion-section">
         <div class="promotion-section-box grid wide">
-            <h1 class="promotion-section__title">Được giảm giá 10% cho lần mua hàng đầu tiên</h1>
+            <h1 class="promotion-section__title">Khám phá hương vị tuyệt hảo - Đặc biệt dành riêng cho bạn!</h1>
             <button class="buy-now-btn--bigger">
                 <a class="buy-now-btn__link" href="<?=$base_url?>/collection">
                     <i class="shopping-cart-icon fa-solid fa-cart-shopping"></i>
@@ -182,7 +180,7 @@
         </div>
     </section>
     <section class="sub-promotion-section">
-        <h2 class="sub-promotion-section__title">Thao tác đơn giản. Không cần đăng ký</h2>
+        <h2 class="sub-promotion-section__title">Thao tác đơn giản, nhanh chóng - Trải nghiệm tiện lợi!</h2>
     </section>
 
     <!-- Section sản phẩm khuyến mãi cho PC, Tablet -->
@@ -315,8 +313,10 @@
                                 Ưu Đãi Trong Ngày Giảm Giá 15% Cho Tất Cả Các Loại Bánh
                             </h2>
                             <button class="buy-now-btn">
-                                <a href="<?=$base_url?>/collection">MUA NGAY</a> 
-                                <i class="arrow-icon fa-solid fa-arrow-right-long"></i>
+                                <a class="buy-now-btn__link" href="<?=$base_url?>/collection">
+                                    MUA NGAY
+                                    <i class="arrow-icon fa-solid fa-arrow-right-long"></i>
+                                </a> 
                             </button>
                         </div>
                     </div>

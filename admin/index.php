@@ -1,10 +1,10 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['user']['role_id']) || $_SESSION['user']['role_id'] !== 1) {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 1) {
     echo 'Không có quyền truy cập';
     exit();
 }
+
 ob_start();
 require_once 'vendor/autoload.php';
 require_once '.././app/model/database.php';

@@ -161,8 +161,8 @@
 .promotion-section__title {
     margin: 0;
     color: var(--white-color);
-    font-size: 3.5rem;
-    line-height: 4rem;
+    font-size: 3.2rem;
+    line-height: 4.2rem;
 }
 
 .sub-promotion-section {
@@ -176,8 +176,8 @@
 .sub-promotion-section__title {
     margin: 0;
     color: var(--secondary-color);
-    font-size: 2.5rem;
-    line-height: 2.5rem;
+    font-size: 2.2rem;
+    line-height: 3.2rem;
 }
 /* End promotion section */
 
@@ -365,13 +365,23 @@
         background-position: 250px 100px;
     }
 
+    .promotion-section::before {
+        bottom: -13px;
+    }
+
     .promotion-box {
         padding: 40px 0;
     }
 
+    .promotion-section-box {
+        flex-direction: column;
+        padding: 50px 0;
+    }
+
     .promotion-section__title {
-        font-size: 2.1rem;
-        line-height: 3rem;
+        font-size: 2.4rem;
+        line-height: 3.4rem;
+        margin-bottom: 20px;
     }
 
     .sub-promotion-section {
@@ -380,6 +390,7 @@
 
     .sub-promotion-section__title {
         font-size: 2rem;
+        line-height: 3rem;
     }
 
     .product-slide {
@@ -522,14 +533,17 @@
     }
 
     .promotion-section__title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         text-align: center;
-        line-height: 3rem;
+        line-height: 3.2rem;
         margin-bottom: 25px;
     }
 
     .sub-promotion-section__title {
         font-size: 1.8rem;
+        line-height: 2.8rem;
+        padding: 0 20px;
+        text-align: center;
     }
 
     .promotional-products-section {

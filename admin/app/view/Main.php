@@ -90,7 +90,6 @@ if ($day == 1) {
       <form action="index.php" method="GET">
         <select name="day" id="order-filter" onchange="this.form.submit()" class="form-filter">
           <option value="0" <?php echo ($day == 0) ? 'selected' : ''; ?>>Tất cả</option>
-          <option value="1" <?php echo ($day == 1) ? 'selected' : ''; ?>>Hôm nay</option>
           <option value="2" <?php echo ($day == 2) ? 'selected' : ''; ?>>Tuần này</option>
         </select>
       </form>

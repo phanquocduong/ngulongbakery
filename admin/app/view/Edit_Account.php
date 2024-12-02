@@ -37,7 +37,7 @@ extract($data['editaccountDetail']);
                                         }
                                         ?>
                                         <div class="d-flex justify-content-center">
-                                            <a href="index.php?page=account_detail" class="btn btn-primary">Quay lại</a>
+                                            <a href="index.php?page=accounts" class="btn btn-primary">Quay lại</a>
                                             <button type="submit" name="submit" class="btn btn-danger ms-2">Lưu thông tin</button>
                                         </div>
                                     </div>

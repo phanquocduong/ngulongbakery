@@ -52,9 +52,12 @@
         </button>
         <ul class="header-right__list">
             <li class="header-right__item">
-                <?php if(isset($_SESSION['user']) && ($_SESSION['user']) != ""): ?>
+                <?php if(isset($_SESSION['user']) && (!empty($_SESSION['user']))): ?>
                     <img class="user-avatar" src="<?=$base_url?>/public/upload/avatar/<?=$_SESSION['user']['avatar']?>" alt="<?=$_SESSION['user']['full_name']?>">
                     <div class="user-action">
+                        <?php if($_SESSION['user']['role_id'] == 1):  ?>
+                            <a href="<?=$base_url?>/admin" class="user-action__link">Trang quản trị</a>
+                        <?php endif; ?>
                         <a href="<?=$base_url?>/account" class="user-action__link">Tài khoản</a>
                         <a href="<?=$base_url?>/logout" class="user-action__link">Đăng xuất</a>
                     </div>

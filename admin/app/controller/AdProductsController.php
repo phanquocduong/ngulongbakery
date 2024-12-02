@@ -42,7 +42,7 @@ class AdProductsController
         $this->data['currentPage'] = $currentPage;
         $this->data['searchKeyword'] = $_POST['search_product'] ?? '';
 
-        $this->renderview('products', $this->data);
+        $this->renderview('Products', $this->data);
     }
     public function viewProducts_Detail()
     {
