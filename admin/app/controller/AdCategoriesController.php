@@ -23,7 +23,7 @@ class AdCategoriesController
     }
     public function viewAddCategories()
     {
-        $this->renderview('Add_categories', $this->data);
+        $this->renderview('Add_Categories', $this->data);
     }
     public function addCate(){
         if (isset($_POST['submit'])) {
@@ -54,7 +54,7 @@ class AdCategoriesController
             $editcate = $this->cate->getIdCate($id);
             if (is_array($editcate)) {
                 $this->data['editcate'] = $editcate;
-                $this->renderview('Edit_categories', $this->data);
+                $this->renderview('Edit_Categories', $this->data);
             } else {
                 echo "Not found....";
             }
@@ -95,7 +95,7 @@ class AdCategoriesController
 
             if (is_array($procate)) {
                 $this->data['procate'] = $procate;
-                $this->renderview('Categories_detail', $this->data);
+                $this->renderview('Categories_Detail', $this->data);
             } else {
                 // echo "Danh mục chưa có sản phẩm nào....";
             }
@@ -107,7 +107,7 @@ class AdCategoriesController
 
             if (is_array($postcate)) {
                 $this->data['postcate'] = $postcate;
-                $this->renderview('Categories_detail', $this->data);
+                $this->renderview('Categories_Detail', $this->data);
             } else {
                 // echo "Danh mục chưa có sản phẩm nào....";
             }

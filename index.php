@@ -13,6 +13,7 @@
     require_once 'app/model/DiscountModel.php';
     require_once 'app/model/NewsModel.php';
     require_once 'app/model/CommentsModel.php';
+    require_once 'app/model/BannerModel.php';
     require_once 'app/controller/HomeController.php';
     require_once 'app/controller/ProductController.php';
     require_once 'app/controller/UserController.php';

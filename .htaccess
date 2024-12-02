@@ -1,5 +1,9 @@
 RewriteEngine On
 
+# Bỏ qua khi đường dẫn là /admin
+RewriteCond %{REQUEST_URI} ^/admin [NC]
+RewriteRule ^ - [L]
+
 # Chấp nhận chuỗi có ký tự a-z, A-Z, 0-9, _ và -
 RewriteRule ^([\w\-]+)$ index.php?page=$1 [QSA,L]
 RewriteRule ^([\w\-]+)/([\w\-]+)$ index.php?page=$1&id=$2 [QSA,L]

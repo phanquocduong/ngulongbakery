@@ -1,6 +1,6 @@
 <!-- Start main -->
         <main>
-            <form action="<?=$base_url?>/handle-login" method="POST" id="loginForm" class="login-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Email không tồn tại.') ? '' : 'login-form--active' ?>">
+            <form action="<?=$base_url?>/handle-login" method="POST" id="loginForm" class="login-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Thông tin tài khoản không hợp lệ.') ? '' : 'login-form--active' ?>">
                 <h4 class="login-title">Đăng nhập</h4>
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="errors">
@@ -52,7 +52,7 @@
                 </div>
             </form>
 
-            <form action="<?=$base_url?>/handle-forgot-pass" method="POST" id="forgotPassForm" class="forgot-pass-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Email không tồn tại.') ? 'forgot-pass-form--active' : '' ?>">
+            <form action="<?=$base_url?>/handle-forgot-pass" method="POST" id="forgotPassForm" class="forgot-pass-form <?= (isset($_SESSION['error']) && $_SESSION['error'] == 'Thông tin tài khoản không hợp lệ.') ? 'forgot-pass-form--active' : '' ?>">
                 <h4 class="forgot-pass-title">Quên mật khẩu</h4>
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="errors">

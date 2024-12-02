@@ -48,6 +48,12 @@ main {
     display: none;
 }
 
+.not-found-title {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    text-align: center;
+}
+
 /* Mobile */
 @media (max-width: 739px) {
     main {

@@ -26,7 +26,7 @@ class AdAccountsController{
 
             if (is_array($accountDetail)) {
                 $this->data['accountDetail'] = $accountDetail;
-                $this->renderview('Account_detail', $this->data);
+                $this->renderview('Account_Detail', $this->data);
             } else {
                 echo "Not found....";
             }
@@ -37,7 +37,7 @@ class AdAccountsController{
 
             if (is_array($editaccountDetail)) {
                 $this->data['editaccountDetail'] = $editaccountDetail;
-                $this->renderview('Edit_account', $this->data);
+                $this->renderview('Edit_Account', $this->data);
             } else {
                 echo "Not found....";
             }
