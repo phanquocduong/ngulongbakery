@@ -16,7 +16,8 @@ class CommentsModel {
         $sql = "SELECT comments.*, users.full_name as fullname , users.avatar as avatar
                 FROM comments 
                 JOIN users ON comments.user_id = users.id 
-                WHERE comments.post_id = ?";
+                WHERE comments.post_id = ?
+                ORDER BY comments.id DESC";;
         return $this->db->getAll($sql, [$postId]);
     }
     public function insertComment($data) {

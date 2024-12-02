@@ -23,7 +23,7 @@ class AdCategoriesController
     }
     public function viewAddCategories()
     {
-        $this->renderview('add_categories', $this->data);
+        $this->renderview('Add_categories', $this->data);
     }
     public function addCate(){
         if (isset($_POST['submit'])) {
@@ -54,7 +54,7 @@ class AdCategoriesController
             $editcate = $this->cate->getIdCate($id);
             if (is_array($editcate)) {
                 $this->data['editcate'] = $editcate;
-                $this->renderview('edit_categories', $this->data);
+                $this->renderview('Edit_categories', $this->data);
             } else {
                 echo "Not found....";
             }
