@@ -73,7 +73,8 @@
           'order' => ['icon' => 'fa-shopping-cart', 'label' => 'Đơn hàng'],
           'accounts' => ['icon' => 'fa-users', 'label' => 'Tài khoản'],
           'post_manage' => ['icon' => 'fa-newspaper', 'label' => 'Bài viết'],
-          'voucher' => ['icon' => 'fa-ticket-alt', 'label' => 'Mã giảm giá']
+          'voucher' => ['icon' => 'fa-ticket-alt', 'label' => 'Mã giảm giá'],
+          'banner'=> ['icon'=> 'fa-star', 'label'=> 'Banner'],
         ];
         $currentPage = $_GET['page'] ?? 'main';
 
@@ -105,7 +106,7 @@
           <i class="fa fa-bars"></i>
         </a>
         <div class="navbar-nav align-items-center ms-auto">
-          <div class="nav-item dropdown">
+          <!-- <div class="nav-item dropdown">
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
               <hr class="dropdown-divider" />
               <a href="#" class="dropdown-item">
@@ -122,7 +123,7 @@
               <hr class="dropdown-divider" />
               <a href="#" class="dropdown-item text-center">Xem Thêm</a>
             </div>
-          </div>
+          </div> -->
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               <i class="fa fa-bell me-lg-2"></i>
