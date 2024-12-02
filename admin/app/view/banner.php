@@ -2,7 +2,7 @@
     <div class="bg-light rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Banner List</h6>
-            <a href="">Add New Banner</a>
+            <a href="index.php?page=addBanner" class="btn btn-primary">Thêm Banner</a>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -47,7 +47,7 @@
                         <td>Ưu đãi</td>
                         <td class="badge bg-success" >Hiện</td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="">Sửa</a>
+                            <a class="btn btn-sm btn-primary" href="index.php?page=edit_banner">Sửa</a>
                             <a class="btn btn-sm btn-danger" href="">Xoá</a>
                         </td>
                     </tr>
@@ -59,7 +59,7 @@
                         <td>Khuyến mãi</td>
                         <td class="badge bg-danger" >Ẩn</td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="">Sửa</a>
+                            <a class="btn btn-sm btn-primary" href="index.php?page=edit_banner">Sửa</a>
                             <a class="btn btn-sm btn-danger" href="">Xoá</a>
                         </td>
                     </tr>

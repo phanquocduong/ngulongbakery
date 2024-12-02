@@ -181,6 +181,12 @@ if (isset($_GET['page'])) {
         case 'banner':
             require_once './app/view/banner.php';
             break;
+        case 'edit_banner':
+            require_once './app/view/Edit_banner.php';
+            break;
+        case 'addBanner':
+            require_once './app/view/add_banner.php';
+            break;
         default:
             $main = new MainController();
             $main->viewMain();
