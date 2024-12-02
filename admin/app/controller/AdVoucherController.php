@@ -22,7 +22,7 @@
         }
         public function viewAddVoucher()
         {
-            $this->renderview('Add_voucher', $this->data);
+            $this->renderview('Add_Voucher', $this->data);
         }
         public function addVoucher(){
             if (isset($_POST['submit'])) {
@@ -50,7 +50,7 @@
 
             if (is_array($voucherdetail)) {
                 $this->data['voucherdetail'] = $voucherdetail;
-                $this->renderview('Edit_voucher', $this->data);
+                $this->renderview('Edit_Voucher', $this->data);
             } else {
                 echo "Not found....";
             }

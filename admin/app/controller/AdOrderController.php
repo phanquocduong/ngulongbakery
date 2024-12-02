@@ -28,7 +28,7 @@ class AdOrderController
     }
     public function viewOrder_Detail()
     {
-        $this->renderview('Order_detail', $this->data);
+        $this->renderview('Order_Detail', $this->data);
     }
     public function confirmOder()
     {
