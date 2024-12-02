@@ -35,7 +35,7 @@ class PostModel
     public function getCommentsByPostId($postId)
     {
         $sql = "SELECT comments.*, users.full_name FROM comments 
-                JOIN users ON comments.user_id = users.id 
+                JOIN users ON comments.user_id = users.id   
                 WHERE comments.post_id = ?";
         return $this->db->getAll($sql, [$postId]);
     }

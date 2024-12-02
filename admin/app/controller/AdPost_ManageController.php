@@ -17,11 +17,11 @@ class AdPost_ManageController
     public function viewPost_Manage()
     {
         $this->data['post'] = $this->post->getPost();
-        $this->renderview('post_manage', $this->data);
+        $this->renderview('Post_manage', $this->data);
     }
     public function viewAddPost()
     {
-        $this->renderview('add_post', $this->data);
+        $this->renderview('Add_post', $this->data);
     }
     public function viewPost_Detail()
     {
@@ -30,7 +30,7 @@ class AdPost_ManageController
 
         if (is_array($postdetail)) {
             $this->data['postdetail'] = $postdetail;
-            $this->renderview('post_detail', $this->data);
+            $this->renderview('Post_detail', $this->data);
         } else {
             echo "Not found....";
         }
@@ -41,7 +41,7 @@ class AdPost_ManageController
         $comments = $this->post->getComments($id);
         if (is_array($comments)) {
             $this->data['comments'] = $comments;
-            $this->renderview('comments', $this->data);
+            $this->renderview('Comments', $this->data);
         } else {
             echo "Not found....";
         }
@@ -49,7 +49,7 @@ class AdPost_ManageController
 
     public function viewEditPost()
     {
-        $this->renderview('edit_post', $this->data);
+        $this->renderview('Edit_post', $this->data);
     }
     public function addPost()
     {

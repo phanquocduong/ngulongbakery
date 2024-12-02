@@ -14,7 +14,7 @@
                         <div class="col-12 col -lg-4">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <img src="img/meo.jpg" alt="" class="rounded-circle"
+                                    <img src="../public/upload/avatar/<?=$avatar?>" alt="" class="rounded-circle"
                                         style="width: 100px; height: 100px" />
                                     <h5 class="mt-3"><?php echo $full_name?></h5>
                                     <?php
