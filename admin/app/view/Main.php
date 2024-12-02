@@ -123,26 +123,26 @@ if ($day == 1) {
             </td>
             </tr>';
           } else {
-            foreach ($getOrder as $key => $value) {
-              extract($value);
-              if (strtotime($created_at) !== false) {
+            foreach ($getOrder as $value) {
+              // extract($value);
+              // if (strtotime($value['created_at']) !== false) {
                 // Tạo đối tượng DateTime trực tiếp với múi giờ Việt Nam
-                $date = new DateTime($created_at, new DateTimeZone('Asia/Ho_Chi_Minh'));
+                $date = new DateTime($value['created_at'], new DateTimeZone('Asia/Ho_Chi_Minh'));
                 // Định dạng lại thời gian
                 $vn_format = $date->format('d/m/Y');
-              } else {
-                $vn_format = "Invalid date";
-              }
+              // } else {
+                // $vn_format = "Invalid date";
+              // }
               echo "<tr class='product-row'>";
               echo "<td>" . $stt++ . "</td>";
               echo "
             <td>
-              <a href='index.php?page=order_detail&id=$id'>$customer</a>
+              <a href='index.php?page=order_detail&id=".$value['id']."'>".$value['customer']."</a>
               </td>";
-              echo "<td>" . number_format($total_amount, 0) . " VNĐ</td>";
+              echo "<td>" . number_format($value['total_amount'], 0) . " VNĐ</td>";
               echo "<td>$vn_format</td>";
-              echo "<td>$status</td>";
-              echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
+              echo "<td>" . $value['status'] . "</td>";
+              echo "<td> <a href='index.php?page=order_detail&id=".$value['id']."'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
               echo "</tr>";
             }
           }

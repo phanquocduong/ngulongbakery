@@ -139,7 +139,7 @@ $discountName = $discount ? $discount['code'] : 'Không có mã giảm giá';
                             <section>
 
                               <select id="order-status" class="form-select" name="order-status" aria-label="Default select example">
-                                <option value="Chờ Xác Nhận" id="order-status-0"
+                                <option value="Chờ xác nhận" id="order-status-0"
 
                                   <?php if (strtolower(trim($order['status'])) == strtolower('Chờ xác nhận')) {
                                     echo 'selected';
@@ -147,29 +147,29 @@ $discountName = $discount ? $discount['code'] : 'Không có mã giảm giá';
                                   Chờ Xác Nhận
                                 </option>
 
-                                <option value="Đã Xác Nhận" id="order-status-1"
+                                <option value="Đã xác nhận" id="order-status-1"
                                   <?php if (strtolower(trim($order['status'])) == strtolower('Đã xác nhận')) {
                                     echo 'selected';
                                   } ?>>
                                   Đã Xác Nhận
                                 </option>
 
-                                <option value="Đang Giao" id="order-status-2"
+                                <option value="Đang giao hàng" id="order-status-2"
 
-                                  <?php if (strtolower(trim($order['status'])) == strtolower('Đang giao')) {
+                                  <?php if (strtolower(trim($order['status'])) == strtolower('Đang giao hàng')) {
                                     echo 'selected';
                                   } ?>>
-                                  Đang Giao
+                                  Đang Giao Hàng
                                 </option>
 
-                                <option value="Đã Giao" id="order-status-3"
-                                  <?php if (strtolower(trim($order['status'])) == strtolower('Đã giao')) {
+                                <option value="Giao hàng thành công" id="order-status-3"
+                                  <?php if (strtolower(trim($order['status'])) == strtolower('Giao hàng thành công')) {
                                     echo 'selected';
                                   } ?>>
-                                  Đã Giao
+                                  Giao Hàng Thành Công
                                 </option>
 
-                                <option value="Đã Huỷ" id="order-status-4"
+                                <option value="Đã huỷ" id="order-status-4"
                                   <?php if (strtolower(trim($order['status'])) == strtolower('Đã Huỷ')) {
                                     echo 'selected';
                                   } ?>>
@@ -188,29 +188,6 @@ $discountName = $discount ? $discount['code'] : 'Không có mã giảm giá';
                           <td colspan="6" class="text-center">Không tìm thấy đơn hàng</td>
                         </tr>
                       <?php endif; ?>
-
-                      <!-- <tr>
-                              <td class="text-center">1</td>
-                              <td class="text-center">08-11-2024</td>
-                              <td class="text-center">
-                                <section>
-                                  <select
-                                    id="order-status"
-                                    class="form-select"
-                                    aria-label="Default select example"
-                                  >
-                                    <option value="0">Chờ Xác Nhận</option>
-                                    <option value="1">Đã Xác Nhận</option>
-                                    <option value="2">Đang Giao</option>
-                                    <option value="3">Đã Giao</option>
-                                    <option value="4">Đã Huỷ</option>
-                                  </select>
-                                </section>
-                              </td>
-                              <td class="text-center">Giao tận miệng</td>
-                              <td class="text-center">NGULONG11-11</td>
-                              <td class="text-center">400.000</td>
-                            </tr> -->
                     </tbody>
                   </table>
                 </div>

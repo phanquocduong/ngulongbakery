@@ -1,5 +1,4 @@
 <?php
-// Tương tác với bảng danhmuc
     class CategoryModel {
         private $db;
 

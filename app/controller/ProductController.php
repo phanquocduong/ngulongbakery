@@ -99,7 +99,7 @@
             // Lấy thông tin danh mục
             if (empty($categoryId)) {
                 $category = [
-                    'name' => '',
+                    'name' => 'Tất cả sản phẩm',
                     'description' => ''
                 ];
             } else {
@@ -121,9 +121,11 @@
             if ($currentPage > 1) {
                 $html .= '<a href="#" data-page="'.($currentPage - 1).'" class="pagination-link__icon-prev"><i class="fa-solid fa-chevron-left"></i></a>';
             }
-            for ($i = 1; $i <= $numberPages; $i++) {
-                $activeClass = ($i == $currentPage) ? 'pagination-link--active' : '';
-                $html .= '<a href="#" data-page="'.$i.'" class="pagination-link '.$activeClass.'">'.$i.'</a>';
+            if ($numberPages > 1) {
+                for ($i = 1; $i <= $numberPages; $i++) {
+                    $activeClass = ($i == $currentPage) ? 'pagination-link--active' : '';
+                    $html .= '<a href="#" data-page="'.$i.'" class="pagination-link '.$activeClass.'">'.$i.'</a>';
+                }
             }
             if ($currentPage < $numberPages) {
                 $html .= '<a href="#" data-page="'.($currentPage + 1).'" class="pagination-link__icon-next"><i class="fa-solid fa-chevron-right"></i></a>';

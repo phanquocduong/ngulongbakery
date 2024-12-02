@@ -43,7 +43,7 @@
                             <div class="product-price-box">
                                 <?php if($data['product']['sale']): ?>
                                     <span class="product-price-old"><?=number_format($data['product']['price'], 0, ',', '.')?>đ</span>
-                                    <span class="product-price-current"><?=number_format($data['product']['price'], 0, ',', '.')?>đ</span>
+                                    <span class="product-price-current"><?=number_format($data['product']['sale'], 0, ',', '.')?>đ</span>
                                 <?php else: ?>
                                     <span class="product-price-current"><?=number_format($data['product']['price'], 0, ',', '.')?>đ</span>
                                 <?php endif; ?>

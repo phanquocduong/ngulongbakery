@@ -305,9 +305,14 @@ header {
     color: var(--secondary-color);
     margin: 12px 0 8px;
     line-height: 2.4rem;
-    display: block;
     text-align: center;
     transition: color 0.3s ease;
+    /* Đảm bảo nội dung hiển thị dấu ba chấm nếu vượt quá số dòng */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box; /* Cần cho hiệu ứng dòng bị giới hạn */
+    -webkit-line-clamp: 1; /* Số dòng tối đa (thay đổi nếu cần) */
+    -webkit-box-orient: vertical; /* Hiển thị theo chiều dọc */
 }
 
 .product-item__rating {
@@ -401,7 +406,6 @@ header {
     background-color: var(--primary-color-bold);
     font-size: 1.4rem;
     font-weight: 600;
-    padding: 12px 30px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -409,22 +413,25 @@ header {
     transition: opacity 0.3s ease;
 }
 
-.buy-now-btn a,
-.buy-now-btn--bigger a {
+.buy-now-btn__link {
     color: var(--white-color);
-}
-
-.buy-now-btn--bigger {
-    padding: 15px 35px;
-}
-
-.buy-now-btn:hover,
-.buy-now-btn--bigger:hover {
     opacity: 0.9;
 }
 
-.buy-now-btn__link {
-    color: var(--white-color);
+.buy-now-btn {
+    padding: 12px 0;
+}
+
+.buy-now-btn .buy-now-btn__link {
+    padding: 12px 30px;
+}
+
+.buy-now-btn--bigger {
+    padding: 15px 0;
+}
+
+.buy-now-btn--bigger .buy-now-btn__link {
+    padding: 15px 35px;
 }
 
 .arrow-icon {
