@@ -24,11 +24,11 @@ class AdOrderController
     public function viewOrder()
     {
         $this->data['orders'] = $this->orderModel->getOrder();
-        $this->renderview('order', $this->data);
+        $this->renderview('Order', $this->data);
     }
     public function viewOrder_Detail()
     {
-        $this->renderview('order_detail', $this->data);
+        $this->renderview('Order_detail', $this->data);
     }
     public function confirmOder()
     {

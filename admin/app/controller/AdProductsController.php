@@ -46,15 +46,15 @@ class AdProductsController
     }
     public function viewProducts_Detail()
     {
-        $this->renderview('products_detail', $this->data);
+        $this->renderview('Products_detail', $this->data);
     }
     public function viewAddProducts()
     {
-        $this->renderview('add_products', $this->data);
+        $this->renderview('Add_products', $this->data);
     }
     public function viewEditProducts()
     {
-        $this->renderview('edit_products', $this->data);
+        $this->renderview('Edit_products', $this->data);
     }
     public function getCategories()
     {
