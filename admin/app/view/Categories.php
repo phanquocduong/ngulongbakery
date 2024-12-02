@@ -53,11 +53,15 @@ if ($type == 1) {
                     <div class="input-group">
                         <input class="form-control border-0" type="search" placeholder="Tìm kiếm danh mục"
                             name="search_category" />
-                        <button class="btn" name="button_category">
+                        <!-- <button class="btn" name="button_category">
                             <span class="input-group-text bg-transparent border-0">
                                 <a href="index.php?page=search_category"><i class="fa fa-search"></i></a>
                             </span>
+                        </button> -->
+                        <button type="submit" class="btn" name="button_category">
+                            <i class="fa fa-search"></i>
                         </button>
+
                     </div>
                 </form>
                 <!-- lọc danh mục -->
@@ -75,18 +79,8 @@ if ($type == 1) {
                     });
                 </script>
                 <br />
-                <?php
-                require_once './app/controller/AdCategoriesController.php';
-                require_once './app/model/CategoryModel.php';
-                $categoriesController = new AdCategoriesController();
-                $productsModel = new CategoryModel();
-                if (isset($_POST['button_category']) && !empty($_POST['search_category'])) {
-                    $listCate = $categoriesController->searchCategories($_POST['search_category']);
-                } else {
-                    // Fetch all products if no search term is provided
-                    $listCate = $productsModel->getCate();
-                }
-                ?>
+      
+               
 
                 <!-- form search end -->
                 <?php
@@ -110,7 +104,18 @@ if ($type == 1) {
                 }
                 ?>
 
-
+                <?php
+                require_once './app/controller/AdCategoriesController.php';
+                require_once './app/model/CategoryModel.php';
+                $categoriesController = new AdCategoriesController();
+                $productsModel = new CategoryModel();
+                if (isset($_POST['button_category']) && !empty($_POST['search_category'])) {
+                    $listCate = $categoriesController->searchCategories($_POST['search_category']);
+                } else {
+                    // Fetch all products if no search term is provided
+                    $listCate = $productsModel->getCate();
+                }
+                ?>
 
                 <div class="table-responsive">
                     <table class="table table-hover table-borderless">

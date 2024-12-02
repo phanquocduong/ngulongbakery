@@ -7,8 +7,8 @@
     <!-- form search -->
     <form class="d-none d-md-flex ms-4" method="POST">
       <div class="input-group">
-        <input class="form-control border-0" type="search" placeholder="Tìm kiếm đơn hàng" />
-        <button class="btn">
+        <input class="form-control border-0" type="search" name="search_order" placeholder="Tìm kiếm đơn hàng" />
+        <button class="btn" name="button_order">
           <span class="input-group-text bg-transparent border-0">
             <i class="fa fa-search"></i>
           </span>
