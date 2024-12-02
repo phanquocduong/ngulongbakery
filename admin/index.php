@@ -178,6 +178,9 @@ if (isset($_GET['page'])) {
             $oder = new AdOrderController();
             $oder->confirmOder();
             break;
+        case 'banner':
+            require_once './app/view/banner.php';
+            break;
         default:
             $main = new MainController();
             $main->viewMain();

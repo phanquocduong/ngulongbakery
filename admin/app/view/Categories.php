@@ -101,6 +101,7 @@ if (!empty($searchTerm)) {
                                     <td>' . $stt++ . '</td>
                                     <td>' . $name . '</td>
                                     <td>
+                                    
                                         <img src="../public/upload/category/' . $image . '" alt=""
                                             style="width: 40px; height: 40px" />
                                     </td>

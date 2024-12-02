@@ -48,7 +48,7 @@ extract($data['editcate']);
                                         <label for="parent" class="form-label">Loại danh mục</label>
                                         <select class="form-select" name="type" id="parent">
                                             <!-- <option selected>Chọn danh mục</option> -->
-                                            <option value="Bài viết" <?= ($type == 'Tin tức' ? ' selected' : '')  ?>>Danh Mục Bài Viết</option>
+                                            <option value="Tin tức" <?= ($type == 'Tin tức' ? ' selected' : '')  ?>>Danh Mục Bài Viết</option>
                                             <option value="Sản phẩm" <?= ($type == 'Sản phẩm' ? ' selected' : '') ?>>Danh Mục Sản Phẩm</option>
                                         </select>
                                     </div>
