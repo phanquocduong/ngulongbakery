@@ -89,6 +89,11 @@
             }
 
             echo '<td>
+                      <a href="index.php?page=edit_account&id=' . $id . '"
+                        ><button class="btn btn-info btn-sm btn-color-text">
+                          Sửa
+                        </button></a
+                      >
                       <a href="index.php?page=account_detail&id=' . $id . '"
                         ><button class="btn btn-info btn-sm btn-color-text">
                           Xem chi tiết

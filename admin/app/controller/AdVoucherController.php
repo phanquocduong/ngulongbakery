@@ -18,11 +18,11 @@
         {
             $voucher = new VoucherModel();
             $this->data['voucher'] = $this->voucher->getVoucher();
-            $this->renderview('voucher', $this->data);
+            $this->renderview('Voucher', $this->data);
         }
         public function viewAddVoucher()
         {
-            $this->renderview('add_voucher', $this->data);
+            $this->renderview('Add_Voucher', $this->data);
         }
         public function addVoucher(){
             if (isset($_POST['submit'])) {
@@ -50,7 +50,7 @@
 
             if (is_array($voucherdetail)) {
                 $this->data['voucherdetail'] = $voucherdetail;
-                $this->renderview('edit_voucher', $this->data);
+                $this->renderview('Edit_Voucher', $this->data);
             } else {
                 echo "Not found....";
             }

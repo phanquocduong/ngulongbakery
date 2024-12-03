@@ -42,19 +42,19 @@ class AdProductsController
         $this->data['currentPage'] = $currentPage;
         $this->data['searchKeyword'] = $_POST['search_product'] ?? '';
 
-        $this->renderview('products', $this->data);
+        $this->renderview('Products', $this->data);
     }
     public function viewProducts_Detail()
     {
-        $this->renderview('products_detail', $this->data);
+        $this->renderview('Products_Detail', $this->data);
     }
     public function viewAddProducts()
     {
-        $this->renderview('add_products', $this->data);
+        $this->renderview('Add_Products', $this->data);
     }
     public function viewEditProducts()
     {
-        $this->renderview('edit_products', $this->data);
+        $this->renderview('Edit_Products', $this->data);
     }
     public function getCategories()
     {

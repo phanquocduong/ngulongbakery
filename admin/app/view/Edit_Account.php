@@ -21,7 +21,7 @@ extract($data['editaccountDetail']);
                             <div class="col-12 col -lg-4">
                                 <div class="card">
                                     <div class="card-body text-center">
-                                        <img id="profile-image" name="image" src="img/meo.jpg" alt="Profile Image"
+                                        <img id="profile-image" name="image" src="../public/upload/avatar/<?=$avatar?>" alt="Profile Image"
                                             class="rounded-circle" style="
                                 width: 100px;
                                 height: 100px;
@@ -37,7 +37,7 @@ extract($data['editaccountDetail']);
                                         }
                                         ?>
                                         <div class="d-flex justify-content-center">
-                                            <a href="index.php?page=account_detail" class="btn btn-primary">Quay lại</a>
+                                            <a href="index.php?page=accounts" class="btn btn-primary">Quay lại</a>
                                             <button type="submit" name="submit" class="btn btn-danger ms-2">Lưu thông tin</button>
                                         </div>
                                     </div>

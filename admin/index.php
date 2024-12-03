@@ -1,10 +1,10 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['user']['role_id']) || $_SESSION['user']['role_id'] !== 1) {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 1) {
     echo 'Không có quyền truy cập';
     exit();
 }
+
 ob_start();
 require_once 'vendor/autoload.php';
 require_once '.././app/model/database.php';
@@ -177,6 +177,9 @@ if (isset($_GET['page'])) {
         case 'confirm_Oder':
             $oder = new AdOrderController();
             $oder->confirmOder();
+            break;
+        case 'banner':
+            require_once './app/view/banner.php';
             break;
         default:
             $main = new MainController();
