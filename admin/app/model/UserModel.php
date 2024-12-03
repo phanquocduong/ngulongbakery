@@ -5,10 +5,12 @@ class UserModel{
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
+    //Lấy dữ liệu từ bảng user
     function getUser(){
         $sql = "SELECT * FROM users";
         return $this->db->getAll($sql);
     }
+    // Lấy thông tin user theo id
     public function getIdUser($iduser)
     {
         if ($iduser > 0) {
@@ -20,11 +22,13 @@ class UserModel{
             return null;
         }
     }
+    //Lấy thông tin user theo role
     public function getUserByRole($role)
     {
         $sql = "SELECT * FROM users WHERE role_id = ?";
         return $this->db->getAll($sql, [$role]);
     }
+    //Cập nhật thông tin user
     function updateUser($data) {
         $data['status'] = isset($data['status']) ? intval($data['status']) : 0;
         $data['created_at'] = !empty($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i:s');
@@ -39,7 +43,7 @@ class UserModel{
     //     $param = [$id];
     //     return $this->db->delete($sql, $param);
     // }
-
+    //Kiểm tra khóa ngoại
         public function isForeignKey($id)
     {
         $ordersCount = $this->db->query("SELECT COUNT(*) as count FROM orders WHERE user_id = ?", [$id])->fetch()['count'];
@@ -49,6 +53,7 @@ class UserModel{
         $postsCount = $this->db->query("SELECT COUNT(*) as count FROM posts WHERE author_id = ?", [$id])->fetch()['count'];
         return ($ordersCount > 0 || $commentsCount > 0 || $favoritesCount > 0 || $reviewsCount > 0 || $postsCount > 0);
     }
+    //update status
     public function updateStatus($id, $status){
         $newStatus = ($status == 1) ? 0 : 1;
         $query = "UPDATE users SET status = :status WHERE id = :id";

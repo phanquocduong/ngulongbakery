@@ -71,27 +71,27 @@ class AdAccountsController{
             echo '<script>location.href="index.php?page=accounts"</script>';
         }
     }
-    public function delUser()
-{
-    if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-        $id = $_GET['id'];
-        if ($this->user->isForeignKey($id)) {
-            $this->user->deleteRelatedData($id);
-        }
-        $data = $this->user->getIdUser($id);
-        $file = '../public/upload/avatar/' . $data['avatar'];
-        if (file_exists($file)) {
-            unlink($file);
-        }
+//     public function delUser()
+// {
+//     if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+//         $id = $_GET['id'];
+//         if ($this->user->isForeignKey($id)) {
+//             $this->user->deleteRelatedData($id);
+//         }
+//         $data = $this->user->getIdUser($id);
+//         $file = '../public/upload/avatar/' . $data['avatar'];
+//         if (file_exists($file)) {
+//             unlink($file);
+//         }
 
-        $this->user->deleteUser($id);
-        echo '<script>alert("Đã xóa thành công!")</script>';
-    } else {
-        echo '<script>alert("ID người dùng không hợp lệ hoặc không tồn tại!")</script>';
-    }
+//         $this->user->deleteUser($id);
+//         echo '<script>alert("Đã xóa thành công!")</script>';
+//     } else {
+//         echo '<script>alert("ID người dùng không hợp lệ hoặc không tồn tại!")</script>';
+//     }
 
-    echo '<script>location.href="index.php?page=accounts"</script>';
-}
+//     echo '<script>location.href="index.php?page=accounts"</script>';
+// }
 
     public function blockUser(){
         if (isset($_GET['id']) && isset($_GET['status'])) {
