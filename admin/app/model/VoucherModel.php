@@ -5,10 +5,12 @@ class VoucherModel{
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
+    //Lấy dữ liệu từ bảng voucher
     function getVoucher(){
         $sql = "SELECT * FROM discounts";
         return $this->db->getAll($sql);
     }
+    // Lấy thông tin voucher theo id
     public function getIdVocher($idvoucher)
     {
         if ($idvoucher > 0) {
@@ -20,17 +22,20 @@ class VoucherModel{
             return null;
         }
     }
+    //Xóa voucher
     public function deleteVoucher($idvoucher){
         $sql = "DELETE FROM discounts WHERE id = ?";
         $param = [$idvoucher];
         return $this->db->delete($sql, $param);
     }
+    //Thêm Voucher
     public function insertVoucher($data)
     {
         $sql = "INSERT INTO discounts (code, discount_value, start_date, end_date, usage_limit, min_order_value, active) VALUES (?,?,?,?,?,?,?)";
         $param = [$data['code'], $data['discount_value'], $data['start_date'], $data['end_date'], $data['usage_limit'], $data['min_order_value'], $data['active']];
         return $this->db->insert($sql, $param);
     }
+    //Cập nhật voucher
     function updateVoucher($data) {
         $sql = "UPDATE discounts SET code = ?, discount_value = ?, start_date = ?, end_date = ?, usage_limit = ?, min_order_value = ?, active = ? WHERE id = ?";
         $params = [$data['code'], $data['discount_value'], $data['start_date'], $data['end_date'], $data['usage_limit'], $data['min_order_value'], $data['active'], $data['id']];

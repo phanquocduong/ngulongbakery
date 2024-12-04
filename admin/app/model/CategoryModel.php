@@ -7,6 +7,7 @@ class CategoryModel
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
+    //Lấy thông tin từ bảng categories
     function getCate()
     {
         $sql = "SELECT * FROM categories  order by id desc";
@@ -18,25 +19,30 @@ class CategoryModel
         $sql = "SELECT * FROM categories WHERE type = ?";
         return $this->db->getAll($sql, [$type]);
     }
+    //Lấy danh mục tin tức
     function getPostCate(){
         $sql = "SELECT * FROM categories WHERE type = 'Tin tức' order by id desc";
         return $this->db->getAll($sql);
     }
+    //Lấy thông tin sản phẩm theo id
     public function getIdPro($id)
     {
         $sql = "SELECT * FROM products WHERE category_id = ? LIMIT 1";
         return $this->db->getOne($sql, [$id]);
     }
+    //Lấy thông tin bài viết theo id
     public function getIdPost($id)
     {
         $sql = "SELECT * FROM posts WHERE category_id = ? LIMIT 1";
         return $this->db->getOne($sql, [$id]);
     }
+    //Lấy thông tin bài viết theo id
     public function getIdCate($id)
     {
         $sql = "SELECT * FROM categories WHERE id = ?";
         return $this->db->getOne($sql, [$id]);
     }
+    //Tính sản phẩm theo danh mục
     public function countProductsByCategoryId($categoryId)
     {
         $sql = "SELECT COUNT(*) as count FROM products WHERE category_id = ?";
@@ -45,11 +51,13 @@ class CategoryModel
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return (int)$row['count'];
     }
+    //lấy sản phẩm theo danh mục
     public function getProductsByCategoryId($categoryId)
     {
         $sql = "SELECT * FROM products WHERE category_id = ?";
         return $this->db->getAll($sql, [$categoryId]);
     }
+    //Tính bài viết theo danh mục
     public function countPostsByCategoryId($categoryId)
     {
         $sql = "SELECT COUNT(*) as count FROM posts WHERE category_id = ?";
@@ -58,6 +66,7 @@ class CategoryModel
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return (int)$row['count'];
     }
+    //Lấy bài viết theo danh mục
     public function getPostsByCategoryId($categoryId)
     {
         $sql = "SELECT posts.*, categories.name AS category_name, users.full_name AS author_name
@@ -85,6 +94,7 @@ class CategoryModel
         ];
         return $this->db->update($sql, $params);
     }
+    //Kiểm tra khóa ngoại
     public function isForeignKey($id) {
         $query = "SELECT COUNT(*) as count FROM products WHERE category_id = :id";
         $stmt = $this->db->prepare($query);
