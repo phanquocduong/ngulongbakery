@@ -35,7 +35,7 @@ class AdBannerController{
             $data['image'] = $_FILES['image']['name'];
             $data['status'] = $_POST['status'];
             // Upload ảnh chính
-            $file = '../public/upload/banner/' . $data['image'];
+            $file = '../public/upload/slider/' . $data['image'];
             if (!move_uploaded_file($_FILES['image']['tmp_name'], $file)) {
                 echo '<script>alert("Không thể upload ảnh")</script>';
                 return;
@@ -58,7 +58,7 @@ class AdBannerController{
             $data['status'] = $_POST['status'];
             if (!empty($_FILES['image']['name'])) {
                 $data['image'] = $_FILES['image']['name'];
-                $file = '../public/upload/banner/' . $data['image'];
+                $file = '../public/upload/slider/' . $data['image'];
                 if (!move_uploaded_file($_FILES['image']['tmp_name'], $file)) {
                     echo '<script>alert("Không thể tải lên ảnh.")</script>';
                     exit;

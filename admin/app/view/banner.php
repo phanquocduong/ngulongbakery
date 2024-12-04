@@ -75,7 +75,7 @@
                         ?>
                         <tr>
                             <td><?= $stt++ ?></td>
-                            <td style="width:250px"><img src="../public/upload/banner/<?= $image ?>" alt="Banner Image"
+                            <td style="width:250px"><img src="../public/upload/slider/<?= $image ?>" alt="Banner Image"
                                     style="width: 200px;"></td>
                             <td><?= $tag ?></td>
                             <td class="status  "><?= $status == 1 ? 'Hiện' : 'Ẩn' ?></td>
