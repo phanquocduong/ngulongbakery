@@ -14,8 +14,8 @@
             $this->mailer->isSMTP();
             $this->mailer->Host = 'smtp.gmail.com';
             $this->mailer->SMTPAuth = true;
-            $this->mailer->Username = 'ngulongbakery@gmail.com'; // Thay bằng email thật
-            $this->mailer->Password = 'guca wcef owki vocr'; // Thay bằng mật khẩu ứng dụng
+            $this->mailer->Username = 'ngulongbakery@gmail.com'; 
+            $this->mailer->Password = 'guca wcef owki vocr';
             $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $this->mailer->Port = 587;
         }
@@ -85,7 +85,7 @@
         public function sendCustomerEmailOfOrder($fullname, $email, $address, $phone, $method, $total, $discount, $transportFee, $note, $orderDetails) {
             try {
                 $this->mailer->setFrom('ngulongbakery@gmail.com', 'Ngũ Long Bakery');
-                $this->mailer->addAddress($email); // Gửi tới email khách hàng
+                $this->mailer->addAddress($email);
                 $this->mailer->isHTML(true);
                 $this->mailer->Subject = "Hóa đơn đặt hàng từ Ngũ Long Bakery";
     
@@ -102,7 +102,7 @@
         public function sendAdminEmailOfOrder($fullname, $email, $address, $phone, $method, $total, $discount, $transportFee, $note, $orderDetails) {
             try {
                 $this->mailer->clearAddresses();
-                $this->mailer->addAddress('ngulongbakery@gmail.com'); // Gửi tới admin
+                $this->mailer->addAddress('ngulongbakery@gmail.com');
                 $this->mailer->isHTML(true);
                 $this->mailer->Subject = "Thông báo đơn hàng mới từ Ngũ Long Bakery";
     

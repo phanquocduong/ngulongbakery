@@ -1,4 +1,4 @@
-// Hàm để cập nhật số lượng sản phẩm
+// Cập nhật số lượng sản phẩm
 function updateQuantity(button, delta, stock) {
     const form = button.closest('.quantity-form');
     const quantityInput = form.querySelector('.quantity');
@@ -16,7 +16,6 @@ function updateQuantity(button, delta, stock) {
     if (quantityValue > 0 && quantityValue <= stock) {
         quantityInput.value = quantityValue;
 
-        // Sử dụng Fetch API
         fetch(`${baseUrl}/index.php?page=handle-update-cart`, {
             method: 'POST',
             headers: {
@@ -27,12 +26,7 @@ function updateQuantity(button, delta, stock) {
                 quantity: quantityValue
             })
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json(); // Chuyển đổi response sang JSON
-            })
+            .then(response => response.json())
             .then(data => {
                 const itemTotalElement = document.querySelector(`.line-item-total[data-index="${index}"]`);
                 const grandTotalElement = document.querySelector('.total-price');
@@ -48,8 +42,7 @@ function updateQuantity(button, delta, stock) {
                             .toFixed(0)
                             .replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ';
                 }
-                const cartQuantityElement = document.querySelector('#cart-quantity');
-                cartQuantityElement.textContent = data.cartQuantity;
+                document.querySelector('#cart-quantity').textContent = data.cartQuantity;
             })
             .catch(error => {
                 console.error('Error updating cart:', error);
@@ -57,17 +50,17 @@ function updateQuantity(button, delta, stock) {
     }
 }
 
-// Hàm để giảm số lượng sản phẩm
+// Giảm số lượng sản phẩm
 function decreaseQuantityInCart(button, stock) {
     updateQuantity(button, -1, stock);
 }
 
-// Hàm để tăng số lượng sản phẩm
+// Tăng số lượng sản phẩm
 function increaseQuantityInCart(button, stock) {
     updateQuantity(button, 1, stock);
 }
 
-// Hàm để xóa sản phẩm khỏi giỏ hàng
+// Xóa sản phẩm khỏi giỏ hàng
 function deleteProduct(id) {
     Swal.fire({
         title: 'Bạn có chắc chắn muốn xóa không?',

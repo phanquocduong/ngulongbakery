@@ -311,10 +311,11 @@
 
     .review-card {
         width: 100%;
+        height: 600px;
     }
 
     .review-content {
-        margin-top: 400px;
+        margin-top: 350px;
     }
 
     .review-text {

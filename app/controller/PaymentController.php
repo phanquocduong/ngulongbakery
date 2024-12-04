@@ -17,7 +17,7 @@
         }
 
         private function renderView($view, $css, $js, $data = []) {
-            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1", []);
+            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1");
             require_once 'app/view/template.php';
         }
 
@@ -47,42 +47,51 @@
         }
 
         public function handleApplyDiscount() {
-            if (isset($_POST['code'])) {
-                $code = trim($_POST['code']);
-                $grandTotal = $_POST['total'];
-                $currentDate = date('Y-m-d');
-
-                if (isset($_SESSION['discount_applied']) && $_SESSION['discount_applied'] === true) {
-                    echo json_encode([
-                        'success' => false,
-                        'message' => 'Mã giảm giá đã được áp dụng. Không thể nhập lại!'
-                    ]);
-                    return;
-                }        
-
-                $coupon = $this->discount->validateCoupon($code, $grandTotal, $currentDate);
+            $inputData = json_decode(file_get_contents("php://input"), true);
         
-                if ($coupon) {
-                    $discountValue = $coupon['discount_value'];
-                    $newTotal = round($grandTotal - ($grandTotal * $discountValue / 100), 2);
-
-                    // Lưu trạng thái vào session
-                    $_SESSION['discount_applied'] = true;
-
-                    echo json_encode([
-                        'success' => true,
-                        'message' => "Áp dụng thành công! Bạn được giảm " . $discountValue . "%.",
-                        'newTotal' => $newTotal,
-                        'discountId' => $coupon['id']
-                    ]);
-                } else {
-                    echo json_encode([
-                        'success' => false,
-                        'message' => "Mã giảm giá không hợp lệ hoặc đã hết hạn!"
-                    ]);
-                }
+            $code = isset($inputData['code']) ? trim($inputData['code']) : null;
+            $provisionalPrice = isset($inputData['provisional']) ? $inputData['provisional'] : null;
+        
+            if (!$code || !$provisionalPrice) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Dữ liệu không hợp lệ. Vui lòng thử lại!'
+                ]);
+                return;
+            }
+        
+            $currentDate = date('Y-m-d');
+        
+            if (isset($_SESSION['discount_applied']) && $_SESSION['discount_applied'] == true) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Mã giảm giá đã được áp dụng. Không thể nhập lại!'
+                ]);
+                return;
+            }
+        
+            $coupon = $this->discount->validateCoupon($code, $provisionalPrice, $currentDate);
+        
+            if ($coupon) {
+                $discountValue = $coupon['discount_value'];
+                $newProvisionalPrice = round($provisionalPrice - ($provisionalPrice * $discountValue / 100));
+        
+                $_SESSION['discount_applied'] = true;
+        
+                echo json_encode([
+                    'success' => true,
+                    'message' => "Áp dụng thành công! Bạn được giảm " . $discountValue . "%.",
+                    'newProvisionalPrice' => $newProvisionalPrice,
+                    'discountId' => $coupon['id']
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => "Mã giảm giá không hợp lệ hoặc đã hết hạn!"
+                ]);
             }
         }
+        
 
         public function handlePayment($base_url) {
             $idClient = $_SESSION['user']['id'];
@@ -93,8 +102,7 @@
                 header("Location: $base_url/payment");
                 exit;
             }
-            $phone = trim($_POST['phone']);
-            $phone = preg_replace('/\D/', '', $phone);
+            $phone = preg_replace('/\D/', '', trim($_POST['phone']));
             if (strlen($phone) < 10 || strlen($phone) > 11 || !ctype_digit($phone) || !preg_match('/^(03|05|07|08|09)\d+$/', $phone)) {
                 $_SESSION['error'] = "Số điện thoại không hợp lệ";
                 header("Location: $base_url/payment");
@@ -109,10 +117,11 @@
             $note = trim($_POST['note']) ?? "";
             $discount = $this->discount->getDiscount($_POST['discount-id']);
             $transportFee = $_POST['transport-fee'];
+            
             $orderId = $this->order->createOrder($idClient, $fullname, $email, $phone, $address, $total, $method, $note, $discount['id']);
         
             if (isset($_SESSION['cart']) && (count($_SESSION['cart']) > 0)) {
-                $orderDetails = ""; // Chuỗi để tạo thông tin sản phẩm trong hóa đơn
+                $orderDetails = "";
                 foreach ($_SESSION['cart'] as $item) {
                     $this->order->createOrderDetails($orderId, $item['price'], $item['quantity'], $item['name'], $item['image']);
                     $lineTotal = $item['price'] * $item['quantity'];

@@ -1,22 +1,12 @@
-// Chọn tất cả các icon chỉnh sửa
+// Chỉnh sửa thông tin cá nhân
 const editIcons = document.querySelectorAll('.edit-icon-blue');
-
-// Lặp qua mỗi icon chỉnh sửa
 editIcons.forEach(icon => {
     icon.addEventListener('click', function () {
-        // Tìm đến input cùng dòng với icon được bấm
         const input = this.previousElementSibling;
-
-        // Thêm class để làm nổi bật outline khi focus
         input.classList.add('editable');
-
-        // Bỏ thuộc tính readonly để có thể focus và chỉnh sửa
         input.removeAttribute('readonly');
-
-        // Focus vào input
         input.focus();
 
-        // Khi input mất focus, khóa lại và bỏ outline
         input.addEventListener('blur', () => {
             input.setAttribute('readonly', true);
             input.classList.remove('editable');
@@ -24,15 +14,14 @@ editIcons.forEach(icon => {
     });
 });
 
+// Chuyển đổi các tabs
 function setActiveMenu(elm, menuClass, itemClass, menuActiveClass, contentActiveClass, contentId) {
     const menuItems = document.getElementsByClassName(menuClass);
     const mainItems = document.getElementsByClassName(itemClass);
 
-    // Loại bỏ activeClass khỏi tất cả các mục
     Array.from(menuItems).forEach(item => item.classList.remove(menuActiveClass));
     Array.from(mainItems).forEach(item => item.classList.remove(contentActiveClass));
 
-    // Thêm activeClass vào mục đã chọn
     elm.classList.add(menuActiveClass);
     document.getElementById(contentId).classList.add(contentActiveClass);
 }
@@ -49,6 +38,7 @@ function openFavoriteProducts(elm) {
     setActiveMenu(elm, 'sidebar-menu__item', 'main-information', 'sidebar-menu__item--active', 'main-information--active', 'favorite-products');
 }
 
+// Popup đánh giá
 const popup = document.getElementById('popup');
 function openReviewModal(orderId) {
     popup.style.display = 'flex';
@@ -56,27 +46,24 @@ function openReviewModal(orderId) {
 }
 
 const closePopupBtn = document.getElementById('closePopupBtn');
-// Close popup when close button is clicked
 closePopupBtn.addEventListener('click', () => {
     popup.style.display = 'none';
 });
-// Close popup when clicking outside the popup content
 window.addEventListener('click', e => {
     if (e.target === popup) {
         popup.style.display = 'none';
     }
 });
 
-// Handle form submission (you can modify this as needed)
+// Xử lý submit form đánh giá
 document.getElementById('ratingForm').addEventListener('submit', e => {
     e.preventDefault();
     const rating = document.querySelector('input[name="rating"]:checked');
-    const comment = document.getElementById('comment').value;
-    if (rating && comment) {
+    if (rating) {
         document.getElementById('ratingForm').submit();
     } else {
         Swal.fire({
-            title: 'Vui lòng chọn sao và nhập nhận xét.',
+            title: 'Vui lòng chọn sao đánh giá',
             icon: 'error',
             showConfirmButton: true
         });
@@ -113,9 +100,9 @@ function buyBackOrder(id) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const orderContainer = document.querySelector('#orders');
-    let num = 1; // Khai báo num với giá trị mặc định là 1
+    let num = 1;
 
-    // Hàm loadReviews: Tải danh sách đánh giá từ server
+    // Tải danh sách đánh giá từ server
     function loadOrders() {
         fetch(`${baseUrl}/index.php?page=handle-orders-display&num=${num}`)
             .then(response => response.json())
@@ -125,22 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Lắng nghe sự kiện phân trang
                     const paginationContainer = document.querySelector('.pagination');
                     paginationContainer.addEventListener('click', function (e) {
+                        e.preventDefault();
                         if (e.target.tagName === 'A') {
-                            e.preventDefault();
-                            num = e.target.getAttribute('data-page'); // Cập nhật num khi người dùng click vào phân trang
-                            loadOrders(); // Tải lại danh sách đánh giá với num mới
+                            num = e.target.getAttribute('data-page');
                         }
                         if (e.target.tagName === 'I') {
-                            e.preventDefault();
                             num = e.target.parentElement.getAttribute('data-page');
-                            loadOrders();
                         }
+                        loadOrders();
                     });
-                } else {
-                    console.error(data.message); // Log lỗi nếu có
                 }
             })
-            .catch(error => console.error('Error:', error)); // Log lỗi nếu có
+            .catch(error => console.error('Error:', error));
     }
 
     // Render đánh giá vào DOM
@@ -234,6 +217,5 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Tải danh sách lịch sử đơn hàng ban đầu
     loadOrders();
 });

@@ -17,7 +17,7 @@
         }
 
         private function renderView($view, $css, $js, $data = null, $numberPages = null) {
-            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1", []);
+            $categories = $this->category->getCategories("WHERE type = 'Sản phẩm' AND status = 1");
             require_once 'app/view/template.php';
         }
 
@@ -30,28 +30,37 @@
             $password = trim($_POST['password']);
             $repassword = trim($_POST['repassword']);
             $email = trim($_POST['email']);
+
+            $errors = [];
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = "Email không hợp lệ!";
+            }
             if ($password !== $repassword) {
-                $_SESSION['error']['repassword'] = "Mật khẩu nhập lại không đúng!";
+                $errors['repassword'] = "Mật khẩu nhập lại không đúng!";
             }
-            $checkMail = $this->user->checkMail($email);
-            if ($checkMail) {
-                $_SESSION['error']['email'] = "Email đã tồn tại, vui lòng nhập email khác!";
+            if ($this->user->getUserByEmail($email)) {
+                $errors['email'] = "Tài khoản đã tồn tại, vui lòng nhập email khác!";
             }
-            if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+            if (!empty($errors)) {
+                $_SESSION['error'] = $errors;
                 $this->renderView('register', $css, $js);
+                return;
+            }
+
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            // Tạo chuỗi mã ngẫu nhiên
+            $verificationCode = bin2hex(random_bytes(32)); 
+
+            $result = $this->user->register($fullname, $email, $hashedPassword, $verificationCode);
+
+            if ($result) {
+                $this->mailController->sendVerificationEmail($email, $verificationCode);
+                $_SESSION['info'] = "Vui lòng kiểm tra email để xác thực tài khoản";
+                header("Location: $base_url/login");
+                exit;
             } else {
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                $verificationCode = bin2hex(random_bytes(32));
-                $result = $this->user->register($fullname, $email, $hashedPassword, $verificationCode);
-                if ($result) {
-                    $this->mailController->sendVerificationEmail($email, $verificationCode);
-                    $_SESSION['info'] = "Vui lòng kiểm tra email để xác thực tài khoản";
-                    header("Location: $base_url/login");
-                    exit;
-                } else {
-                    $_SESSION['error']['unknown'] = "Có lỗi xảy ra. Vui lòng thử lại!";
-                    $this->renderView('register', $css, $js);
-                }
+                $_SESSION['error']['unknown'] = "Có lỗi xảy ra. Vui lòng thử lại!";
+                $this->renderView('register', $css, $js);
             }
         }   
 
@@ -76,19 +85,18 @@
             $password = trim($_POST['customerPassword']);
             $rememberMe = isset($_POST['rememberMe']) ? true : false;
             
-            // Lấy thông tin người dùng từ cơ sở dữ liệu theo email
             $user = $this->user->getUserByEmail($email);
             
-            // Kiểm tra mật khẩu
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user'] = $user;
-                // Nếu chọn "Nhớ mật khẩu"
+
                 if ($rememberMe) {
                     // Tạo chuỗi dữ liệu lưu trữ trong cookie
                     $cookieValue = base64_encode(json_encode(['email' => $email, 'password' => $password]));
                     // Thiết lập cookie, hạn 30 ngày
                     setcookie('rememberMe', $cookieValue, time() + (30 * 24 * 60 * 60), "/");
                 }
+
                 if (isset($_SESSION['redirectto'])){
                     header("Location: $_SESSION[redirectto]");
                     unset($_SESSION['redirectto']);
@@ -102,7 +110,7 @@
                     }
                 }
             } else {
-                $_SESSION['error'] = "Thông tin đăng nhập không hợp lệ.";
+                $_SESSION['error']['login'] = "Thông tin đăng nhập không hợp lệ.";
                 $this->renderView('login', $css, $js);
             }
         }
@@ -115,19 +123,21 @@
                 $email = $cookieData['email'];
                 $password = $cookieData['password'];
         
-                // Lấy thông tin người dùng từ cơ sở dữ liệu
                 $user = $this->user->getUserByEmail($email);
         
-                // Kiểm tra mật khẩu
                 if ($user && password_verify($password, $user['password'])) {
                     $_SESSION['user'] = $user;
-                    // Điều hướng đến trang phù hợp
-                    if ($_SESSION['user']['role_id'] == 1) {
-                        header("Location: $base_url/admin");
-                        exit;
+                    if (isset($_SESSION['redirectto'])){
+                        header("Location: $_SESSION[redirectto]");
+                        unset($_SESSION['redirectto']);
                     } else {
-                        header("Location: $base_url");
-                        exit;
+                        if ($_SESSION['user']['role_id'] == 1) {
+                            header("Location: $base_url/admin");
+                            exit;
+                        } else {
+                            header("Location: $base_url");
+                            exit;
+                        }
                     }
                 }
             }
@@ -135,45 +145,45 @@
 
         public function handleForgotPassword($base_url, $css, $js) {
             $email = trim($_POST['email']);
-            // Kiểm tra xem email có tồn tại trong cơ sở dữ liệu không
             $user = $this->user->getUserByEmail($email);
+
             if ($user) {
-                // Tạo mã xác thực để đặt lại mật khẩu
                 $resetCode = bin2hex(random_bytes(32));
-                // Lưu mã xác thực vào cơ sở dữ liệu (có thể trong bảng users)
                 $this->user->saveResetCode($email, $resetCode);
-                // Gửi email đặt lại mật khẩu
                 $this->mailController->sendResetPasswordEmail($email, $resetCode);
+
                 $_SESSION['info'] = "Vui lòng kiểm tra email của bạn để đặt lại mật khẩu.";
                 header("Location: $base_url/login");
                 exit;
             } else {
-                $_SESSION['error'] = "Thông tin tài khoản không hợp lệ.";
+                $_SESSION['error']['forgot'] = "Thông tin tài khoản không hợp lệ.";
                 $this->renderView('login', $css, $js);
             }
         }
 
         public function viewResetPassword($css, $js) {
-            $this->renderView('reset-password', $css, $js);
+            $this->renderView('change-password', $css, $js);
         }
 
         public function handleResetPassword($base_url, $css, $js) {
             $resetCode = $_POST['resetCode'];
-            $newPassword = trim($_POST['newPassword']);
-            $confirmPassword = trim($_POST['confirmPassword']);
+            $newPassword = trim($_POST['resetPassword']);
+            $confirmPassword = trim($_POST['confirmResetPassword']);
         
             if ($newPassword !== $confirmPassword) {
-                $_SESSION['error'] = "Mật khẩu không khớp!";
-                $this->renderView('reset-password', $css, $js);
+                $data['resetCode'] = $resetCode;
+                $_SESSION['error']['reset'] = "Mật khẩu không khớp!";
+                $this->renderView('change-password', $css, $js, $data);
             } else {
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
                 if ($this->user->resetPassword($resetCode, $hashedPassword)) {
                     $_SESSION['success'] = "Mật khẩu đã được đặt lại thành công!";
                     header("Location: $base_url/login");
                     exit;
                 } else {
-                    $_SESSION['error'] = "Mã xác thực không hợp lệ hoặc đã hết hạn.";
-                    $this->renderView('reset-password', $css, $js);
+                    $_SESSION['error']['reset'] = "Mã xác thực không hợp lệ hoặc đã hết hạn.";
+                    $this->renderView('change-password', $css, $js);
                 }
             }
         }        
@@ -195,6 +205,7 @@
             $fullname = trim($_POST['fullname']);
             $phone = trim($_POST['phone']);
             $address = trim($_POST['address']);
+
             if ($_FILES['avatar']['name'] != '') {
                 $avatar = time() . '_' . $_FILES['avatar']['name'];
                 $targetFilePath = './public/upload/avatar/' . $avatar;
@@ -211,9 +222,12 @@
                     exit;
                 }
             } else {
-                $avatar = $_SESSION['user']['avatar'];
+                $avatar = time() . '_' . $_SESSION['user']['avatar'];
             }
+
             $result = $this->user->updateInformation($_SESSION['user']['id'], $fullname, $phone, $address, $avatar);
+
+            // Xử lý upload ảnh
             if ($result) {
                 $uploadSuccess = true;
                 if ($_FILES['avatar']['name'] != '') {
@@ -224,10 +238,12 @@
                     }
                 }
                 if ($uploadSuccess) {
+                    // Cập nhật lại thông tin của session user
                     $_SESSION['user']['full_name'] = $fullname;
                     $_SESSION['user']['phone'] = $phone;
                     $_SESSION['user']['address'] = $address;
                     $_SESSION['user']['avatar'] = $avatar;
+
                     $_SESSION['success'] = "Cập nhật thông tin thành công";
                     header("Location: $base_url/account");
                     exit;
@@ -249,25 +265,28 @@
 
         public function handleChangePassword($base_url, $css, $js) {
             $currentPassword = trim($_POST['currentPassword']);
+
             if (password_verify($currentPassword, $_SESSION['user']['password'])) {
                 $newPassword = trim($_POST['newPassword']);
-                $confirmPassword = trim($_POST['confirmPassword']);
-                if ($newPassword !== $confirmPassword) {
-                    $_SESSION['error'] = "Mật khẩu nhập lại không khớp!";
+                $confirmPassword = trim($_POST['confirmNewPassword']);
+
+                if ($newPassword != $confirmPassword) {
+                    $_SESSION['error']['change'] = "Mật khẩu nhập lại không khớp!";
                     $this->renderView('change-password', $css, $js);
                 } else {
                     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                    
                     if ($this->user->changePassword($_SESSION['user']['id'], $hashedPassword)) {
                         $_SESSION['success'] = "Mật khẩu đã được cập nhật thành công!";
                         header("Location: $base_url/account");
                         exit;
                     } else {
-                        $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại";
+                        $_SESSION['error']['change'] = "Có lỗi xảy ra, vui lòng thử lại";
                         $this->renderView('change-password', $css, $js);
                     }
                 }
             } else {
-                $_SESSION['error'] = "Mật khẩu hiện tại không đúng!";
+                $_SESSION['error']['change'] = "Mật khẩu hiện tại không đúng!";
                 $this->renderView('change-password', $css, $js);
             }
         }        

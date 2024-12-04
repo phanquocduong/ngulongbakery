@@ -31,7 +31,6 @@
         }
 
         public function handleProductsDisplay() {
-            // Lấy các tham số từ URL
             $num = isset($_GET['num']) ? (int)$_GET['num'] : 1;
             $limit = 12;
             $start = ($num - 1) * $limit;
@@ -40,11 +39,10 @@
             $prices = isset($_GET['price']) ? explode(',', $_GET['price']) : [];
             $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
         
-            // Mảng chứa các điều kiện lọc
             $conditions = [];
             $params = [];
         
-            // Điều kiện lọc theo category_id
+            // Điều kiện lọc theo danh mục
             if ($categoryId != 0) {
                 $conditions[] = "category_id = ?";
                 $params[] = $categoryId;
@@ -67,17 +65,16 @@
                     }
                 }
                 if (!empty($priceConditions)) {
-                    $conditions[] = ' (' . implode(' OR ', $priceConditions) . ') ';
+                    $conditions[] = ' ('.implode(' OR ', $priceConditions).') ';
                 }
             }
         
-            // Xây dựng điều kiện SQL
             $whereConditions = '';
             if (!empty($conditions)) {
-                $whereConditions = 'WHERE ' . implode(' AND ', $conditions) . ' AND status = 1 AND stock_quantity > 0';
+                $whereConditions = 'WHERE '.implode(' AND ', $conditions).' AND status = 1 AND stock_quantity > 0';
             }
 
-            // Xử lý điều kiện sắp xếp
+            // Điều kiện lọc theo thứ tự sắp xếp
             $order = '';
             if ($sort == 'price_asc') {
                 $order = "price ASC";
@@ -87,16 +84,14 @@
                 $order = "name ASC";
             } elseif ($sort == 'name_desc') {
                 $order = "name DESC";
-            } elseif ($sort == 'featured') {
-                $order = "views DESC";
+            } elseif ($sort == 'soldest') {
+                $order = "sold DESC";
             }
         
-            // Truy vấn sản phẩm
             $products = $this->product->getProducts($whereConditions, $params, $order, $start, $limit);
             $totalProducts = $this->product->getProductCount($whereConditions, $params);
             $numberPages = ceil($totalProducts / $limit);
 
-            // Lấy thông tin danh mục
             if (empty($categoryId)) {
                 $category = [
                     'name' => 'Tất cả sản phẩm',
@@ -140,22 +135,24 @@
                     $_SESSION['error'] = "Không có sản phẩm này";
                     header("Location: $base_url");
                     exit;
-                } else {
-                    $this->product->increaseProductViews($_GET['id']);
-                    $data['relatedProducts'] = $this->product->getRelatedProducts($data['product']['category_id'], $_GET['id'], $data['product']['tags']);
-                    if (isset($_SESSION['user'])) {
-                        $favorite =  $this->favorite_products->getFavoriteProduct($_SESSION['user']['id'], $_GET['id']);
-                        if ($favorite) {
-                            $data['favorite'] = $favorite;
-                        }
-                    }
-                    $this->renderView('product-details', $css, $js, $data);
                 }
+                $this->product->increaseProductViews($_GET['id']);
+                $data['relatedProducts'] = $this->product->getRelatedProducts($data['product']['category_id'], $_GET['id'], $data['product']['tags']);
+                if (isset($_SESSION['user'])) {
+                    $favorite =  $this->favorite_products->getFavoriteProduct($_SESSION['user']['id'], $_GET['id']);
+                    if ($favorite) {
+                        $data['favorite'] = $favorite;
+                    }
+                }
+                $this->renderView('product-details', $css, $js, $data);
+            } else {
+                header("Location: $base_url");
+                exit;
             }
         }   
 
         public function viewSearchProducts($css, $js) {
-            $this->viewProducts('search-products', $css, $js, 'WHERE (name LIKE "%'.$_GET['keyword'].'%" OR tags LIKE "%'.$_GET['keyword'].'%") AND status = 1 AND stock_quantity > 0', []);
+            $this->viewProducts('search-products', $css, $js, 'WHERE (name LIKE "%'.$_GET['keyword'].'%" OR tags LIKE "%'.$_GET['keyword'].'%") AND status = 1 AND stock_quantity > 0');
         }
 
         public function handleFavoriteProduct() {
@@ -163,7 +160,7 @@
             $productId = $data['productId'] ?? null;
             $userId = $data['userId'] ?? null;
             if (!$productId || !$userId) {
-                echo json_encode(['success' => false, 'error' => 'Dữ liệu không hợp lệ.']);
+                echo json_encode(['success' => false]);
                 exit;
             }
             $favorite = $this->favorite_products->getFavoriteProduct($userId, $productId);

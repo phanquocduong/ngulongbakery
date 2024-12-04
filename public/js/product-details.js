@@ -1,4 +1,4 @@
-// Hàm toggleFavorite: Thêm hoặc bỏ yêu thích cho sản phẩm
+// Thêm hoặc bỏ yêu thích cho sản phẩm
 function toggleFavorite(productId, userId) {
     fetch(`${baseUrl}/index.php?page=handle-favorite-product`, {
         method: 'POST',
@@ -8,108 +8,85 @@ function toggleFavorite(productId, userId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                const heartIcon = document.querySelector(`.heart-icon`);
-                heartIcon.classList.toggle('heart-icon--fill', data.isFavorite); // Thay đổi màu icon yêu thích
-            } else {
-                alert(data.error); // Lỗi nếu có
+                document.querySelector(`.heart-icon`).classList.toggle('heart-icon--fill', data.isFavorite);
             }
         })
-        .catch(error => console.error('Error:', error)); // Log lỗi nếu có
+        .catch(error => console.error('Error:', error));
 }
 
-// Hàm changeDisplayImage: Thay đổi ảnh hiển thị khi click vào ảnh nhỏ
+// Thay đổi ảnh hiển thị khi click vào ảnh nhỏ
 function changeDisplayImage(image) {
     const displayImage = document.querySelector('.main-image');
     const extraImages = document.querySelectorAll('.extra-image');
 
-    // Loại bỏ lớp sáng cho tất cả ảnh nhỏ
     for (let extraImage of extraImages) {
         extraImage.classList.remove('extra-image--bright');
     }
 
-    // Thêm lớp sáng cho ảnh được click
     image.classList.add('extra-image--bright');
 
-    // Thêm lớp fade-in để tạo hiệu ứng chuyển ảnh
     displayImage.classList.add('fade-in');
     displayImage.style.opacity = 0;
 
-    // Đổi ảnh sau một khoảng thời gian để tạo hiệu ứng mượt mà
     setTimeout(() => {
         displayImage.style.backgroundImage = `url('${image.src}')`;
         displayImage.style.opacity = 1;
     }, 100);
 
-    // Loại bỏ lớp fade-in sau khi hiệu ứng hoàn thành
     setTimeout(() => {
         displayImage.classList.remove('fade-in');
     }, 600);
 }
 
-// Hàm activeTab: Đổi tab khi người dùng click vào tab
+// Đổi tab khi người dùng click vào tab
 function activeTab(tab, id) {
     const allTabs = document.querySelectorAll('.tab-item');
 
-    // Loại bỏ lớp active cho tất cả các tab
     for (let tab of allTabs) {
         tab.classList.remove('tab-item--active');
     }
-
-    // Thêm lớp active cho tab hiện tại
     tab.classList.add('tab-item--active');
 
     const allTabsContent = document.querySelectorAll('.tab-content');
-
-    // Loại bỏ lớp active cho tất cả các content
     for (let tabContent of allTabsContent) {
         tabContent.classList.remove('tab-content--active');
     }
-
-    // Hiển thị nội dung của tab hiện tại
-    const tabContentActive = document.getElementById(id);
-    tabContentActive.classList.add('tab-content--active');
+    document.getElementById(id).classList.add('tab-content--active');
 }
 
-// Hàm updateQuantity: Cập nhật số lượng sản phẩm
+// Cập nhật số lượng sản phẩm
 function updateQuantity(num) {
     let quantity = document.querySelector('.quantity-selection__action-edit');
 
     if (num > 0) {
-        quantity.value = ++quantity.value; // Tăng số lượng
+        quantity.value = ++quantity.value;
     }
+
     if (num < 0 && quantity.value > 1) {
-        quantity.value = --quantity.value; // Giảm số lượng nếu số lượng > 1
+        quantity.value = --quantity.value;
     }
 }
 
-// Hàm openImageModal: Mở modal hiển thị ảnh lớn
+// Mở modal hiển thị ảnh lớn
 function openImageModal(image) {
     const imageModalDisplay = document.querySelector('.image-modal__display');
-    const imageModal = imageModalDisplay.parentElement;
-
-    // Kiểm tra nếu ảnh có background-image, lấy URL từ src hoặc background-image
     let imageUrl = image.style.backgroundImage ? image.style.backgroundImage.slice(5, image.style.backgroundImage.length - 2) : image.src;
 
-    // Cập nhật ảnh hiển thị trong modal
     imageModalDisplay.src = imageUrl;
-
-    // Thêm lớp để hiển thị modal
-    imageModal.classList.add('image-modal--active');
+    imageModalDisplay.parentElement.classList.add('image-modal--active');
 }
 
-// Hàm closeImageModal: Đóng modal khi người dùng click đóng
+// Đóng modal khi người dùng click đóng
 function closeImageModal() {
-    const imageModal = document.querySelector('.image-modal');
-    imageModal.classList.remove('image-modal--active');
+    document.querySelector('.image-modal').classList.remove('image-modal--active');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const reviewContainer = document.querySelector('#reviews');
     const productId = document.getElementById('productId').value;
     const reviewsTab = document.getElementById('reviews-tab');
-    let num = 1; // Khai báo num với giá trị mặc định là 1
+    let num = 1;
 
-    // Hàm loadReviews: Tải danh sách đánh giá từ server
     function loadReviews() {
         fetch(`${baseUrl}/index.php?page=handle-product-reviews-display&product-id=${productId}&num=${num}`)
             .then(response => response.json())
@@ -121,22 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Lắng nghe sự kiện phân trang
                     const paginationContainer = document.querySelector('.pagination');
                     paginationContainer.addEventListener('click', function (e) {
+                        e.preventDefault();
                         if (e.target.tagName === 'A') {
-                            e.preventDefault();
-                            num = e.target.getAttribute('data-page'); // Cập nhật num khi người dùng click vào phân trang
-                            loadReviews(); // Tải lại danh sách đánh giá với num mới
+                            num = e.target.getAttribute('data-page');
                         }
                         if (e.target.tagName === 'I') {
-                            e.preventDefault();
                             num = e.target.parentElement.getAttribute('data-page');
-                            loadReviews();
                         }
+                        loadReviews();
                     });
-                } else {
-                    console.error(data.message); // Log lỗi nếu có
                 }
             })
-            .catch(error => console.error('Error:', error)); // Log lỗi nếu có
+            .catch(error => console.error('Error:', error));
     }
 
     // Render đánh giá vào DOM
@@ -167,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Hàm renderStars: Render sao đánh giá sản phẩm
+    // Render sao đánh giá sản phẩm
     function renderStars(rating) {
         let starsHtml = '';
         for (let i = 1; i <= 5; i++) {
@@ -176,6 +149,5 @@ document.addEventListener('DOMContentLoaded', () => {
         return starsHtml;
     }
 
-    // Tải danh sách đánh giá ban đầu
     loadReviews();
 });

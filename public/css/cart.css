@@ -32,7 +32,8 @@ main {
     font-size: 2rem;
     color: var(--black-color);
     display: block;
-    text-align: right;
+    text-align: center;
+    cursor: pointer;
     position: relative;
     top: 4px;
 }
@@ -155,7 +156,7 @@ main {
 }
 
 .order-item + .order-item {
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .cart-empty {

@@ -8,7 +8,7 @@
                         style="
                             border-image-source: url(https://t4.ftcdn.net/jpg/08/44/76/91/360_F_844769159_YK4xuiJGP0fmBumMpXVUEk9I2LDEhAEX.jpghttps://as1.ftcdn.net/v2/jpg/06/44/71/32/1000_F_644713254_L42ARbrHjlRKNHnG3ryhwu1G2eZS12g0.jpg);
                         ">
-                        <h1 style="color: rgb(240, 179, 81)">LIÊN HỆ</h1>
+                        <h1 style="color: var(--secondary-color)">LIÊN HỆ</h1>
                         <input
                             type="email"
                             name="email"
