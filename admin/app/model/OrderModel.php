@@ -73,17 +73,4 @@ class OrderModel
 
         return $this->db->query($sql, [$status, $id]);
     }
-
-    // lấy đơn hàng theo ngày
-    public function getOrderToday()
-    {
-        $sql = "SELECT * FROM orders WHERE DATE(created_at) = CURDATE()";
-        return $this->db->getOne($sql);
-    }
-    // lấy đơn hàng theo tuần
-    public function getOrderInWeek()
-    {
-        $sql = "SELECT * FROM orders WHERE YEARWEEK(created_at, 1) = YEARWEEK(CURDATE(), 1)";
-        return $this->db->getAll($sql);
-    }
 }

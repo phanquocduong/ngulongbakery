@@ -6,21 +6,21 @@
             $this->order = new OrderModel();
         }
 
-        function cancelOrder($base_url) {
+        function cancelOrder() {
             if (isset($_GET['id'])) {
                 if($this->order->changeStatus($_GET['id'], 'Đã huỷ')) {
                     $_SESSION['success'] = "Huỷ đơn hàng thành công";
-                    header("Location: $base_url/account");
+                    header("Location: index.php?page=account");
                     exit;
                 }
             }
         }
 
-        function buyBackOrder($base_url) {
+        function buyBackOrder() {
             if (isset($_GET['id'])) {
                 if($this->order->changeStatus($_GET['id'], 'Chờ xác nhận')) {
                     $_SESSION['success'] = "Đặt lại đơn hàng thành công";
-                    header("Location: $base_url/account");
+                    header("Location: index.php?page=account");
                     exit;
                 }
             }
@@ -29,7 +29,7 @@
         public function handleOrdersDisplay() {
             $userId = $_SESSION['user']['id'];
             $num = isset($_GET['num']) ? (int)$_GET['num'] : 1;
-            $limit = 10;
+            $limit = 3;
             $start = ($num - 1) * $limit;
 
             $orders = $this->order->getOrders('WHERE user_id = ?', [$userId], 'id DESC', $start, $limit);

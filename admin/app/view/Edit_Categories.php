@@ -43,41 +43,38 @@ extract($data['editcate']);
                                             <textarea class="form-control" name="description" id="description" rows="3"
                                                 placeholder="Nhập mô tả">' . $description . '</textarea>
                                         </div>';
-                                    ?>
-                                    <div class="mb-3">
-                                        <label for="parent" class="form-label">Loại danh mục</label>
-                                        <select class="form-select" name="type" id="parent">
-                                            <!-- <option selected>Chọn danh mục</option> -->
-                                            <option value="Bài viết" <?= ($type == 'Tin tức' ? ' selected' : '')  ?>>Danh Mục Bài Viết</option>
-                                            <option value="Sản phẩm" <?= ($type == 'Sản phẩm' ? ' selected' : '') ?>>Danh Mục Sản Phẩm</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="status" class="form-label">Trạng Thái</label>
-                                        <select class="form-select" name="status" id="status">
-                                            <option selected>Chọn trạng thái</option>
-                                            <option value="1" <?= ($status == 1 ? ' selected' : '') ?>>Kích Hoạt</option>
-                                            <option value="0" <?= ($status == 0 ? ' selected' : '') ?>>Không Kích Hoạt</option>
-                                        </select>
-                                    </div>
-                                    <div class="" style="display: flex;">
-                                        <a href="index.php?page=categories" style="width: 150px;;background: red; border: none; margin: 0;" class="btn btn-custom">
-                                            Quay lại
-                                        </a>
-                                        <button type="submit" style="width: 150px;;margin: 0 10px; border: none;" name="submit" class="btn btn-primary">
+                                        ?>
+                                        <div class="mb-3">
+                                            <label for="parent" class="form-label">Loại danh mục</label>
+                                            <select class="form-select" name="type" id="parent">
+                                                <!-- <option selected>Chọn danh mục</option> -->
+                                                <option value="Bài viết" <?= ($type == 'Tin tức' ? ' selected' : '')  ?> >Danh Mục Bài Viết</option>
+                                                <option value="Sản phẩm" <?= ($type == 'Sản phẩm' ? ' selected' : '') ?> >Danh Mục Sản Phẩm</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Trạng Thái</label>
+                                            <select class="form-select" name="status" id="status">
+                                                <option selected>Chọn trạng thái</option>
+                                                <option value="1" <?= ($status == 1 ? ' selected' : '') ?> >Kích Hoạt</option>
+                                                <option value="0" <?= ($status == 0 ? ' selected' : '') ?> >Không Kích Hoạt</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" name="submit" class="btn btn-primary">
                                             Sửa
                                         </button>
+                                        <br />
                                     </div>
-                                    <br />
                                 </div>
                             </div>
                         </div>
+                    </form>
+                    <a href="index.php?page=categories" class="btn btn-custom">
+                        Quay lại
+                    </a>
                 </div>
-                </form>
-
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- form edit category end -->

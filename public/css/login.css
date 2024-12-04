@@ -57,7 +57,8 @@ main {
     border: none;
 }
 
-.login-action {
+.login-action,
+.submit-action {
     margin-top: 15px;
 }
 
@@ -158,26 +159,6 @@ main {
 
 .errors li {
     padding-left: 20px;
-}
-
-.password-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.6rem;
-    cursor: pointer;
-    color: #999;
-}
-
-.toggle-password:hover {
-    color: var(--primary-color-bold);
 }
 
 /* Tablet - PC low resolution */

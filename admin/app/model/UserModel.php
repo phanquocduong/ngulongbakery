@@ -32,13 +32,13 @@ class UserModel{
         $params = [$data['email'], $data['full_name'], $data['phone'], $data['address'], $data['role_id'], $data['avatar'], $data['status'], $data['id']];
         return $this->db->update($sql, $params);
     }
-    // public function deleteUser($id)
-    // {
-    //     $this->deleteRelatedData($id);
-    //     $sql = "DELETE FROM users WHERE id = ?";
-    //     $param = [$id];
-    //     return $this->db->delete($sql, $param);
-    // }
+    public function deleteUser($id)
+    {
+        $this->deleteRelatedData($id);
+        $sql = "DELETE FROM users WHERE id = ?";
+        $param = [$id];
+        return $this->db->delete($sql, $param);
+    }
 
         public function isForeignKey($id)
     {
@@ -58,14 +58,14 @@ class UserModel{
         $stmt->execute();
         return $newStatus;
     }
-    // public function deleteRelatedData($id)
-    // {
-    //     $this->db->query("DELETE FROM comments WHERE post_id IN (SELECT id FROM posts WHERE author_id = ?)", [$id]);
-    //     $this->db->query("DELETE FROM posts WHERE author_id = ?", [$id]);
-    //     $this->db->query("DELETE FROM orderdetails WHERE order_id IN (SELECT id FROM orders WHERE user_id = ?)", [$id]);
-    //     $this->db->query("DELETE FROM orders WHERE user_id = ?", [$id]);
-    //     $this->db->query("DELETE FROM favorite_products WHERE user_id = ?", [$id]);
-    //     $this->db->query("DELETE FROM reviews WHERE user_id = ?", [$id]);
-    //     $this->db->query("DELETE FROM posts WHERE author_id = ?", [$id]);
-    // }
+    public function deleteRelatedData($id)
+    {
+        $this->db->query("DELETE FROM comments WHERE post_id IN (SELECT id FROM posts WHERE author_id = ?)", [$id]);
+        $this->db->query("DELETE FROM posts WHERE author_id = ?", [$id]);
+        $this->db->query("DELETE FROM orderdetails WHERE order_id IN (SELECT id FROM orders WHERE user_id = ?)", [$id]);
+        $this->db->query("DELETE FROM orders WHERE user_id = ?", [$id]);
+        $this->db->query("DELETE FROM favorite_products WHERE user_id = ?", [$id]);
+        $this->db->query("DELETE FROM reviews WHERE user_id = ?", [$id]);
+        $this->db->query("DELETE FROM posts WHERE author_id = ?", [$id]);
+    }
 }

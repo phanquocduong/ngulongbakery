@@ -29,19 +29,11 @@ main {
     width: 100%;
     text-align: center;
 }
-.contact_main-box-in-input-select {
-    border: 1px solid rgb(189, 189, 189);
-    border-radius: 5px;
-    color: var(--text-color);
-}
-.contact_main-box-in-input-select :active {
-    background-color: none;
-}
+
 .contact_main-box-in-ul-li {
     margin-bottom: 20px;
     font-size: 3rem;
     line-height: 4rem;
-
     list-style: none;
     padding: 0;
     font-weight: 450;
@@ -68,7 +60,6 @@ main {
 
 .contact_main-box-in-input {
     width: 100%;
-    height: 100%;
     border: 10px solid;
     padding: 20px 0;
     border-image-slice: 30; /* Cắt hình ảnh thành các phần viền */

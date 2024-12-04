@@ -10,10 +10,10 @@
                                     <i class="customer-info__icon fa-solid fa-user-large"></i>
                                     <div class="customer-info__body">
                                         <p class="customer-info__body-title"><?=$_SESSION['user']['full_name']?> (<?=$_SESSION['user']['email']?>)</p>
-                                        <a href="<?=$base_url?>/logout" class="customer-info__body-logout">Đăng xuất</a>
+                                        <a href="index.php?page=logout" class="customer-info__body-logout">Đăng xuất</a>
                                     </div>
                                 </div>
-                                <form action="<?=$base_url?>/handle-payment" method="POST">
+                                <form action="index.php?page=handle-payment" method="POST">
                                     <input required type="text" name="fullname" class="form-name__control" placeholder="Họ và tên" value="<?=$_SESSION['user']['full_name']?>"/>
                                     <div class="form-group">
                                         <input required type="email" name="email" class="form-email__control" placeholder="Email" value="<?=$_SESSION['user']['email']?>"/>
@@ -88,12 +88,12 @@
                                         </h2>
                                         <img
                                             class="transfer-information__img"
-                                            src="<?=$base_url?>/public/upload/qrcode/qrcode.jpg"
+                                            src="public/upload/qrcode/qrcode.jpg"
                                             alt="QR code"
                                         />
                                     </div>
                                     <div class="step-footer">
-                                        <a href="<?=$base_url?>/cart" class="step-footer-previous-link">Giỏ hàng</a>
+                                        <a href="index.php?page=cart" class="step-footer-previous-link">Giỏ hàng</a>
                                         <?php 
                                             $grandTotal = array_reduce($_SESSION['cart'], function($total, $item) {return $total + ($item['quantity'] * $item['price']);}, 0);
                                         ?>
@@ -115,7 +115,7 @@
                                 <div class="product-order">
                                     <div class="product-order__thumbnail">
                                         <img
-                                            src="<?=$base_url?>/public/upload/product/<?=$item['image']?>"
+                                            src="public/upload/product/<?=$item['image']?>"
                                             alt="<?=$item['name']?>"
                                             class="product-order__img"
                                         />

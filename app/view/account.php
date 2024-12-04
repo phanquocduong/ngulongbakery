@@ -5,7 +5,7 @@
             <div class="col l-2 m-3 c-12">
                     <div class="sidebar-heading">
                         <img
-                            src="<?=$base_url?>/public/upload/avatar/<?=$_SESSION['user']['avatar']?>"
+                            src="public/upload/avatar/<?=$_SESSION['user']['avatar']?>"
                             alt="<?=$_SESSION['user']['full_name']?>"
                             class="sidebar-heading__avatar"
                         />
@@ -38,12 +38,12 @@
                         <h2 class="main-information__heading">Hồ sơ của tôi</h2>
                         <h4 class="main-information__sub-heading">Quản lý thông tin hồ sơ để bảo mật tài khoản</h4>
                         <div class="main-information-box">
-                            <form action="<?=$base_url?>/handle-update-information" method="POST" enctype="multipart/form-data">
+                            <form action="index.php?page=handle-update-information" method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col l-8 m-12 c-12">
                                         <div class="edit-avatar-box--mobile-tablet">
                                             <img
-                                                src="<?=$base_url?>/public/upload/avatar/<?=$_SESSION['user']['avatar']?>"
+                                                src="public/upload/avatar/<?=$_SESSION['user']['avatar']?>"
                                                 alt="<?=$_SESSION['user']['full_name']?>"
                                                 class="edit-avatar__img"
                                             />
@@ -72,7 +72,7 @@
                                                     <label class="user-information__label">Mật khẩu:</label>
                                                     <div class="user-information__value">
                                                         <span>********</span>
-                                                        <a href="<?=$base_url?>/change-password" class="edit-link">Đổi mật khẩu</a>
+                                                        <a href="index.php?page=change-password" class="edit-link">Đổi mật khẩu</a>
                                                     </div>
                                                 </div>
                                                 <div class="user-information__value form-group">
@@ -104,7 +104,7 @@
                                     <div class="edit-avatar-wrap col l-4 m-12 c-12">
                                         <div class="edit-avatar-box">
                                             <img
-                                                src="<?=$base_url?>/public/upload/avatar/<?=$_SESSION['user']['avatar']?>"
+                                                src="public/upload/avatar/<?=$_SESSION['user']['avatar']?>"
                                                 alt="<?=$_SESSION['user']['full_name']?>"
                                                 class="edit-avatar__img"
                                             />
@@ -130,7 +130,7 @@
                         <div class="popup-content">
                             <span id="closePopupBtn" class="close-popup-btn">&times;</span>
                             <h2 class="popup-heading">Đánh giá sản phẩm</h2>
-                            <form action="<?=$base_url?>/review" method="POST" id="ratingForm" enctype="multipart/form-data">
+                            <form action="index.php?page=review" method="POST" id="ratingForm" enctype="multipart/form-data">
                                 <input class="order-id" type="hidden" name="orderId">
                                 <!-- Rating Stars -->
                                 <div class="rating">
@@ -185,10 +185,10 @@
                                         foreach($data['favorite'] as $item): ?>
                                     <div class="col l-3 m-6 c-10 c-offset-1">
                                         <div class="product-item">
-                                            <a href="<?=$base_url?>/product-details/<?=$item['id']?>" class="product-item__img-link">
-                                                <div class="product-item__img" style="background-image: url(<?=$base_url?>/public/upload/product/<?= $item['image'] ?>);"></div>
+                                            <a href="index.php?page=product-details&id=<?=$item['id']?>" class="product-item__img-link">
+                                                <div class="product-item__img" style="background-image: url(public/upload/product/<?= $item['image'] ?>);"></div>
                                             </a>
-                                            <a href="<?=$base_url?>/product-details/<?=$item['id']?>" class="product-item__title-link">
+                                            <a href="index.php?page=product-details&id=<?=$item['id']?>" class="product-item__title-link">
                                                 <h4 class="product-item__name"><?= $item['name'] ?></h4>
                                             </a>
                                             <div class="product-item__rating">

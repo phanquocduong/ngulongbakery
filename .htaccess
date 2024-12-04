@@ -1,5 +1,0 @@
-RewriteEngine On
-
-# Chấp nhận chuỗi có ký tự a-z, A-Z, 0-9, _ và -
-RewriteRule ^([\w\-]+)$ index.php?page=$1 [QSA,L]
-RewriteRule ^([\w\-]+)/([\w\-]+)$ index.php?page=$1&id=$2 [QSA,L]

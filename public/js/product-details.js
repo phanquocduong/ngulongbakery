@@ -1,6 +1,6 @@
 // Hàm toggleFavorite: Thêm hoặc bỏ yêu thích cho sản phẩm
 function toggleFavorite(productId, userId) {
-    fetch(`${baseUrl}/index.php?page=handle-favorite-product`, {
+    fetch('index.php?page=handle-favorite-product', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId, userId })
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hàm loadReviews: Tải danh sách đánh giá từ server
     function loadReviews() {
-        fetch(`${baseUrl}/index.php?page=handle-product-reviews-display&product-id=${productId}&num=${num}`)
+        fetch(`index.php?page=handle-product-reviews-display&product-id=${productId}&num=${num}`)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
@@ -126,11 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             num = e.target.getAttribute('data-page'); // Cập nhật num khi người dùng click vào phân trang
                             loadReviews(); // Tải lại danh sách đánh giá với num mới
                         }
-                        if (e.target.tagName === 'I') {
-                            e.preventDefault();
-                            num = e.target.parentElement.getAttribute('data-page');
-                            loadReviews();
-                        }
                     });
                 } else {
                     console.error(data.message); // Log lỗi nếu có
@@ -143,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderReviews(review) {
         return `
             <div class="review-item">
-                <img class="review-item__avatar" src="${baseUrl}/public/upload/avatar/${review.avatar}" alt="${review.full_name}" />
+                <img class="review-item__avatar" src="public/upload/avatar/${review.avatar}" alt="${review.full_name}" />
                 <div class="review-item__body">
                     <span class="review-item__name">${review.full_name}</span>
                     <div class="review-item__rating">${renderStars(review.rating)}</div>
@@ -154,10 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             review.images
                                 ? review.images
                                       .split(',')
-                                      .map(
-                                          image =>
-                                              `<img onclick="openImageModal(this)" class="review-item__image" src="${baseUrl}/public/upload/review/${image}" alt="" />`
-                                      )
+                                      .map(image => `<img class="review-item__image" src="public/upload/review/${image}" alt="" />`)
                                       .join('')
                                 : ''
                         }

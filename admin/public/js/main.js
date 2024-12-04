@@ -116,7 +116,7 @@
   });
 
   // buttuon "Xuất hoá đơn"
-  document.addEventListener("DOMContentLoaded", function () {
+/*   document.addEventListener("DOMContentLoaded", function () {
     const orderStatusSelect = document.getElementById("order-status");
     const exportButton = document.getElementById("export-button");
     const inExportButton = document.getElementById("in-export-button");
@@ -129,32 +129,36 @@
         inExportButton.style.border = "none";
         console.log(orderStatusSelect.value);
         inExportButton.innerHTML = `Xác nhận `;
-      } else if (orderStatusSelect.value === "Đang Giao") {
+      }
+      else if (orderStatusSelect.value === "Đang Giao") {
         exportButton.disabled = false;
         exportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.border = "none";
         inExportButton.innerHTML = `Xác nhận giao hàng`;
-      } else if (orderStatusSelect.value === "Đã Giao") {
+      }
+      else if (orderStatusSelect.value === "Đã Giao") {
         exportButton.disabled = false;
         exportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.backgroundColor = "#2194E6";
         inExportButton.style.border = "none";
         inExportButton.innerHTML = `Xác nhận đã giao hàng`;
-      } else if (orderStatusSelect.value === "Đã Huỷ") {
+      }
+      else if (orderStatusSelect.value === "Đã Huỷ") {
         exportButton.disabled = false;
         exportButton.style.backgroundColor = "red";
         inExportButton.style.backgroundColor = "red";
         inExportButton.style.border = "none";
         inExportButton.innerHTML = `Xác nhận hủy`;
-      } else {
+      }
+      else {
         exportButton.disabled = true;
         exportButton.style.backgroundColor = "#ccc";
         inExportButton.style.backgroundColor = "#ccc";
         inExportButton.style.border = "none";
       }
     });
-  });
+  }); */
 
   // Sidebar Toggler
   $(".sidebar-toggler").click(function () {

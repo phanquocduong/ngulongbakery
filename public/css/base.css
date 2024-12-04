@@ -13,7 +13,7 @@
 
 html {
     font-size: 62.5%;
-    line-height: 2rem;
+    line-height: 1.6rem;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
@@ -300,11 +300,11 @@ header {
 }
 
 .product-item__name {
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 1.7rem;
+    font-weight: 600;
     color: var(--secondary-color);
     margin: 12px 0 8px;
-    line-height: 2.4rem;
+    line-height: 2rem;
     display: block;
     text-align: center;
     transition: color 0.3s ease;
@@ -553,11 +553,6 @@ header {
 }
 
 @media (min-width: 740px) and (max-width: 1024px) {
-    /* Start header */
-    .header-search__btn {
-        padding: 13px 12px 13px 21px;
-    }
-
     /* Start footer */
     .footer-menu__heading {
         margin-top: 40px;
@@ -759,88 +754,4 @@ header {
         font-size: 2rem;
     }
     /* End footer */
-}
-
-/* Popup container */
-.swal2-popup {
-    background: #fefefe; /* Nền trắng */
-    border-radius: 15px; /* Bo góc mềm mại */
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng */
-    padding: 20px;
-    font-family: 'Arial', sans-serif; /* Font dễ đọc */
-    max-width: 400px; /* Độ rộng tối đa */
-    width: 90%; /* Độ rộng tự động thích nghi */
-    animation: fadeIn 0.3s ease-in-out; /* Hiệu ứng xuất hiện */
-}
-
-/* Tiêu đề popup */
-.swal2-title {
-    font-size: 24px;
-    line-height: 1.2;
-    font-weight: bold;
-    color: #333; /* Màu chữ đậm */
-    text-align: center;
-}
-
-/* Nội dung chính */
-.swal2-html-container {
-    font-size: 16px !important;
-    line-height: 1 !important;
-    color: #666 !important; /* Màu chữ dịu nhẹ */
-    text-align: center !important;
-}
-
-/* Các nút bấm */
-.swal2-confirm,
-.swal2-cancel {
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 30px; /* Nút dạng bo tròn */
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Nút OK (Confirm) */
-.swal2-confirm {
-    background-color: #4caf50;
-    color: white;
-    box-shadow: 0px 4px 10px rgba(76, 175, 80, 0.4);
-}
-
-.swal2-confirm:hover {
-    background-color: #45a049;
-    box-shadow: 0px 6px 15px rgba(76, 175, 80, 0.6);
-}
-
-/* Nút Cancel */
-.swal2-cancel {
-    background-color: #f44336;
-    color: white;
-    box-shadow: 0px 4px 10px rgba(244, 67, 54, 0.4);
-}
-
-.swal2-cancel:hover {
-    background-color: #d32f2f;
-    box-shadow: 0px 6px 15px rgba(244, 67, 54, 0.6);
-}
-
-/* Footer */
-.swal2-footer {
-    font-size: 14px;
-    color: #999;
-    margin-top: 15px;
-    text-align: center;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }

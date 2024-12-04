@@ -10,7 +10,7 @@
             $this->product = new ProductModel();
         }
 
-        function review($base_url) {
+        function review() {
             $orderId = $_POST['orderId'];
             $rating = $_POST['rating'];
             $comment = htmlspecialchars($_POST['comment']); // Lọc XSS
@@ -22,7 +22,7 @@
         
                 if ($fileCount > 3) {
                     $_SESSION['error'] = "Bạn chỉ được phép tải lên tối đa 3 ảnh.";
-                    header("Location: $base_url/account");
+                    header("Location: index.php?page=account");
                     exit;
                 }
         
@@ -35,7 +35,7 @@
                             $uploadedImages[] = $fileName;
                         } else {
                             $_SESSION['error'] = "Lỗi khi upload hình ảnh.";
-                            header("Location: $base_url/account");
+                            header("Location: index.php?page=account");
                             exit;
                         }
                     }
@@ -51,19 +51,13 @@
                 $updateStatusResult = $this->order->updateReviewStatusOfOrder($orderId);
                 if (!$result || !$updateStatusResult) {
                     $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại.";
-                    header("Location: $base_url/account");
+                    header("Location: index.php?page=account");
                     exit;
                 }
-                $reviewsOfProduct = $this->review->getReviewsOfProduct('WHERE product_id = ?', [$product['id']]);
-                $countReviewsOfProduct = $this->review->getReviewCount('WHERE product_id = ?', [$product['id']]);
-                $totalRatingOfProducts = array_reduce($reviewsOfProduct, function($total, $item) {return $total + $item['rating'];}, 0);
-                $averageRatingOfProduct = round($totalRatingOfProducts / $countReviewsOfProduct);
-                $this->product->updateRatingOfProduct($product['id'], $averageRatingOfProduct);
             }
         
             // Redirect sau khi xử lý xong
-            $_SESSION['success'] = "Đánh giá thành công";
-            header("Location: $base_url");
+            header('Location: index.php?page=account');
             exit;
         }
 

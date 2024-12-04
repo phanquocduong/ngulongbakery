@@ -105,7 +105,7 @@
             ]);
         }
 
-        public function handleDeleteCart($base_url) {
+        public function handleDeleteCart() {
             if (isset($_GET['index'])) {
                 $index = $_GET['index'];
                 
@@ -115,9 +115,7 @@
                 }
                 
                 // Chuyển hướng lại trang giỏ hàng
-                $_SESSION['success'] = "Xoá sản phẩm khỏi giỏ hàng thành công";
-                header("Location: $base_url/cart");
-                exit;
+                echo '<script>window.location.href = "index.php?page=cart";</script>';
             }
         }        
     }

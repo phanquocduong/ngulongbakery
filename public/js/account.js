@@ -92,7 +92,7 @@ function cancelOrder(id) {
         cancelButtonText: 'Hủy'
     }).then(result => {
         if (result.isConfirmed) {
-            window.location.href = `${baseUrl}/cancel-order/${id}`;
+            window.location.href = `index.php?page=cancel-order&id=${id}`;
         }
     });
 }
@@ -106,7 +106,7 @@ function buyBackOrder(id) {
         cancelButtonText: 'Hủy'
     }).then(result => {
         if (result.isConfirmed) {
-            window.location.href = `${baseUrl}/buy-back-order/${id}`;
+            window.location.href = `index.php?page=buy-back-order&id=${id}`;
         }
     });
 }
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hàm loadReviews: Tải danh sách đánh giá từ server
     function loadOrders() {
-        fetch(`${baseUrl}/index.php?page=handle-orders-display&num=${num}`)
+        fetch(`index.php?page=handle-orders-display&num=${num}`)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
@@ -129,11 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             e.preventDefault();
                             num = e.target.getAttribute('data-page'); // Cập nhật num khi người dùng click vào phân trang
                             loadOrders(); // Tải lại danh sách đánh giá với num mới
-                        }
-                        if (e.target.tagName === 'I') {
-                            e.preventDefault();
-                            num = e.target.parentElement.getAttribute('data-page');
-                            loadOrders();
                         }
                     });
                 } else {
@@ -198,9 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return `
                             <div class="product-order">
                                 <div class="product-info">
-                                    <img src="${baseUrl}/public/upload/product/${detail.product_image}" alt="${
-                            detail.product_name
-                        }" class="product-info__img" />
+                                    <img src="public/upload/product/${detail.product_image}" alt="${detail.product_name}" class="product-info__img" />
                                     <div class="product-info__right">
                                         <h4 class="product-info__name">${detail.product_name}</h4>
                                         <span class="product-info__quantity">x${detail.quantity}</span>

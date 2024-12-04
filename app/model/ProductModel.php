@@ -76,9 +76,9 @@
             return $this->db->execute($sql, [$id]);
         }
 
-        public function updateSoldOfProduct($product_name, $quantity) {
-            $sql = "UPDATE products SET sold = sold + ? WHERE name = ? AND status = 1 AND stock_quantity > 0";
-            return $this->db->execute($sql, [$quantity, $product_name]);
+        public function updateSoldOfProduct($product_name) {
+            $sql = "UPDATE products SET sold = sold + 1 WHERE name = ? AND status = 1 AND stock_quantity > 0";
+            return $this->db->execute($sql, [$product_name]);
         }
 
         public function updateStockQuantityOfProduct($product_name, $quantity) {
@@ -92,11 +92,6 @@
                     INNER JOIN favorite_products f ON p.id = f.product_id
                     WHERE f.user_id = ?";
             return $this->db->getAll($sql, [$userId]);    
-        }
-
-        public function updateRatingOfProduct($id, $rating) {
-            $sql = "UPDATE products SET rating = ? WHERE id = ?";
-            return $this->db->execute($sql, [$rating, $id]);
         }
     }
 ?>

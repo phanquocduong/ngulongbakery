@@ -38,7 +38,7 @@
 
                 $this->mailer->send();
             } catch (Exception $e) {
-                echo "Không thể gửi email. Lỗi gửi thư: {$this->mailer->ErrorInfo}";
+                echo "Không thể gửi email. Lỗi gửi thư: {$mail->ErrorInfo}";
             }
         }
 
@@ -53,7 +53,7 @@
 
                 $this->mailer->send();
             } catch (Exception $e) {
-                echo "Không thể gửi email. Lỗi gửi thư: {$this->mailer->ErrorInfo}";
+                echo "Không thể gửi email. Lỗi gửi thư: {$mail->ErrorInfo}";
             }
         }
 
@@ -78,7 +78,7 @@
 
                 $this->mailer->send();
             } catch (Exception $e) {
-                echo "Không thể gửi email. Lỗi gửi thư: {$this->mailer->ErrorInfo}";
+                echo "Không thể gửi email. Lỗi gửi thư: {$mail->ErrorInfo}";
             }
         }
 

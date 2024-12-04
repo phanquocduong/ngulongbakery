@@ -25,8 +25,6 @@
     require_once 'app/controller/MailController.php';
     require_once 'app/controller/NewsController.php';
 
-    $base_url = 'http://localhost/ngulongbakery';
-
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
         switch ($page) {
@@ -46,7 +44,7 @@
                 break;
             case 'handle-delete-cart':
                 $cart = new CartController();
-                $cart->handleDeleteCart($base_url);
+                $cart->handleDeleteCart();
                 break;
             case 'collection':
                 $css = 'collection.css';
@@ -62,7 +60,7 @@
                 $css = 'product-details.css';
                 $js = 'product-details.js';
                 $product = new ProductController();
-                $product->viewProductDetails($base_url, $css, $js);
+                $product->viewProductDetails($css, $js);
                 break;
             case 'register':
                 $css = 'register.css';
@@ -74,29 +72,29 @@
                 $css = 'register.css';
                 $js = 'register.js';
                 $user = new UserController();
-                $user->handleRegister($base_url, $css, $js);
+                $user->handleRegister($css, $js);
                 break;
             case 'verify':
                 $user = new UserController();
-                $user->verify($base_url);
+                $user->verify();
                 break;
             case 'login':
                 $css = 'login.css';
                 $js = 'login.js';
                 $user = new UserController();
-                $user->viewLogin($base_url, $css, $js);
+                $user->viewLogin($css, $js);
                 break;
             case 'handle-login':
                 $css = 'login.css';
                 $js = 'login.js';
                 $user = new UserController();
-                $user->handleLogin($base_url, $css, $js);
+                $user->handleLogin($css, $js);
                 break;
             case 'handle-forgot-pass':
                 $css = 'login.css';
                 $js = 'login.js';
                 $user = new UserController();
-                $user->handleForgotPassword($base_url, $css, $js);
+                $user->handleForgotPassword($css, $js);
                 break;
             case 'reset-password':
                 $css = 'reset-password.css';
@@ -108,11 +106,11 @@
                 $css = 'reset-password.css';
                 $js = 'reset-password.js';
                 $user = new UserController();
-                $user->handleResetPassword($base_url, $css, $js);
+                $user->handleResetPassword($css, $js);
                 break;
             case 'logout':
                 $user = new UserController();
-                $user->logout($base_url);
+                $user->logout();
                 break;
             case 'account':
                 $css = 'account.css';
@@ -122,7 +120,7 @@
                 break;
             case 'handle-update-information':
                 $user = new UserController();
-                $user->handleUpdateInformation($base_url);
+                $user->handleUpdateInformation();
                 break;
             case 'change-password':
                 $css = 'change-password.css';
@@ -134,19 +132,19 @@
                 $css = 'change-password.css';
                 $js = 'change-password.js';
                 $user = new UserController();
-                $user->handleChangePassword($base_url, $css, $js);
+                $user->handleChangePassword($css, $js);
                 break;
             case 'cancel-order':
                 $order = new OrderController();
-                $order->cancelOrder($base_url);
+                $order->cancelOrder();
                 break;
             case 'buy-back-order':
                 $order = new OrderController();
-                $order->buyBackOrder($base_url);
+                $order->buyBackOrder();
                 break;
             case 'review':
                 $review = new ReviewController();
-                $review->review($base_url);
+                $review->review();
                 break;
             case 'search':
                 $css = 'search-products.css';
@@ -168,13 +166,13 @@
                 $css = 'contact.css';
                 $js = '';
                 $contact = new ContactController();
-                $contact->handleContact($base_url);
+                $contact->handleContact($css, $js);
                 break;
             case 'payment':
                 $css = 'payment.css';
                 $js = 'payment.js';
                 $payment = new PaymentController();
-                $payment->viewPayment($base_url, $css, $js);
+                $payment->viewPayment($css, $js);
                 break;
             case 'get-districts':
                 $payment = new PaymentController();
@@ -190,7 +188,7 @@
                 break;
             case 'handle-payment':
                 $payment = new PaymentController();
-                $payment->handlePayment($base_url);
+                $payment->handlePayment();
                 break;
             case 'handle-product-reviews-display':
                 $review = new ReviewController();

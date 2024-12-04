@@ -78,7 +78,7 @@ function addToCart(button, productId) {
     }
 
     // Gửi yêu cầu đến backend với ID sản phẩm và số lượng
-    fetch(`${baseUrl}/index.php?page=handle-add-to-cart`, {
+    fetch('index.php?page=handle-add-to-cart', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

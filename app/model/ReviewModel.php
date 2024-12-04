@@ -7,7 +7,7 @@
             $this->db = new Database();
         }
         
-        public function getFeaturedReviews($limit = 0) {
+        public function getFeaturedReviews() {
             $sql = "SELECT r.*, u.full_name, u.avatar 
                     FROM reviews r 
                     INNER JOIN users u ON r.user_id = u.id 
@@ -17,10 +17,8 @@
                         WHERE r2.rating >= 4 AND r2.status = 1 
                         GROUP BY r2.user_id
                     ) 
-                    ORDER BY r.created_at DESC ";
-            if ($limit > 0) {
-                $sql .= " LIMIT $limit";
-            }
+                    ORDER BY r.created_at DESC 
+                    LIMIT 2";
             return $this->db->getAll($sql);
         }
 

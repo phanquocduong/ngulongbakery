@@ -64,9 +64,8 @@ class AdPost_ManageController
             $files = '../public/upload/post/images/' . $data['image'];
             if (!move_uploaded_file($_FILES['avt-post']['tmp_name'], $files)) {
                 echo '<script>alert("Upload ảnh không thành công")</script>';
-                var_dump($files);
-               /*  echo '<script>location.href="index.php?page=add_post"</script>'; */
-               /*  return; */
+                echo '<script>location.href="index.php?page=add_post"</script>';
+                return;
             }
             $this->post->insertPost($data);
             echo '<script>alert("Thêm bài viết thành công")</script>';

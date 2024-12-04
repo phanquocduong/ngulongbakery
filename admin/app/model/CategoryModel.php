@@ -12,16 +12,6 @@ class CategoryModel
         $sql = "SELECT * FROM categories  order by id desc";
         return $this->db->getAll($sql);
     }
-
-    // lấy danh mục theo loại
-    function getCategoriesByType($type = []){
-        $sql = "SELECT * FROM categories WHERE type = ?";
-        return $this->db->getAll($sql, [$type]);
-    }
-    function getPostCate(){
-        $sql = "SELECT * FROM categories WHERE type = 'Tin tức' order by id desc";
-        return $this->db->getAll($sql);
-    }
     public function getIdPro($id)
     {
         $sql = "SELECT * FROM products WHERE category_id = ? LIMIT 1";

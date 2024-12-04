@@ -3,22 +3,22 @@
         <div class="grid wide">
             <div class="row">
                 <div class="footer-item l-3 m-12 c-12">
-                    <img src="<?=$base_url?>/public/upload/logo/logo.png" alt="Logo Ngũ Long Bakery - Tiệm bánh truyền thống" class="footer-logo" loading="lazy"/>
+                    <img src="public/upload/logo/logo.png" alt="Logo Ngũ Long Bakery - Tiệm bánh truyền thống" class="footer-logo" loading="lazy"/>
                 </div>
                 <div class="footer-item col l-3 m-4 c-12">
                     <div class="footer-menu__heading">Khám phá thêm</div>
                     <ul class="footer-menu__list">
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/collection" class="footer-menu__item-link">Sản phẩm</a>
+                            <a href="index.php?page=collection" class="footer-menu__item-link">Sản phẩm</a>
                         </li>
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/news" class="footer-menu__item-link">Tin tức</a>
+                            <a href="index.php?page=news" class="footer-menu__item-link">Tin tức</a>
                         </li>
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/about" class="footer-menu__item-link">Giới thiệu</a>
+                            <a href="index.php?page=about" class="footer-menu__item-link">Giới thiệu</a>
                         </li>
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/contact" class="footer-menu__item-link">Liên hệ</a>
+                            <a href="index.php?page=contact" class="footer-menu__item-link">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -26,13 +26,13 @@
                     <div class="footer-menu__heading">Tài khoản của bạn</div>
                     <ul class="footer-menu__list">
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/register" class="footer-menu__item-link">Đăng ký</a>
+                            <a href="index.php?page=register" class="footer-menu__item-link">Đăng ký</a>
                         </li>
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/login" class="footer-menu__item-link">Đăng nhập</a>
+                            <a href="index.php?page=login" class="footer-menu__item-link">Đăng nhập</a>
                         </li>
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/cart" class="footer-menu__item-link">Giỏ hàng</a>
+                            <a href="index.php?page=cart" class="footer-menu__item-link">Giỏ hàng</a>
                         </li>
                     </ul>
                 </div>
@@ -40,13 +40,13 @@
                     <div class="footer-menu__heading">Hỗ trợ khách hàng</div>
                     <ul class="footer-menu__list">
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/shipping-policy" class="footer-menu__item-link">Chính sách giao hàng</a>
+                            <a href="index.php?page=shipping-policy" class="footer-menu__item-link">Chính sách giao hàng</a>
                         </li>
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/privacy-policy" class="footer-menu__item-link">Chính sách bảo mật</a>
+                            <a href="index.php?page=privacy-policy" class="footer-menu__item-link">Chính sách bảo mật</a>
                         </li>
                         <li class="footer-menu__item">
-                            <a href="<?=$base_url?>/faq" class="footer-menu__item-link">Câu hỏi thường gặp</a>
+                            <a href="index.php?page=faq" class="footer-menu__item-link">Câu hỏi thường gặp</a>
                         </li>
                     </ul>
                 </div>
