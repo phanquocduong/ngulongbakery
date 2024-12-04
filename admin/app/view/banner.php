@@ -10,24 +10,46 @@
                     .table {
                         width: 100%;
                         margin: auto;
+                        border-collapse: collapse;
                     }
 
                     .table th,
                     .table td {
                         text-align: center;
                         vertical-align: middle;
+                        padding: 10px;
+                        border: 1px solid #ddd;
+                    }
+
+                    .table th {
+                        background-color: #f8f9fa;
+                        font-weight: bold;
                     }
 
                     .table img {
                         display: block;
                         margin: auto;
+                        max-width: 100%;
+                        height: auto;
                     }
-                    .badge{
-                        text-align: center;
-                        vertical-align: middle;
-                        margin-top: 50px;
-                        margin-left: 110px;
-                        margin-right: -70px;
+
+                    /* .badge {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 5px 10px;
+                        border-radius: 12px;
+                        font-size: 14px;
+                        margin: auto;
+                    } */
+                    .status {
+                        height: 30px;
+                        margin: auto;
+                    }
+
+                    .btn {
+                        padding: 5px 10px;
+                        font-size: 14px;
                     }
                 </style>
                 <?php
@@ -47,23 +69,23 @@
                 </thead>
                 <tbody>
                     <?php
-                     $stt = 1;
-                    foreach($listbanner as $key => $value) {
+                    $stt = 1;
+                    foreach ($listbanner as $key => $value) {
                         extract($value);
-                        echo '
+                        ?>
                         <tr>
-                            <td>' . $stt++ . '</td>
-                            <td style="width:250px"><img src="../public/upload/banner/' . $image . '"
-                                alt="Banner Image" style="width: 200px;"></td>
-                            <td>' . $tag . '</td>
-                            <td class="badge bg-success">' . $status . '</td>
+                            <td><?= $stt++ ?></td>
+                            <td style="width:250px"><img src="../public/upload/banner/<?= $image ?>" alt="Banner Image"
+                                    style="width: 200px;"></td>
+                            <td><?= $tag ?></td>
+                            <td class="status  "><?= $status == 1 ? 'Hiện' : 'Ẩn' ?></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="index.php?page=editbanner&id='.$id.'">Sửa</a>
-                                <a class="btn btn-sm btn-danger" href="index.php?page=delete_banner&id='.$id.'">Xoá</a>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=editbanner&id=<?= $id ?>">Sửa</a>
+                                <a class="btn btn-sm btn-danger" href="javascript:void(0);"
+                                    onclick="confirmDelete(<?= $id ?>)">Xoá</a>
                             </td>
                         </tr>
-';
-
+                        <?php
                     }
                     ?>
                 </tbody>
@@ -71,3 +93,10 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmDelete(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa banner này không?')) {
+            window.location.href = 'index.php?page=delete_banner&id=' + id;
+        }
+    }
+</script>
