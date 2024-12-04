@@ -37,15 +37,15 @@ class AdBannerController{
             // Upload ảnh chính
             $file = '../public/upload/banner/' . $data['image'];
             if (!move_uploaded_file($_FILES['image']['tmp_name'], $file)) {
-                echo '<script>alert("Không thể ảnh")</script>';
+                echo '<script>alert("Không thể upload ảnh")</script>';
                 return;
             }
             $result = $this->banner->insertBanner($data);
             if ($result) {
-                echo '<script>alert("Thêm danh mục thành công")</script>';
+                echo '<script>alert("Thêm Banner thành công")</script>';
                 echo '<script>location.href="index.php?page=banner"</script>';
             } else {
-                echo '<script>alert("Lỗi khi thêm danh mục vào cơ sở dữ liệu.")</script>';
+                echo '<script>alert("Lỗi khi thêm Banner vào cơ sở dữ liệu.")</script>';
             }
         }
     }
@@ -60,7 +60,7 @@ class AdBannerController{
                 $data['image'] = $_FILES['image']['name'];
                 $file = '../public/upload/banner/' . $data['image'];
                 if (!move_uploaded_file($_FILES['image']['tmp_name'], $file)) {
-                    echo '<script>alert("Không thể tải lên ảnh bìa.")</script>';
+                    echo '<script>alert("Không thể tải lên ảnh.")</script>';
                     exit;
                 }
             } else {
@@ -69,7 +69,7 @@ class AdBannerController{
                     'default-post-image.jpg'; // Default image if none exists
             }
             $this->banner->updateBanner($data);
-            echo '<script>alert("Sửa bài viết thành công")</script>';
+            echo '<script>alert("Sửa Banner thành công")</script>';
             echo '<script>location.href="index.php?page=banner"</script>';
         }
     }
@@ -77,7 +77,7 @@ class AdBannerController{
     {
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
         $this->banner->deleteBanner($id);
-        echo '<script>alert("Xóa bài viết thành công")</script>';
+        echo '<script>alert("Xóa Banner thành công")</script>';
         echo '<script>location.href="index.php?page=banner"</script>';
     
     }      
