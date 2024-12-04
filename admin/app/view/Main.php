@@ -343,54 +343,6 @@ $reviewNew = new AdProductsModel();
           }
         }
         ?>
-        <!-- <div class="d-flex mb-2">
-          <div>Người dùng <b>A</b> đã bình luận trong sản phẩm <b>B</b>:</div>
-          <div style="margin-left:5px;">Bánh rất ngon nhaaa</div>
-        </div> -->
-        <!-- <div class="d-flex align-items-center border-bottom py-2">
-          <input class="form-check-input m-0" day="checkbox" />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span>Bán 1 tỷ gói mè trong ngày...</span>
-              <button class="btn btn-sm">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex align-items-center border-bottom py-2">
-          <input class="form-check-input m-0" type="checkbox" />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span>Nhập thêm sản phẩm mới...</span>
-              <button class="btn btn-sm">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex align-items-center border-bottom py-2">
-          <input class="form-check-input m-0" type="checkbox" checked />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span><del>Giao đơn về Thủ Đức...</del></span>
-              <button class="btn btn-sm text-primary">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex align-items-center pt-2">
-          <input class="form-check-input m-0" type="checkbox" />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span>Cập nhật mã giảm giá...</span>
-              <button class="btn btn-sm">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
