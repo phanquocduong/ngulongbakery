@@ -2,7 +2,7 @@
     <div class="bg-light rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Banner List</h6>
-            <a href="">Add New Banner</a>
+            <a href="index.php?page=addbanner" class="btn btn-primary">Thêm Banner</a>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -30,6 +30,12 @@
                         margin-right: -70px;
                     }
                 </style>
+                <?php
+                require_once './app/model/BannerModel.php';
+                $bannermodel = new BannerModel();
+                $listbanner = $bannermodel->get_banner();
+                ?>
+
                 <thead>
                     <tr class="text-dark">
                         <th scope="col">STT</th>
@@ -40,29 +46,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td style="width:250px"><img src="../public/upload/banner/banner-collection.png"
+                    <?php
+                     $stt = 1;
+                    foreach($listbanner as $key => $value) {
+                        extract($value);
+                        echo '
+                        <tr>
+                            <td>' . $stt++ . '</td>
+                            <td style="width:250px"><img src="../public/upload/banner/' . $image . '"
                                 alt="Banner Image" style="width: 200px;"></td>
-                        <td>Ưu đãi</td>
-                        <td class="badge bg-success" >Hiện</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" href="">Sửa</a>
-                            <a class="btn btn-sm btn-danger" href="">Xoá</a>
-                        </td>
-                    </tr>
+                            <td>' . $tag . '</td>
+                            <td class="badge bg-success">' . $status . '</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="index.php?page=editbanner&id='.$id.'">Sửa</a>
+                                <a class="btn btn-sm btn-danger" href="index.php?page=delete_banner&id='.$id.'">Xoá</a>
+                            </td>
+                        </tr>
+';
 
-                     <tr>
-                        <td>2</td>
-                        <td style="width:250px"><img src="../public/upload/banner/banner-collection.png"
-                                alt="Banner Image" style="width: 200px;"></td>
-                        <td>Khuyến mãi</td>
-                        <td class="badge bg-danger" >Ẩn</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" href="">Sửa</a>
-                            <a class="btn btn-sm btn-danger" href="">Xoá</a>
-                        </td>
-                    </tr>
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
