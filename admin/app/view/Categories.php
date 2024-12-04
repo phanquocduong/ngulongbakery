@@ -57,10 +57,13 @@ if (!empty($searchTerm)) {
                 <form class="d-flex" method="POST">
                     <div class="input-group">
                         <input class="form-control border-0" type="search" placeholder="Tìm kiếm danh mục"
-                            name="search_category" value="<?php echo htmlspecialchars($searchTerm); ?>" />
-                        <button class="btn btn-primary" type="submit" name="button_category">
-                            <i class="fa fa-search"></i>
+                            name="search_category" />
+                        <button class="btn" name="button_category">
+                            <span class="input-group-text bg-transparent border-0">
+                                <a href="index.php?page=search_category"><i class="fa fa-search"></i></a>
+                            </span>
                         </button>
+
                     </div>
                 </form>
 
@@ -79,6 +82,43 @@ if (!empty($searchTerm)) {
                         this.form.submit();
                     });
                 </script>
+                <br />
+                <?php
+                require_once './app/controller/AdCategoriesController.php';
+                require_once './app/model/CategoryModel.php';
+                $categoriesController = new AdCategoriesController();
+                $productsModel = new CategoryModel();
+                if (isset($_POST['button_category']) && !empty($_POST['search_category'])) {
+                    $listCate = $categoriesController->searchCategories($_POST['search_category']);
+                } else {
+                    // Fetch all products if no search term is provided
+                    $listCate = $productsModel->getCate();
+                }
+                ?>
+
+                <!-- form search end -->
+                <?php
+                require_once './app/controller/AdCategoriesController.php';
+                require_once './app/model/CategoryModel.php';
+
+                $categoriesController = new AdCategoriesController();
+                $productsModel = new CategoryModel();
+
+                $type = isset($_GET['type']) ? $_GET['type'] : 0;
+
+                if ($type == 1) {
+                    // Lọc danh mục sản phẩm
+                    $listCate = $categoriesController->getCategoriesByType('Sản phẩm');
+                } elseif ($type == 2) {
+                    // Lọc danh mục tin tức
+                    $listCate = $categoriesController->getCategoriesByType('Tin tức');
+                } else {
+                    // Hiển thị tất cả danh mục
+                    $listCate = $productsModel->getCate();
+                }
+                ?>
+
+
 
                 <div class="table-responsive">
                     <table class="table table-hover table-borderless">

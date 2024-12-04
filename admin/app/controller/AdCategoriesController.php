@@ -151,10 +151,8 @@ class AdCategoriesController
     
         $sql = "SELECT * FROM categories WHERE name LIKE :keyword";
         $params = [':keyword' => '%' . $keyword . '%'];
-    
-        $db = new Database(); // Ensure this uses your Database class
-        $results = $db->getAll($sql, $params);
         $db = new Database();
+        $results = $db->getAll($sql, $params);
         return $db->getAll($sql, $params);
     }
 
