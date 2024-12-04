@@ -26,26 +26,31 @@ class AdMailController
 
     private function renderEmailView($view, $data)
     {
-        extract($data);
+
         ob_start();
         include "app/view/email/$view.php";
         return ob_get_clean();
     }
 
-    public function statusPr($email, $status)
+    public function statusPr($checkt, $email, $status)
     {
+        echo $checkt;
+        echo $status;
+        echo $email;
         try {
-            $this->mailer->setFrom('ngulongbakery@gmail.com', 'Ngũ Long Bakery');
+            $this->mailer->setFrom('ngulongbakery@gmail.com');
             $this->mailer->addAddress($email);
             $this->mailer->isHTML(true);
-            $this->mailer->Subject = "Đơn hàng của bạn hiện $status";    
+            $this->mailer->Subject = "Đơn hàng của bạn $status";
 
-            $this->mailer->Body = $this->renderEmailView('Mailstatuspro', compact('status'));
-
+            $body = $this->renderEmailView($checkt, ['data' => $status]);
+            if (empty($body)) {
+                throw new Exception('Nội dung email trống');
+            }
+            $this->mailer->Body = $body;
             $this->mailer->send();
         } catch (Exception $e) {
-            echo "Không thể gửi email. Lỗi gửi thư: {$mail->ErrorInfo}";
+            echo "Không thể gửi email. Lỗi gửi thư: {$e}";
         }
     }
-
 }

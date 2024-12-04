@@ -24,27 +24,43 @@ class AdOrderController
     public function viewOrder()
     {
         $this->data['orders'] = $this->orderModel->getOrder();
-        $this->renderview('Order', $this->data);
+        $this->renderview('order', $this->data);
     }
     public function viewOrder_Detail()
     {
-        $this->renderview('Order_Detail', $this->data);
+        $this->renderview('order_detail', $this->data);
     }
     public function confirmOder()
     {
+        $checkurl = '';
+        if (isset($_POST['deleteod'])) {
+            $status = 'Đã hủy';
+        } else {
+            $status = trim($_POST['subodervip']);
+        }
 
-
-        $status = $_POST['order-status'];
         $IdOder = $_POST['oderCom-id'];
+
+        if (trim($status) == 'Đã xác nhận') {
+            $checkurl = 'Mailstatuspro';
+        } elseif (trim($status) == 'Đang giao hàng') {
+            $checkurl = 'onwayoder';
+        } elseif (trim($status) == 'Giao hàng thành công') {
+            $checkurl = 'complete';
+        } elseif (trim($status) == 'Đã hủy') {
+            $checkurl = 'deleteoder';
+        }
+
         /*     cập nhật trạng thái đơn hàng */
         $resus = $this->orderModel->chanceStatuspr($status, $IdOder);
         if ($resus) {
             $_SESSION['success'] = "Đơn hàng hiện $status ";
 
-            $emailuser = $_POST['odermaildl'];;
-            $checkuser = $this->mailController->statusPr($emailuser, $status);
+            $emailuser = $_POST['odermaildl'];
+            ;
+            $checkuser = $this->mailController->statusPr($checkurl, $emailuser, $status);
             /*   $_SESSION['success'] = "Chúng tôi sẽ cố gắng liên hệ lại với bạn trong thời gian sớm nhất!";
- */
+             */
             header('Location: ./index.php?page=order_detail&id=' . $IdOder);
         } else {
             echo "  <script>
@@ -54,4 +70,3 @@ class AdOrderController
         }
     }
 }
-?>
