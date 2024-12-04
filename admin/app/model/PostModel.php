@@ -7,6 +7,7 @@ class PostModel
         require_once '../app/model/database.php';
         $this->db = new Database();
     }
+    //lấy dữ liệu từ bảng post
     function getPost()
     {
         $sql = "SELECT posts.*, categories.name AS category_name, users.full_name AS author_name
@@ -15,6 +16,7 @@ class PostModel
                 JOIN users ON posts.author_id = users.id";
         return $this->db->getAll($sql);
     }
+    //lấy thông tin post theo id
     public function getIdPost($idpost)
     {
         if ($idpost > 0) {
@@ -39,6 +41,7 @@ class PostModel
                 WHERE comments.post_id = ?";
         return $this->db->getAll($sql, [$postId]);
     }
+    //Thêm Posts
     public function insertPost($data)
     {
         if (isset($data['created_at'])) {

@@ -65,7 +65,7 @@
                                   ><i class="fa fa-pencil-alt"></i
                                 ></a>
                                 <a href="index.php?page=delete_voucher&id='.$id.'" class="text-danger"
-                                  ><i class="fa fa-trash-alt"></i
+                                  onclick="return confirm(\'Bạn có chắc chắn muốn xóa voucher này không?\')"><i class="fa fa-trash-alt"></i
                                 ></a>
                               </td>
                             </tr>';

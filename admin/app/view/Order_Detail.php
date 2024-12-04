@@ -25,7 +25,7 @@ $discountName = $discount ? $discount['code'] : 'Không có mã giảm giá';
     <div class="row">
       <div class="col-12">
         <div class="card card-body">
-          <a href="index.php?page=order" class="nav nav-link">Quay lại</a>
+          <a href="index.php?page=order" class="nav nav-link">Quay lại </a>
           <h4 class="card-title text-center text-primary fw-bold mb-4 mt-2">
             Chi Tiết Đơn Hàng
           </h4>
@@ -129,54 +129,17 @@ $discountName = $discount ? $discount['code'] : 'Không có mã giảm giá';
                       $orderId = isset($_GET['id']) ? intval($_GET['id']) : 0;
                       $order = $orderModel->getOrderById($orderId);
                       ?>
-
+                      <!--  điều kiện hiển thị trạng thái -->
                       <?php if ($order): ?>
                         <tr>
-                          <td class="text-center"><input type="hidden" id="odercheck-id" value="<?= $orderId ?> " name="oderCom-id"> <?php echo $order['id']; ?></td>
+                          <td class="text-center"><input type="hidden" id="odercheck-id" value="<?= $orderId ?> "
+                              name="oderCom-id"> <?php echo $order['id']; ?></td>
                           <td class="text-center"><?php echo $order['created_at']; ?></td>
                           <!-- <td class="text-center"></td> -->
                           <td class="text-center">
+
                             <section>
-
-                              <select id="order-status" class="form-select" name="order-status" aria-label="Default select example">
-                                <option value="Chờ xác nhận" id="order-status-0"
-
-                                  <?php if (strtolower(trim($order['status'])) == strtolower('Chờ xác nhận')) {
-                                    echo 'selected';
-                                  } ?>>
-                                  Chờ Xác Nhận
-                                </option>
-
-                                <option value="Đã xác nhận" id="order-status-1"
-                                  <?php if (strtolower(trim($order['status'])) == strtolower('Đã xác nhận')) {
-                                    echo 'selected';
-                                  } ?>>
-                                  Đã Xác Nhận
-                                </option>
-
-                                <option value="Đang giao hàng" id="order-status-2"
-
-                                  <?php if (strtolower(trim($order['status'])) == strtolower('Đang giao hàng')) {
-                                    echo 'selected';
-                                  } ?>>
-                                  Đang Giao Hàng
-                                </option>
-
-                                <option value="Giao hàng thành công" id="order-status-3"
-                                  <?php if (strtolower(trim($order['status'])) == strtolower('Giao hàng thành công')) {
-                                    echo 'selected';
-                                  } ?>>
-                                  Giao Hàng Thành Công
-                                </option>
-
-                                <option value="Đã huỷ" id="order-status-4"
-                                  <?php if (strtolower(trim($order['status'])) == strtolower('Đã Huỷ')) {
-                                    echo 'selected';
-                                  } ?>>
-                                  Đã Huỷ
-                                </option>
-
-                              </select>
+                              <?= $order['status'] ?>
                             </section>
                           </td>
                           <td class="text-center"><?php echo $order['note']; ?></td>
@@ -219,10 +182,61 @@ $discountName = $discount ? $discount['code'] : 'Không có mã giảm giá';
           </div>
           <br />
           <hr />
-          <input type="hidden" name="suboder" value="suboder" name="" id="">
-          <button id="export-button" class="btn btn-primary" disabled style="background-color: #ccc">
-            <div class="" class="btn btn-primary" style="width: 100%; background-color: #ccc; border: none"
-              id="in-export-button">
+          <?php if (strtolower(trim($order['status'])) == strtolower('Chờ xác nhận')): ?>
+            <button value="Đã hủy" name="deleteod"
+              style="border: none;color:#fff;padding:10px;border-radius: 10px;background-color: red;margin: 0 13px;">Hủy
+              đơn hàng</button>
+          <?php endif ?>
+          <input type="hidden" value="
+          <?php
+          if (strtolower(trim($order['status'])) == strtolower('Chờ xác nhận')) {
+            echo 'Đã xác nhận';
+          } elseif (strtolower(trim($order['status'])) == strtolower('Đã xác nhận')) {
+            echo 'Đang giao hàng';
+          } elseif (strtolower(trim($order['status'])) == strtolower('Đang giao hàng')) {
+            echo 'Giao hàng thành công';
+          }
+          ?>
+          " name="subodervip" id="">
+          <!-- thêm button hủy đơn -->
+          <?php
+          if (strtolower(trim($order['status'])) == strtolower('Đã hủy')): ?>
+
+          <?php endif ?>
+          <button id="export-button" class="btn" <?php
+          if (strtolower(trim($order['status'])) == strtolower('Giao hàng thành công')) {
+            echo 'disabled';
+          } elseif (strtolower(trim($order['status'])) == strtolower('Đã huỷ')) {
+            echo 'disabled';
+          }
+          ;
+
+          ?> style=" ">
+            <div class="" class="btn" style="width: 100%;
+             background-color:
+             <?php if (strtolower(trim($order['status'])) == strtolower('Giao hàng thành công')) {
+               echo '#1a972f';
+             } elseif (strtolower(trim($order['status'])) == strtolower('Đã hủy')) {
+               echo '#red';
+             } else {
+               echo '#009CFF;';
+             } ?> 
+              ; border: none;color:#fff;padding:10px 0;border-radius: 10px;" id="in-export-button">
+
+              <?php
+              if (strtolower(trim($order['status'])) == strtolower('Chờ xác nhận')) {
+                echo 'xác nhận đơn hàng';
+              } elseif (strtolower(trim($order['status'])) == strtolower('Đã xác nhận')) {
+                echo 'Xác nhận vận chuyển';
+              } elseif (strtolower(trim($order['status'])) == strtolower('Đang giao hàng')) {
+                echo 'Xác nhận giao hàng thành công';
+              } elseif (strtolower(trim($order['status'])) == strtolower('Giao hàng thành công')) {
+                echo 'Đơn hàng này đã được giao';
+              } else {
+                echo 'Đơn hàng này đã bị hủy';
+              }
+              ;
+              ?>
 
             </div>
           </button>
@@ -241,7 +255,7 @@ $discountName = $discount ? $discount['code'] : 'Không có mã giảm giá';
       showConfirmButton: false
     })
   </script>
-<?php unset($_SESSION['success']);
+  <?php unset($_SESSION['success']);
 endif; ?>
 <!-- body end -->
 <!-- </form> -->

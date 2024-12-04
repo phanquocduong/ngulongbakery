@@ -17,6 +17,7 @@ require_once './app/controller/AdOrderController.php';
 require_once './app/controller/AdUserController.php';
 require_once './app/controller/AdPost_ManageController.php';
 require_once './app/controller/AdVoucherController.php';
+require_once './app/controller/AdBannerController.php';
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
     switch ($page) {
@@ -177,6 +178,30 @@ if (isset($_GET['page'])) {
         case 'confirm_Oder':
             $oder = new AdOrderController();
             $oder->confirmOder();
+            break;
+        case 'banner':
+            $banner = new AdBannerController();
+            $banner-> viewbanner();
+            break;
+        case 'addbanner':
+            $banner = new AdBannerController();
+            $banner-> viewaddbanner();
+            break;
+        case 'editbanner':
+            $banner = new AdBannerController();
+            $banner-> vieweditbanner();
+            break;
+        case 'delete_banner':
+            $banner = new AdBannerController();
+            $banner-> deleteBanner();
+            break;
+        case 'edit_banner':
+            $banner = new AdBannerController();
+            $banner-> editBanner();
+            break;
+        case 'add_banner':
+            $banner = new AdBannerController();
+            $banner->addBanner();
             break;
         default:
             $main = new MainController();

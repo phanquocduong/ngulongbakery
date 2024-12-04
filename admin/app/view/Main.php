@@ -90,6 +90,7 @@ if ($day == 1) {
       <form action="index.php" method="GET">
         <select name="day" id="order-filter" onchange="this.form.submit()" class="form-filter">
           <option value="0" <?php echo ($day == 0) ? 'selected' : ''; ?>>Tất cả</option>
+          <option value="1" <?php echo ($day == 1) ? 'selected' : ''; ?>>Hôm nay</option>
           <option value="2" <?php echo ($day == 2) ? 'selected' : ''; ?>>Tuần này</option>
         </select>
       </form>
@@ -122,26 +123,26 @@ if ($day == 1) {
             </td>
             </tr>';
           } else {
-            foreach ($getOrder as $key => $value) {
-              extract($value);
-              if (strtotime($created_at) !== false) {
+            foreach ($getOrder as $value) {
+              // extract($value);
+              // if (strtotime($value['created_at']) !== false) {
                 // Tạo đối tượng DateTime trực tiếp với múi giờ Việt Nam
-                $date = new DateTime($created_at, new DateTimeZone('Asia/Ho_Chi_Minh'));
+                $date = new DateTime($value['created_at'], new DateTimeZone('Asia/Ho_Chi_Minh'));
                 // Định dạng lại thời gian
                 $vn_format = $date->format('d/m/Y');
-              } else {
-                $vn_format = "Invalid date";
-              }
+              // } else {
+                // $vn_format = "Invalid date";
+              // }
               echo "<tr class='product-row'>";
               echo "<td>" . $stt++ . "</td>";
               echo "
             <td>
-              <a href='index.php?page=order_detail&id=$id'>$customer</a>
+              <a href='index.php?page=order_detail&id=".$value['id']."'>".$value['customer']."</a>
               </td>";
-              echo "<td>" . number_format($total_amount, 0) . " VNĐ</td>";
+              echo "<td>" . number_format($value['total_amount'], 0) . " VNĐ</td>";
               echo "<td>$vn_format</td>";
-              echo "<td>$status</td>";
-              echo "<td> <a href='index.php?page=order_detail&id=$id'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
+              echo "<td>" . $value['status'] . "</td>";
+              echo "<td> <a href='index.php?page=order_detail&id=".$value['id']."'><button class='btn btn-sm btn-primary'>Xem Chi Tiết</button></a></td>";
               echo "</tr>";
             }
           }
@@ -342,54 +343,6 @@ $reviewNew = new AdProductsModel();
           }
         }
         ?>
-        <!-- <div class="d-flex mb-2">
-          <div>Người dùng <b>A</b> đã bình luận trong sản phẩm <b>B</b>:</div>
-          <div style="margin-left:5px;">Bánh rất ngon nhaaa</div>
-        </div> -->
-        <!-- <div class="d-flex align-items-center border-bottom py-2">
-          <input class="form-check-input m-0" day="checkbox" />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span>Bán 1 tỷ gói mè trong ngày...</span>
-              <button class="btn btn-sm">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex align-items-center border-bottom py-2">
-          <input class="form-check-input m-0" type="checkbox" />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span>Nhập thêm sản phẩm mới...</span>
-              <button class="btn btn-sm">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex align-items-center border-bottom py-2">
-          <input class="form-check-input m-0" type="checkbox" checked />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span><del>Giao đơn về Thủ Đức...</del></span>
-              <button class="btn btn-sm text-primary">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex align-items-center pt-2">
-          <input class="form-check-input m-0" type="checkbox" />
-          <div class="w-100 ms-3">
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <span>Cập nhật mã giảm giá...</span>
-              <button class="btn btn-sm">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
