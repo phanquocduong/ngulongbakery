@@ -67,7 +67,7 @@ extract($data['editaccountDetail']);
                                             <div class="col-12 col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label">Số Điện Thoại</label>
-                                                    <input type="text" class="form-control" id="phone" name="phone"
+                                                    <input type="number" class="form-control" id="phone" name="phone"
                                                         value="<?php echo $phone?>" />
                                                 </div>
                                             </div>
