@@ -38,6 +38,11 @@
         
                 $allowedTypes = ['image/jpeg', 'image/png'];
                 for ($i = 0; $i < $fileCount; $i++) {
+                    // Kiểm tra file có thực sự được upload hay không
+                    if (!isset($_FILES['imageUpload']['error'][$i]) || $_FILES['imageUpload']['error'][$i] !== UPLOAD_ERR_OK) {
+                        continue; // Bỏ qua nếu không có file hoặc file bị lỗi
+                    }
+                    
                     // Xử lý định dạng ảnh                   
                     if (!in_array($_FILES['imageUpload']['type'][$i], $allowedTypes)) {
                         $_SESSION['error'] = "Chỉ hỗ trợ file ảnh PNG và JPEG!";
@@ -53,17 +58,15 @@
                     }
 
                     // Xử lý upload ảnh
-                    if ($_FILES['imageUpload']['error'][$i] === UPLOAD_ERR_OK) {
-                        $fileName = time() . '_' . $_FILES['imageUpload']['name'][$i];
-                        $targetFilePath = './public/upload/review/' . $fileName;
-        
-                        if (move_uploaded_file($_FILES['imageUpload']['tmp_name'][$i], $targetFilePath)) {
-                            $uploadedImages[] = $fileName;
-                        } else {    
-                            $_SESSION['error'] = "Lỗi khi upload hình ảnh.";
-                            header("Location: $base_url/account");
-                            exit;
-                        }
+                    $fileName = time() . '_' . $_FILES['imageUpload']['name'][$i];
+                    $targetFilePath = './public/upload/review/' . $fileName;
+    
+                    if (move_uploaded_file($_FILES['imageUpload']['tmp_name'][$i], $targetFilePath)) {
+                        $uploadedImages[] = $fileName;
+                    } else {    
+                        $_SESSION['error'] = "Lỗi khi upload hình ảnh.";
+                        header("Location: $base_url/account");
+                        exit;
                     }
                 }
             }

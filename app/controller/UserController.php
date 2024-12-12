@@ -42,7 +42,7 @@
                 $errors['email'] = "Tài khoản đã tồn tại, vui lòng nhập email khác!";
             }
             if (!empty($errors)) {
-                $_SESSION['error'] = $errors;
+                $_SESSION['register-error'] = $errors;
                 $this->renderView('register', $css, $js);
                 return;
             }
@@ -110,7 +110,7 @@
                     }
                 }
             } else {
-                $_SESSION['error']['login'] = "Thông tin đăng nhập không hợp lệ.";
+                $_SESSION['login-error'] = "Thông tin đăng nhập không hợp lệ.";
                 $this->renderView('login', $css, $js);
             }
         }
@@ -156,7 +156,7 @@
                 header("Location: $base_url/login");
                 exit;
             } else {
-                $_SESSION['error']['forgot'] = "Thông tin tài khoản không hợp lệ.";
+                $_SESSION['forgot-error'] = "Thông tin tài khoản không hợp lệ.";
                 $this->renderView('login', $css, $js);
             }
         }
@@ -172,7 +172,7 @@
         
             if ($newPassword !== $confirmPassword) {
                 $data['resetCode'] = $resetCode;
-                $_SESSION['error']['reset'] = "Mật khẩu không khớp!";
+                $_SESSION['reset-error'] = "Mật khẩu không khớp!";
                 $this->renderView('change-password', $css, $js, $data);
             } else {
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
@@ -182,7 +182,7 @@
                     header("Location: $base_url/login");
                     exit;
                 } else {
-                    $_SESSION['error']['reset'] = "Mã xác thực không hợp lệ hoặc đã hết hạn.";
+                    $_SESSION['reset-error'] = "Mã xác thực không hợp lệ hoặc đã hết hạn.";
                     $this->renderView('change-password', $css, $js);
                 }
             }
@@ -271,7 +271,7 @@
                 $confirmPassword = trim($_POST['confirmNewPassword']);
 
                 if ($newPassword != $confirmPassword) {
-                    $_SESSION['error']['change'] = "Mật khẩu nhập lại không khớp!";
+                    $_SESSION['change-error'] = "Mật khẩu nhập lại không khớp!";
                     $this->renderView('change-password', $css, $js);
                 } else {
                     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
@@ -281,12 +281,12 @@
                         header("Location: $base_url/account");
                         exit;
                     } else {
-                        $_SESSION['error']['change'] = "Có lỗi xảy ra, vui lòng thử lại";
+                        $_SESSION['change-error'] = "Có lỗi xảy ra, vui lòng thử lại";
                         $this->renderView('change-password', $css, $js);
                     }
                 }
             } else {
-                $_SESSION['error']['change'] = "Mật khẩu hiện tại không đúng!";
+                $_SESSION['change-error'] = "Mật khẩu hiện tại không đúng!";
                 $this->renderView('change-password', $css, $js);
             }
         }        

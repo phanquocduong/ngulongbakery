@@ -1,13 +1,14 @@
 <main>
-    <form action="<?=$base_url?>/handle-login" method="POST" id="loginForm" class="login-form <?= (isset($_SESSION['error']['forgot'])) ? '' : 'login-form--active' ?>">
+    <form action="<?=$base_url?>/handle-login" method="POST" id="loginForm" class="login-form <?= (isset($_SESSION['forgot-error'])) ? '' : 'login-form--active' ?>">
         <h4 class="login-title">Đăng nhập</h4>
-        <?php if(isset($_SESSION['error']['login'])): ?>
+        <?php if(isset($_SESSION['login-error'])): ?>
             <div class="errors">
                 <ul>
-                    <li><?=$_SESSION['error']['login']?></li>
+                    <li><?=$_SESSION['login-error']?></li>
                 </ul>
             </div>
-        <?php endif; ?>
+        <?php unset($_SESSION['login-error']);
+            endif; ?>
         <div class="form-group email-form">
             <label for="customerEmail" class="form-label">EMAIL</label>
             <input
@@ -51,15 +52,15 @@
         </div>
     </form>
 
-    <form action="<?=$base_url?>/handle-forgot-pass" method="POST" id="forgotPassForm" class="forgot-pass-form <?= (isset($_SESSION['error']['forgot'])) ? 'forgot-pass-form--active' : '' ?>">
+    <form action="<?=$base_url?>/handle-forgot-pass" method="POST" id="forgotPassForm" class="forgot-pass-form <?= (isset($_SESSION['forgot-error'])) ? 'forgot-pass-form--active' : '' ?>">
         <h4 class="forgot-pass-title">Quên mật khẩu</h4>
-        <?php if(isset($_SESSION['error']['forgot'])): ?>
+        <?php if(isset($_SESSION['forgot-error'])): ?>
             <div class="errors">
                 <ul>
-                    <li><?=$_SESSION['error']['forgot']?></li>
+                    <li><?=$_SESSION['forgot-error']?></li>
                 </ul>
             </div>
-        <?php unset($_SESSION['error']['forgot']);
+        <?php unset($_SESSION['forgot-error']);
             endif; ?>
         <div class="form-group email-form">
             <label for="email" class="form-label">EMAIL</label>

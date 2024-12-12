@@ -1,14 +1,14 @@
 <main>
     <form action="<?=$base_url?>/handle-change-password" method="POST" class="change-password-form <?=(isset($_GET['page']) && ($_GET['page'] == 'change-password' || $_GET['page'] == 'handle-change-password')) ? 'active' : '' ?>">
         <h4 class="change-password-title">Đổi mật khẩu</h4>
-        <?php if(isset($_SESSION['error']['change'])): ?>
+        <?php if(isset($_SESSION['change-error'])): ?>
             <div class="errors">
                 <ul>
-                    <li><?=$_SESSION['error']['change']?></li>
+                    <li><?=$_SESSION['change-error']?></li>
                 </ul>
             </div>
         <?php 
-            unset($_SESSION['error']['change']);
+            unset($_SESSION['change-error']);
             endif; 
         ?>
         <div class="form-group current-password-form">
@@ -21,6 +21,7 @@
                     rules="required"
                     class="form-control"
                     placeholder="Nhập mật khẩu hiện tại"
+                    value="<?=isset($_POST['currentPassword']) ? $_POST['currentPassword'] : ''?>"
                 />
                 <button type="button" class="toggle-password" onclick="togglePassword('currentPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
             </div>
@@ -36,6 +37,7 @@
                     rules="required|min:8|passwordComplexity"
                     class="form-control"
                     placeholder="Nhập mật khẩu mới"
+                    value="<?=isset($_POST['newPassword']) ? $_POST['newPassword'] : ''?>"
                 />
                 <button type="button" class="toggle-password" onclick="togglePassword('newPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
             </div>
@@ -51,6 +53,7 @@
                     rules="required"
                     class="form-control"
                     placeholder="Nhập lại mật khẩu mới"
+                    value="<?=isset($_POST['confirmNewPassword']) ? $_POST['confirmNewPassword'] : ''?>"
                 />
                 <button type="button" class="toggle-password" onclick="togglePassword('confirmNewPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
             </div>
@@ -66,14 +69,14 @@
     </form>
     <form action="<?=$base_url?>/handle-reset-password" method="POST" class="reset-password-form <?=(isset($_GET['page']) && ($_GET['page'] == 'reset-password' || $_GET['page'] == 'handle-reset-password')) ? 'active' : '' ?>">
         <h4 class="reset-password-title">Đặt lại mật khẩu</h4>
-        <?php if(isset($_SESSION['error']['reset'])): ?>
+        <?php if(isset($_SESSION['reset-error'])): ?>
             <div class="errors">
                 <ul>
-                    <li><?=$_SESSION['error']['reset']?></li>
+                    <li><?=$_SESSION['reset-error']?></li>
                 </ul>
             </div>
         <?php 
-            unset($_SESSION['error']['reset']);
+            unset($_SESSION['reset-error']);
             endif; 
         ?>
         <input type="hidden" name="resetCode" value="<?= (isset($_GET['code'])) ? $_GET['code'] : $data['resetCode'] ?>" />
@@ -87,6 +90,7 @@
                     rules="required|min:8|passwordComplexity"
                     class="form-control"
                     placeholder="Nhập mật khẩu mới"
+                    value="<?=isset($_POST['resetPassword']) ? $_POST['resetPassword'] : ''?>"
                 />
                 <button type="button" class="toggle-password" onclick="togglePassword('resetPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
             </div>
@@ -102,6 +106,7 @@
                     rules="required"
                     class="form-control"
                     placeholder="Nhập lại mật khẩu"
+                    value="<?=isset($_POST['confirmResetPassword']) ? $_POST['confirmResetPassword'] : ''?>"
                 />
                 <button type="button" class="toggle-password" onclick="togglePassword('confirmResetPassword', this)"><i class="fa-solid fa-eye-slash"></i></button>
             </div>
