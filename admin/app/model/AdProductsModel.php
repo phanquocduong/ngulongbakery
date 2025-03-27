@@ -117,12 +117,21 @@ class AdProductsModel
         $param = [$data['name'], $data['price'], $data['sale'], $data['image'], $data['extra_image'], $data['short_description'], $data['detailed_description'], $data['rating'], $data['stock_quantity'], $data['sold'], $data['views'], $data['tags'], $data['status'], $data['category_id'], $data['id']];
         return $this->db->update($sql, $param);
     }
-    function deletePro($id)
+    // function deletePro($id)
+    // {
+    //     $sql = "DELETE FROM products WHERE id = ?";
+    //     $param = [$id];
+    //     return $this->db->delete($sql, $param);
+    // }
+    public function updateProductStatus($id, $status)
     {
-        $sql = "DELETE FROM products WHERE id = ?";
-        $param = [$id];
-        return $this->db->delete($sql, $param);
+        $sql = "UPDATE products SET status = :status WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
+    
     public function getReviews()
     {
         $sql = "SELECT products.id AS product_id, reviews.id AS review_id, reviews.comment AS contents, reviews.created_at AS date_comments, reviews.rating AS rating, reviews.images AS img, users.id AS user_id, users.full_name AS username

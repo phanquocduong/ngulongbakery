@@ -41,6 +41,15 @@ class PostModel
                 WHERE comments.post_id = ?";
         return $this->db->getAll($sql, [$postId]);
     }
+
+    public function deleteCommentById($commentId)
+    {
+        $sql = "DELETE FROM comments WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $commentId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    
     //Thêm Posts
     public function insertPost($data)
     {

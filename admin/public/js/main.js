@@ -1,3 +1,4 @@
+import CodeBlock from "@ckeditor/ckeditor5-code-block/src/codeblock";
 (function ($) {
   ("use strict");
   // Thêm bài viết

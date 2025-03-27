@@ -61,6 +61,7 @@
             <th>Hình ảnh</th>
             <th>Lượt xem</th>
             <th>Danh mục</th>
+            <th>Trạng thái</th>
             <th>Hành động</th>
           </tr>
         </thead>
@@ -77,6 +78,7 @@
                   style="width: 50px; height: 50px"></td>
               <td><?php echo $product['views']; ?></td>
               <td><?php echo $product['category_name']; ?></td>
+              <td><?php echo ($product['status'] == 1) ? 'Hiện' : 'Ẩn'; ?></td>
               <td>
                 <a href="index.php?page=products_detail&id=<?php echo $product['id']; ?>"
                   class="btn btn-sm btn-primary">Xem</a>
