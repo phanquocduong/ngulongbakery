@@ -3,14 +3,16 @@
         <h1 style='margin: 0;'>Thông báo đơn hàng mới</h1>
     </div>
     <div style='padding: 20px;'>
-        <p><strong>Khách hàng:</strong> <?= $fullname ?></p>
-        <p><strong>Email:</strong> <?= $email ?></p>
-        <p><strong>Số điện thoại:</strong> <?= $phone ?></p>
-        <p><strong>Địa chỉ:</strong> <?= $address ?></p>
-        <p><strong>Phương thức thanh toán:</strong> <?= $method ?></p>
-        <p><strong>Tổng cộng:</strong> <?= number_format($total, 0, ',', '.') ?>đ</p>
+        <p><strong>Khách hàng: </strong><?=$fullname?></p>
+        <p><strong>Email: </strong><?=$email?></p>
+        <p><strong>Số điện thoại: </strong><?=$phone?></p>
+        <p><strong>Địa chỉ: </strong><?=$address?></p>
+        <p><strong>Phương thức thanh toán: </strong><?=$method?></p>
+        <p><strong>Giảm giá: </strong><?= $discount ? $discount . '%' : 'Không có' ?></p>
+        <p><strong>Phí vận chuyển: </strong><?=number_format($transportFee, 0, ',', '.')?>đ</p>
+        <p><strong>Tổng cộng: </strong><?=number_format($total, 0, ',', '.')?>đ</p>
         <?php if ($note): ?>
-            <p"><strong>Ghi chú:</strong> <?= $note ?></p>
+            <p><strong>Ghi chú: </strong><?=$note?></p>
         <?php endif; ?>
         <h3>Chi tiết đơn hàng:</h3>
         <table style='width: 100%; border-collapse: collapse;'>
@@ -23,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?= $orderDetails ?>
+                <?=$orderDetails?>
             </tbody>
         </table>
     </div>

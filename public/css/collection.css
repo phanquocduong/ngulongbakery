@@ -199,6 +199,7 @@ main {
     .collection-name {
         font-size: 3.5rem;
         line-height: 4.5rem;
+        margin-top: 20px;
     }
 
     .collection-main__heading {
@@ -208,6 +209,7 @@ main {
 
     .collection-desc {
         line-height: 2.4rem;
+        text-align: center;
     }
 
     .sort-right {

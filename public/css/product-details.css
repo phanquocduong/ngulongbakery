@@ -338,7 +338,7 @@ main {
     font-size: 1.7rem;
 }
 
-.add-to-cart-btn {
+.add-to-cart-btn.add-to-cart-btn--related {
     font-size: 1.3rem;
     padding: 11px 33px;
 }
@@ -491,7 +491,7 @@ main {
     }
 
     .review-item__comment {
-        line-height: 2.2rem;
+        line-height: 2.6rem;
     }
 
     .product-item {
@@ -505,8 +505,8 @@ main {
     }
 
     .review-item__image {
-        width: 90px;
-        height: 90px;
+        width: 80px;
+        height: 80px;
         margin-right: 8px;
     }
 }

@@ -1,17 +1,16 @@
+// Toggle hiển thị menu lọc
 function toggleFilterMenu(menuId) {
-    // Toggle hiển thị menu lọc
     document.getElementById(menuId).classList.toggle('filter-menu__body--active');
 }
 
+// Xử lý hiển thị danh sách sản phẩm
 document.addEventListener('DOMContentLoaded', () => {
-    // Lấy các phần tử cần thiết từ DOM
     const categoryFilters = document.querySelectorAll("input[name='category-filter']");
     const priceFilters = document.querySelectorAll("input[name='price-filter']");
     const productContainer = document.querySelector('.products-list');
     const loadingSpinner = document.querySelector('.loading-spinner');
     const paginationContainer = document.querySelector('.pagination');
 
-    // Định nghĩa các bộ lọc mặc định
     let filters = {
         category: '',
         price: [],
@@ -19,9 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         sort: ''
     };
 
-    // Hàm tải sản phẩm từ server và hiển thị lên trang
     function loadProducts() {
-        loadingSpinner.style.display = 'block'; // Hiển thị spinner khi đang tải
+        loadingSpinner.style.display = 'block';
 
         // Xây dựng chuỗi queryParams từ các bộ lọc
         const queryParams = new URLSearchParams({
@@ -35,24 +33,29 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`${baseUrl}/index.php?page=handle-products-display&${queryParams}`)
             .then(response => response.json())
             .then(data => {
-                loadingSpinner.style.display = 'none'; // Ẩn spinner khi dữ liệu đã được tải
+                loadingSpinner.style.display = 'none';
+
                 if (data.message) {
-                    // Nếu không có sản phẩm, hiển thị thông báo
+                    // Hiển thị thông báo không tìm thấy
                     productContainer.style.justifyContent = 'center';
                     productContainer.innerHTML = `<p class="no-products-message">${data.message}</p>`;
                 } else {
-                    // Hiển thị danh sách sản phẩm
+                    // Render sản phẩm
                     productContainer.style.justifyContent = '';
                     productContainer.innerHTML = data.products.map(renderProduct).join('');
                 }
-                // Cập nhật thông tin danh mục và phân trang
+
+                // Hiển thị thông tin danh mục
                 document.querySelector('.collection-name').innerText = data.category.name;
                 document.querySelector('.collection-desc').innerText = data.category.description;
+
+                // Render phân trang
                 paginationContainer.innerHTML = data.pagination;
-                filters.num = 1; // Đặt lại số trang sau mỗi lần tải sản phẩm mới
+
+                filters.num = 1;
             })
             .catch(error => {
-                loadingSpinner.style.display = 'none'; // Ẩn spinner nếu có lỗi xảy ra
+                loadingSpinner.style.display = 'none';
                 console.error('Error:', error);
             });
     }
@@ -80,10 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     ${product.sale ? `<div class="product-item__sale-off">-${calculateDiscount(product.price, product.sale)}%</div>` : ''}
                     <div class="add-to-cart-box">
-                        <button 
-                            class="add-to-cart-btn" 
-                            onclick="addToCart(this, ${product.id}, '${product.name}', ${product.sale || product.price}, '${product.image}')"
-                        >
+                        <button class="add-to-cart-btn" onclick="addToCart(this, ${product.id})">
                             THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                         </button>
                     </div>
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Hàm render sao đánh giá của sản phẩm
+    // Render sao đánh giá của sản phẩm
     function renderStars(rating) {
         let starsHtml = '';
         for (let i = 1; i <= 5; i++) {
@@ -101,12 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return starsHtml;
     }
 
-    // Hàm tính toán phần trăm giảm giá
+    // Tính toán phần trăm giảm giá
     function calculateDiscount(price, sale) {
         return Math.round(((price - sale) / price) * 100);
     }
 
-    // Hàm lắng nghe thay đổi của bộ lọc danh mục khi người dùng nhấn vào danh mục ở ngoài trang
+    // Lắng nghe thay đổi của bộ lọc danh mục khi người dùng nhấn vào danh mục ở trên header menu
     categoryFilters.forEach(filter => {
         if (filter.checked) {
             filters.category = filter.id;
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Hàm lắng nghe thay đổi của bộ lọc danh mục khi người dùng chọn danh mục trong trang
+    // Lắng nghe thay đổi của bộ lọc danh mục khi người dùng chọn danh mục trong trang
     categoryFilters.forEach(filter =>
         filter.addEventListener('change', function () {
             filters.category = this.id;
@@ -135,16 +135,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Lắng nghe sự kiện phân trang
     paginationContainer.addEventListener('click', function (e) {
+        e.preventDefault();
         if (e.target.tagName === 'A') {
-            e.preventDefault();
             filters.num = e.target.getAttribute('data-page');
-            loadProducts();
         }
         if (e.target.tagName === 'I') {
-            e.preventDefault();
             filters.num = e.target.parentElement.getAttribute('data-page');
-            loadProducts();
         }
+        loadProducts();
     });
 
     // Lắng nghe sự kiện sắp xếp sản phẩm
@@ -153,6 +151,5 @@ document.addEventListener('DOMContentLoaded', () => {
         loadProducts();
     });
 
-    // Tải sản phẩm ngay khi trang được tải
     loadProducts();
 });

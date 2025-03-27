@@ -65,7 +65,7 @@
                                     <option value="price_desc">Giá: Giảm dần</option>
                                     <option value="name_asc">Tên: A-Z</option>
                                     <option value="name_desc">Tên: Z-A</option>
-                                    <option value="featured">Sản phẩm nổi bật</option>
+                                    <option value="soldest">Sản phẩm bán chạy</option>
                                 </select>
                             </div>
                         </div>

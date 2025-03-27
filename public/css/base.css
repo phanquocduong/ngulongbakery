@@ -552,6 +552,11 @@ header {
     .header-menu__item-link {
         padding: 0 30px;
     }
+
+    .header-sub-menu__item-link:hover {
+        color: var(--secondary-color);
+    }
+
     /* End header */
 
     .footer-item {
@@ -733,6 +738,10 @@ header {
 
     .modal-sub-menu__list.active {
         display: block;
+    }
+
+    .header-sub-menu__item-link:hover {
+        color: var(--secondary-color);
     }
     /* End header */
 

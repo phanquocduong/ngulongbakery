@@ -16,7 +16,7 @@
                         FROM reviews r2 
                         WHERE r2.rating >= 4 AND r2.status = 1 
                         GROUP BY r2.user_id
-                    ) 
+                    ) AND r.comment != ''
                     ORDER BY r.created_at DESC ";
             if ($limit > 0) {
                 $sql .= " LIMIT $limit";

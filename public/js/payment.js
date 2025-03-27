@@ -8,12 +8,11 @@ function closeTransferInformation() {
     infoDiv.classList.remove('transfer-information--active');
 }
 
-// AJAX để load quận/huyện và phường/xã
+// Load quận/huyện
 document.getElementById('province').addEventListener('change', function () {
     let provinceId = this.value;
     let transportFee = 0;
 
-    // Tính phí vận chuyển dựa trên provinceId
     if (provinceId >= 1 && provinceId <= 30) {
         transportFee = 40000;
     } else if (provinceId >= 31 && provinceId <= 43) {
@@ -23,13 +22,12 @@ document.getElementById('province').addEventListener('change', function () {
     }
 
     // Cập nhật phí vận chuyển trên giao diện
-    const transportFeeElement = document.querySelector('.transport-fee__price');
-    const transportFeeElementHidden = document.querySelector('.transport-fee__price--hidden');
-    transportFeeElement.textContent = new Intl.NumberFormat().format(transportFee) + 'đ';
-    transportFeeElementHidden.value = transportFee;
+    document.querySelector('.transport-fee__price').textContent = new Intl.NumberFormat().format(transportFee) + 'đ';
+    document.querySelector('.transport-fee__price--hidden').value = transportFee;
 
-    const grandTotal = parseInt(document.getElementById('total-payment').textContent.replace(/[^\d]/g, ''));
-    const newTotal = grandTotal + transportFee;
+    const provisionalPrice = parseInt(document.querySelector('.provisional-price').textContent.replace(/[^\d]/g, ''));
+    const newTotal = provisionalPrice + transportFee;
+
     document.getElementById('total-payment').textContent = new Intl.NumberFormat().format(newTotal) + 'đ';
     document.getElementById('total-payment-hidden').value = newTotal;
 
@@ -37,16 +35,19 @@ document.getElementById('province').addEventListener('change', function () {
         .then(response => response.json())
         .then(data => {
             let districtSelect = document.getElementById('district');
+
             districtSelect.innerHTML = '<option value="">Quận / huyện</option>';
             data.forEach(district => {
                 districtSelect.innerHTML += `<option value="${district.id}">${district.name}</option>`;
             });
             districtSelect.disabled = false;
+
             document.getElementById('ward').innerHTML = '<option value="">Phường / xã</option>';
             document.getElementById('ward').disabled = true;
         });
 });
 
+// Load phường/xã
 document.getElementById('district').addEventListener('change', function () {
     let districtId = this.value;
 
@@ -54,6 +55,7 @@ document.getElementById('district').addEventListener('change', function () {
         .then(response => response.json())
         .then(data => {
             let wardSelect = document.getElementById('ward');
+
             wardSelect.innerHTML = '<option value="">Phường / Xã</option>';
             data.forEach(ward => {
                 wardSelect.innerHTML += `<option value="${ward.id}">${ward.name}</option>`;
@@ -64,34 +66,44 @@ document.getElementById('district').addEventListener('change', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const applyDiscountButton = document.getElementById('apply-discount');
-    const discountCodeInput = document.getElementById('discount-code');
-    const totalPayment = document.getElementById('total-payment');
-    const totalPaymentHidden = document.getElementById('total-payment-hidden');
     const discountMessage = document.querySelector('.form-message');
-    const discountId = document.getElementById('discount-id');
 
     applyDiscountButton.addEventListener('click', function (e) {
         e.preventDefault();
 
-        const discountCode = discountCodeInput.value.trim();
-        const grandTotal = parseInt(totalPayment.textContent.replace(/[^\d]/g, ''));
+        const discountCode = document.getElementById('discount-code').value.trim();
+        const provisionalPrice = parseInt(document.querySelector('.provisional-price').textContent.replace(/[^\d]/g, ''));
 
-        // Gửi Ajax request
         fetch(`${baseUrl}/index.php?page=apply-discount`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `code=${encodeURIComponent(discountCode)}&total=${grandTotal}`
+            body: `code=${encodeURIComponent(discountCode)}&provisional=${provisionalPrice}`
+        });
+
+        fetch(`${baseUrl}/index.php?page=apply-discount`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                code: discountCode,
+                provisional: provisionalPrice
+            })
         })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Cập nhật giao diện
                     discountMessage.style.color = '#28a745';
-                    totalPayment.textContent = new Intl.NumberFormat('en-US').format(data.newTotal) + 'đ';
-                    totalPaymentHidden.value = data.newTotal;
-                    discountId.value = data.discountId;
+                    document.getElementById('discount-id').value = data.discountId;
+
+                    const transportFee = parseInt(document.querySelector('.transport-fee__price--hidden').value);
+                    document.querySelector('.provisional-price').textContent = new Intl.NumberFormat().format(data.newProvisionalPrice) + 'đ';
+
+                    const newTotal = data.newProvisionalPrice + transportFee;
+                    document.getElementById('total-payment').textContent = new Intl.NumberFormat().format(newTotal) + 'đ';
+                    document.getElementById('total-payment-hidden').value = newTotal;
                 } else {
                     discountMessage.style.color = '#f4516c';
                 }

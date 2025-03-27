@@ -1,4 +1,5 @@
-const form = new Validator('.change-password-form');
+const form1 = new Validator('.change-password-form.active');
+const form2 = new Validator('.reset-password-form.active');
 
 function togglePassword(id, elm) {
     var passwordField = document.getElementById(id);

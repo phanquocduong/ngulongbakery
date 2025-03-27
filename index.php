@@ -100,14 +100,14 @@
                 $user->handleForgotPassword($base_url, $css, $js);
                 break;
             case 'reset-password':
-                $css = 'reset-password.css';
-                $js = 'reset-password.js';
+                $css = 'change-password.css';
+                $js = 'change-password.js';
                 $user = new UserController();
                 $user->viewResetPassword($css, $js);
                 break;
             case 'handle-reset-password':
-                $css = 'reset-password.css';
-                $js = 'reset-password.js';
+                $css = 'change-password.css';
+                $js = 'change-password.js';
                 $user = new UserController();
                 $user->handleResetPassword($base_url, $css, $js);
                 break;

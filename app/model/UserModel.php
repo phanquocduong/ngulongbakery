@@ -7,10 +7,10 @@
             $this->db = new Database();
         }
 
-        function checkMail($email) {
-            $sql = "SELECT * FROM users WHERE email = ?";
+        function getUserByEmail($email) {
+            $sql = "SELECT * FROM users WHERE email = ? AND status = 1 AND is_verified = 1";
             return $this->db->get($sql, [$email]);
-        }
+        }    
 
         function register($fullname, $email, $password, $verificationCode) {
             $sql = "INSERT INTO users (`full_name`, `email`, `password`, `verification_code`) VALUES (?, ?, ?, ?)";
@@ -18,14 +18,9 @@
         }
 
         function verify($code) {
-            $sql = "UPDATE users SET is_verified = 1 WHERE verification_code = ? AND is_verified = 0";
+            $sql = "UPDATE users SET is_verified = 1 WHERE verification_code = ? AND is_verified = 0 AND status = 1";
             return $this->db->execute($sql, [$code]);
-        }
-        
-        function getUserByEmail($email) {
-            $sql = "SELECT * FROM users WHERE email = ? AND status = 1 AND is_verified = 1";
-            return $this->db->get($sql, [$email]);
-        }        
+        }    
 
         function saveResetCode($email, $resetCode) {
             $sql = "UPDATE users SET reset_code = ? WHERE email = ? AND is_verified = 1 AND status = 1";

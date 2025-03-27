@@ -20,24 +20,24 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" style="text-align: right; padding: 10px; border: 1px solid #ddd;"><strong>Phí vận chuyển:</strong></td>
-                    <td style="text-align: right; padding: 10px; border: 1px solid #ddd;"><?= number_format($transportFee, 0, ',', '.') ?>đ</td>
-                </tr>
-                <tr>
                     <td colspan="3" style="text-align: right; padding: 10px; border: 1px solid #ddd;"><strong>Giảm giá:</strong></td>
                     <td style="text-align: right; padding: 10px; border: 1px solid #ddd;"><?= $discount ? $discount . '%' : 'Không có' ?></td>
                 </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right; padding: 10px; border: 1px solid #ddd;"><strong>Phí vận chuyển:</strong></td>
+                    <td style="text-align: right; padding: 10px; border: 1px solid #ddd;"><?=number_format($transportFee, 0, ',', '.')?>đ</td>
+                </tr>
                 <tr style="background-color: #f5f5f5;">
                     <td colspan="3" style="text-align: right; padding: 10px; border: 1px solid #ddd;"><strong>Tổng cộng:</strong></td>
-                    <td style="text-align: right; padding: 10px; border: 1px solid #ddd;"><strong><?= number_format($total, 0, ',', '.') ?>đ</strong></td>
+                    <td style="text-align: right; padding: 10px; border: 1px solid #ddd;"><strong><?=number_format($total, 0, ',', '.')?>đ</strong></td>
                 </tr>
             </tfoot>
         </table>
-        <p style="margin-bottom: 5px;"><strong>Địa chỉ giao hàng:</strong> <?= $address ?></p>
-        <p style="margin-bottom: 5px;"><strong>Số điện thoại:</strong> <?= $phone ?></p>
-        <p style="margin-bottom: 5px;"><strong>Phương thức thanh toán:</strong> <?= $method ?></p>
+        <p style="margin-bottom: 5px;"><strong>Địa chỉ giao hàng: </strong><?=$address?></p>
+        <p style="margin-bottom: 5px;"><strong>Số điện thoại: </strong><?=$phone?></p>
+        <p style="margin-bottom: 5px;"><strong>Phương thức thanh toán: </strong><?=$method?></p>
         <?php if ($note): ?>
-            <p style="margin-bottom: 20px;"><strong>Ghi chú:</strong> <?= $note ?></p>
+            <p style="margin-bottom: 20px;"><strong>Ghi chú: </strong><?=$note?></p>
         <?php endif; ?>
         <p style="margin: 20px 0; text-align: center;">
             <strong>Ngũ Long Bakery</strong> xin chân thành cảm ơn và hân hạnh được phục vụ quý khách!

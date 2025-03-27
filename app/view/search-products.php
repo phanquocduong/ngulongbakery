@@ -19,10 +19,10 @@
                             </div>
                             <div class="product-item__price">
                                 <?php if ($item['sale']): ?>
-                                    <span class="product-item__price-old"><?= number_format($item['price']) ?>đ</span>
-                                    <span class="product-item__price-current"><?= number_format($item['sale']) ?>đ</span>
+                                    <span class="product-item__price-old"><?=number_format($item['price'], 0, ',', '.')?>đ</span>
+                                    <span class="product-item__price-current"><?=number_format($item['sale'], 0, ',', '.')?>đ</span>
                                 <?php else: ?>
-                                    <span class="product-item__price-current"><?= number_format($item['price']) ?>đ</span>
+                                    <span class="product-item__price-current"><?=number_format($item['price'], 0, ',', '.')?>đ</span>
                                 <?php endif; ?>
                             </div>
                             <?php if ($item['sale']): ?>
@@ -30,10 +30,7 @@
                                 <div class="product-item__sale-off">-<?= $percentDiscount ?>%</div>
                             <?php endif; ?>
                             <div class="add-to-cart-box">
-                                <button 
-                                    class="add-to-cart-btn" 
-                                    onclick="addToCart(this, <?= $item['id'] ?>, '<?= $item['name'] ?>', <?= $item['sale'] ? $item['sale'] : $item['price'] ?>, '<?= $item['image'] ?>')"
-                                >
+                                <button class="add-to-cart-btn" data-product-id="<?=$item['id']?>">
                                     THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                                 </button>
                             </div>
@@ -50,10 +47,12 @@
                 <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$previous_page?>" class="pagination-link__icon-prev <?= $current_page == 1 ? 'none' : '' ?>">
                     <i class="fa-solid fa-chevron-left"></i>
                 </a>
-                <?php 
-                for ($i = 1; $i <= $numberPages; $i++): ?>
-                    <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$i?>" class="pagination-link <?= $i == $current_page ? 'pagination-link--active' : '' ?>"><?= $i ?></a>
-                <?php endfor; ?>
+                <?php if ($numberPages > 1):
+                        for ($i = 1; $i <= $numberPages; $i++): ?>
+                            <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$i?>" class="pagination-link <?= $i == $current_page ? 'pagination-link--active' : '' ?>"><?= $i ?></a>
+                <?php endfor; 
+                    endif;
+                ?>
                 <a href="index.php?page=search&keyword=<?=$_GET['keyword']?>&num=<?=$next_page?>" class="pagination-link__icon-next <?= $current_page == $numberPages ? 'none' : '' ?>">
                     <i class="fa-solid fa-chevron-right"></i>
                 </a>

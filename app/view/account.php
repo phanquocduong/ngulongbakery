@@ -11,9 +11,6 @@
                         />
                         <div class="sidebar-heading__right">
                             <h4 class="sidebar-heading__username"><?=$_SESSION['user']['full_name']?></h4>
-                            <!-- <span onclick="openUserInformation(this)" class="sidebar-heading__edit-profile">
-                                <i class="edit-icon fa-solid fa-pencil"></i>Sửa hồ sơ
-                            </span> -->
                         </div>
                     </div>
                     <ul class="sidebar-menu">
@@ -209,10 +206,7 @@
                                                 <div class="product-item__sale-off">-<?= $percentDiscount ?>%</div>
                                             <?php endif; ?>
                                             <div class="add-to-cart-box">
-                                                <button 
-                                                    class="add-to-cart-btn" 
-                                                    onclick="addToCart(this, <?= $item['id'] ?>, '<?= $item['name'] ?>', <?= $item['sale'] ? $item['sale'] : $item['price'] ?>, '<?= $item['image'] ?>')"
-                                                >
+                                                <button class="add-to-cart-btn" data-product-id="<?=$item['id']?>">
                                                     THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                                                 </button>
                                             </div>

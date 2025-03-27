@@ -10,7 +10,7 @@
         <a class="slideshow-prev"><i class="fa-solid fa-chevron-left"></i></a>
         <a class="slideshow-next"><i class="fa-solid fa-chevron-right"></i></a>
     </div>
-    <!-- Slideshow hiện trên Mobile -->
+    <!-- Banner hiện trên Mobile -->
     <div class="banner-mobile">
         <h4 class="banner-mobile__label">Sản phẩm nổi bật !!!</h4>
         <h1 class="banner-mobile__name">BÁNH BÔNG LAN TRỨNG MUỐI</h1>
@@ -19,7 +19,7 @@
             trứng muối mặn.
         </p>
         <button class="buy-now-btn--bigger">
-            <a href="" class="buy-now-btn__link">
+            <a href="<?=$base_url?>/product-details/4" class="buy-now-btn__link">
                 <i class="shopping-cart-icon fa-solid fa-cart-shopping"></i>
                 MUA NGAY
             </a>
@@ -103,10 +103,7 @@
                                 <div class="product-item__sale-off">-<?=$percentDiscount?>%</div>
                             <?php endif; ?>
                             <div class="add-to-cart-box">
-                                <button 
-                                    class="add-to-cart-btn" 
-                                    onclick="addToCart(this, <?=$product['id']?>, '<?=$product['name']?>', <?= $product['sale'] ? $product['sale'] : $product['price'] ?>, '<?=$product['image']?>')"
-                                >
+                                <button class="add-to-cart-btn" data-product-id="<?=$product['id']?>">
                                     THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                                 </button>
                             </div>
@@ -218,10 +215,7 @@
                                     <div class="product-item__sale-off">-<?=$percentDiscount?>%</div>
                                 <?php endif; ?>
                                 <div class="add-to-cart-box">
-                                    <button 
-                                        class="add-to-cart-btn" 
-                                        onclick="addToCart(this, <?=$product['id']?>, '<?=$product['name']?>', <?= $product['sale'] ? $product['sale'] : $product['price'] ?>, '<?=$product['image']?>')"
-                                    >
+                                    <button class="add-to-cart-btn" data-product-id="<?=$product['id']?>">
                                         THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                                     </button>
                                 </div>
@@ -269,10 +263,7 @@
                                 <div class="product-item__sale-off">-<?=$percentDiscount?>%</div>
                             <?php endif; ?>
                             <div class="add-to-cart-box">
-                                <button 
-                                    class="add-to-cart-btn" 
-                                    onclick="addToCart(this, <?=$product['id']?>)"
-                                >
+                                <button class="add-to-cart-btn" data-product-id="<?=$product['id']?>">
                                     THÊM VÀO GIỎ HÀNG <i class="check-icon fa-solid fa-check"></i>
                                 </button>
                             </div>

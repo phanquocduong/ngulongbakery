@@ -13,9 +13,19 @@
         function review($base_url) {
             $orderId = $_POST['orderId'];
             $rating = $_POST['rating'];
-            $comment = htmlspecialchars($_POST['comment']); // Lọc XSS
+            $comment = $_POST['comment'] ?? "";
+
+            if (empty($orderId) || !is_numeric($orderId)) {
+                $_SESSION['error'] = "Mã đơn hàng không hợp lệ.";
+                header("Location: $base_url/account");
+                exit;
+            }            
+            if (empty($rating) || !is_numeric($rating) || $rating < 1 || $rating > 5) {
+                $_SESSION['error'] = "Xếp hạng không hợp lệ.";
+                header("Location: $base_url/account");
+                exit;
+            }            
         
-            // Xử lý upload ảnh
             $uploadedImages = [];
             if (isset($_FILES['imageUpload'])) {
                 $fileCount = count($_FILES['imageUpload']['name']);
@@ -26,46 +36,69 @@
                     exit;
                 }
         
+                $allowedTypes = ['image/jpeg', 'image/png'];
                 for ($i = 0; $i < $fileCount; $i++) {
-                    if ($_FILES['imageUpload']['error'][$i] === UPLOAD_ERR_OK) {
-                        $fileName = time() . '_' . $_FILES['imageUpload']['name'][$i];
-                        $targetFilePath = './public/upload/review/' . $fileName;
-        
-                        if (move_uploaded_file($_FILES['imageUpload']['tmp_name'][$i], $targetFilePath)) {
-                            $uploadedImages[] = $fileName;
-                        } else {
-                            $_SESSION['error'] = "Lỗi khi upload hình ảnh.";
-                            header("Location: $base_url/account");
-                            exit;
-                        }
+                    // Kiểm tra file có thực sự được upload hay không
+                    if (!isset($_FILES['imageUpload']['error'][$i]) || $_FILES['imageUpload']['error'][$i] !== UPLOAD_ERR_OK) {
+                        continue; // Bỏ qua nếu không có file hoặc file bị lỗi
+                    }
+                    
+                    // Xử lý định dạng ảnh                   
+                    if (!in_array($_FILES['imageUpload']['type'][$i], $allowedTypes)) {
+                        $_SESSION['error'] = "Chỉ hỗ trợ file ảnh PNG và JPEG!";
+                        header("Location: $base_url/account");
+                        exit;
+                    }
+
+                    // Xử lý kích thước ảnh
+                    if ($_FILES['imageUpload']['size'][$i] > 5000000) {  // 5MB
+                        $_SESSION['error'] = "Kích thước file quá lớn! Vui lòng chọn ảnh nhỏ hơn 5MB.";
+                        header("Location: $base_url/account");
+                        exit;
+                    }
+
+                    // Xử lý upload ảnh
+                    $fileName = time() . '_' . $_FILES['imageUpload']['name'][$i];
+                    $targetFilePath = './public/upload/review/' . $fileName;
+    
+                    if (move_uploaded_file($_FILES['imageUpload']['tmp_name'][$i], $targetFilePath)) {
+                        $uploadedImages[] = $fileName;
+                    } else {    
+                        $_SESSION['error'] = "Lỗi khi upload hình ảnh.";
+                        header("Location: $base_url/account");
+                        exit;
                     }
                 }
             }
         
             // Lấy chi tiết đơn hàng và thêm đánh giá
             $productsDetails = $this->order->getOrderDetails($orderId);
-            foreach ($productsDetails as $productDetails) {
-                $product = $this->product->getProductByName($productDetails['product_name']);
+            foreach ($productsDetails as $item) {
+                $product = $this->product->getProductByName($item['product_name']);
                 $uploadedImagesString = implode(',', $uploadedImages);
+
                 $result = $this->review->addReview($_SESSION['user']['id'], $rating, $uploadedImagesString, $comment, $product['id'], 1);
                 $updateStatusResult = $this->order->updateReviewStatusOfOrder($orderId);
+
                 if (!$result || !$updateStatusResult) {
                     $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại.";
                     header("Location: $base_url/account");
                     exit;
                 }
+
                 $reviewsOfProduct = $this->review->getReviewsOfProduct('WHERE product_id = ?', [$product['id']]);
                 $countReviewsOfProduct = $this->review->getReviewCount('WHERE product_id = ?', [$product['id']]);
+
                 $totalRatingOfProducts = array_reduce($reviewsOfProduct, function($total, $item) {return $total + $item['rating'];}, 0);
                 $averageRatingOfProduct = round($totalRatingOfProducts / $countReviewsOfProduct);
+
                 $this->product->updateRatingOfProduct($product['id'], $averageRatingOfProduct);
             }
         
-            // Redirect sau khi xử lý xong
             $_SESSION['success'] = "Đánh giá thành công";
             header("Location: $base_url");
             exit;
-        }
+        }     
 
         public function handleProductReviewsDisplay() {
             $productId = isset($_GET['product-id']) ? $_GET['product-id'] : null;
@@ -95,9 +128,11 @@
             if ($currentPage > 1) {
                 $html .= '<a href="#" data-page="' . ($currentPage - 1) . '" class="pagination-link__icon-prev"><i class="fa-solid fa-chevron-left"></i></a>';
             }
-            for ($i = 1; $i <= $numberPages; $i++) {
-                $activeClass = $i == $currentPage ? 'pagination-link--active' : '';
-                $html .= '<a href="#" data-page="' . $i . '" class="pagination-link ' . $activeClass . '">' . $i . '</a>';
+            if ($numberPages > 1) {
+                for ($i = 1; $i <= $numberPages; $i++) {
+                    $activeClass = $i == $currentPage ? 'pagination-link--active' : '';
+                    $html .= '<a href="#" data-page="' . $i . '" class="pagination-link ' . $activeClass . '">' . $i . '</a>';
+                }
             }
             if ($currentPage < $numberPages) {
                 $html .= '<a href="#" data-page="' . ($currentPage + 1) . '" class="pagination-link__icon-next"><i class="fa-solid fa-chevron-right"></i></a>';
