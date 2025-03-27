@@ -123,38 +123,54 @@
   require_once './app/model/PostModel.php';
   $getComments = new PostModel();
 
+  if (isset($_GET['delete_comment_id']) && is_numeric($_GET['delete_comment_id'])) {
+    $commentId = intval($_GET['delete_comment_id']);
+    if ($getComments->deleteCommentById($commentId)) {
+      echo '<script>alert("Bình luận đã được xoá.");</script>';
+    } else {
+      echo '<script>alert("Không thể xoá bình luận.");</script>';
+    }
+    echo '<script>location.href="index.php?page=post_detail&id=' . intval($_GET['id']) . '"</script>';
+  }
+
   // Lấy id bài viết từ url
   $postId = isset($_GET['id']) ? intval($_GET['id']) : 0;
   // Lấy danh sách comment theo id bài viết
   $comments = $getComments->getCommentsByPostId($postId);
   ?>
-  <?php
-  if ($comments) {
-    foreach ($comments as $comment) {
-      extract($comment);
-      echo '<div class="comment">';
-      echo '<div class="comment-item">';
-      echo '<div class="comment-item-header">';
-      echo '<img src="../public/upload/avatar/'.$avatar_user.'" class="rounded-circle" alt="" style="width: 40px; height: 40px" />';
-      echo '<div class="comment-item-header-info">';
-      echo '<h6>' . htmlspecialchars($full_name) . '</h6>';
-      echo '<span>' . htmlspecialchars($created_at) . '</span>';
-      echo '</div>';
-      echo '</div>';
-      echo '<div class="comment-item-content">';
-      echo '<p>' . htmlspecialchars($comment) . '</p>';
-      echo '</div>';
-      echo '<button class="btn btn-sm btn-danger">Xoá</button>';
-      echo '</div>';
-      echo '</div>';
-    }
-  } else {
-    echo '<p>Không có bình luận nào.</p>';
+<?php
+if ($comments) {
+  foreach ($comments as $comment) {
+    extract($comment);
+    echo '<div class="comment">';
+    echo '<div class="comment-item">';
+    echo '<div class="comment-item-header">';
+    echo '<img src="../public/upload/avatar/' . $avatar_user . '" class="rounded-circle" alt="" style="width: 40px; height: 40px" />';
+    echo '<div class="comment-item-header-info">';
+    echo '<h6>' . htmlspecialchars($full_name) . '</h6>';
+    echo '<span>' . htmlspecialchars($created_at) . '</span>';
+    echo '</div>';
+    echo '</div>';
+    echo '<div class="comment-item-content">';
+    echo '<p>' . htmlspecialchars($comment) . '</p>';
+    echo '</div>';
+    echo "<a href='javascript:void(0);' class='btn btn-sm btn-danger' onclick='return confirmDeleteComment($id)'>Xoá</a>";    echo '</div>';
+    echo '</div>';
   }
-  ?>
+} else {
+  echo '<p>Không có bình luận nào.</p>';
+}
+?>
   <br />
   <!-- -------------------------------------------------------- -->
 </div>
+<script>
+function confirmDeleteComment(commentId) {
+    if (confirm('Bạn có chắc chắn muốn xoá bình luận này không?')) {
+        window.location.href = 'index.php?page=post_detail&id=<?= $postId ?>&delete_comment_id=' + commentId;
+    }
+  }
+</script>
 <br />
 
 <!-- Main End -->

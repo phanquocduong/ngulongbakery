@@ -184,30 +184,56 @@ class AdProductsController
     }
 
 
+    // public function delPro()
+    // {
+    //     // if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+    //     //     $id = $_GET['id'];
+    //     //     $data = $this->products->getProductById($id);
+
+    //     //     // Xoá ảnh chính
+    //     //     $file = '../public/upload/product/' . $data['image'];
+    //     //     if (file_exists($file)) {
+    //     //         unlink($file);
+    //     //     }
+
+    //     //     // Xoá ảnh con
+    //     //     $extra_images = explode(',', $data['extra_image']);
+    //     //     foreach ($extra_images as $extra_image) {
+    //     //         $fileExtra = '../public/upload/product/' . $extra_image;
+    //     //         if (file_exists($fileExtra)) {
+    //     //             unlink($fileExtra);
+    //     //         }
+    //     //     }
+
+    //     //     $this->products->deletePro($id);
+    //     // }
+    //     // thay đổi trạng thái sản phẩm từ 1 -> 0
+    //     $this->products->delPro();
+    //     echo '<script>alert("Xoá sản phẩm thành công")</script>';
+
+    //     echo '<script>location.href="index.php?page=products"</script>';
+    // }
+
     public function delPro()
     {
-        if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+        if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $data = $this->products->getProductById($id);
 
-            // Xoá ảnh chính
-            $file = '../public/upload/product/' . $data['image'];
-            if (file_exists($file)) {
-                unlink($file);
+            if ($data) {
+                $newStatus = $data['status'] == 1 ? 0 : 1;
+                $this->products->updateProductStatus($id, $newStatus);
+                $statusMessage = $newStatus == 1 ? "Sản phẩm đã được hiển thị lại." : "Sản phẩm đã được ẩn.";
+                echo "<script>alert('{$statusMessage}');</script>";
+                echo '<script>location.href="index.php?page=products"</script>';
+            } else {
+                echo '<script>alert("Sản phẩm không tồn tại.");</script>';
+                echo '<script>location.href="index.php?page=products"</script>';
             }
-
-            // Xoá ảnh con
-            $extra_images = explode(',', $data['extra_image']);
-            foreach ($extra_images as $extra_image) {
-                $fileExtra = '../public/upload/product/' . $extra_image;
-                if (file_exists($fileExtra)) {
-                    unlink($fileExtra);
-                }
-            }
-
-            $this->products->deletePro($id);
+        } else {
+            echo '<script>alert("ID sản phẩm không hợp lệ.");</script>';
+            echo '<script>location.href="index.php?page=products"</script>';
         }
-        echo '<script>location.href="index.php?page=products"</script>';
     }
 
     public function searchProducts()
